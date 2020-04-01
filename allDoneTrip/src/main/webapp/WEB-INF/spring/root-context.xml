@@ -20,9 +20,9 @@
 
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="bit03"></property>
-		<property name="password" value="bit03"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@110.8.135.5:1521:XE"></property>
+		<property name="username" value="alldone"></property>
+		<property name="password" value="1234"></property>
 
 	</bean>
 

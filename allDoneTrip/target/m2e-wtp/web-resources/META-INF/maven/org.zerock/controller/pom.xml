@@ -13,6 +13,13 @@
 		<org.aspectj-version>1.9.0</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
+	<repositories>
+	<repository>
+	  <id>oracle</id>
+	  <name>ORACLE JDBC Repository</name>
+	  <url>http://maven.jahia.org/maven2</url>
+	</repository>
+	</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -72,7 +79,11 @@
 			<artifactId>HikariCP</artifactId>
 			<version>3.3.1</version>
 		</dependency>
-
+        <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc7</artifactId>
+          <version>12.1.0.2</version>
+        </dependency>
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
