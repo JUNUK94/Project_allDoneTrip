@@ -12,5 +12,8 @@ public interface PlannerMapper {
 	
 	//게시글 전체 갯수 카운트
 	public int totalCount(Criteria cri);
+
+	//게시글 전체 정렬
+	public List<PlannerVO> sorting(Criteria cri);
 	
 }

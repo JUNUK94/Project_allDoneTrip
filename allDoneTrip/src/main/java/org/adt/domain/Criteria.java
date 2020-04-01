@@ -8,6 +8,7 @@ public class Criteria {
 	private int pageNum;
 	private int amount;
 
+	private String sortType;
 	private String type;
 	private String keyword;
 	

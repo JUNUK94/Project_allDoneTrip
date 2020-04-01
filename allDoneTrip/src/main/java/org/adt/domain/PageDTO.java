@@ -1,6 +1,7 @@
 package org.adt.domain;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 
 @Data
 public class PageDTO {
@@ -23,7 +24,7 @@ public class PageDTO {
 		this.endPage = (int)((Math.ceil(cri.getPageNum() /10.0)) * 10);
 		this.startPage = this.endPage - 9;
 		
-		int realEnd = (int)((Math.ceil(total * 1.0)) / cri.getAmount());
+		int realEnd = (int)(total / cri.getAmount())+1;
 		if(realEnd < endPage) {
 			this.endPage = realEnd;
 		}

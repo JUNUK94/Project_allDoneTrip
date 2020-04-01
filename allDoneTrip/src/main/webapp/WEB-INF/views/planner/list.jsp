@@ -27,7 +27,6 @@
 		crossorigin="anonymous"></script>
 
 <!--====================================================================================-->
-
 </head>
 <body>
 	<br>
@@ -46,17 +45,17 @@
 	<div class="row center-block bg-light" style="height: 50px">
 		<div class="col-md-2"></div>
 		<div class="col-md-1">
-			<input type="radio" name="sort_like">등록일순
+			<input type="radio" name="sortType" value="regdate">등록일순
 		</div>
 		<div class="col-md-1">
-			<input type="radio" name="sort_like">추천순
+			<input type="radio" name="sortType" value="plan_Like">추천순
 		</div>
 		<div class="col-md-1">
-			<input type="radio" name="sort_like">조회순
+			<input type="radio" name="sortType" value="click_Num">조회순
 		</div>
 		<div class="col-md-1">
 			<select name="city_no">
-				<option value="" selected="selected">도시 선택</option>
+				<option value="">도시 선택</option>
 				<option value="1">파리</option>
 				<option value="2">바르셀로나</option>
 				<option value="3">베니스</option>
@@ -64,8 +63,7 @@
 		</div> 
 		<div class="col-md-3">
 			<form id="searchForm" action="/planner/list" method='get'>
-				<select name='type'>
-					<option value=""> -- </option>
+				<select id='type'>
 					<option value="p_Title">제목</option>
 					<option value="nick_Name">작성자</option>
 				</select>
@@ -77,8 +75,9 @@
 			</form>
 		</div> 
 		<div class="col-md-1">	
-			<select name="amount">
-				<option value="10" selected="selected">10개씩 보기</option>
+			<select id="amount">
+				<option value="">보기 수량</option>
+				<option value="10">10개씩 보기</option>
 				<option value="20">20개씩 보기</option>
 				<option value="30">30개씩 보기</option>
 				<option value="40">40개씩 보기</option>
@@ -127,28 +126,40 @@
 
 
 	<div class="row">
-		<div class="col-md-12 text-center">
-			<c:if test="${pageMaker.prev}">
-				<a class="pageing" href="${pageMaker.startPage - 1}">previous</a>
-			</c:if>
-			
-			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-				<a class="pageing" href="${num}">${num}</a>
-			</c:forEach>
-			
-			<c:if test="${pageMaker.next}">
-				<a class="pageing" href="${pageMaker.endPage + 1}">next</a>
-			</c:if>
-			
-			<form id="actionForm" action="/planner/list" method="get">
-				<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
-				<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
-			</form>
+		<div class="col-md-10">
+			<ul class="pagination">
+				<c:if test="${pageMaker.prev}">
+					<li class="page-item">
+						<a class="page-link" href="${pageMaker.startPage - 1}">previous</a>
+					</li>
+				</c:if>
+				
+				<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+					<li class="page-item">
+						<a class="page-link" href="${num}">${num}</a>
+					</li>
+				</c:forEach>
+				
+				<c:if test="${pageMaker.next}">
+					<li class="page-item">
+						<a class="page-link" href="${pageMaker.endPage + 1}">next</a>
+					</li>
+				</c:if>
+			</ul>
 		</div>
 	</div>
 	
 
-
+	<form id="actionForm" action="/planner/list" method="get">
+		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
+	</form>
+	
+	<form id="sortForm" action="/planner/sort" method="get">
+		<input type="hidden" name="sortType" value = "">
+		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
+	</form>
 <!--====================================================================================-->
 
 	<script src="${contextPath}/resources/js/plannerList.js"></script>

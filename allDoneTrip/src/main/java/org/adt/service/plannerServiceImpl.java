@@ -26,6 +26,11 @@ public class plannerServiceImpl implements plannerService {
 	public int totalCount(Criteria cri) {
 		return mapper.totalCount(cri);
 	}
+
+	@Override
+	public List<PlannerVO> sorting(Criteria cri) {
+		return mapper.sorting(cri);
+	}
 	
 	
 	

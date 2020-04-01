@@ -25,18 +25,32 @@ public class PlannerController {
 	@Autowired
 	private plannerService service;
 	
+	//플래너 작성창으로 이동
 	@GetMapping("/write")
 	public void write() {
 		log.info("write");
 	}
 	
+	//플래너 리스트로 이동
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-			
+
 		int total = service.totalCount(cri);
+
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	//조건으로 플래너 sort 후, 플래너 리스트로 이동	
+	@GetMapping("/sort")
+	public String sort(Criteria cri, Model model) {
+
+		int total = service.totalCount(cri);
+				
+		model.addAttribute("list", service.sorting(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
-		model.addAttribute("list", service.getList(cri));	
-		model.addAttribute("pageMaker", new PageDTO(cri, total));	
+		return "planner/list";
 	}
 
 	
