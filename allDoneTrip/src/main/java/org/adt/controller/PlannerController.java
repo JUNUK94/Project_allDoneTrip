@@ -23,6 +23,11 @@ public class PlannerController {
 		log.info("write");
 	}
 	
+	@GetMapping("/list")
+	public void list() {
+		log.info("list");
+	}
+	
 	
 	@PostMapping("/cityInfo")
 	public ResponseEntity<HashMap<String, String>> cityInfo(@RequestParam("img") String img,
