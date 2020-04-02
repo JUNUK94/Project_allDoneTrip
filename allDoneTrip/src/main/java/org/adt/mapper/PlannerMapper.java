@@ -20,7 +20,7 @@ public interface PlannerMapper {
 	public void addClickNum(Long plan_No);
 
 	// 플래너 정보 가져오기
-	public PlannerVO getContent(Long plan_No);
+	public List<PlannerVO> getPlanner(Long plan_No);
 
 	// 플래너 저장
 	public void insert(PlannerVO pvo);

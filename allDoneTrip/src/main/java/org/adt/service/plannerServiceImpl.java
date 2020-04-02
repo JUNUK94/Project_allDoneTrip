@@ -74,8 +74,8 @@ public class plannerServiceImpl implements plannerService {
 	
 	// 플래너 정보 가져오기
 	@Override
-	public PlannerVO getContent(Long plan_No) {
-		return mapper.getContent(plan_No);
+	public List<PlannerVO> getPlanner(Long plan_No) {
+		return mapper.getPlanner(plan_No);
 	}
 
 	// 플래너 저장

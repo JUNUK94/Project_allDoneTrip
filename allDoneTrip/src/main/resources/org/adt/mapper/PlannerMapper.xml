@@ -80,9 +80,12 @@
 	</select>
 
 
-	<select id="getContent" resultType="org.adt.domain.PlannerVO">
+	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select plan_No, title, writer, content from planner where plan_No = #{plan_No}
+			select 	plan_No, p_Title, nick_Name, city_Name, trip_Period, plan_Like, p_Content, click_Num 
+			from 	planner, city
+			where 	plan_No = #{plan_No} 
+					and planner.city_No=city.city_No
 		]]>
 	</select>
 
