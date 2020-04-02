@@ -37,10 +37,10 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		var num = $(this).attr("href");
-		var inputBno = "<input type='hidden' name='bno' value='"+num+"'>"
+		var plan_No = "<input type='hidden' name='plan_No' value='"+num+"'>"
 	
-		actionForm.append(inputBno);
-		actionForm.attr("action", "/board/showContent");
+		actionForm.append(plan_No);
+		actionForm.attr("action", "/planner/show");
 		actionForm.submit();
 	});
 	
@@ -51,6 +51,15 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		searchForm.find("input[name='pageNum']").val("1");
+		searchForm.submit();
+	});
+	
+	$("#city_No").on("change", function(e){
+		var city_No = $(this).val();
+		
+		searchForm.find("input[name='pageNum']").val("1");
+		searchForm.find("input[name='keyword']").val(city_No);
+		searchForm.find("#type").val("C");
 		searchForm.submit();
 	});
 });

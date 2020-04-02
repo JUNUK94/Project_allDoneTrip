@@ -7,13 +7,27 @@ import org.adt.domain.PlannerVO;
 
 public interface PlannerMapper {
 
-	//ÇÃ·¡³Ê ¸®½ºÆ® °¡Á®¿À±â
+	// í”Œëž˜ë„ˆ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	public List<PlannerVO> getList(Criteria cri);
-	
-	//°Ô½Ã±Û ÀüÃ¼ °¹¼ö Ä«¿îÆ®
+
+	// í”Œëž˜ë„ˆ ì „ì²´ ê°¯ìˆ˜ ì¹´ìš´íŠ¸
 	public int totalCount(Criteria cri);
 
-	//°Ô½Ã±Û ÀüÃ¼ Á¤·Ä
+	// í”Œëž˜ë„ˆ ì •ë ¬
 	public List<PlannerVO> sorting(Criteria cri);
-	
+
+	// ì¡°íšŒìˆ˜ ì¶”ê°€
+	public void addClickNum(Long plan_No);
+
+	// í”Œëž˜ë„ˆ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+	public PlannerVO getContent(Long plan_No);
+
+	// í”Œëž˜ë„ˆ ì €ìž¥
+	public void insert(PlannerVO pvo);
+
+	// í”Œëž˜ë„ˆ ìˆ˜ì •
+	public void update(PlannerVO pvo);
+
+	// í”Œëž˜ë„ˆ ì‚­ì œ
+	public void delete(Long plan_No);
 }

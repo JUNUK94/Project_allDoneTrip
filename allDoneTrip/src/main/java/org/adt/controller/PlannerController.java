@@ -2,6 +2,9 @@ package org.adt.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,23 +28,37 @@ public class PlannerController {
 	@Autowired
 	private plannerService service;
 	
-	//ÇÃ·¡³Ê ÀÛ¼ºÃ¢À¸·Î ÀÌµ¿
+	// í”Œë˜ë„ˆ ì‘ì„± í˜ì´ì§€ë¡œ ì´ë™
 	@GetMapping("/write")
 	public void write() {
 		log.info("write");
 	}
 	
-	//ÇÃ·¡³Ê ¸®½ºÆ®·Î ÀÌµ¿
+	// í”Œë˜ë„ˆ ë¦¬ìŠ¤íŠ¸ í˜ì´ì§€ë¡œ ì´ë™
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-
+		
+		// ì „ì²´ í”Œë˜ë„ˆ ìˆ˜ ì¹´ìš´íŠ¸
 		int total = service.totalCount(cri);
+		log.info(cri);
 
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 
-	//Á¶°ÇÀ¸·Î ÇÃ·¡³Ê sort ÈÄ, ÇÃ·¡³Ê ¸®½ºÆ®·Î ÀÌµ¿	
+	// í”Œë˜ë„ˆ ì¡°íšŒ í˜ì´ì§€ë¡œ ì´ë™
+	@GetMapping("/show")
+	public void show(HttpServletResponse response, HttpServletRequest request,
+					@RequestParam("plan_No") Long plan_No , Model model) {
+		
+		//ì¿ í‚¤ì—¬ë¶€ ì²´í¬í•˜ì—¬ ì¡°íšŒìˆ˜ ì¶”ê°€
+		service.checkCookie(response, request, plan_No);
+			
+		//model.addAttribute("content", service.getContent(plan_No));
+	}
+	
+	
+	// í”Œë˜ë„ˆ ì •ë ¬
 	@GetMapping("/sort")
 	public String sort(Criteria cri, Model model) {
 
@@ -54,9 +71,7 @@ public class PlannerController {
 	}
 
 	
-	
-	
-	//µµ½ÃÁ¤º¸ °¡Á®¿À±â
+	// ë„ì‹œì •ë³´ ë‹´ì•„ì˜¤ê¸°	
 	@PostMapping("/cityInfo")
 	public ResponseEntity<HashMap<String, String>> cityInfo(@RequestParam("img") String img,
 											@RequestParam("title") String title,

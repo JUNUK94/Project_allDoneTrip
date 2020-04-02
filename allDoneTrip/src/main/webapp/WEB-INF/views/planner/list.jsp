@@ -54,21 +54,29 @@
 			<input type="radio" name="sortType" value="click_Num">조회순
 		</div>
 		<div class="col-md-1">
-			<select name="city_no">
+			<select name="city_No" id="city_No">
 				<option value="">도시 선택</option>
 				<option value="1">파리</option>
-				<option value="2">바르셀로나</option>
-				<option value="3">베니스</option>
+				<option value="2">니스</option>
+				<option value="3">리옹</option>
+				<option value="4">상해</option>
+				<option value="5">홍콩</option>
+				<option value="6">방콕</option>
+				<option value="7">다낭</option>
+				<option value="8">하노이</option>
+				<option value="9">치앙마이</option>
+				<option value="10">베이징</option>
 			</select>
 		</div> 
 		<div class="col-md-3">
 			<form id="searchForm" action="/planner/list" method='get'>
-				<select id='type'>
-					<option value="p_Title">제목</option>
-					<option value="nick_Name">작성자</option>
+				<select name ='type' id ='type'>
+					<option value="T">제목</option>
+					<option value="W">작성자</option>
+					<option value="C" hidden="">도시</option>
 				</select>
 				
-				<input type="text" name="search_city">
+				<input type="text" name="keyword">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="submit" value="검색">
@@ -96,8 +104,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>추천</th>
+						<th>글번호</th>
+						<th>추천수</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>조회수</th>
@@ -151,6 +159,8 @@
 	
 
 	<form id="actionForm" action="/planner/list" method="get">
+		<input type="hidden" name="type" value = "${pageMaker.cri.type}">
+		<input type="hidden" name="keyword" value = "${pageMaker.cri.keyword}">
 		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
 	</form>

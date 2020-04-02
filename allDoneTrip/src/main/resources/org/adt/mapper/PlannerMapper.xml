@@ -8,11 +8,14 @@
 			<foreach item='type' collection="typeArr">
 				<trim prefix="or">
 					<choose>
-						<when test="type == 'p_Title'.toString()">
+						<when test="type == 'T'.toString()">
 							p_Title like '%'||#{keyword}||'%'
 						</when>
-						<when test="type == 'nick_Name'.toString()">
+						<when test="type == 'W'.toString()">
 							nick_Name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							planner.city_No = #{keyword}
 						</when>
 					</choose>
 				</trim>
@@ -24,14 +27,15 @@
 	<select id="getList" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
 			select	* 
-			from	(select
-							
-							rownum rn, plan_No, p_Title, city_Name, trip_Period, 
-							nick_Name, plan_Like, click_Num
+			from 	(select
+					/*+ index_desc(planner pk_planner)*/
+							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num
 					from 	planner, city
 					where	
 		]]>
-							<include refid="criteria"></include>
+		
+		<include refid="criteria"></include>					
+		
 		<![CDATA[		
 							planner.city_No=city.city_No 
 							and rownum <= #{pageNum} * #{amount})
@@ -61,8 +65,17 @@
 		<![CDATA[		
 							planner.city_No=city.city_No 
 							and rownum <= #{pageNum} * #{amount}
-							order by #{sortType} asc)
+							order by #{sortType} desc)
 			where 	rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+
+
+	<select id="addClickNum">
+		<![CDATA[
+			update 	planner
+			set		click_Num = (1 + (select click_Num from planner where plan_No = #{plan_No}))
+			where 	plan_No = #{plan_No}
 		]]>
 	</select>
 
