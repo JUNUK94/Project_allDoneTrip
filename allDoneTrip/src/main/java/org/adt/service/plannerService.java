@@ -1,18 +1,15 @@
-package org.adt.mapper;
+package org.adt.service;
 
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-import org.adt.domain.Criteria;
->>>>>>> c4b34fa090894f170599194269b6fad9d6b70514
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.adt.domain.PlannerVO;
+import org.adt.domain.Criteria;
 
-public interface PlannerMapper {
+public interface plannerService {
 
-<<<<<<< HEAD
-	public List<PlannerVO> getList();
-=======
 	// 플래너 리스트 가져오기
 	public List<PlannerVO> getList(Criteria cri);
 
@@ -21,6 +18,9 @@ public interface PlannerMapper {
 
 	// 플래너 정렬
 	public List<PlannerVO> sorting(Criteria cri);
+
+	// 쿠키 체크 후 조회수 추가
+	public void checkCookie(HttpServletResponse response, HttpServletRequest request, Long plan_No);
 
 	// 조회수 추가
 	public void addClickNum(Long plan_No);
@@ -36,5 +36,5 @@ public interface PlannerMapper {
 
 	// 플래너 삭제
 	public void delete(Long plan_No);
->>>>>>> c4b34fa090894f170599194269b6fad9d6b70514
+
 }
