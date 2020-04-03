@@ -14,8 +14,7 @@ public class PageDTO {
 	private int total;
 	private Criteria cri;
 	
-	
-	//»ý¼ºÀÚ¿¡¼­ ÃÊ±â°ª ÇÒ´ç
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ê±â°ª ï¿½Ò´ï¿½
 	public PageDTO(Criteria cri, int total) {
 		
 		this.cri = cri;

@@ -16,8 +16,8 @@
 
 <!-- 후기작성 -->
 <insert id="reviewInsert">
-  insert into board(b_type,btype_name,member_no, bno, title, b_content, nick_Name)
-  values (#{b_Type},#{bType_Name},#{member_No}, seq_board.nextval, #{title}, #{b_content}, #{nick_Name})
+  insert into board(b_type,btype_name,member_no, bno, title, b_content, nick_Name, email)
+  values (#{b_Type},#{bType_Name},#{member_No}, seq_board.nextval, #{title}, #{b_content}, #{nick_Name}, #{email})
 </insert>
 
 <insert id ="reViewInsertSelectKey">

@@ -11,6 +11,8 @@ public class BoardVO {
 	private int bno;
 	private String title;
 	private String b_content;
+	private String nick_Name;
+	private String email;
 	private int b_clickNum;
 	private int b_Like;
 	private String regdate;
