@@ -23,6 +23,12 @@ public interface BoardMapper {
 	//자유게시판 페이징처리
 	public int freeWithPaging(Criteria cri);
 	
+	// 조회수 추가
+	public void addBclickNum(Long bno);
+	
+	// 좋아요 추가
+	public void addLike(Long bno);
+	
 	
 	//게시판글작성
 	public void reviewInsert(BoardVO board);

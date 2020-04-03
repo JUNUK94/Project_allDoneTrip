@@ -8,6 +8,7 @@ import lombok.Data;
 public class PlannerVO {
 	
 	  private Long plan_No;
+	  private String email;
 	  private String nick_Name;
 	  private String p_Title;
 	  private String p_Content;
@@ -19,4 +20,5 @@ public class PlannerVO {
 	  private Date regdate;
 	  private Date updateDate;
 	  
+	  private Long like_No;
 }

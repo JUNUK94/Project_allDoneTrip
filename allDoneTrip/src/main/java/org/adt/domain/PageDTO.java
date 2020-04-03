@@ -33,7 +33,6 @@ public class PageDTO {
 			realEnd = number+1;
 		}
 		
-		//int realEnd = (int)(total / cri.getAmount())+1;
 		if(realEnd < endPage) {
 			this.endPage = realEnd;
 		}
