@@ -48,15 +48,15 @@ public class PlannerController {
 
 	// 플래너 조회 페이지로 이동
 	@GetMapping("/show")
-	public void show(HttpServletResponse response, HttpServletRequest request,
+	public String show(HttpServletResponse response, HttpServletRequest request,
 					@RequestParam("plan_No") Long plan_No , Model model) {
 		
 		//쿠키여부 체크하여 조회수 추가
 		service.checkCookie(response, request, plan_No);
-			
-		//model.addAttribute("content", service.getContent(plan_No));
+		model.addAttribute("content", service.getPlanner(plan_No));
+		
+		return "planner/show";
 	}
-	
 	
 	// 플래너 정렬
 	@GetMapping("/sort")

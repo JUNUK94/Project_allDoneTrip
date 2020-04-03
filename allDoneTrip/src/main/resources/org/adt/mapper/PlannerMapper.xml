@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.zerock.mapper.PlannerMapper">
+     <select id = "getList" resultType="org.adt.domain.PlannerVO">
+      <![CDATA[
+      select plan_No,p_Title,city_Name,trip_Period,plan_Like,click_Num from planner, city 
+      where planner.city_No=city.city_No
+      ]]>
+    </select>
+  
+  </mapper>
+=======
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.adt.mapper.PlannerMapper">
@@ -80,9 +95,12 @@
 	</select>
 
 
-	<select id="getContent" resultType="org.adt.domain.PlannerVO">
+	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select plan_No, title, writer, content from planner where plan_No = #{plan_No}
+			select 	plan_No, p_Title, nick_Name, city_Name, trip_Period, plan_Like, p_Content, click_Num 
+			from 	planner, city
+			where 	plan_No = #{plan_No} 
+					and planner.city_No=city.city_No
 		]]>
 	</select>
 
@@ -119,3 +137,4 @@
 
 
 </mapper>
+>>>>>>> c4b34fa090894f170599194269b6fad9d6b70514

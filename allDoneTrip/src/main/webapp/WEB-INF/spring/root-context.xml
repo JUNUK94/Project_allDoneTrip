@@ -16,14 +16,14 @@
 
 	<context:annotation-config></context:annotation-config>
 
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-
+	 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@110.8.135.5:1521:XE"></property>
+		  value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="jdbcUrl"
+		  value="jdbc:oracle:thin:@110.8.135.5:1521:XE"></property>
+		
 		<property name="username" value="alldone"></property>
 		<property name="password" value="1234"></property>
-
 	</bean>
 
 	<!-- HikariCP configuration -->
@@ -44,8 +44,7 @@
 
 	<tx:annotation-driven />
 
-	<mybatis-spring:scan
-		base-package="org.adt.mapper" />
+	<mybatis-spring:scan base-package="org.adt.mapper" />
 
 	<context:component-scan
 		base-package="org.adt.service"></context:component-scan>

@@ -2,11 +2,17 @@ package org.adt.mapper;
 
 import java.util.List;
 
+<<<<<<< HEAD
+=======
 import org.adt.domain.Criteria;
+>>>>>>> c4b34fa090894f170599194269b6fad9d6b70514
 import org.adt.domain.PlannerVO;
 
 public interface PlannerMapper {
 
+<<<<<<< HEAD
+	public List<PlannerVO> getList();
+=======
 	// 플래너 리스트 가져오기
 	public List<PlannerVO> getList(Criteria cri);
 
@@ -20,7 +26,7 @@ public interface PlannerMapper {
 	public void addClickNum(Long plan_No);
 
 	// 플래너 정보 가져오기
-	public PlannerVO getContent(Long plan_No);
+	public List<PlannerVO> getPlanner(Long plan_No);
 
 	// 플래너 저장
 	public void insert(PlannerVO pvo);
@@ -30,4 +36,5 @@ public interface PlannerMapper {
 
 	// 플래너 삭제
 	public void delete(Long plan_No);
+>>>>>>> c4b34fa090894f170599194269b6fad9d6b70514
 }

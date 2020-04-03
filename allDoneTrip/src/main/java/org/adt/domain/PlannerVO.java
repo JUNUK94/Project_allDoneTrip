@@ -10,6 +10,7 @@ public class PlannerVO {
 	  private Long plan_No;
 	  private String nick_Name;
 	  private String p_Title;
+	  private String p_Content;
 	  private String city_Name;
 	  private String trip_Period;
 	  private Long plan_Like;
