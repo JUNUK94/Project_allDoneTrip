@@ -15,4 +15,5 @@ public class CommunityController {
 	public void allBoardList() {
 		log.info("시작");
 	}
+	
 }
