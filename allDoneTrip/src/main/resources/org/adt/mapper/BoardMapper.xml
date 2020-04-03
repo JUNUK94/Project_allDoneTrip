@@ -2,4 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.adt.mapper.BoardMapper">
+
+<!-- 후기전체목록 가져오기 -->
+<select id="getReviewList" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+		  SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
+          ROWNUM RN, BNO, TITLE, B_CONTENT, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
+          FROM BOARD 
+          WHERE B_TYPE='2'
+		]]>
+
+</select>
+
+<!-- 후기작성 -->
+<insert id="reviewInsert">
+  insert into board(b_type,btype_name,member_no, bno, title, b_content, nick_Name)
+  values (#{b_Type},#{bType_Name},#{member_No}, seq_board.nextval, #{title}, #{b_content}, #{nick_Name})
+</insert>
+
+<insert id ="reViewInsertSelectKey">
+<selectKey keyProperty="bno" order="BEFORE"
+   resultType="long">
+   select seq_board.nextval from dual
+   </selectKey>
+  insert into board(b_type,btype_name,member_no, bno, title, b_content, nick_Name)
+  values (#{b_Type},#{bType_Name},#{member_No}, seq_board.nextval, #{title}, #{b_content}, #{nick_Name})
+   </insert>
+   
+   <!-- read(select)처리 -->
+   <select id="reviewRead" resultType="org.adt.domain.BoardVO">
+      select rownum rn, bno, title, b_content, b_cilknum, b_like, regdate, updatedate 
+      from board 
+      where #{bno} in (select #{bno} from board where b_type='2')
+      <!-- select * from board where bno=#{bno}로 해줘도 되지 않나?? bno 값이 pk라서.. -->
+   </select>
+   
+   <!-- 후기삭제-->
+   <delete id ="reviewDelete">
+      delete from board where bno = #{bno}
+   </delete>
 </mapper>
+

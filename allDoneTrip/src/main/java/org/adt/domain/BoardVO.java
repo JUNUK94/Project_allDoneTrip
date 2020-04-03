@@ -3,7 +3,7 @@ package org.adt.domain;
 import lombok.Data;
 
 @Data
-public class CommunityVO {
+public class BoardVO {
 
 	private int b_Type;
 	private String bType_Name;
@@ -15,5 +15,5 @@ public class CommunityVO {
 	private int b_Like;
 	private String regdate;
 	private String updatedate;
-	private Boolean planner_OX;
+	private Boolean planner_OX; //플래너 유무 Y,N
 }

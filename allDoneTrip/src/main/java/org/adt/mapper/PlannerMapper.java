@@ -2,12 +2,16 @@ package org.adt.mapper;
 
 import java.util.List;
 
+
 import org.adt.domain.Criteria;
+
 import org.adt.domain.PlannerVO;
 
 public interface PlannerMapper {
 
+
 	public List<PlannerVO> getList();
+
 	// 플래너 리스트 가져오기
 	public List<PlannerVO> getList(Criteria cri);
 
@@ -31,4 +35,5 @@ public interface PlannerMapper {
 
 	// 플래너 삭제
 	public void delete(Long plan_No);
+
 }
