@@ -71,15 +71,49 @@
 	</select>
 
 
-	<select id="addClickNum">
+	<!-- 클릭 시 조회수 추가 -->	
+	<update id="addClickNum">
 		<![CDATA[
 			update 	planner
 			set		click_Num = (1 + (select click_Num from planner where plan_No = #{plan_No}))
 			where 	plan_No = #{plan_No}
 		]]>
+	</update>
+	
+	
+	<!-- 좋아요 사전 체크여부 판별 -->	
+	<select id="check_User" resultType="int">
+		<![CDATA[
+			select 	count(*)
+			from	planner_like
+			where 	plan_No = #{plan_No} and email = #{email}
+		]]>
 	</select>
+	
+	
+	<!-- 플래너 테이블에 좋아요 추가 -->	
+	<update id="addLike">
+		<![CDATA[
+			update 	planner
+			set		plan_Like = (1 + (select plan_Like from planner where plan_No = #{plan_No}))
+			where 	plan_No = #{plan_No}
+		]]>
+	</update>
+	
+	
+	<!-- planner_like 테이블에 클릭한 유저 등록 -->	
+	<insert id="addLike_insertUser">
+		<selectKey keyProperty="like_No" order="BEFORE"
+			resultType="long">
+			select seq_planner_like.nextval from dual
+		</selectKey>
+		
+		insert	into planner_like
+		values	(#{like_No}, #{plan_No}, #{email})
+	</insert>
 
 
+	<!-- 플래너 정보 가져오기 -->	
 	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
 			select 	plan_No, p_Title, nick_Name, city_Name, trip_Period, plan_Like, p_Content, click_Num 
@@ -90,6 +124,10 @@
 	</select>
 
 
+
+
+
+
 	<insert id="insert">
 		<selectKey keyProperty="plan_No" order="BEFORE"
 			resultType="long">
@@ -97,8 +135,7 @@
 		</selectKey>
 
 		insert into planner (plan_No, title, content, writer)
-		values (#{plan_No},
-		#{title}, #{content}, #{writer})
+		values (#{plan_No},#{title}, #{content}, #{writer})
 	</insert>
 
 

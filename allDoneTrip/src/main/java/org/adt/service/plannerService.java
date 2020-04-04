@@ -22,8 +22,8 @@ public interface plannerService {
 	// 쿠키 체크 후 조회수 추가
 	public void checkCookie(HttpServletResponse response, HttpServletRequest request, Long plan_No);
 
-	// 조회수 추가
-	public void addClickNum(Long plan_No);
+	// 좋아요 사전 체크여부 판별 후 좋아요 추가
+	public boolean addLike_afterCheck(PlannerVO pvo);
 
 	// 플래너 정보 가져오기
 	public List<PlannerVO> getPlanner(Long plan_No);

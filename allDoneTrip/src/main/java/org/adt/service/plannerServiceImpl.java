@@ -41,13 +41,7 @@ public class plannerServiceImpl implements plannerService {
 	public List<PlannerVO> sorting(Criteria cri) {
 		return mapper.sorting(cri);
 	}
-	
-	// 조회수 추가
-	@Override
-	public void addClickNum(Long plan_No) {
-		mapper.addClickNum(plan_No);
-	}
-	
+
 	// 쿠키 체크 후 조회수 추가
 	@Override
 	public void checkCookie(HttpServletResponse response, HttpServletRequest request, Long plan_No) {
@@ -68,9 +62,28 @@ public class plannerServiceImpl implements plannerService {
 		if (StringUtils.indexOfIgnoreCase(cookie_read_count, new_cookie_read_count) == -1 ) {
 			Cookie cookie = new Cookie("read_count", cookie_read_count + new_cookie_read_count); 
 			response.addCookie(cookie); 
-			this.addClickNum(plan_No);
+			
+			mapper.addClickNum(plan_No);
 		}
 	}
+	
+	
+	
+	// 좋아요 사전 체크여부 판별 후 좋아요 추가
+	@Override
+	public boolean addLike_afterCheck(PlannerVO pvo) {
+		
+		int check = mapper.check_User(pvo);
+		
+		if(check == 0) {
+			mapper.addLike(pvo);
+			mapper.addLike_insertUser(pvo);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	
 	// 플래너 정보 가져오기
 	@Override
