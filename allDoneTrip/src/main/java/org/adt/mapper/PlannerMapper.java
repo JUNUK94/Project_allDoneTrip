@@ -18,9 +18,6 @@ public interface PlannerMapper {
 	// 플래너 전체 갯수 카운트
 	public int totalCount(Criteria cri);
 
-	// 플래너 정렬
-	public List<PlannerVO> sorting(Criteria cri);
-
 	// 조회수 추가
 	public void addClickNum(Long plan_No);
 

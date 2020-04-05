@@ -169,11 +169,6 @@
 		<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
 	</form>
 	
-	<form id="sortForm" action="/planner/sort" method="get">
-		<input type="hidden" name="sortType" value = "">
-		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
-	</form>
 <!--====================================================================================-->
 
 	<script src="${contextPath}/resources/js/planner/plannerList.js"></script>

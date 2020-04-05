@@ -52,19 +52,6 @@ public class PlannerController {
 	}
 
 
-	// 플래너 정렬
-	@GetMapping("/sort")
-	public String sort(Criteria cri, Model model) {
-
-		int total = service.totalCount(cri);
-		log.info(cri);
-				
-		model.addAttribute("list", service.sorting(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		return "planner/list";
-	}
-
 	
 	// 플래너 조회 페이지로 이동
 	@GetMapping("/show")

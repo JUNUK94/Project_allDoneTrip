@@ -36,12 +36,6 @@ public class plannerServiceImpl implements plannerService {
 		return mapper.totalCount(cri);
 	}
 
-	// 플래너 정렬
-	@Override
-	public List<PlannerVO> sorting(Criteria cri) {
-		log.info(cri.getSortType());
-		return mapper.sorting(cri);
-	}
 
 	// 쿠키 체크 후 조회수 추가
 	@Override

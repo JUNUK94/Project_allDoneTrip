@@ -1,7 +1,10 @@
 $(document).ready(function(){
 	
 	var actionForm = $("#actionForm");
-	var sortForm = $("#sortForm");
+	
+	$("input[name='keyword']").val();
+	
+	
 	
 	//페이지 번호 선택시 
 	$(".page-link").on("click", function(e){
@@ -25,8 +28,8 @@ $(document).ready(function(){
 	//라디오박스 선택 시 정렬
 	$("input[name='sortType']").on("click", function(e){
 		var sortType = $(this).val();
-		sortForm.find("input[name='sortType']").val(sortType);
-		sortForm.submit();
+		actionForm.find("input[name='sortType']").val(sortType);
+		actionForm.submit();
 	});
 	
 	
@@ -52,6 +55,7 @@ $(document).ready(function(){
 		searchForm.find("input[name='pageNum']").val("1");
 		searchForm.submit();
 	});
+	
 	
 	// 도시명 선택하여 검색
 	$("#city_No").on("change", function(e){

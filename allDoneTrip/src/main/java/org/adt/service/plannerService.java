@@ -16,9 +16,6 @@ public interface plannerService {
 	// 플래너 전체 갯수 카운트
 	public int totalCount(Criteria cri);
 
-	// 플래너 정렬
-	public List<PlannerVO> sorting(Criteria cri);
-
 	// 쿠키 체크 후 조회수 추가
 	public void checkCookie(HttpServletResponse response, HttpServletRequest request, Long plan_No);
 
