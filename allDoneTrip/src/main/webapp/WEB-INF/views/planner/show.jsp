@@ -12,9 +12,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 조회</title>
 	<% 
-		//session.setAttribute("email", "ccc@naver.com");
-		//session.setAttribute("nick_Name", "짜파구리");
-		session.invalidate();
+		session.setAttribute("email", "herbing@naver.com");
+		session.setAttribute("nick_Name", "wowgarcon");
+		//session.invalidate();
 	%>
 <!--=====================================jquery=========================================-->
 
@@ -81,7 +81,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-2 bg-light"></div>
 			<div class="col-md-2 bg-light">
-				<img src="/resources/img/sample_main.JPG" width="160px">
+				<img src="/resources/img/planner/sample_main.JPG" width="160px">
 			</div>
 			<div class="col-md-2 bg-light">
 				<c:forEach items="${content}" var="pvo">
@@ -94,10 +94,10 @@
 				</c:forEach>
 			</div>
 			<div class="col-md-2 bg-light">
-				<img src="/resources/img/scrap.JPG" width="30px">
-				<img src="/resources/img/share.JPG" width="30px">
+				<img src="/resources/img/planner/scrap.JPG" width="30px">
+				<img src="/resources/img/planner/share.JPG" width="30px">
 				<br><br><br><br><br>
-				<img id="likeBtn" src="/resources/img/Like.png" width="80px">
+				<img id="likeBtn" src="/resources/img/planner/Like.png" width="80px">
 				<br>
 				<c:forEach items="${content}" var="pvo">
 					<label name="likeCnt">${pvo.plan_Like}</label>
@@ -119,7 +119,7 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-1">
-			<img src="/resources/img/Non_User_Photo.JPG">
+			<img src="/resources/img/planner/Non_User_Photo.JPG">
 			</div>
 			<div class="col-md-6">
 				<textarea id="plannerReply" class="col-md-12 bg-light" style="height:100px;" placeholder="댓글을 입력해주세요"></textarea>
@@ -136,7 +136,7 @@
 				<div class="row" id="${vs.index}">
 					<div class="col-md-2"></div>
 					<div class="col-md-1">
-						<img src="/resources/img/Non_User_Photo.JPG">
+						<img src="/resources/img/planner/Non_User_Photo.JPG">
 					</div>
 					<div class="col-md-5">
 						<div class="row">
@@ -224,8 +224,8 @@
 
 <!--====================================================================================-->
 
-	<script src="${contextPath}/resources/js/plannerShow.js"></script>
-	<script src="${contextPath}/resources/js/plannerReply.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerShow.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerReply.js"></script>
 
 <!--====================================================================================-->
 </body>

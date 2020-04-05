@@ -174,7 +174,7 @@
 	</form>
 <!--====================================================================================-->
 
-	<script src="${contextPath}/resources/js/plannerList.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerList.js"></script>
 
 <!--====================================================================================-->
 

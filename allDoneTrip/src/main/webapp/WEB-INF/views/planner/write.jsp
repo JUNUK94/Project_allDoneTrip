@@ -102,9 +102,9 @@
 	
 </body>
 <!--====================================================================================-->	
- 	<script src="${contextPath}/resources/js/drag&drop.js"></script>
-	<script src="${contextPath}/resources/js/calculator.js"></script>
-	<script src="${contextPath}/resources/js/exchange.js"></script>
+ 	<script src="${contextPath}/resources/js/planner/drag&drop.js"></script>
+	<script src="${contextPath}/resources/js/planner/calculator.js"></script>
+	<script src="${contextPath}/resources/js/planner/exchange.js"></script>
 	 
 <!--====================================================================================-->	
 </html>
