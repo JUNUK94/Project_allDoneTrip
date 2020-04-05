@@ -39,6 +39,7 @@ public class plannerServiceImpl implements plannerService {
 	// 플래너 정렬
 	@Override
 	public List<PlannerVO> sorting(Criteria cri) {
+		log.info(cri.getSortType());
 		return mapper.sorting(cri);
 	}
 

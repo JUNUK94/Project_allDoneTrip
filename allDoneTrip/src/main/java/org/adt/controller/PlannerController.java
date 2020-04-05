@@ -46,10 +46,26 @@ public class PlannerController {
 		
 		// 전체 플래너 수 카운트
 		int total = service.totalCount(cri);
+		
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 
+
+	// 플래너 정렬
+	@GetMapping("/sort")
+	public String sort(Criteria cri, Model model) {
+
+		int total = service.totalCount(cri);
+		log.info(cri);
+				
+		model.addAttribute("list", service.sorting(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		return "planner/list";
+	}
+
+	
 	// 플래너 조회 페이지로 이동
 	@GetMapping("/show")
 	public String show(HttpServletResponse response, HttpServletRequest request,
@@ -71,19 +87,7 @@ public class PlannerController {
 		return "planner/show";
 	}
 	
-	// 플래너 정렬
-	@GetMapping("/sort")
-	public String sort(Criteria cri, Model model) {
 
-		int total = service.totalCount(cri);
-				
-		model.addAttribute("list", service.sorting(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		return "planner/list";
-	}
-
-	
 	
 	// 플래너 댓글 등록
 	@PostMapping("/replyWrite")

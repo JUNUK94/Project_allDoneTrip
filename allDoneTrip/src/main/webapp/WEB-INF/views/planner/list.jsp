@@ -77,8 +77,9 @@
 					</select>
 					
 					<input type="text" name="keyword">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
+					<input type="hidden" name="pageNum" value= "${pageMaker.cri.pageNum}">
+					<input type="hidden" name="amount" value= "${pageMaker.cri.amount}">
 					<input type="submit" value="검색">
 				</form>
 			</div> 
@@ -118,7 +119,7 @@
 								<td>${pvo.plan_No}</td>
 								<td>${pvo.plan_Like}</td>
 								<td>
-									<a class="move" href="${pvo.plan_No}">${pvo.p_Title}</a>
+									<a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a>
 									${pvo.city_Name}
 								</td>
 								<td>${pvo.nick_Name}</td>
@@ -165,6 +166,7 @@
 		<input type="hidden" name="keyword" value = "${pageMaker.cri.keyword}">
 		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
+		<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
 	</form>
 	
 	<form id="sortForm" action="/planner/sort" method="get">

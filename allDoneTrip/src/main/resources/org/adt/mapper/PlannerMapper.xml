@@ -55,7 +55,7 @@
 	<select id="sorting" resultType="org.adt.domain.PlannerVO">
 	<![CDATA[
 			select	* 
-			from	(select
+			from	(select /*+ index_desc(planner pk_planner)*/
 							rownum rn, plan_No, p_Title, city_Name, trip_Period, 
 							nick_Name, plan_Like, click_Num
 					from 	planner, city
@@ -63,9 +63,21 @@
 		]]>
 							<include refid="criteria"></include>
 		<![CDATA[		
-							planner.city_No=city.city_No 
+							planner.city_No = city.city_No 
 							and rownum <= #{pageNum} * #{amount}
-							order by #{sortType} desc)
+		]]>					
+					<choose>
+						<when test="sortType == 'regdate'.toString()">
+							order by regdate desc)
+						</when>
+						<when test="sortType == 'plan_Like'.toString()">
+							order by plan_Like desc)
+						</when>
+						<when test="sortType == 'click_Num'.toString()">
+							order by click_Num desc)
+						</when>
+					</choose>
+		<![CDATA[
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>

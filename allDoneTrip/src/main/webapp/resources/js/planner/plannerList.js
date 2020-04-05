@@ -22,7 +22,7 @@ $(document).ready(function(){
 	});
 	
 	
-	//라디오박스 선택 시
+	//라디오박스 선택 시 정렬
 	$("input[name='sortType']").on("click", function(e){
 		var sortType = $(this).val();
 		sortForm.find("input[name='sortType']").val(sortType);
@@ -30,10 +30,8 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-	
-	$(".move").on("click", function(e){
+	// 조회페이지로 이동
+	$(".show").on("click", function(e){
 		e.preventDefault();
 		
 		var num = $(this).attr("href");
@@ -47,6 +45,7 @@ $(document).ready(function(){
 	
 	var searchForm = $("#searchForm");
 	
+	// 키워드 입력하여 검색
 	$("#searchForm").find("input[type='submit']").on("click", function(e){
 		e.preventDefault();
 		
@@ -54,6 +53,7 @@ $(document).ready(function(){
 		searchForm.submit();
 	});
 	
+	// 도시명 선택하여 검색
 	$("#city_No").on("change", function(e){
 		var city_No = $(this).val();
 		
