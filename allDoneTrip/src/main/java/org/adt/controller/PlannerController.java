@@ -37,8 +37,10 @@ public class PlannerController {
 	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
-	public void write() {
+	public void write(Model model) {
 		log.info("write");
+		
+		model.addAttribute("width", "1000");
 	}
 	
 	
