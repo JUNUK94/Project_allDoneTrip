@@ -13,7 +13,7 @@ public class Criteria {
 	private String keyword;
 	
 	
-	//»ı¼ºÀÚ¿¡¼­ ÃÊ±â°ª ÇÒ´ç
+	//í˜ì´ì§• ì²˜ë¦¬ ê´€ë ¨
 	public Criteria() {
 		this(1,10);
 	}

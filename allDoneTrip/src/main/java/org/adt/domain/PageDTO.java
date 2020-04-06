@@ -15,7 +15,7 @@ public class PageDTO {
 	private Criteria cri;
 	
 	
-	//»ı¼ºÀÚ¿¡¼­ ÃÊ±â°ª ÇÒ´ç
+	//í˜ì´ì§• ì²˜ë¦¬
 	public PageDTO(Criteria cri, int total) {
 		
 		this.cri = cri;
@@ -34,7 +34,6 @@ public class PageDTO {
 			realEnd = number+1;
 		}
 		
-		//int realEnd = (int)(total / cri.getAmount())+1;
 		if(realEnd < endPage) {
 			this.endPage = realEnd;
 		}

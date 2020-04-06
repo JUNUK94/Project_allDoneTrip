@@ -77,8 +77,9 @@
 					</select>
 					
 					<input type="text" name="keyword">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
+					<input type="hidden" name="pageNum" value= "${pageMaker.cri.pageNum}">
+					<input type="hidden" name="amount" value= "${pageMaker.cri.amount}">
 					<input type="submit" value="검색">
 				</form>
 			</div> 
@@ -118,7 +119,7 @@
 								<td>${pvo.plan_No}</td>
 								<td>${pvo.plan_Like}</td>
 								<td>
-									<a class="move" href="${pvo.plan_No}">${pvo.p_Title}</a>
+									<a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a>
 									${pvo.city_Name}
 								</td>
 								<td>${pvo.nick_Name}</td>
@@ -134,8 +135,9 @@
 	
 	
 		<div class="row">
-			<div class="col-md-10">
-				<ul class="pagination">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<ul class="pagination justify-content-center">
 					<c:if test="${pageMaker.prev}">
 						<li class="page-item">
 							<a class="page-link" href="${pageMaker.startPage - 1}">previous</a>
@@ -155,6 +157,7 @@
 					</c:if>
 				</ul>
 			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
 
@@ -163,16 +166,12 @@
 		<input type="hidden" name="keyword" value = "${pageMaker.cri.keyword}">
 		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
+		<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
 	</form>
 	
-	<form id="sortForm" action="/planner/sort" method="get">
-		<input type="hidden" name="sortType" value = "">
-		<input type="hidden" name="pageNum" value = "${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value = "${pageMaker.cri.amount}">
-	</form>
 <!--====================================================================================-->
 
-	<script src="${contextPath}/resources/js/plannerList.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerList.js"></script>
 
 <!--====================================================================================-->
 

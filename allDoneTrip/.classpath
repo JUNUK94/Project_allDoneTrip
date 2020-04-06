@@ -36,6 +36,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -47,5 +48,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+=======
+>>>>>>> 0f6495382968ce94c15aaad3495235766c51b1b5
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

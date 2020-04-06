@@ -23,6 +23,7 @@ public class plannerServiceImpl implements plannerService {
 	
 	@Autowired
 	private PlannerMapper mapper;
+
 	
 	// 플래너 리스트 가져오기
 	@Override
@@ -30,24 +31,14 @@ public class plannerServiceImpl implements plannerService {
 		return mapper.getList(cri);
 	}
 
+	
 	// 플래너 전체 갯수 카운트
 	@Override
 	public int totalCount(Criteria cri) {
 		return mapper.totalCount(cri);
 	}
 
-	// 플래너 정렬
-	@Override
-	public List<PlannerVO> sorting(Criteria cri) {
-		return mapper.sorting(cri);
-	}
-	
-	// 조회수 추가
-	@Override
-	public void addClickNum(Long plan_No) {
-		mapper.addClickNum(plan_No);
-	}
-	
+
 	// 쿠키 체크 후 조회수 추가
 	@Override
 	public void checkCookie(HttpServletResponse response, HttpServletRequest request, Long plan_No) {
@@ -68,9 +59,29 @@ public class plannerServiceImpl implements plannerService {
 		if (StringUtils.indexOfIgnoreCase(cookie_read_count, new_cookie_read_count) == -1 ) {
 			Cookie cookie = new Cookie("read_count", cookie_read_count + new_cookie_read_count); 
 			response.addCookie(cookie); 
-			this.addClickNum(plan_No);
+			
+			mapper.addClickNum(plan_No);
 		}
 	}
+	
+	
+	// 좋아요 사전 체크여부 판별 후 좋아요 추가
+	@Override
+	public boolean addLike_afterCheck(PlannerVO pvo) {
+		
+		//플래너 게시판 번호, 이메일로 좋아요를 눌렀는지 판단
+		int check = mapper.check_User(pvo);
+		
+		//좋아요를 누르지 않았으면
+		if(check == 0) {
+			mapper.addLike(pvo);	//planner DB에 좋아요+1로 업데이트
+			mapper.addLike_insertUser(pvo); //planner_Like DB에 게시판번호, 이메일 추가
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	
 	// 플래너 정보 가져오기
 	@Override
@@ -81,26 +92,20 @@ public class plannerServiceImpl implements plannerService {
 	// 플래너 저장
 	@Override
 	public void insert(PlannerVO pvo) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	// 플래너 수정
 	@Override
 	public void update(PlannerVO pvo) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	// 플래너 삭제
 	@Override
 	public void delete(Long plan_No) {
-		// TODO Auto-generated method stub
 		
 	}
 
-
-	
-	
 	
 }
