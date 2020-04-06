@@ -62,7 +62,7 @@
 <!-- 자유게시판 전체목록 페이징처리 -->
 <select id="freeWithPaging" resultType="org.adt.domain.BoardVO">
 		<![CDATA[
-		  select rwonum rn, bno, title, b_content, nick_name, b_clicknum, b_like, regdate, updatedate
+		  select rownum rn, bno, title, b_content, nick_name, b_clicknum, b_like, regdate, updatedate
 		  from(
 		  SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
