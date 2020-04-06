@@ -13,9 +13,10 @@ public class Criteria {
 	private String keyword;
 	
 	
-	//»ı¼ºÀÚ¿¡¼­ ÃÊ±â°ª ÇÒ´ç
+	//í˜„ì¬ í˜ì´ì§€ ì •ë³´
 	public Criteria() {
-		this(1,10);
+		this.pageNum = 1;
+		this.amount = 1;
 	}
 	
 	public Criteria(int pageNum, int amount) {

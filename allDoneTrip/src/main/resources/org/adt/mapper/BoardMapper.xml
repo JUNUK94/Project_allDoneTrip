@@ -2,7 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.adt.mapper.BoardMapper">
-
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and" prefixOverrides="or">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="or">
+					<choose>
+						<when test="type == 'T'.toString()">
+							p_Title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							nick_Name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							planner.city_No = #{keyword}
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 <!-- 게시판전체목록 가져오기 -->
 <select id="getList" resultType="org.adt.domain.BoardVO">
 		<![CDATA[
@@ -10,18 +28,25 @@
 		  from(
 		  SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
-          FROM BOARD 
-          WHERE 
+          FROM BOARD
+         where 
 		]]>
-      	<include refid="criteria"></include>					
+    <!-- <include refid="criteria"></include> -->				
 		
-		<![CDATA[		
-			board
-			and rownum <= #{pageNum} * #{amount})
+		<![CDATA[
+			rownum <= #{pageNum} * #{amount})
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
 </select>
 
+<!-- 게시판 전체 페이징 -->
+<select id="boardPaging" resultType="int">
+		<![CDATA[
+		  select	count(*)
+		from	board
+		where	board.bno > 0
+		]]>
+</select>
 
 <!-- 후기전체목록 페이징처리 -->
 <select id="reviewWithPaging" resultType="org.adt.domain.BoardVO">
@@ -54,7 +79,7 @@
       	<include refid="criteria"></include>					
 		
 		<![CDATA[		
-			b_type ='2'
+			b_type ='3'
 			and rownum <= #{pageNum} * #{amount})
 			where rn > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -72,7 +97,7 @@
       	<include refid="criteria"></include>					
 		
 		<![CDATA[		
-			b_type ='2'
+			b_type ='4'
 			and rownum <= #{pageNum} * #{amount})
 			where rn > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -127,4 +152,3 @@
    </update>
    
  </mapper>
-

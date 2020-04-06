@@ -21,11 +21,15 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	@GetMapping("/*")
-	public void allCommunitylist( Criteria cri, Model model) {
-		log.info(service);
-		model.addAttribute("list", service.allBoardList(cri));
-//		model.addAttribute("pageUtil", new PageDTO(cri, service.totalBoardCount(cri)) );
+	@GetMapping("/")
+	public String allCommunitylist( Criteria cri, Model model) {
+		System.out.println(service.getList(cri));
 		
+		int total = service.boardPaging(cri);
+
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		System.out.println(total);
+		return "/community/list";
 	}
 }

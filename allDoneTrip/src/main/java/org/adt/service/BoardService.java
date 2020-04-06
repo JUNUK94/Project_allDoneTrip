@@ -7,18 +7,35 @@ import org.adt.domain.Criteria;
 
 public interface BoardService {
 	
-	//모든 게시판 글 가져오기
-	public List<BoardVO> allBoardList(Criteria cri);
+	//게시판전체목록 가져오기
+	public List<BoardVO> getList(Criteria cri);
 	
-	//모든 게시판 글 갯수 구하기
-	public int totalBoardCount(Criteria cri);
+	//전체게시판 페이징 처리
+	public int boardPaging(Criteria cri);
 
-	//여행후기 게시판 글 가져오기
-	public List<BoardVO> reviewList();
+	//후기게시판 페이징처리
+	public int reviewWithPaging(Criteria cri);
 	
-	//동행찾기 게시판 글 가져오기
-	public List<BoardVO> companyList();
+	//동행찾기 페이징처리
+	public int friendWithPaging(Criteria cri);
 	
-	//자유 게시판 글 가져오기
-	public List<BoardVO> freeBoardList(); 
+	//자유게시판 페이징처리
+	public int freeWithPaging(Criteria cri);
+	
+	
+	//게시판글작성
+	public void reviewInsert(BoardVO board);
+	
+	public void reviewInsertSelectKey(BoardVO board);
+	
+	
+	
+	//글검색
+	public BoardVO read(Long bno);
+	
+	//글삭제
+	public int delete(Long bno);
+	
+	//글수정
+	public int update(BoardVO board);
 }

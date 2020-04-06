@@ -20,34 +20,71 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper bMapper;
 
+	//게시판 전체 리스트 출
 	@Override
-	public List<BoardVO> allBoardList(Criteria cri) {
-		return bMapper.getReviewList();
+	public List<BoardVO> getList(Criteria cri) {
+		return bMapper.getList(cri);
+	}
+	
+	//게시판 전체 페이징 처
+	@Override
+	public int boardPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return bMapper.boardPaging(cri);
+	}
+
+	//리뷰게시판 페이징
+	@Override
+	public int reviewWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return bMapper.reviewWithPaging(cri);
+	}
+
+	//동행게시판 페이징
+	@Override
+	public int friendWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return bMapper.friendWithPaging(cri);
+	}
+
+	//자유게시판 페이징
+	@Override
+	public int freeWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return bMapper.freeWithPaging(cri);
 	}
 
 	@Override
-	public int totalBoardCount(Criteria cri) {
+	public void reviewInsert(BoardVO board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reviewInsertSelectKey(BoardVO board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BoardVO read(Long bno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Long bno) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<BoardVO> reviewList() {
+	public int update(BoardVO board) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
-	@Override
-	public List<BoardVO> companyList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<BoardVO> freeBoardList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }
