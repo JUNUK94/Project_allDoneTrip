@@ -22,12 +22,15 @@ public interface BoardMapper {
 	
 	//자유게시판 페이징처리
 	public int freeWithPaging(Criteria cri);
+<<<<<<< HEAD
 	
 	// 조회수 추가
 	public void addBclickNum(Long bno);
 	
 	// 좋아요 추가
 	public void addLike(Long bno);
+=======
+>>>>>>> 03b5777... 일단 커뮤니티 임시 올림
 	
 	
 	//게시판글작성
