@@ -16,14 +16,14 @@
 </select>
 
 <!-- 회원프로필 추가 -->
-<insert id="boardInsert">
+<insert id="memberInsert">
 	insert into attach (attach_type, type_name, uuid, upload_path, file_name, file_type, member_no)
 	values (#{attach_Type}, #{type_Name}, ${uuid}, #{upload_Path}, #{file_Name}, #{file_Type},#{member_No} )
 </insert>
 
 
 <!-- 회원프로필 찾기 -->
-<select id="findByBno" resultType="org.adt.domain.AttachVO">
+<select id="fineByMember_No" resultType="org.adt.domain.AttachVO">
  	select * from attach where member_no = #{member_No}
 </select>
 
