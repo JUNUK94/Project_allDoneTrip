@@ -78,6 +78,24 @@
 		]]>
 </select>
 
+<!-- 조회수 -->
+	<select id="addBclickNum">
+		<![CDATA[
+			update 	board
+			set		b_clickNum = (1 + (select b_clickNum from board where bno = #{bno}))
+			where 	bno = #{bno}
+		]]>
+	</select>
+	
+<!-- 좋아요 -->
+	<select id="addLike">
+		<![CDATA[
+			update 	board
+			set		b_Like = (1 + (select b_Like from board where bno = #{bno}))
+			where 	bno = #{bno}
+		]]>
+	</select>
+
 <!-- 게시판작성 -->
 <insert id="Insert">
   insert 
