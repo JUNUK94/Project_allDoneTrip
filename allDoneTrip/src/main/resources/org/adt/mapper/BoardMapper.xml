@@ -12,10 +12,6 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD 
           WHERE 
-		]]>
-      	<include refid="criteria"></include>					
-		
-		<![CDATA[		
 			board
 			and rownum <= #{pageNum} * #{amount})
 			where 	rn > (#{pageNum} - 1) * #{amount}
@@ -32,10 +28,8 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD 
           WHERE 
-		]]>
-      	<include refid="criteria"></include>					
-		
-		<![CDATA[		
+			
+				
 			b_type ='2'
 			and rownum <= #{pageNum} * #{amount})
 			where rn > (#{pageNum} - 1) * #{amount}
@@ -50,10 +44,7 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD 
           WHERE 
-		]]>
-      	<include refid="criteria"></include>					
-		
-		<![CDATA[		
+	
 			b_type ='2'
 			and rownum <= #{pageNum} * #{amount})
 			where rn > (#{pageNum} - 1) * #{amount}
@@ -68,10 +59,9 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD 
           WHERE 
-		]]>
-      	<include refid="criteria"></include>					
+				
 		
-		<![CDATA[		
+		
 			b_type ='2'
 			and rownum <= #{pageNum} * #{amount})
 			where rn > (#{pageNum} - 1) * #{amount}
