@@ -23,6 +23,7 @@ public class plannerServiceImpl implements plannerService {
 	
 	@Autowired
 	private PlannerMapper mapper;
+
 	
 	// 플래너 리스트 가져오기
 	@Override
@@ -30,6 +31,7 @@ public class plannerServiceImpl implements plannerService {
 		return mapper.getList(cri);
 	}
 
+	
 	// 플래너 전체 갯수 카운트
 	@Override
 	public int totalCount(Criteria cri) {
@@ -63,16 +65,17 @@ public class plannerServiceImpl implements plannerService {
 	}
 	
 	
-	
 	// 좋아요 사전 체크여부 판별 후 좋아요 추가
 	@Override
 	public boolean addLike_afterCheck(PlannerVO pvo) {
 		
+		//플래너 게시판 번호, 이메일로 좋아요를 눌렀는지 판단
 		int check = mapper.check_User(pvo);
 		
+		//좋아요를 누르지 않았으면
 		if(check == 0) {
-			mapper.addLike(pvo);
-			mapper.addLike_insertUser(pvo);
+			mapper.addLike(pvo);	//planner DB에 좋아요+1로 업데이트
+			mapper.addLike_insertUser(pvo); //planner_Like DB에 게시판번호, 이메일 추가
 			return true;
 		}else {
 			return false;
@@ -89,26 +92,20 @@ public class plannerServiceImpl implements plannerService {
 	// 플래너 저장
 	@Override
 	public void insert(PlannerVO pvo) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	// 플래너 수정
 	@Override
 	public void update(PlannerVO pvo) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	// 플래너 삭제
 	@Override
 	public void delete(Long plan_No) {
-		// TODO Auto-generated method stub
 		
 	}
 
-
-	
-	
 	
 }

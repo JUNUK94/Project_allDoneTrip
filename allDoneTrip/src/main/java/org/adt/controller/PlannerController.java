@@ -34,11 +34,13 @@ public class PlannerController {
 	@Autowired
 	private plannerReplyService replyService;
 	
+	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
 	public void write() {
 		log.info("write");
 	}
+	
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
@@ -57,7 +59,8 @@ public class PlannerController {
 	@GetMapping("/show")
 	public String show(HttpServletResponse response, HttpServletRequest request,
 					@RequestParam("plan_No") Long plan_No, PlannerReplyVO rvo, Model model) {
-		
+
+		// 전체 플래너 수 카운트		
 		int totalReply = replyService.totalReplyCount(plan_No);
 		
 		//쿠키여부 체크하여 조회수 추가
@@ -81,18 +84,17 @@ public class PlannerController {
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> replyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
+		
+		//날짜, 시간 구분해서 원하는 형식으로 조합
 		String date[] = prvo.getRegdate().split("/");
 		String sysdate = date[0] + " " + date[1];
 		
+		//PlannerReplyVO의 regdate 변수에 날짜+시간 set하기
 		prvo.setRegdate(sysdate);
 		
-		log.info(prvo);
-		
+		//댓글 DB에 입력
 		replyService.replyWrite(prvo);
-		
 		map.put("list",prvo);
-		
-		log.info(map.get("list"));
 		
 		return new ResponseEntity<HashMap<String, PlannerReplyVO>>(map, HttpStatus.OK);
 	}
@@ -103,14 +105,15 @@ public class PlannerController {
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> reReplyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
-	
+
+		//날짜, 시간 구분해서 원하는 형식으로 조합
 		String date[] = prvo.getRegdate().split("/");
 		String sysdate = date[0] + " " + date[1];
 		
+		//PlannerReplyVO의 regdate 변수에 날짜+시간 set하기
 		prvo.setRegdate(sysdate);
 		
-		log.info(prvo);
-		
+		//댓글 DB에 입력
 		replyService.reReplyWrite(prvo);
 		map.put("list", prvo);
 		
@@ -123,6 +126,7 @@ public class PlannerController {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
+		//댓글 DB에서 삭제 실행 후 성공 or 실패 여부 판단
 		boolean result = replyService.replyDelete(prvo);
 		String message = "댓글 삭제 실패";
 	
@@ -144,10 +148,8 @@ public class PlannerController {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		log.info(pvo);
+		//좋아요 추가 기능 실행 후, 성공 or 실패 여부 판단
 		boolean result = service.addLike_afterCheck(pvo);
-		
-		
 		
 		if(result) {
 			map.put("message", "감사합니다");
@@ -156,7 +158,7 @@ public class PlannerController {
 		}
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
-		}
+	}
 	
 	
 	
@@ -166,6 +168,8 @@ public class PlannerController {
 											@RequestParam("title") String title,
 											@RequestParam("text") String text) {
 		
+		HashMap<String, String> map = new HashMap<String, String>();
+
 		if(img != ""){
 			img = ("<img src='/resources/img/"+img+"'>");
 		}
@@ -176,7 +180,6 @@ public class PlannerController {
 			text = ("<div>"+text+"</div>");
 		}
 		
-		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("img", img);
 		map.put("title", title);
 		map.put("text", text);
