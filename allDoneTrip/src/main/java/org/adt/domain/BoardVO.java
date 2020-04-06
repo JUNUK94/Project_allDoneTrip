@@ -1,5 +1,7 @@
 package org.adt.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,7 @@ public class BoardVO {
 	private String regdate;
 	private String updatedate;
 	private Boolean planner_OX; //플래너 유무 Y,N
+	
+	private Long reply_Cnt; //댓글개수
+	private List<AttachVO> attachList;
 }
