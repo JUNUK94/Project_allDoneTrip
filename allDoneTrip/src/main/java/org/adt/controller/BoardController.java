@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/community/*")
-public class CommunityController {
+public class BoardController {
 	
 	@GetMapping("/*")
 	public void allBoardList() {
