@@ -275,7 +275,7 @@
 					<div class="col-md-12">
 					<div class="input-group mb-3">
 						<form id="searchPlace_Form" action="https://www.google.com/maps/search/?api=1&query=" method="get">
-							<input type="text" name="query" class="form-control Autocomplete">
+							<input type="text" name="query" class="form-control SearchBox">
 							<div class="input-group-append">
 								<button id="searchPlaceBtn" class="input-group-text" placeholder="장소검색">검색</button>
 							</div>

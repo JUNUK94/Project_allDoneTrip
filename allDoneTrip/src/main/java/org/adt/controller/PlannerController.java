@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package org.adt.controller;
 
 import java.util.HashMap;
