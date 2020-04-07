@@ -6,10 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>올던트립 로그인</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container-sm mt-5 border" >
@@ -19,42 +15,43 @@
 		<div class="row">
 			<div class="col border">
 				<br>
-				<input type="text" class="form-control" value="아이디" id="usr">
+				<input type="text" class="form-control" placeholder="아이디" id="usr">
 				<br>
-				<input type="text" class="form-control" value="비밀번호" id="pw">
+				<input type="text" class="form-control" placeholder="비밀번호" id="pw">
 				<br>
-				<button type="button" class="btn btn-primary btn-block" id="">로그인</button>
+				<button type="button" class="btn btn-primary btn-block" id="login">로그인</button>
 				<br>
 			</div>
     		<div class="col border text-center middle" >
     		
 	    		<div class="container-sm mt-4">
-	    			<button type="button" class="btn btn-warning" id="">카카오 로그인</button>
-	    		</div>
+	    			<button type="button" class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
+		    	</div>
+		    	
 	    		<div class="container-sm mt-4">
-	    			<button type="button" class="btn btn-success" id="">네이버 로그인</button>
+	    			<button type="button" class="btn btn-success" id="naverLogin">네이버 로그인</button>
 	    		</div>
     		</div>
 		</div>
 		<div class="row">
-			<button type="button" class="btn btn-link col text-left" id="">아이디/비밀번호 찾기 </button>
-			
-			<button type="button" class="btn btn-link col text-right" id="signUp">회원가입 </button>
+			<div class="col-4">
+				<button type="button" class="btn btn-link btn-sm col text-left" id="idSearch">아이디/비밀번호 찾기 </button>
+			</div>
+			<div class="col-5"></div>
+			<div class="col-3">
+				<button type="button" class="btn btn-link btn-sm col text-right" id="signUp">회원가입 </button>
+			</div>
 		</div>
-	
+	</div>
 </body>
-<script type="text/javascript">	
-		$(document).ready(function(){
-			//회원가입 버튼 클릭시 회원가입 페이지 이동
-			$("#signUp").on("click", function(e){
-				$(location).attr("href","/login/signUpList");
-			});
-			
-		});
-		
-		$(document).ready(function () {
-			
-					
-		});
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script type="text/javascript">
+	Kakao.init('9d97ada42431e424c4f3d1f9dc6b09af');
+	console.log(Kakao.isInitialized());
 	</script>
+	<script src="/resources/js/login/loginMain.js"></script>
 </html>
