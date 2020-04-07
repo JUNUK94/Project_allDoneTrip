@@ -36,6 +36,14 @@ public class PlannerController {
 	
 	
 	// 플래너 작성 페이지로 이동
+	@GetMapping("/test")
+	public void test(Model model) {
+		log.info("test");
+		
+	}
+	
+	
+	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
 	public void write(Model model) {
 		log.info("write");

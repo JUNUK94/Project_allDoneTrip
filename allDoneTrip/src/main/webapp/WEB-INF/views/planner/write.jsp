@@ -14,6 +14,9 @@
 		height: 200px;
 		border: solid 1px gray;
 	}
+	body {
+		position: relative; 
+  	}
 </style>
 <!--=====================================jquery=========================================-->
 
@@ -35,10 +38,10 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
 		crossorigin="anonymous"></script>
-
+		
 <!--====================================================================================-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="50">
 	<br><br>
 		<div class="row">
 			<div class="col-md-3">
@@ -54,7 +57,7 @@
 					<div class="input-group-prepend">
 						<label class="input-group-text">대표 여행도시</label>
 					</div>
-					<select class="custom-select" id="inputGroupSelect03">
+					<select class="custom-select" id="mainCity">
 						<option selected></option>
 						<option value="1">파리</option>
 						<option value="2">니스</option>
@@ -95,20 +98,108 @@
 			<div class="col-md-2 bg-light">
 				<!-- 드래그&드롭 테스트 -->
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12" id="title_CityInfo">
 						<h4>도시정보</h4>
 						<hr>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-					<ul>
-						<li id="pensu" draggable="true">펭수</li>
-						<li id="nice" draggable="true">니스</li>
-						<li id="lyon" draggable="true">리옹</li>
-					</ul>
+					<div class="row" id="wrapper_CitInfoSelector" style="display: none;">
+						<div class="col-md-12">
+							<select class="form-control" id="CitInfoSelector">
+								<option value="" selected>도시 선택</option>
+								<option value="1">파리</option>
+								<option value="2">니스</option>
+								<option value="3">리옹</option>
+								<option value="4">상해</option>
+								<option value="5">홍콩</option>
+								<option value="6">방콕</option>
+								<option value="7">다낭</option>
+								<option value="8">하노이</option>
+								<option value="9">치앙마이</option>
+								<option value="10">베이징</option>
+							</select>
+						</div>
 					</div>
-				</div>
+					<br>
+					<div class="containor" id="CitInfo" style="display: none">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-10">
+										명소 ∨
+										<hr>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<ul id="hotPlace">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-10">
+										맛집 ∨
+										<hr>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<ul id="restaurant">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-10">
+										쇼핑 ∨
+										<hr>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<ul id="shopping">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-10">
+										날씨 ∨
+										<hr>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<ul id="weather">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+									
+							<ul>
+								<li id="pensu" draggable="true">펭수</li>
+							</ul>
+				
 				
 				<br> <br>
 				
@@ -270,16 +361,18 @@
 						<div id="mapShow"></div>
 					</div>
 				</div>
-				<br>
 				<div class="row">
 					<div class="col-md-12">
-					<div class="input-group mb-3">
-						<form id="searchPlace_Form" action="https://www.google.com/maps/search/?api=1&query=" method="get">
-							<input type="text" name="query" class="form-control SearchBox">
-							<div class="input-group-append">
-								<button id="searchPlaceBtn" class="input-group-text" placeholder="장소검색">검색</button>
-							</div>
-						</form>
+						<a href="#" id="showMyPositon" class="text-primary small">내 위치로 이동</a>
+					</div>
+					<div class="col-md-12">
+						<div class="input-group mb-3">
+							<!--  <form id="searchPlace_Form" action="https://www.google.com/maps/search/?api=1&query=" method="get">-->
+								<input type="text" id="query" name="query" class="form-control SearchBox">
+								<div class="input-group-append">
+									<button id="searchPlaceBtn" class="input-group-text">검색</button>
+								</div>
+							<!--</form>-->
 					</div>
 				</div>
 			</div>
@@ -292,15 +385,18 @@
 		
 		<input type="hidden" name="width" id="width" value="${width}">
 		
+		<div id="weather"></div>
+		
 		
 </body>
 <!--=================================googleMap API======================================-->
 	<script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
-	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
 <!--====================================================================================-->
 	<script src="${contextPath}/resources/js/planner/drag&drop.js"></script>
 	<script src="${contextPath}/resources/js/planner/calculator.js"></script>
 	<script src="${contextPath}/resources/js/planner/exchange.js"></script>
+	<script src="${contextPath}/resources/js/planner/weather.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerWrite.js"></script>
 <!--====================================================================================-->
 </html>
