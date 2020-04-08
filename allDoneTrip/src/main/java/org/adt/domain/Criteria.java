@@ -11,6 +11,7 @@ public class Criteria {
 	private String sortType;
 	private String type;
 	private String keyword;
+	private int b_Type;
 	
 	
 	//페이징 처리 관련
