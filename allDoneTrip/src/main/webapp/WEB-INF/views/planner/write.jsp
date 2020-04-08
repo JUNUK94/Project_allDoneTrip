@@ -275,7 +275,7 @@
 					<div class="col-md-12">
 					<div class="input-group mb-3">
 						<form id="searchPlace_Form" action="https://www.google.com/maps/search/?api=1&query=" method="get">
-							<input type="text" name="query" class="form-control">
+							<input type="text" name="query" class="form-control SearchBox">
 							<div class="input-group-append">
 								<button id="searchPlaceBtn" class="input-group-text" placeholder="장소검색">검색</button>
 							</div>
@@ -297,6 +297,7 @@
 <!--=================================googleMap API======================================-->
 	<script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
 	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
 <!--====================================================================================-->
 	<script src="${contextPath}/resources/js/planner/drag&drop.js"></script>
 	<script src="${contextPath}/resources/js/planner/calculator.js"></script>
