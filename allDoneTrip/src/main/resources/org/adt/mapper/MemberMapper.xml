@@ -5,14 +5,16 @@
 
 	<!-- 회원가입 -->
 	<insert id="join">
-	
-		<selectKey keyProperty="member_No" order="BEFORE" resultType="long">
-			select seq_memberinfo.nextval from dual
-		</selectKey>
-	
-	   insert into memberinfo(member_no, email, nick_name, name, pw, birth, gender, phone_num, join_Date)
-	   values( #{member_No}, #{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, (TO_CHAR(sysdate, 'yyyymmdd')))
+	insert into memberinfo(
+	   member_no, email, nick_name, name, pw, birth, gender, phone_num,join_Date,agree_date, mobile_Co
+	             )
+	   values( 
+	      seq_memberinfo.nextval,#{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, 
+	      (TO_CHAR(sysdate, 'yyyymmdd')),(TO_CHAR(sysdate, 'yyyymmdd')),#{mobile_Co})
 	</insert>
 
-
+  <!-- 회원탈퇴 -->
+  <delete id = "delete">
+     delete from memberinfo where memner_no=#{member_No}
+  </delete>
 </mapper>
