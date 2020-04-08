@@ -9,7 +9,14 @@ import org.adt.domain.PlannerVO;
 public interface BoardMapper {
 	
 	//게시판전체목록 가져오기
-	public List<BoardVO> getList(Criteria cri);
+	public List<BoardVO> getBoardList(Criteria cri);
+	
+	//특정 게시글 가져오기
+	public BoardVO read(int bno);
+	
+	//게시판 전체 갯수 가져오기
+	public int getTotalCount(Criteria cri);
+
 	
 	//전체게시판 페이징 처리
 	public int boardPaging(Criteria cri);
