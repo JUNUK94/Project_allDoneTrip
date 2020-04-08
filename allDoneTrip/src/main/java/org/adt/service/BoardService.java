@@ -10,6 +10,12 @@ public interface BoardService {
 	//게시판전체목록 가져오기
 	public List<BoardVO> getList(Criteria cri);
 	
+	//특정 게시글 조회
+	public BoardVO get(Long bno);
+	
+	//게시판 전체 갯수
+	public int getTotal(Criteria cri);
+	
 	//전체게시판 페이징 처리
 	public int boardPaging(Criteria cri);
 

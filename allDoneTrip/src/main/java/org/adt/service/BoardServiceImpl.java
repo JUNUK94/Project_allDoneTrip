@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService {
 	//게시판 전체 리스트 출
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
-		return bMapper.getList(cri);
+		return bMapper.getBoardList(cri);
 	}
 	
 	//게시판 전체 페이징 처
@@ -82,6 +82,18 @@ public class BoardServiceImpl implements BoardService {
 	public int update(BoardVO board) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		
+		log.info("get total count");
+		return bMapper.getTotalCount(cri);
+	}
+
+	@Override
+	public BoardVO get(Long bno) {
+		return bMapper.read(bno);
 	}
 
 
