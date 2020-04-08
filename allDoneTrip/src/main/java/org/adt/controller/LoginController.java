@@ -2,7 +2,9 @@ package org.adt.controller;
 
 import java.util.HashMap;
 
-//import org.alldone.domain.LoginVO;
+import org.adt.domain.MemberVO;
+import org.adt.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,9 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @RequestMapping("/login/*")
 public class LoginController {
+	
+	@Autowired
+	private MemberService mService;
 	
 	@GetMapping("/loginMain")
 	public void loginMain() {
@@ -69,10 +74,13 @@ public class LoginController {
 	}
 	
 	@PostMapping("/insertMember")
-	public String insertMember(/*LoginVO lvo*/) {
-//		service.insertMember(lvo);
-//		
-//		log.info(lvo);
+	public String insertMember(MemberVO member) {
+		
+		
+		
+		mService.join(member);
+		
+		log.info(member);
 		return "login/signUp/signUpSuccess";
 	}
 	

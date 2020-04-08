@@ -22,12 +22,12 @@
 		<form id="signUpForm" >
 		<div class="row mt-3 " >
 			<div class="col-2 "><p class='divText'>Email*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email"></div>
 		</div>
 		
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Password*</p></div>
-			<div class="col "><input type="password" class="form-control" placeholder="Password" id="pw"></div>
+			<div class="col "><input type="password" class="form-control" placeholder="Password" id="pw" name="pw"></div>
 		</div>
 		<div class="row" >
 			<div class="col-2"></div>
@@ -37,11 +37,11 @@
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Name*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Name" id="name"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Name" id="name" name="name"></div>
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Birthday*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="ex)19990101" id="birth"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="ex)19990101" id="birth" name="birth"></div>
 		</div>
 		<div class="row" >
 			<div class="col-2"></div>
@@ -66,11 +66,11 @@
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Nickname*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Nickname" id="nickname"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Nickname" id="nickname" name="nick_Name"></div>
 		</div>
 		<div class="row mt-3" >
 		<div class="col-2 middle">
-			<select class="form-control" id="agency" name="agency">
+			<select class="form-control" id="agency" name="mobile_Co">
 				<option value="">agency</option>
 				<option id="sk" value="SKT">SKT</option>
 				<option id="kt" value="KT">KT</option>
@@ -78,7 +78,7 @@
 			</select>
 		</div>
 		<div class="col-10">
-			<input type="text" class="form-control" placeholder="Phone Number(only number)" id="phone">
+			<input type="text" class="form-control" placeholder="Phone Number(only number)" id="phone_Num" name="phone_Num">
 		</div>
 		</div>
 		<div class="row mt-5 " >

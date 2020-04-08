@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.adt</groupId>
 	<artifactId>controller</artifactId>
-	<name>ex05</name>
+	<name>allDoneTrip</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -299,6 +299,16 @@
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+                	<groupId>org.apache.maven.plugins</groupId>
+                	<artifactId>maven-war-plugin</artifactId>
+                	<version>2.4</version>
+                	<configuration>
+                		<warSourceDirectory>src/main/webapp</warSourceDirectory>
+						<warName>sample</warName>
+                		<failOnMissingWebXml>false</failOnMissingWebXml>
+                	</configuration>
 			</plugin>
 		</plugins>
 	</build>

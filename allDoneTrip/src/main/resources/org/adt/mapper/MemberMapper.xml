@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.adt.mapper.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="join">
+	
+		<selectKey keyProperty="member_No" order="BEFORE" resultType="long">
+			select seq_memberinfo.nextval from dual
+		</selectKey>
+	
+	   insert into memberinfo(member_no, email, nick_name, name, pw, birth, gender, phone_num, join_Date)
+	   values( #{member_No}, #{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, (TO_CHAR(sysdate, 'yyyymmdd')))
+	</insert>
+
+
 </mapper>
