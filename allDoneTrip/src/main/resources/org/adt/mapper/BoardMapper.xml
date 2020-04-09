@@ -15,7 +15,6 @@
 						<when test="type == 'C'.toString()">
 							b_Content like '%'||#{keyword}||'%'
 						</when>
-						
 					</choose>
 				</trim>
 			</foreach>
@@ -33,45 +32,36 @@
 				 where
 				 rownum <= #{pageNum} * #{amount}
 		   ]]>	 
-		
-			<choose>
-						<when test="b_Type == 2">
-							(b_Type = '2')
-						</when>
-						<when test="b_Type == 3">
-							(b_Type = '3')
-						</when>
-						<when test="b_Type == 4">
-							(b_Type = '4')
-						</when>
-						<otherwise>
-						   (b_Type = '2' and b_Type ='3' and b_Type='4')
-						</otherwise>
-					</choose>
+		     <trim prefix ="AND">
+			  <if test="b_Type != '' and b_Type!=null">
+                   b_Type=#{b_Type}
+              </if>
+            </trim>
 		 <![CDATA[
 							)
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
-	</select>
+	 </select>
 	
 	<select id="read" resultType="org.adt.domain.BoardVO">
 		select * from board where bno = #{bno}
 	</select>
-	<!-- 게시판 전체 페이징 -->
-	<select id="boardPaging" resultType="int">
-		<![CDATA[
-		  select	count(*)
-		from	board
-		where	board.bno > 0
-		]]>
-	</select>
+
+	<!-- 전체 페이지 가져오기 -->
 	<select id="getTotalCount" resultType="int">
 		select count(*) from board where
 
 		<include refid="criteria"></include>
-
-		bno > 0
-
+		
+		<trim prefix ="AND">
+			<if test="b_Type != '' and b_Type!=null">
+                 b_Type=#{b_Type}
+            </if>
+        </trim>
+      	
+      	<![CDATA[
+			bno > 0
+		]]>
 	</select>
 	
 	<!-- 조회수 추가 -->	
