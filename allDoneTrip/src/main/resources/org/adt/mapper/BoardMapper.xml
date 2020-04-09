@@ -7,14 +7,15 @@
 				<trim prefix="or">
 					<choose>
 						<when test="type == 'T'.toString()">
-							p_Title like '%'||#{keyword}||'%'
+							title like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'W'.toString()">
 							nick_Name like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'C'.toString()">
-							planner.city_No = #{keyword}
+							b_Content like '%'||#{keyword}||'%'
 						</when>
+						
 					</choose>
 				</trim>
 			</foreach>
@@ -30,14 +31,31 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD
 				 where
-				 rownum <= #{pageNum} * #{amount})
+				 rownum <= #{pageNum} * #{amount}
+		   ]]>	 
+		
+			<choose>
+						<when test="b_Type == 2">
+							(b_Type = '2')
+						</when>
+						<when test="b_Type == 3">
+							(b_Type = '3')
+						</when>
+						<when test="b_Type == 4">
+							(b_Type = '4')
+						</when>
+						<otherwise>
+						   (b_Type = '2' and b_Type ='3' and b_Type='4')
+						</otherwise>
+					</choose>
+		 <![CDATA[
+							)
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>
 	
 	<select id="read" resultType="org.adt.domain.BoardVO">
-		select * from board where bno =
-		#{bno}
+		select * from board where bno = #{bno}
 	</select>
 	<!-- 게시판 전체 페이징 -->
 	<select id="boardPaging" resultType="int">
@@ -55,4 +73,39 @@
 		bno > 0
 
 	</select>
+	
+	<!-- 조회수 추가 -->	
+	<update id="addBclickNum">
+		<![CDATA[
+			update 	board
+			set		b_clickNum = (1 + (select b_clickNum from board where bno = #{bno}))
+			where 	bno = #{bno}
+		]]>
+	</update>
+	
+		<!-- 좋아요 사전 체크여부 판별 -->	
+	<select id="check_User" resultType="int">
+		<![CDATA[
+			select 	count(*)
+			from	
+			    board_like
+			where  	
+			     bno = #{bno} and email = #{email}
+		]]>
+	</select>
+	
+		<!-- 게시판테이블에 좋아요 추가 -->	
+	<update id="addLike">
+		<![CDATA[
+			update  board
+			set		b_Like = (1 + (select b_Like from board where bno = #{bno}))
+			where 	bno = #{bno}
+		]]>
+	</update>
+	
+	<!-- planner_like 테이블에 클릭한 유저 등록 -->	
+	<insert id="addLike_insertUser">	
+		insert	into board_like (b_likeno, bno, email)
+		values	(seq_board_like.nextval, #{bno}, #{email})
+	</insert>
 </mapper>

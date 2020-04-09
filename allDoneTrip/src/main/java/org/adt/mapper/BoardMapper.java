@@ -36,6 +36,8 @@ public interface BoardMapper {
 	// 좋아요 추가
 	public void addLike(Long bno);
 	
+	public void addLike_insertUser(BoardVO board);
+	
 	//게시판글작성
 	public void reviewInsert(BoardVO board);
 	

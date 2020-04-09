@@ -11,6 +11,7 @@ public class Criteria {
 	private String sortType;
 	private String type;
 	private String keyword;
+	private int b_Type;
 	
 	
 	//페이징 처리 관련
@@ -22,7 +23,7 @@ public class Criteria {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
-	
+
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
 	}
