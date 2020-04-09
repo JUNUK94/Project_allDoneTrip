@@ -35,7 +35,7 @@
 		    	<br>
 				<br>
 				<br>
-	    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=9d97ada42431e424c4f3d1f9dc6b09af&redirect_uri=http://localhost:8080/login/signUpKakao&response_type=code">
+	    <a href="https://kauth.kakao.com/oauth/authorize?client_id=9d97ada42431e424c4f3d1f9dc6b09af&redirect_uri=http://localhost:8080/login/signUp/kakaoSignUp&response_type=code">      
 	    		<button type="button" class="btn btn-warning" id="kakaoSignUp">카카오로 회원가입</button></a>
 			   	<br>
 				<br>

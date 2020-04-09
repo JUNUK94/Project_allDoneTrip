@@ -13,6 +13,21 @@
 	   insert into memberinfo(member_no, email, nick_name, name, pw, birth, gender, phone_num, join_Date)
 	   values( #{member_No}, #{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, (TO_CHAR(sysdate, 'yyyymmdd')))
 	</insert>
-
+	
+	<select id="emailCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email}
+	</select>
+	
+	<select id="nick_NameCheck" resultType="String">
+		select count(*) from memberinfo
+		where nick_Name=#{nick_Name}
+	</select>
+	
+	<select id="loginCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email} and pw=#{pw}
+	</select>
+	
 
 </mapper>
