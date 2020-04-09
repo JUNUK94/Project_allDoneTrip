@@ -38,7 +38,7 @@ $(document).ready(function(){
 					currency1_val = "달러";
 					break;
 				case 'HKD' :
-					currency1_val = "홍콩달러";
+					currency1_val = "달러";
 					break;
 				case 'EUR' :
 					currency1_val = "유로";

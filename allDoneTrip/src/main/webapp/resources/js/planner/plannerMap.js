@@ -10,9 +10,10 @@ $(document).ready(function(){
 	var longitude;	//경도
 	var markers=[];
 	
+	var geocoder = new google.maps.Geocoder();
+
 	getMyPositon(); //onload시 내 위치 기준으로 지도 출력
 
-	
 	
 	
 //=================================================함수 영역===========================================================
@@ -49,11 +50,6 @@ $(document).ready(function(){
 				    }
 				});
 
-//		var request = {
-//				location: location,
-//				radius: '500',
-//				query: 'restaurant'
-//				};
 
 		// 마커 띄우기
 		var marker = new google.maps.Marker({
@@ -65,6 +61,7 @@ $(document).ready(function(){
 		setMapOnAll(map);
 		marker.setMap(map);
 		
+		
 		// 마커 클릭 시 zoom 이벤트
 		google.maps.event.addListener(marker,'dblclick',function() {
 			console.log("zoom");
@@ -72,71 +69,17 @@ $(document).ready(function(){
 			  map.setCenter(marker.getPosition());
 			  });
 	
+		
 		// 지도 클릭 시 마커 추가 + 위도경도 띄워주기 이벤트	
 		google.maps.event.addListener(map, 'click', function(event) {
 			placeMarker(event.latLng);
 		 });
 		
 		
-		
-		 var geocoder = new google.maps.Geocoder();
-		 
          // submit 버튼 클릭 이벤트 실행
          document.getElementById('searchPlaceBtn').addEventListener('click', function() {
-             console.log('submit 버튼 클릭 이벤트 실행');
-
-             // 여기서 실행
              geocodeAddress(geocoder, map);
          });
-
-         /**
-          * geocodeAddress
-          * 
-          * 입력한 주소로 맵의 좌표를 바꾼다.
-          */
-         function geocodeAddress(geocoder, resultMap) {
-             console.log('geocodeAddress 함수 실행');
-
-             // 주소 설정
-             var address = $("#query").val();
-             console.log(address);
-             /**
-              * 입력받은 주소로 좌표에 맵 마커를 찍는다.
-              * 1번째 파라미터 : 주소 등 여러가지. 
-              *      ㄴ 참고 : https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRequests
-              * 
-              * 2번째 파라미터의 함수
-              *      ㄴ result : 결과값
-              *      ㄴ status : 상태. OK가 나오면 정상.
-              */
-             geocoder.geocode({'address': address}, function(result, status) {
-                 console.log(result);
-                 console.log(status);
-
-                 if (status === 'OK') {
-                     // 맵의 중심 좌표를 설정한다.
-                     resultMap.setCenter(result[0].geometry.location);
-                     // 맵의 확대 정도를 설정한다.
-                     resultMap.setZoom(18);
-                     // 맵 마커
-                     var marker = new google.maps.Marker({
-                         map: resultMap,
-                         position: result[0].geometry.location
-                     });
-
-                     // 위도
-                     console.log('위도(latitude) : ' + marker.position.lat());
-                     // 경도
-                     console.log('경도(longitude) : ' + marker.position.lng());
-                 } else {
-                     alert('지오코드가 다음의 이유로 성공하지 못했습니다 : ' + status);
-                 }
-             });
-         }
-
-
-		
-		
 	}
 
 
@@ -150,7 +93,7 @@ $(document).ready(function(){
 		});
 		  
 		var infowindow = new google.maps.InfoWindow({
-			content: place.name+'<br>위도: ' + place.lat() + '<br>경도: ' + place.lng()
+			content: '<br>위도: ' + place.lat() + '<br>경도: ' + place.lng()
 		});
 		  
 		  //array에 마커 추가
@@ -172,6 +115,66 @@ $(document).ready(function(){
 	    markers[i].setMap(map);
 	  }
 	}
+	
+	
+	
+	 //입력한 주소로 맵의 좌표를 바꾸기
+    function geocodeAddress(geocoder, resultMap) {
+        console.log('geocodeAddress 함수 실행');
+
+        // 주소 설정
+        var address = $("#query").val();
+        console.log(address);
+        
+        geocoder.geocode({'address': address}, function(result, status) {
+            console.log(result);
+            console.log(status);
+
+            if (status === 'OK') {
+                // 맵의 중심 좌표를 설정한다.
+                resultMap.setCenter(result[0].geometry.location);
+                // 맵의 확대 정도를 설정한다.
+                resultMap.setZoom(18);
+                // 맵 마커
+                var marker = new google.maps.Marker({
+                    map: resultMap,
+                    position: result[0].geometry.location
+                });
+
+                // 위도
+                console.log('위도(latitude) : ' + marker.position.lat());
+                // 경도
+                console.log('경도(longitude) : ' + marker.position.lng());
+            } else {
+                alert('지오코드가 다음의 이유로 성공하지 못했습니다 : ' + status);
+            }
+        });
+    }
+	
+    
+    
+    //장소 검색
+    function placeSearch() {
+        console.log('placeSearch 함수 실행');
+
+        $.ajax({
+			url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM',
+			type: 'post',
+			dataType: 'JSON',
+			data: {plan_No:plan_No, nick_Name:nick_Name, pr_Content:pr_Content, regdate:regdate, email:email},
+			async: false,
+			success: function(map){
+				alert("댓글이 등록되었습니다.");
+				window.location.reload();
+			},
+			error:function(){
+				alert("댓글 등록에 실패하였습니다.");
+			}
+        });
+        
+        
+    }
+	
 	
 	
 	
@@ -199,13 +202,6 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		var query = $("input[name='query']").val();
-//
-//		var url = encodeURI(searchPlace_Form.attr("action") + query);
-//		console.log(url);
-//
-//		searchPlace_Form.attr("action", url);
-//		searchPlace_Form.submit();
-		
 		
 		var request = {
 		          query: query,

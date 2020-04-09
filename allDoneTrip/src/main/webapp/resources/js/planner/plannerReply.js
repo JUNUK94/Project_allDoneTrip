@@ -61,6 +61,7 @@ function replyDelete(p_Rno){
         dataType: 'JSON',
         data: {plan_No:plan_No, p_Rno:p_Rno},
         success: function(map){
+			console.log(map);
         	alert(map.message);
         	window.location.reload();
         },
