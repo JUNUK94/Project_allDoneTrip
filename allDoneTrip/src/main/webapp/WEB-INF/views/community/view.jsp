@@ -39,6 +39,7 @@
 
 	<div class="row bodyMargin">
 		<nav class="col-2 sidenav">
+			<h4 class="flex-column">커뮤니티</h4>
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link" href="#">여행후기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">동행찾기</a></li>
@@ -48,7 +49,6 @@
 		<div class="col-9">
 			<div class="panel panel-default">
 
-				<div class="panel-heading h1">커뮤니티 글이다 이말이다.</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 
@@ -73,9 +73,6 @@
 							value='<c:out value="${board.nick_Name }"/>' readonly="readonly">
 					</div>
 
-					<button data-oper='modify' class="btn btn-default">수정</button>
-					<button data-oper='list' class="btn btn-info">목록</button>
-
 					<%-- <form id='operForm' action="/boad/modify" method="get">
   <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 </form> --%>
@@ -95,52 +92,120 @@
 					</form>
 
 
-
+				<div class="row">
+				<div class="col-12 text-right">
+					<button data-oper='modify' class="btn btn-primary">수정</button>
+					<button data-oper='list' class="btn btn-info">목록</button>
+				</div>
+				</div>
 				</div>
 				<!--  end panel-body -->
-
 			</div>
 			<!--  end panel-body -->
+			<div class="row">
+				<div class="col-md-1">
+					<img src="/resources/img/planner/Non_User_Photo.JPG">
+				</div>
+				<div class="col-md-8">
+					<textarea id="plannerReply" class="col-md-12 bg-light"
+						style="height: 100px;" placeholder="댓글을 입력해주세요"></textarea>
+				</div>
+				<div class="col-md-2">
+					<button id="sendPlannerReply" class="col-md-12 bg-light"
+						style="height: 100px;">등록</button>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+
+			<br>
+			<div id="plannerReplyList">
+				<c:forEach items="${reply}" var="prvo" varStatus="vs">
+					<div class="row" id="${vs.index}">
+						<div class="col-md-1">
+							<img src="/resources/img/planner/Non_User_Photo.JPG">
+						</div>
+						<div class="col-md-5">
+							<div class="row">
+								<div class="col-md-2 small text-left">
+									<a href="${prvo.nick_Name}">${prvo.nick_Name}</a>
+								</div>
+								<div class="col-md-10 small text-left">${prvo.regdate}</div>
+							</div>
+							<div>${prvo.pr_Content}</div>
+						</div>
+						<div class="col-md-1 small text-right">
+							<a href="#" id="count_reReply${vs.index}"
+								onclick="show_reReplyList(${vs.index})">∨</a>
+						</div>
+						<div class="col-md-1 small text-right" id="replyRUD">
+							<c:if test="${prvo.email == email}">
+								<a href="#" onclick="replyDelete(${prvo.p_Rno})">삭제</a> | 
+						</c:if>
+							<a href="#" onclick="replyWarning(${prvo.p_Rno})">신고</a> | <a
+								href="#" onclick="reReply(${prvo.p_Rno},${vs.index})">답글</a>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+					<!-- 답글 입력창 -->
+					<div class="row" id="reReply${vs.index}" style="display: none;">
+						<div class="col-md-2"></div>
+						<div class="col-md-1"></div>
+						<div class="col-md-6">
+							<textarea id="reReplyText${vs.index}" class="col-md-12 bg-light"
+								style="height: 100px;" placeholder=">답글"></textarea>
+						</div>
+						<div class="col-md-1">
+							<button class="col-md-12 bg-light" style="height: 100px;"
+								onclick="reReplyInsert(${prvo.p_Rno}, ${vs.index})">등록</button>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+					<!-- 답글 띄우기 -->
+					<div class="row" id="reReplyList${vs.index}" style="display: none;">
+						<c:forEach items="${reReply}" var="rrvo">
+							<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
+								<div class="col-md-2"></div>
+								<div class="col-md-7">
+									<div class="row">
+										<div class="col-md-2"></div>
+										<div class="col-md-1 text-right">┕</div>
+										<div class="col-md-2 text-left small bg-light">${rrvo.nick_Name}</div>
+										<div class="col-md-7 text-left small bg-light">
+											${rrvo.regdate}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2"></div>
+										<div class="col-md-1"></div>
+										<div class="col-md-9 bg-light">${rrvo.pr_Content}</div>
+									</div>
+								</div>
+								<div class="col-md-1 text-right small">
+									<c:if test="${rrvo.email == email}">
+										<a href="#" onclick="replyDelete(${rrvo.p_Rno})">삭제</a> |
+									</c:if>
+									<a href="#" onclick="reReplyWarning(${rrvo.p_Rno})">신고</a>
+								</div>
+								<div class="col-md-2"></div>
+								<br>
+								<br>
+								<br>
+							</c:if>
+						</c:forEach>
+					</div>
+					<br>
+				</c:forEach>
+			</div>
+			<!-- ./ end row -->
 		</div>
-		<!-- end panel -->
+	</div>
+	<!-- end panel -->
 	</div>
 	<!-- /.row -->
 
 
-	<div class='row'>
 
-		<div class="col-lg-12">
-
-			<!-- /.panel -->
-			<div class="panel panel-default">
-				<!--       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-      </div> -->
-
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> Reply
-					<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
-						Reply</button>
-				</div>
-
-
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-
-					<ul class="chat">
-
-					</ul>
-					<!-- ./ end ul -->
-				</div>
-				<!-- /.panel .chat-panel -->
-
-				<div class="panel-footer"></div>
-
-
-			</div>
-		</div>
-		<!-- ./ end row -->
-	</div>
 
 
 
@@ -500,61 +565,6 @@
 
 						});
 	</script>
-
-
-
-	<script>
-		/* console.log("===============");
-		 console.log("JS TEST");
-
-		 var bnoValue = '<c:out value="${board.bno}"/>'; */
-
-		//for replyService add test
-		/* replyService.add(
-		
-		 {reply:"JS Test", replyer:"tester", bno:bnoValue}
-		 ,
-		 function(result){ 
-		 alert("RESULT: " + result);
-		 }
-		 ); */
-
-		//reply List Test
-		/* replyService.getList({bno:bnoValue, page:1}, function(list){
-		
-		 for(var i = 0,  len = list.length||0; i < len; i++ ){
-		 console.log(list[i]);
-		 }
-		 });
-		 */
-
-		/*  //17번 댓글 삭제 테스트 
-		 replyService.remove(17, function(count) {
-
-		 console.log(count);
-
-		 if (count === "success") {
-		 alert("REMOVED");
-		 }
-		 }, function(err) {
-		 alert('ERROR...');
-		 });
-		 */
-
-		//12번 댓글 수정 
-		/* replyService.update({
-		 rno : 12,
-		 bno : bnoValue,
-		 reply : "Modified Reply...."
-		 }, function(result) {
-
-		 alert("수정 완료...");
-
-		 });  
-		 */
-	</script>
-
-
 	<script type="text/javascript">
 		$(document).ready(function() {
 
