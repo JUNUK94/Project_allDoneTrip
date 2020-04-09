@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.adt</groupId>
 	<artifactId>controller</artifactId>
-	<name>allDoneTrip</name>
+	<name>ex05</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -51,6 +51,14 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.0.7.RELEASE</version>
+		</dependency>
+
+
 
 
 		<!-- AspectJ -->
@@ -299,16 +307,6 @@
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
-			</plugin>
-			<plugin>
-                	<groupId>org.apache.maven.plugins</groupId>
-                	<artifactId>maven-war-plugin</artifactId>
-                	<version>2.4</version>
-                	<configuration>
-                		<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>sample</warName>
-                		<failOnMissingWebXml>false</failOnMissingWebXml>
-                	</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -162,6 +162,14 @@
 				.ready(
 						function() {
 							
+							
+							$(".boardListBtn").on("click", function() {
+								
+								let boardTB = $(".boardTB")
+
+								$.ajax()
+							})
+
 							var actionForm = $("#actionForm");
 
 							$(".paginate_button a").on(
