@@ -1,1 +1,25 @@
 @charset "UTF-8";
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.right-align {
+  text-align: right;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: red;
+}
+
+.bodyMargin {
+	margin: 10px;
+}
