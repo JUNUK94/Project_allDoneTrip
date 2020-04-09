@@ -31,20 +31,25 @@
           ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE 
           FROM BOARD
 				 where
-				 rownum <= #{pageNum} * #{amount})
-			]]>	 
-				 <choose>
-						<when test="b_Type == '2'.toString()">
-							t_Type ='2'
+				 rownum <= #{pageNum} * #{amount}
+		   ]]>	 
+		
+			<choose>
+						<when test="b_Type == 2">
+							(b_Type = '2')
 						</when>
-						<when test="b_Type == '3'.toString()">
-							t_Type ='3'
+						<when test="b_Type == 3">
+							(b_Type = '3')
 						</when>
-						<when test="b_Type == '4'.toString()">
-							t_Type ='4'
+						<when test="b_Type == 4">
+							(b_Type = '4')
 						</when>
+						<otherwise>
+						   (b_Type = '2' and b_Type ='3' and b_Type='4')
+						</otherwise>
 					</choose>
-			<![CDATA[		
+		 <![CDATA[
+							)
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>
