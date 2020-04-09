@@ -41,8 +41,14 @@
         
         
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
         <property name="context-root" value="sample"/>
                                                                         	
+=======
+        <property name="context-root" value="/"/>
+                                                                                	
+    
+>>>>>>> refs/remotes/origin/master
     
     
     
