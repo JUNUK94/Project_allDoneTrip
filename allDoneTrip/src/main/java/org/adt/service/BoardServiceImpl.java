@@ -20,71 +20,45 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper bMapper;
 
-	//게시판 전체 리스트 출
+	//게시판전체목록 가져오기
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
-		return bMapper.getList(cri);
+		return bMapper.getBoardList(cri);
 	}
 	
-	//게시판 전체 페이징 처
+	//특정 게시글 조회
 	@Override
-	public int boardPaging(Criteria cri) {
-		// TODO Auto-generated method stub
-		return bMapper.boardPaging(cri);
+	public BoardVO get(Long bno) {
+		return bMapper.read(bno);
+	}
+		
+	//게시판 전체 갯수
+	@Override
+	public int getTotal(Criteria cri) {
+			
+		log.info("get total count");
+		return bMapper.getTotalCount(cri);
 	}
 
-	//리뷰게시판 페이징
+	//게시판글작성
 	@Override
-	public int reviewWithPaging(Criteria cri) {
-		// TODO Auto-generated method stub
-		return bMapper.reviewWithPaging(cri);
-	}
-
-	//동행게시판 페이징
-	@Override
-	public int friendWithPaging(Criteria cri) {
-		// TODO Auto-generated method stub
-		return bMapper.friendWithPaging(cri);
-	}
-
-	//자유게시판 페이징
-	@Override
-	public int freeWithPaging(Criteria cri) {
-		// TODO Auto-generated method stub
-		return bMapper.freeWithPaging(cri);
-	}
-
-	@Override
-	public void reviewInsert(BoardVO board) {
+	public void Insert(BoardVO board) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void reviewInsertSelectKey(BoardVO board) {
-		// TODO Auto-generated method stub
 		
-	}
-
+	//글수정
 	@Override
-	public BoardVO read(Long bno) {
+	public int update(BoardVO board) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
-
+		
+	//글삭제
 	@Override
 	public int delete(Long bno) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public int update(BoardVO board) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-
-	
 }

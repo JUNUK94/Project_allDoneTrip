@@ -5,7 +5,7 @@
  */
 
 var width = document.getElementById("width").value;
-console.log(width);
+//console.log(width);
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
