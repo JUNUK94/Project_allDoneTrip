@@ -37,7 +37,6 @@
 			overflow:auto;
 		}
 
-	
 		#mapShow {
 			width: 100%;
 			height: 250px;

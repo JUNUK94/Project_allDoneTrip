@@ -1,9 +1,6 @@
 package org.adt.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +41,13 @@ public class PlannerController {
 	public void write(Model model) {
 		log.info("write");
 		
-		model.addAttribute("width", "1000");
+		model.addAttribute("width", "100%");
+	}
+		
+	
+	// 플래너 작성 페이지로 이동
+	@GetMapping("/Test")
+	public void Test(Model model) {
 	}
 	
 	
@@ -87,6 +90,7 @@ public class PlannerController {
 	
 	// 플래너 댓글 등록
 	@PostMapping("/replyWrite")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> replyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
@@ -108,6 +112,7 @@ public class PlannerController {
 	
 	// 플래너 대댓글(답글) 등록
 	@PostMapping("/reReplyWrite")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> reReplyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
@@ -128,6 +133,7 @@ public class PlannerController {
 	
 	// 플래너 댓글 삭제
 	@PostMapping("/replyDelete")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> replyDelete(PlannerReplyVO prvo){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -150,6 +156,7 @@ public class PlannerController {
 	
 	// 좋아요 추가
 	@PostMapping("/like")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> addLike(PlannerVO pvo){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -170,6 +177,7 @@ public class PlannerController {
 	
 	// 도시정보 담아오기	
 	@PostMapping("/cityInfo")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> cityInfo(@RequestParam("img") String img,
 											@RequestParam("title") String title,
 											@RequestParam("text") String text) {

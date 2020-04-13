@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+//=================================================선언부===========================================================	
+
 	var plannerReply = $("#plannerReply");
 	var sessionForm = $("#sessionForm");
 	var replyDelete =$("#replyDelete");
@@ -8,7 +10,7 @@ $(document).ready(function(){
 	var nick_Name = sessionForm.find("input[name='nick_Name']").val();
 	var email = sessionForm.find("input[name='email']").val();
 	
-	
+//=================================================이벤트 영역========================================================	
 	
 	//댓글 등록
 	$("#sendPlannerReply").on("click",function(){
@@ -46,7 +48,7 @@ $(document).ready(function(){
 		}	
 	});
 
-});
+}); //end of ajax
 
 
 //댓글 삭제 이벤트
@@ -129,7 +131,6 @@ function reReplyInsert(p_Rno, index){
 }
 
 
-
 //버튼 클릭시 답글 리스트 띄우기 이벤트
 function show_reReplyList(index){
 
@@ -139,10 +140,10 @@ function show_reReplyList(index){
 	var aTag = document.getElementById("count_reReply"+index);
 
 	if(frame.style.display == "none"){
-		frame.removeAttribute("style");
+		frame.style.display = '';
 		aTag.innerHTML = "∧";
 	}else{
-		frame.setAttribute("style","display:none");
+		frame.style.display = 'none';
 		aTag.innerHTML = "∨";
 	}
 }

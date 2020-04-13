@@ -1,4 +1,3 @@
-
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
@@ -8,38 +7,19 @@ var width = document.getElementById("width").value;
 //console.log(width);
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here.
-	// For complete reference see:
-	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
 
-	// The toolbar groups arrangement, optimized for two toolbar rows.
-	config.toolbarGroups = [
-		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-		{ name: 'links' },
-		{ name: 'insert' },
-		{ name: 'forms' },
-		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'others' },
-		'/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-		{ name: 'styles' },
-		{ name: 'colors' },
-		{ name: 'about' }
-	];
-
-	
 	config.language = 'ko';
 	config.width = width;
-	
-	// Remove some buttons provided by the standard plugins, which are
-	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
+	config.enterMode = CKEDITOR.ENTER_BR;	// 줄바꿈 시 <p> -> <br>
+	config.startupFocus = true;				// 시작시 포커스 설정
+	config.allowedContent = true;			// 기본적인 html이 필터링으로 지워지는데 필터링을 하지 않는다.
+	config.docType = "<!DOCTYPE html>";		//문서타입 설정
 
-	// Set the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre';
+	
+	
+	config.pasteFromWordRemoveFontStyles = false;	//워드에서 붙여넣기 시 문자 스타일 유지
+	
+	config.spreadsheet_licenseKey = '67Gn/ccajt8HqAe6ISOxvFLS3VuCdhWHiKWsSvBTtJgRVOqyoSnOBpwiVPfmdpn0CXKykieFQVsEcjCNj39tPDf6YmacQx277AZYwFIR4nHCDAU0ULqRnHecxzCTgEOQMRdqpk0ettsJSxUNe0OXzFAUKQ=='
 	
 	
 	// Simplify the dialog windows.
@@ -47,7 +27,13 @@ CKEDITOR.editorConfig = function( config ) {
 	
     config.filebrowserBrowseUrl = "/CKEditorSample/ckfinder/ckfinder.html";
     config.filebrowserFlashBrowseUrl = "/CKEditorSample/ckfinder/ckfinder.html?type=Flash";
+    
+    //파일 업로드 경로 (설정하면 업로드 플러그인에 탭이생김)
     config.filebrowserUploadUrl = "/CKEditorSample/ckfinder/core/connector/java/connctor.java?command=QuickUpload&type=Files";
+ 
+    //이미지 업로드 경로 (설정하면 업로드 플러그인에 탭이생김)
     config.filebrowserImageUploadUrl = "/CKEditorSample/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images";
+    
+    //플래쉬 업로드 경로 (설정하면 업로드 플러그인에 탭이생김)	
     config.filebrowserFlashUploadUrl = "/CKEditorSample/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash";	
 };
