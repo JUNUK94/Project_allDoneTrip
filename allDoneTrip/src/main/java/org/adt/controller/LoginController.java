@@ -70,11 +70,12 @@ public class LoginController {
 	public void allDoneSignUp() {
 
 	}
-
+	
 	
 	@RequestMapping(value="/signUp/kakaoSignUp")
 	public String login(@RequestParam("code") String code, HttpSession session) {
-	    String access_Token = mService.getAccessToken(code);
+	    
+		String access_Token = mService.getAccessToken(code);
 	    HashMap<String, Object> userInfo = mService.getUserInfo(access_Token);
 	    System.out.println("login Controller : " + userInfo);
 	    
@@ -82,6 +83,7 @@ public class LoginController {
 	    if (userInfo.get("email") != null) {
 	        session.setAttribute("userId", userInfo.get("email"));
 	        session.setAttribute("access_Token", access_Token);
+	        
 	    }
 	    return "login/signUp/kakaoSignUp";
 	}

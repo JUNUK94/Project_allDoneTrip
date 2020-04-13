@@ -24,7 +24,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/trip/city")
+@RequestMapping("/trip/city/*")
 public class TripinfoController {
 
 	/*

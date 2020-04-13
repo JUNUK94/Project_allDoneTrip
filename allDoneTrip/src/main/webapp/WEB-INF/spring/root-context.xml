@@ -13,23 +13,18 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-
 	<context:annotation-config></context:annotation-config>
-
 	 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName"
-			value="oracle.jdbc.OracleDriver"></property>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@110.8.135.5:1521:XE"></property>
 		<property name="username" value="alldone"></property>
 		<property name="password" value="1234"></property>
 	</bean>
-
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
-
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -41,19 +36,13 @@
 	</bean>
 
 	<tx:annotation-driven />
-
 	<mybatis-spring:scan base-package="org.adt.mapper" />
-
 	<context:component-scan
 		base-package="org.adt.service"></context:component-scan>
 	<context:component-scan
 		base-package="org.adt.aop"></context:component-scan>
-		
 	<context:component-scan
     base-package="org.adt.task"></context:component-scan>
-		
-
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-
 	<task:annotation-driven />
 </beans>
