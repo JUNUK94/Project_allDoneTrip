@@ -37,32 +37,53 @@ public class UploadController {
 	//에디터 이미지 업로드
 	@PostMapping(value = "/imageInput", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> imageInput(@RequestParam("upload") MultipartFile[] uploadFile, HttpSession session){
-		
+	public ResponseEntity<HashMap<String, Object>> imageInput(@RequestParam("upload") MultipartFile[] uploadFile, HttpSession session, HttpServletRequest request){
+		System.out.println("시작한다");
 		log.info("----------------이미지 업로드 시작한다~~----------------");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		String uploadFolder = "";
+		System.out.println("일일일일");
+		
+		String contextPath = request.getContextPath();
+		String serverFolder = "/var/lib/tomcat8/webapps";
+		String webFolder = "https://alldonetrip.shop/resources";
+		String nonUser = "/img/nonUser/imgUpload/";
+		String user = "/img/user/imgUpload/";
 		
 		if(session.getAttribute("email") == null && session.getAttribute("email").equals("")){
-			uploadFolder = "https://alldonetrip.shop/img/nonUser/imgUpload";
+			log.info("이이이이이");
+			serverFolder = serverFolder+nonUser;
+			webFolder = webFolder + nonUser;
 		}else {
-			uploadFolder = "https://alldonetrip.shop/img/user/imgUpload";
+			log.info("삼삼삼삼");
+			serverFolder = serverFolder+user;
+			webFolder = webFolder + user;
 		}
-		
-		String uploadFolderPath = getFolder();
+		log.info("사사사사사");
+		String dailyFolder="";
+		try {
+			log.info("hello!!!!!");
+			dailyFolder = (String)getFolder();
+			log.info("안녕 = ");
+			log.info("dailyFolder = "+dailyFolder);
+		} catch (Exception e) {
+			log.info(e);
+		}
+		log.info("오오오오");
 		
 		//make Folder--------
-		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		File uploadPath = new File(serverFolder, dailyFolder);
+		log.info("uploadPath = "+uploadPath);
 		
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
 		
-		//make yyyy/MM/dd Folder--------
+		//파일 업로드--------
 		for(MultipartFile multipartFile : uploadFile) {
 			String uploadFileName = multipartFile.getOriginalFilename();
+			
 			
 			//IE has file path
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
@@ -79,10 +100,12 @@ public class UploadController {
 				if(checkImageType(saveFile)) {
 				}
 				
+				
 				//add to Hashmap
 				map.put("uploaded", 1);	// 1로 고정(업로드 성공 시 1)
 				map.put("fileName", uploadFileName);	//파일명
-				map.put("url", uploadPath+"\\"+uploadFileName);	//업로드경로 + 파일명
+				map.put("url", webFolder+dailyFolder+"\\"+uploadFileName);	//업로드경로 + 파일명
+				log.info("URL = "+map.get("url"));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -105,9 +128,9 @@ public class UploadController {
 		String uploadFolder = "";
 		
 		if(session.getAttribute("email") == null && session.getAttribute("email").equals("")){
-			uploadFolder = "https://alldonetrip.shop/img/nonUser/drag";
+			uploadFolder = "/img/nonUser/drag";
 		}else {
-			uploadFolder = "https://alldonetrip.shop/img/user/drag";
+			uploadFolder = "/img/user/drag";
 		}
 		
 		String uploadFolderPath = getFolder();
