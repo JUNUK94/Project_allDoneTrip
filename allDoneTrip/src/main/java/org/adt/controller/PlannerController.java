@@ -1,5 +1,7 @@
 package org.adt.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,15 +43,9 @@ public class PlannerController {
 	public void write(Model model) {
 		log.info("write");
 		
-		model.addAttribute("width", "100%");
+		//model.addAttribute("width", "100%");
 	}
 		
-	
-	// 플래너 작성 페이지로 이동
-	@GetMapping("/Test")
-	public void Test(Model model) {
-	}
-	
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
@@ -87,6 +83,34 @@ public class PlannerController {
 	}
 	
 
+	
+	
+	// 플래너 저장
+	@PostMapping("/save")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, PlannerVO>> savePlanner(PlannerVO pvo) {
+															
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		Date date = new Date();
+		String sysdate = sdf.format(date);
+		
+		log.info(pvo);
+		
+		//플래너 번호가 없으면 DB에 insert
+		if(pvo.getPlan_No() == null) {
+			service.save(pvo);
+		}else {
+			service.update(pvo);
+		}
+		
+		pvo.setUpdateDate(sysdate);
+		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
 	
 	// 플래너 댓글 등록
 	@PostMapping("/replyWrite")

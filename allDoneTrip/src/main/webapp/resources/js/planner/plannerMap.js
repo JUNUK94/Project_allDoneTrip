@@ -1,6 +1,6 @@
-$(document).ready(function(){	
 
-//=================================================선언부===========================================================	
+$(document).ready(function(){
+//=================================================선언부==========================================================	
 
 	var mapShow = $("#mapShow");
 	var searchPlace_Form = $("#searchPlace_Form");
@@ -15,19 +15,19 @@ $(document).ready(function(){
 	
 	var latitude; //위도
 	var longitude;	//경도
-	var markers=[];
+	var marker_Arr=[];
 	
 	var mapStatus = true;
 	var index = 0;
 	
 	var key = "AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM"; // 원래 키
+
 	
 	//onload시 내 위치 기준으로 지도 출력
 	getMyPositon(); 
 
-
 	
-//=================================================함수 영역===========================================================
+//=================================================함수부===========================================================
 	
 	//현재 위치 가져와서 지도 생성
 	function getMyPositon() {
@@ -49,7 +49,8 @@ $(document).ready(function(){
 	
 	//지도 생성 함수
 	function initialize(location) {
-		
+		//-------------------------------------------지도 초기화-----------------------------------------
+		//지도 초기화 및 생성
 		map = new google.maps.Map(document.getElementById('mapShow'), {
 				center: location,	//중심좌표
 				zoom: 8,			//줌하는 단계
@@ -61,19 +62,46 @@ $(document).ready(function(){
 				    }
 				});
 
-		// 마커 띄우기
-		var marker = new google.maps.Marker({
+		// 현재 위치 마커 초기화
+		var marker_myPosition = new google.maps.Marker({
 			  position: location,
 			  animation:google.maps.Animation.BOUNCE,
 			  title:'Click to zoom'
 		});
-		marker.setMap(map);
+		
+		// 검색어 자동완성 객체 초기화
+		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('input_query'), {
+			types: ['geocode']
+		});
+		
+		
+		//-------------------------------------------지도 함수 선언-----------------------------------------
+		
+		//검색어 자동완성 함수
+		function fillInAddress() {
+			var place = autocomplete.getPlace();
+			
+			map.setCenter(place.geometry.location);
+			searchMarker = new google.maps.Marker({
+				map: map,
+				position: place.geometry.location
+			});
+		}
+		
+		
+		//--------------------------------------------지도 함수 실행-----------------------------------------
+		
+		// 현재 위치 마커 띄우기
+		marker_myPosition.setMap(map);
 		
 		//배열에 저장된 모든 마커 띄우기
-		markers_SetOn_Map(map);
+		marker_Arr_SetOn_Map(map);
+		
+		
+		//--------------------------------------------지도 이벤트 선언-----------------------------------------
 		
 		//생성된 마커 더블클릭 시 zoom 이벤트
-		map.addListener(markers,'dblclick',function() {
+		map.addListener(marker_Arr,'dblclick',function() {
 			console.log("zoom");
 			map.setZoom(10);
 			map.setCenter(marker.getPosition());
@@ -84,14 +112,16 @@ $(document).ready(function(){
 			placeMarker(event.latLng, map);
 		 });
 		
-		
-		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('input_query'), {
-			types: ['geocode']
-		});
+		// 검색어 자동완성 이벤트
 		autocomplete.addListener('place_changed', fillInAddress);
+		
 		
 	} // end of init()
 
+	
+	
+	
+	
 	
 	//마커 추가 함수
 	function placeMarker(location) {
@@ -105,7 +135,7 @@ $(document).ready(function(){
 		//center이동
 		map.setCenter(location);
 		//array에 마커 추가
-		markers.push(addMarker);
+		marker_Arr.push(addMarker);
 		  
 //		var infowindow = new google.maps.InfoWindow({
 //			content: '<br>위도: ' + location.lat() + '<br>경도: ' + location.lng()
@@ -124,9 +154,9 @@ $(document).ready(function(){
 
 
 	// array에 저장된 모든 마커 찍기
-	function markers_SetOn_Map(map) {
-	  for (var i = 0; i < markers.length; i++) {
-	    markers[i].setMap(map);
+	function marker_Arr_SetOn_Map(map) {
+	  for (var i = 0; i < marker_Arr.length; i++) {
+	    marker_Arr[i].setMap(map);
 	  }
 	}
 	
@@ -366,16 +396,5 @@ function remove_Map_Search_Result(index){
 	}
 }
 
-//검색 자동완성
-function fillInAddress() {
-	var place = autocomplete.getPlace();
-	alert(place.geometry.location.lat());
-	alert(place.geometry.location.lng());
-	
-	map.setCenter(place.geometry.location);
-	searchMarker = new google.maps.Marker({
-		map: map,
-		position: place.geometry.location
-	});
-}
+
 

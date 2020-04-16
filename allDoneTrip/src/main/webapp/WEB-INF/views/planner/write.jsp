@@ -10,6 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<title>플래너 작성</title>
+	<%	session.setAttribute("email", "silverdue@gmail.com");
+		session.setAttribute("nick_Name", "창창");
+		//session.invalidate();
+	%>
+	
 	<style>
 	
 		#document_area {
@@ -37,6 +42,7 @@
 			overflow:auto;
 		}
 
+	
 		#mapShow {
 			width: 100%;
 			height: 250px;
@@ -44,6 +50,9 @@
 			border: solid 1px gray;
 		}
 
+		div.hotplace_info:hover,
+		div.restaurant_info:hover,
+		div.shopping_info:hover,
 		div.weather_info:hover,
 		div.map_Search_Result:hover{
 			cursor: grab;
@@ -64,6 +73,8 @@
 		}
 
 	</style>
+	
+<!--=================================마우스로 지도영역 너비 조절=====================================-->
 	<script type="text/javascript">
 		var startpos = 0;
 		var diffpos = 0;
@@ -103,10 +114,6 @@
 		
 	</script>
 
-
-
-
-	
 <!--=====================================jquery=========================================-->
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -138,13 +145,13 @@
 				<div class="input-group-prepend">
 					<label class="input-group-text">제목</label>
 				</div>
-				<input type="text" class="form-control">
+				<input id="plannerTitle" name="plannerTitle" type="text" class="form-control">
 			</div>
 	 		<div class="input-group p-3" style="width:15%">
 				<div class="input-group-prepend">
 					<label class="input-group-text">대표 여행지</label>
 				</div>
-				<select class="form-control" id="mainCity">
+				<select id="mainCity" class="form-control">
 					<option selected></option>
 					<option value="1">파리</option>
 					<option value="2">니스</option>
@@ -162,17 +169,21 @@
 				<div class="input-group-prepend">
 					<label class="input-group-text">여행시작</label>
 				</div>
-				<input type="date" class="form-control">
+				<input id="startDay" name="startDay" type="date" class="form-control">
 			</div>
 			<div class="input-group p-3" style="width:20%">	
-				<input type="date" class="form-control">
+				<input id="endDay" name="endDay" type="date" class="form-control">
 				<div class="input-group-append">
 					<label class="input-group-text">여행종료</label>
 				</div>
 			</div>
 			<div class="d-flex justify-content-start ml-auto p-3" style="width:20%">
-				<button type="submit" class="btn btn-outline-secondary" style="font-weight: bold">저장</button>
-				<button type="submit" class="btn btn-outline-secondary" style="font-weight: bold">등록</button>
+				<button id="save" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="나만이 확인할 수 있도록 저장합니다. 저장한 플래너는 마이페이지에서 확인하실 수 있습니다.">
+					저장
+				</button>
+				<button id="register" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="플래너 게시판에 등록하여 모두에게 공유합니다.">
+					등록
+				</button>
 			</div>
 		</div> <!-- end of 상단 플래너 정보 입력바 -->
 	 
@@ -194,30 +205,30 @@
 						<option value="Paris">파리</option>
 						<option value="Nice">니스</option>
 						<option value="Lyon">리옹</option>
-						<option value="Sanghi">상해</option>
+						<option value="Shanghai">상하이</option>
 						<option value="Hongkong">홍콩</option>
+						<option value="Beijing">베이징</option>
 						<option value="Bangkok">방콕</option>
 						<option value="Danang">다낭</option>
 						<option value="Hanoi">하노이</option>
 						<option value="Hawaii">하와이</option>
-						<option value="Beijing">베이징</option>
 					</select>
 					<br>
 					<ul class="list-group">
 						<li id="title_hotPlace_List" class="list-group-item d-flex justify-content-between align-items-center" 
 							data-toggle="collapse" data-target="#hotPlace_List">
 						    <label>명소</label>
-						    <span class="badge badge-light badge-pill" data-toggle="popover" title="올던트립 추천 명소" data-content="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
+						    <span class="badge badge-light badge-pill" data-toggle="tooltip" title="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
 						</li>
 						
 						<li id="hotPlace_List" class="collapse bg-white list-group list-group-flush" style="overflow: scroll;">
-							<!-- 맛집 정보 리스트 추가 -->
+							<!-- 명소 정보 리스트 추가 -->
 						</li>
 						
 						<li id="title_restaurant_List" class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="collapse" data-target="#restaurant_List">
 						    <label>맛집</label>
-						    <span class="badge badge-light badge-pill" data-toggle="popover" title="올던트립 추천 맛집" data-content="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
+						    <span class="badge badge-light badge-pill" data-toggle="tooltip" title="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
 						</li>
 												
 						<li id="restaurant_List" class="collapse bg-white list-group list-group-flush" style="overflow: scroll;">
@@ -227,7 +238,7 @@
 						<li id="title_shopping_List" class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="collapse" data-target="#shopping_List">
 						    <label>쇼핑</label>
-						    <span class="badge badge-light badge-pill" data-toggle="popover" title="올던트립 추천 쇼핑장소" data-content="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
+						    <span class="badge badge-light badge-pill" data-toggle="tooltip" title="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
 						</li>
 						
 						<li id="shopping_List" class="collapse bg-white list-group list-group-flush" style="overflow: scroll;">
@@ -237,7 +248,7 @@
 						<li id="title_weather_List" class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="collapse" data-target="#weather_List">
 						    <label>날씨</label>
-							<span class="badge badge-light badge-pill" data-toggle="popover" title="5일간의 날씨정보(현재일 포함)" data-content="작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
+							<span class="badge badge-light badge-pill" data-toggle="tooltip" title="현재일 포함 5일간의 날씨정보입니다. 작성창에 드래그&드롭하여 정보를 입력 가능합니다.">?</span>
 						</li>
 						
 						<li id="weather_List" class="collapse bg-white list-group list-group-flush" style="overflow: scroll;">
@@ -349,7 +360,7 @@
 	 		<div id="editor_area" class="d-flex flex-column order-2">
 	 			<div class="col_c" style="margin-bottom: 30px">
 					<div class="input-group">
-						<textarea id="p_content" class="form-control"></textarea>
+						<textarea id="p_Content" class="form-control"></textarea>
 					</div>
 				</div>
 				
@@ -423,9 +434,11 @@
 		
 	
 	
-	<!-- 에디터 가로 크기 지정을 위한 input 태그 -->
-	<input type="hidden" name="width" id="width" value="${width}">
-
+	
+	<input type="hidden" name="email" id="email" value="${email}"/>
+	<input type="hidden" name="nick_Name" id="nick_Name" value="${nick_Name}"/>
+	<input type="hidden" name="plan_No" id="plan_No" value=""/>
+	
 </body>
 <!--=================================googleMap API======================================-->
 
@@ -435,15 +448,18 @@
 <!--====================================================================================-->
 
 <script src="${contextPath}/resources/js/planner/plannerWrite.js"></script>
+<script src="${contextPath}/resources/js/planner/plannerCityInfo.js"></script>
 <script src="${contextPath}/resources/js/planner/calculator.js"></script>
 <script src="${contextPath}/resources/js/planner/exchange.js"></script>
 
 <!--=================================CKeditor 설정=======================================-->
 
 <script>
-	CKEDITOR.replace('p_content', { height: 1000 });
-	CKEDITOR.replace( 'editor', {
-	    spreadsheet_licenseKey: '67Gn/ccajt8HqAe6ISOxvFLS3VuCdhWHiKWsSvBTtJgRVOqyoSnOBpwiVPfmdpn0CXKykieFQVsEcjCNj39tPDf6YmacQx277AZYwFIR4nHCDAU0ULqRnHecxzCTgEOQMRdqpk0ettsJSxUNe0OXzFAUKQ==',
+	CKEDITOR.replace( 'p_Content', {
+		height: 1000,
+		width: '100%',
+		filebrowserImageUploadUrl : '/upload/imageInput',	//이미지 업로드 시 저장경로 
+		imageUploadUrl : '/upload/dragImage'		//드래그&드롭 시 이미지저장 경로
 	} );
 </script>
 

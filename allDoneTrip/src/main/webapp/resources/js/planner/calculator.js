@@ -216,6 +216,12 @@ $(document).ready(function(){
 		}
 	}); // end of 계산
 	
+	
+	//계산 결과 리스트 띄우기
+	showResult.on("click", function () {
+		calculate_Result_List.toggle(500);
+	});
+	
 });// end of Ajax
 
 

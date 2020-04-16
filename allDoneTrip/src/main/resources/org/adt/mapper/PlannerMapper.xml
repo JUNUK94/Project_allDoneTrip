@@ -39,6 +39,7 @@
 		<![CDATA[		
 							planner.city_No=city.city_No 
 							and rownum <= #{pageNum} * #{amount}
+							and status = 1
 		]]>					
 					<choose>
 						<when test="sortType == 'regdate'.toString()">
@@ -62,7 +63,7 @@
 		select	count(*)
 		from	planner
 		where	<include refid="criteria"></include>
-				plan_No > 0
+				plan_No > 0 and status = 1
 	</select>
 	
 
@@ -114,36 +115,60 @@
 			select 	plan_No, p_Title, nick_Name, city_Name, trip_Period, plan_Like, p_Content, click_Num 
 			from 	planner, city
 			where 	plan_No = #{plan_No} 
-					and planner.city_No=city.city_No
+					and planner.city_No=city.city_No 
 		]]>
 	</select>
 
 
-
-
-
-
-	<insert id="insert">
-		<selectKey keyProperty="plan_No" order="BEFORE"
-			resultType="long">
-			select seq_board.nextval from dual
+	<!-- 플래너 저장 후 플래너 번호 return -->
+	<insert id="save">
+		insert into planner (plan_No, b_Type, nick_Name, email, p_Title, p_Content, trip_Period, city_No, regdate)
+		values (seq_planner.nextval, '1', #{nick_Name}, #{email}, #{p_Title}, #{p_Content}, #{trip_Period}, #{city_No}, to_char(sysdate, 'yyyy.MM.dd'))
+		
+		<selectKey keyProperty="plan_No" resultType="long" order="AFTER">
+			select seq_planner.currval from dual
 		</selectKey>
-
-		insert into planner (plan_No, title, content, writer)
-		values (#{plan_No},#{title}, #{content}, #{writer})
 	</insert>
 
 
+	<!-- 플래너 수정 -->
 	<update id="update">
-		<![CDATA[
-			update planner
-			set title = #{title},
-				content = #{content},
-				updateDate = sysdate
-			where plan_No = #{plan_No}
-		]]>
+		update planner
+		set nick_Name = #{nick_Name},
+			p_Title = #{p_Title},
+			p_Content = #{p_Content},
+			trip_Period = #{trip_Period},
+			city_No = #{city_No},
+			updateDate = to_char(sysdate, 'yyyy.MM.dd')
+		where plan_No = #{plan_No}
 	</update>
 
+
+	<!-- 플래너 작성 페이지에서 게시판에 등록 => status 1로 변경 -->
+	<update id="register">
+		update planner
+		set nick_Name = #{nick_Name},
+			p_Title = #{p_Title},
+			p_Content = #{p_Content},
+			trip_Period = #{trip_Period},
+			city_No = #{city_No},
+			updateDate = to_char(sysdate, 'yyyy.MM.dd'),
+			status = '1'
+		where plan_No = #{plan_No}
+	</update>
+	
+	
+	<!-- 그냥 플래너 목록 중에서 게시판 등록버튼 클릭 => status 1로 변경 -->
+	<update id="">
+		update planner
+		set nick_Name = #{nick_Name},
+			updateDate = to_char(sysdate, 'yyyy.MM.dd'),
+			status = '1'
+		where plan_No = #{plan_No}
+	</update>
+
+
+	<!-- 플래너 삭제 -->
 	<delete id="delete">
 		<![CDATA[
 			delete from planner
