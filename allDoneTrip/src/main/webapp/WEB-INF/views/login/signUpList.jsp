@@ -11,7 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script type="text/javascript">
-	  Kakao.init('9d97ada42431e424c4f3d1f9dc6b09af');
+	  Kakao.init('c830142e73bf6dbb2bac8a21583ca959');
 	  console.log(Kakao.isInitialized());
   </script>
   <script src="/resources/js/login/signUpList.js"></script>
@@ -35,8 +35,9 @@
 		    	<br>
 				<br>
 				<br>
-	    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=9d97ada42431e424c4f3d1f9dc6b09af&redirect_uri=http://localhost:8080/login/signUpKakao&response_type=code">
-	    		<button type="button" class="btn btn-warning" id="kakaoSignUp">카카오로 회원가입</button></a>
+	    <a href="${kakao_url}">
+	    		<button type="button" class="btn btn-warning" id="kakao_id_login">카카오로 회원가입</button>
+	    </a>
 			   	<br>
 				<br>
 				<br>
