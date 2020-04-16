@@ -1,22 +1,10 @@
 package org.adt.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-
 import org.adt.domain.MemberVO;
 import org.adt.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -68,8 +56,23 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 	}
+
+	@Override
+	public String idSearch(String name, int phone_Num) {
+		// TODO Auto-generated method stub
+		String searchEmail = mMapper.idSearch(name, phone_Num);
+		
+		return searchEmail;
+	}
 	
-	
+	@Override
+	public String pwSearch(String email, int phone_Num) {
+		// TODO Auto-generated method stub
+		String searchPassword = mMapper.idSearch(email, phone_Num);
+		
+		return searchPassword;
+	}
+
 	
 	
 	

@@ -28,6 +28,16 @@
 		where email=#{email} and pw=#{pw}
 	</select>
 	
+	<select id="idSearch" resultType="String">
+		select email from memberinfo
+		where name=#{name} and phone_Num=#{phone_Num}
+	</select>
+	
+	<select id="pwSearch" resultType="String">
+		select pw from memberinfo
+		where email=#{email} and phone_Num=#{phone_Num}
+	</select>
+	
   <!-- 회원탈퇴 -->
   <delete id = "delete">
      delete from memberinfo where memner_no=#{member_No}

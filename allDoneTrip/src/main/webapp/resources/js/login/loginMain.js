@@ -16,7 +16,7 @@
 /*===========================================================================================*/	
 		//아이디/비밀번호 찾기
 		$("#idSearch").on("click", function(e){
-			$(location).attr("href","/login/idSearch");
+			$(location).attr("href","/login/search");
 		});
 				
 		

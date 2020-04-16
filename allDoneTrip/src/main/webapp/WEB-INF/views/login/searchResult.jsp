@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-idSearch
+	${msg1} <br> ${searchResult} ${msg2}
 </body>
 </html>

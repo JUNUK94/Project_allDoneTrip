@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,11 +57,47 @@ public class LoginController {
 
 	}
 
-	@GetMapping("/idSearch")
-	public void idSearch() {
+	@GetMapping("/search")
+	public void search() {
 
 	}
+	
+	@PostMapping("/idSearch")
+	public String idSearch(@RequestParam("name") String name, @RequestParam("phone_Num") int phone_Num, Model model) {
+		MemberVO member = new MemberVO();
+		member.setName(name);
+		member.setPhone_Num(phone_Num);
+		log.info(member.getName()+member.getPhone_Num());
+		
+		String searchResult = mService.idSearch(member.getName(), member.getPhone_Num());
+		String msg1 = "아이디는 ";
+		String msg2 = "입니다. ";
+		log.info("searchResult = " + searchResult);
+		
+		model.addAttribute("searchResult", searchResult);
+		model.addAttribute("msg1", msg1);
+		model.addAttribute("msg2", msg2);
+		return "/login/searchResult";
+	}
 
+	@PostMapping("/pwSearch")
+	public String pwSearch(@RequestParam("email") String email, @RequestParam("phone_Num") int phone_Num, Model model) {
+		MemberVO member = new MemberVO();
+		member.setEmail(email);
+		member.setPhone_Num(phone_Num);
+		log.info(member.getEmail());
+		
+		String searchResult = mService.idSearch(member.getEmail(), member.getPhone_Num());
+		String msg1 = "비밀번호는 ";
+		String msg2 = "입니다. ";
+		log.info("searchResult = " + searchResult);
+		
+		model.addAttribute("searchResult", searchResult);
+		model.addAttribute("msg1", msg1);
+		model.addAttribute("msg2", msg2);
+		return "/login/searchResult";
+	}
+	
 	@GetMapping("/login")
 	public void login(String email,Model model) {
 		model.addAttribute("email",email);
