@@ -10,9 +10,9 @@
 	<div class="container-sm mt-5 border" >
 		<div class="row mt-5"></div>
 		<div class="row">
-		
-		<form id="idSearchForm">
 			<div class="col border text-center">
+			
+			<form id="idSearchForm">
 				<div class="row badge badge-primary" id="idSearch" style="position: relative; font-size:14pt;">아  이  디    찾  기</div><br>
 					<div class="row">
 						<div class="col-3"></div>
@@ -34,34 +34,35 @@
 					</div>
 					<div class="col-3"></div>
 				</div>
+			</form>
+			
 			</div>
-		</form>
-		
-		<form id="pwSearchForm">
-			<div class="col border text-center">
+			<div class="col-6 border text-center">
+			
+			<form id="pwSearchForm">
 				<div class="row badge badge-primary" id="pwSearch" style="position: relative; font-size:14pt;">비 밀 번 호  찾 기</div><br>
 					<div class="row">
 						<div class="col-3"></div>
-						<div class="col mt-2">아이디와 전화번호를 입력해주세요.</div>
+						<div class="col-6 mt-2">아이디와 전화번호를 입력해주세요.</div>
 						<div class="col-3"></div>
 					</div>
 					<div class="row"> 
 						<div class="col-3"></div>
-						<div class="col mt-2">
+						<div class="col-6 mt-2">
 							<input type="text" class="form-control" placeholder="이메일" name="email"><br>
 							<input type="text" class="form-control" placeholder="전화번호" name="phone_Num">
 						</div>
 						<div class="col-3"></div>
 					</div>
-				<div class="row mt-4">
-					<div class="col-3"></div>
-					<div class="col">
-						<button type="button" class="btn btn-link btn-sm" id="pwButton">비밀번호찾기</button>
-					</div>
+					<div class="row mt-4">
+						<div class="col-3"></div>
+						<div class="col-6">
+							<button type="button" class="btn btn-link btn-sm" id="pwButton">비밀번호찾기</button>
+						</div>
 					<div class="col-3"></div>
 				</div>
+			</form>
 			</div>
-		</form>
 		
 		</div>
 		<div class="row mt-5"></div>
