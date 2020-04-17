@@ -91,21 +91,35 @@ public class plannerServiceImpl implements plannerService {
 
 	// 플래너 저장
 	@Override
-	public void insert(PlannerVO pvo) {
-		
+	public long save(PlannerVO pvo) {
+		return mapper.save(pvo);
 	}
+
 
 	// 플래너 수정
 	@Override
 	public void update(PlannerVO pvo) {
-		
+		mapper.update(pvo);
 	}
 
+	// 플래너 게시판에 등록
+	@Override
+	public void register(PlannerVO pvo) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	// 플래너 삭제
 	@Override
 	public void delete(Long plan_No) {
 		
 	}
+
+
+
+
+
 
 	
 }

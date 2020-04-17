@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -10,22 +9,13 @@
 <title>Insert title here</title>
 <!--=====================================jquery=========================================-->
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
-<script
-	src="http://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM"></script>
 <!--===================================bootstrap========================================-->
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="/resources/css/community.css" rel="stylesheet">
 </head>
 <body>
@@ -51,27 +41,23 @@
 				<div class="panel-heading h1">커뮤니티 글이다 이말이다.</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
+					<div class="row col-12 inputMargin">
+						<div class="form-group col-2">
+							<label>글 번호</label> <input class="form-control" name='bno' value='<c:out value="${board.bno }"/>' readonly="readonly">
+						</div>
 
-					<div class="form-group">
-						<label>글 번호</label> <input class="form-control" name='bno'
-							value='<c:out value="${board.bno }"/>' readonly="readonly">
+						<div class="form-group col-8">
+							<label>글 제목</label> <input class="form-control" name='title' value='<c:out value="${board.title }"/>' readonly="readonly">
+						</div>
+						<div class="form-group col-2">
+							<label>작성자</label> <input class="form-control" name='writer' value='<c:out value="${board.nick_Name }"/>' readonly="readonly">
+						</div>
 					</div>
-
-					<div class="form-group">
-						<label>글 제목</label> <input class="form-control" name='title'
-							value='<c:out value="${board.title }"/>' readonly="readonly">
-					</div>
-
 					<div class="form-group">
 						<label>내용</label>
-						<textarea class="form-control" rows="3" name='content'
-							readonly="readonly"><c:out value="${board.b_content}" /></textarea>
+						<textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${board.b_content}" /></textarea>
 					</div>
 
-					<div class="form-group">
-						<label>작성자</label> <input class="form-control" name='writer'
-							value='<c:out value="${board.nick_Name }"/>' readonly="readonly">
-					</div>
 
 					<button data-oper='modify' class="btn btn-default">수정</button>
 					<button data-oper='list' class="btn btn-info">목록</button>
@@ -82,25 +68,118 @@
 
 
 					<form id='operForm' action="/community/modify" method="get">
-						<input type='hidden' id='bno' name='bno'
-							value='<c:out value="${board.bno}"/>'> <input
-							type='hidden' name='pageNum'
-							value='<c:out value="${cri.pageNum}"/>'> <input
-							type='hidden' name='amount'
-							value='<c:out value="${cri.amount}"/>'> <input
-							type='hidden' name='keyword'
-							value='<c:out value="${cri.keyword}"/>'> <input
-							type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+						<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'> <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'> <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'> <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
 
 					</form>
 
 
+<<<<<<< HEAD
 
+=======
+					<div class="row">
+						<div class="col-12 text-right">
+							<button data-oper='modify' class="btn btn-primary">수정</button>
+							<button data-oper='list' class="btn btn-info">목록</button>
+						</div>
+					</div>
+>>>>>>> stash
 				</div>
 				<!--  end panel-body -->
 
 			</div>
 			<!--  end panel-body -->
+<<<<<<< HEAD
+=======
+			<div class="row">
+				<div class="col-md-1">
+					<img src="/resources/img/planner/Non_User_Photo.JPG">
+				</div>
+				<div class="col-md-8">
+					<textarea id="plannerReply" class="col-md-12 bg-light" style="height: 100px;" placeholder="댓글을 입력해주세요"></textarea>
+				</div>
+				<div class="col-md-2">
+					<button id="sendPlannerReply" class="col-md-12 bg-light" style="height: 100px;">등록</button>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+
+			<br>
+			<div id="plannerReplyList">
+				<c:forEach items="${reply}" var="prvo" varStatus="vs">
+					<div class="row" id="${vs.index}">
+						<div class="col-md-1">
+							<img src="/resources/img/planner/Non_User_Photo.JPG">
+						</div>
+						<div class="col-md-5">
+							<div class="row">
+								<div class="col-md-2 small text-left">
+									<a href="${prvo.nick_Name}">${prvo.nick_Name}</a>
+								</div>
+								<div class="col-md-10 small text-left">${prvo.regdate}</div>
+							</div>
+							<div>${prvo.pr_Content}</div>
+						</div>
+						<div class="col-md-1 small text-right">
+							<a href="#" id="count_reReply${vs.index}" onclick="show_reReplyList(${vs.index})">∨</a>
+						</div>
+						<div class="col-md-1 small text-right" id="replyRUD">
+							<c:if test="${prvo.email == email}">
+								<a href="#" onclick="replyDelete(${prvo.p_Rno})">삭제</a> | 
+						</c:if>
+							<a href="#" onclick="replyWarning(${prvo.p_Rno})">신고</a> | <a href="#" onclick="reReply(${prvo.p_Rno},${vs.index})">답글</a>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+					<!-- 답글 입력창 -->
+					<div class="row" id="reReply${vs.index}" style="display: none;">
+						<div class="col-md-2"></div>
+						<div class="col-md-1"></div>
+						<div class="col-md-6">
+							<textarea id="reReplyText${vs.index}" class="col-md-12 bg-light" style="height: 100px;" placeholder=">답글"></textarea>
+						</div>
+						<div class="col-md-1">
+							<button class="col-md-12 bg-light" style="height: 100px;" onclick="reReplyInsert(${prvo.p_Rno}, ${vs.index})">등록</button>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+					<!-- 답글 띄우기 -->
+					<div class="row" id="reReplyList${vs.index}" style="display: none;">
+						<c:forEach items="${reReply}" var="rrvo">
+							<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
+								<div class="col-md-2"></div>
+								<div class="col-md-7">
+									<div class="row">
+										<div class="col-md-2"></div>
+										<div class="col-md-1 text-right">┕</div>
+										<div class="col-md-2 text-left small bg-light">${rrvo.nick_Name}</div>
+										<div class="col-md-7 text-left small bg-light">${rrvo.regdate}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2"></div>
+										<div class="col-md-1"></div>
+										<div class="col-md-9 bg-light">${rrvo.pr_Content}</div>
+									</div>
+								</div>
+								<div class="col-md-1 text-right small">
+									<c:if test="${rrvo.email == email}">
+										<a href="#" onclick="replyDelete(${rrvo.p_Rno})">삭제</a> |
+									</c:if>
+									<a href="#" onclick="reReplyWarning(${rrvo.p_Rno})">신고</a>
+								</div>
+								<div class="col-md-2"></div>
+								<br>
+								<br>
+								<br>
+							</c:if>
+						</c:forEach>
+					</div>
+					<br>
+				</c:forEach>
+			</div>
+			<!-- ./ end row -->
+>>>>>>> stash
 		</div>
 		<!-- end panel -->
 	</div>
@@ -145,27 +224,22 @@
 
 
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>Reply</label> <input class="form-control" name='reply'
-							value='New Reply!!!!'>
+						<label>Reply</label> <input class="form-control" name='reply' value='New Reply!!!!'>
 					</div>
 					<div class="form-group">
-						<label>Replyer</label> <input class="form-control" name='replyer'
-							value='replyer'>
+						<label>Replyer</label> <input class="form-control" name='replyer' value='replyer'>
 					</div>
 					<div class="form-group">
-						<label>Reply Date</label> <input class="form-control"
-							name='replyDate' value='2018-01-01 13:13'>
+						<label>Reply Date</label> <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
 					</div>
 
 				</div>

@@ -1,5 +1,7 @@
 package org.adt.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
@@ -40,9 +43,9 @@ public class PlannerController {
 	public void write(Model model) {
 		log.info("write");
 		
-		model.addAttribute("width", "1000");
+		//model.addAttribute("width", "100%");
 	}
-	
+		
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
@@ -81,8 +84,37 @@ public class PlannerController {
 	
 
 	
+	
+	// 플래너 저장
+	@PostMapping("/save")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, PlannerVO>> savePlanner(PlannerVO pvo) {
+															
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		Date date = new Date();
+		String sysdate = sdf.format(date);
+		
+		log.info(pvo);
+		
+		//플래너 번호가 없으면 DB에 insert
+		if(pvo.getPlan_No() == null) {
+			service.save(pvo);
+		}else {
+			service.update(pvo);
+		}
+		
+		pvo.setUpdateDate(sysdate);
+		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	
 	// 플래너 댓글 등록
 	@PostMapping("/replyWrite")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> replyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
@@ -104,6 +136,7 @@ public class PlannerController {
 	
 	// 플래너 대댓글(답글) 등록
 	@PostMapping("/reReplyWrite")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, PlannerReplyVO>> reReplyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
@@ -124,6 +157,7 @@ public class PlannerController {
 	
 	// 플래너 댓글 삭제
 	@PostMapping("/replyDelete")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> replyDelete(PlannerReplyVO prvo){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -146,6 +180,7 @@ public class PlannerController {
 	
 	// 좋아요 추가
 	@PostMapping("/like")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> addLike(PlannerVO pvo){
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -166,6 +201,7 @@ public class PlannerController {
 	
 	// 도시정보 담아오기	
 	@PostMapping("/cityInfo")
+	@ResponseBody
 	public ResponseEntity<HashMap<String, String>> cityInfo(@RequestParam("img") String img,
 											@RequestParam("title") String title,
 											@RequestParam("text") String text) {
@@ -188,5 +224,8 @@ public class PlannerController {
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
+	
+	
+
 	
 }

@@ -24,7 +24,12 @@
 			<div class="col-2 "><p class='divText'>Email*</p></div>
 			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email"></div>
 		</div>
-		
+		<div class="row" >
+			<div class="col-2"></div>
+			<div class="col-8">
+				<div class="emailCheckStatus" style="font-size:8pt;"></div>
+			</div>
+		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Password*</p></div>
 			<div class="col "><input type="password" class="form-control" placeholder="Password" id="pw" name="pw"></div>
@@ -66,7 +71,13 @@
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Nickname*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Nickname" id="nickname" name="nick_Name"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="nick_Name" id="nick_Name" name="nick_Name"></div>
+		</div>
+		<div class="row" >
+			<div class="col-2"></div>
+			<div class="col-8">
+				<div class="nicknameCheckStatus" style="font-size:8pt;"></div>
+			</div>
 		</div>
 		<div class="row mt-3" >
 		<div class="col-2 middle">

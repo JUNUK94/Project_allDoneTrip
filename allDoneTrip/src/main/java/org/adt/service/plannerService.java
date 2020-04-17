@@ -26,11 +26,14 @@ public interface plannerService {
 	public List<PlannerVO> getPlanner(Long plan_No);
 
 	// 플래너 저장
-	public void insert(PlannerVO pvo);
+	public long save(PlannerVO pvo);
 
 	// 플래너 수정
 	public void update(PlannerVO pvo);
-
+	
+	// 플래너 게시판에 등록
+	public void register(PlannerVO pvo);
+	
 	// 플래너 삭제
 	public void delete(Long plan_No);
 

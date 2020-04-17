@@ -1,220 +1,246 @@
-	$(document).ready(function() {
+$(document).ready(function(){
 
-			var calulator = $("button.calculator");
-			var plus = $("button.plus");
-			var minus = $("button.minus");
-			var multiple = $("button.multiple");
-			var devide = $("button.devide");
-			var openBracket = $("button.openBracket");
-			var closeBracket = $("button.closeBracket");
-			var back = $("button.back");
-			var clear = $("button.clear");
-			var showProcess = $("input.showProcess");
-			var showResult = $("div.showResult");
+//=================================================선언부===========================================================
+	
+	var zero = $("#zero");		//0
+	var one = $("#one");		//1
+	var two = $("#two");		//2
+	var three = $("#three");	//3
+	var four = $("#four");		//4
+	var five = $("#five");		//5
+	var six = $("#six");		//6
+	var seven = $("#seven");	//7
+	var eight = $("#eight");	//8
+	var nine = $("#nine");		//9
+	var point = $("#point");	//.
+	
+	var equal = $("#equal");				//=
+	var plus = $("#plus");					//+
+	var minus = $("#minus");				//-
+	var multiple = $("#multiple");			//x
+	var devide = $("#devide");				//'/'
+	var openBracket = $("#openBracket");	//(
+	var closeBracket = $("#closeBracket");	//)
+	var back = $("#back");					//<-
+	var clear = $("#clear");				//C
+	
+	
+	var inputNum = $("input[name='inputNum']");
+	var showResult = $("#showResult");
+	var calculate_Result_List = $("#calculate_Result_List");
+	var value;
+	var lastChar;
+	var length;
+	var process;
+	var calulate_Result;
+	var index = 0;
 
-			var status = false;
-			var process = "";
-			var result = "";
-
+//=================================================이벤트 영역===========================================================
+	
+	// 숫자 입력 이벤트
+	$("#button-wrapper").on("click",".number", function() {
+		
+		value = $(this).html();
+		process = inputNum.val();
+		length = process.length;
+		lastChar = process.charAt(length-1);
+		
+		if(length != 0){
+			if(value == '.'){
+				if(isNaN(lastChar)){
+					value = '';
+				}else{
+				}
+			}else{
+				if(lastChar == ')'){
+					value = '*' + value;
+				}
+			}
+		}else{
+			if(value == '.'){
+				value = '';
+			}
+		}
+		process += value;
+		inputNum.val(process);
+	});
+	
+	
+	
+	// 연산자 입력 이벤트
+	$("#button-wrapper").on("click",".operator", function() {
+		
+		value = $(this).html();
+		process = inputNum.val();
+		length = process.length;
+		lastChar = process.charAt(length-1);
+		
+		if(length == 0){
+			if(value != '-'){
+				value = '';
+			}
+		}else{
+			if(lastChar != ')'){
+				if(isNaN(lastChar)){
+					value = '';
+				}
+			}
+		}
+		
+		process += value;
+		inputNum.val(process);
+	});
+	
+	
+	
+	// 열린 괄호 '(' 입력 이벤트
+	openBracket.on("click", function() {
+		
+		value = $(this).html();
+		process = inputNum.val();
+		length = process.length;
+		lastChar = process.charAt(length-1);
+		
+		if(length != 0){
+			if(lastChar != '.'){
+				if(!isNaN(lastChar)){
+					value = '*' + value;
+				}
+			}else{
+				value = '0*' + value;
+			}
+		}
+		process += value;
+		inputNum.val(process);
+	});
+	
+	
+	
+	// 닫힌 괄호 ')' 입력 이벤트
+	closeBracket.on("click", function() {
+		
+		value = $(this).html();
+		process = inputNum.val();
+		length = process.length;
+		lastChar = process.charAt(length-1);
+		
+		var count1 = 0;
+		var count2 = 0;
+			if(length != 0){
+			for(var i=0; i<length; i++) {
+				if (process.charAt(i) == "(") {
+					count1 = Number(count1) + 1;
+				} else if (process.charAt(i) == ")") {
+					count2 = Number(count2) + 1;
+				}
+			}
 			
-			// 계산
-			calulator.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
-
-				if (inputNum == "") {
-					if (isNaN(process.charAt(process.length - 1))) {
-						if (process.charAt(process.length - 1) != ")") {
-							process = process.slice(0, -1);
-							showProcess.val(process);
-						}
-					}
-				} else {
-					process += inputNum;
-					showProcess.val(process);
-				}
-
-				try {
-					result = eval(showProcess.val());
-					if (!isNaN(result)) {
-						showResult.html(process + " = " + result);
-						$("input[name='inputNum']").val(null);
-						showProcess.val(result);
-					}
-				} catch (Exception) {
-					alert("잘못된 수식입니다");
-				}
-			}); // end of 계산
-			
-
-			// 리셋
-			clear.on("click", function() {
-				$("input[name='inputNum']").val(null);
-				showProcess.val(null);
-				process = "";
-				status = false;
-			}); // end of 리셋
-			
-
-			// 더하기
-			plus.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
-
-				if (inputNum != "") {
-					$("input[name='inputNum']").val(null);
-					process += (inputNum + "+");
-				} else {
-					if (isNaN(process.charAt(process.length - 1))) {
-						process = process.replace(process
-								.charAt(process.length - 1), "+");
+			if (count1 > count2) {
+				if(isNaN(lastChar)){
+					switch(lastChar){
+						case '+' : value = '';
+							break;
+						case '-' : value = '';
+							break;
+						case '*' : value = '';
+							break;
+						case '/' : value = '';
+							break;
+						case '.' : value = '0'+value;
+							break;
 					}
 				}
-				if (status) {
-					process += (inputNum + "+");
-					$("input[name='inputNum']").removeAttr("readOnly");
-					$("input[name='inputNum']").attr("placeholder", "0");
-					status = false;
+			}else{
+				value = '';
+			}
+		}else{
+			value = '';
+		}
+		
+		process += value;
+		inputNum.val(process);
+	});
+	
+	
+	
+	// 한칸 지우기
+	back.on("click", function() {
+		
+		process = inputNum.val();
+		process = process.slice(0, -1);
+		
+		inputNum.val(process);
+	});
+	
+	
+	// 모두 지우기
+	clear.on("click", function() {
+		inputNum.val(null);
+	});
+	
+	
+	// 계산하기
+	equal.on("click", function() {
+		process = inputNum.val();
+		length = process.length;
+		lastChar = process.charAt(length-1);
+		
+		console.log(process);
+		
+		if(length != 0){
+			if(isNaN(lastChar)){
+				if(lastChar != ')'){
+					process = process.slice(0, -1);
 				}
-				showProcess.val(process);
-			});// end of 더하기
-			
+			}
+			try {
+				calulate_Result = eval(process);
+				showResult.css("display","");
+				
+				var str = "";
+				str += ("<div class='row' id='remove_Cal_Result"+index+"'>");
+				str += "<div class='col-md-10'>";
+				str += (process+" = ");
+				str += ("<label class='text-primary'>"+calulate_Result+"</label>");
+				str += "</div>";
+				str += ("<div class='col-md-2 remove_Cal_Result' onclick='remove_Cal_Result("+index+")'>x</div>");
+				str += "</div>";
+				
+				index = Number(index)+1;
+				// 리스트 화면에 출력
+				calculate_Result_List.append(str);
+				
+			} catch (Exception) {
+				alert("잘못된 수식입니다");
+			}
+		}
+	}); // end of 계산
+	
+	
+	//계산 결과 리스트 띄우기
+	showResult.on("click", function () {
+		calculate_Result_List.toggle(500);
+	});
+	
+});// end of Ajax
 
-			// 빼기
-			minus.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
 
-				if (inputNum != "") {
-					$("input[name='inputNum']").val(null);
-					process += (inputNum + "-");
-				} else {
-					if (isNaN(process.charAt(process.length - 1))) {
-						process = process.replace(process
-								.charAt(process.length - 1), "-");
-					}
-				}
+//=================================================함수 영역===========================================================
 
-				if (status) {
-					process += (inputNum + "-");
-					$("input[name='inputNum']").removeAttr("readOnly");
-					$("input[name='inputNum']").attr("placeholder", "0");
-					status = false;
-				}
-				showProcess.val(process);
-			}); // end of 빼기
-			
+// 계산결과 리스트 지우기
+function remove_Cal_Result(index){
+	var x_btn = document.getElementById("remove_Cal_Result"+index);
+	var result_List_wrapper = document.getElementById('calculate_Result_List');
+	result_List_wrapper.removeChild(x_btn);
+	
+	var cnt = result_List_wrapper.childElementCount;
 
-			// 곱하기
-			multiple.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
+	if(cnt == 0){
+		showResult.style.display = 'none';
+	}
+}
 
-				if (inputNum != "") {
-					$("input[name='inputNum']").val(null);
-					process += (inputNum + "*");
-				} else {
-					if (isNaN(process.charAt(process.length - 1))) {
-						process = process.replace(process
-								.charAt(process.length - 1), "*");
-					}
-				}
 
-				if (status) {
-					process += (inputNum + "*");
-					$("input[name='inputNum']").removeAttr("readOnly");
-					$("input[name='inputNum']").attr("placeholder", "0");
-					status = false;
-				}
-				showProcess.val(process);
-			}); // end of 곱하기
 
-			
-			// 나누기
-			devide.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
 
-				if (inputNum != "") {
-					$("input[name='inputNum']").val(null);
-					process += (inputNum + "/");
-				} else {
-					if (isNaN(process.charAt(process.length - 1))) {
-						process = process.replace(process
-								.charAt(process.length - 1), "/");
-					}
-				}
-				if (status) {
-					process += (inputNum + "/");
-					$("input[name='inputNum']").removeAttr("readOnly");
-					$("input[name='inputNum']").attr("placeholder", "0");
-					status = false;
-				}
-				showProcess.val(process);
-			});// end of 나누기
 
-			// 열린 괄호
-			openBracket.on("click", function() {
-				process = showProcess.val();
-
-				if (!isNaN(process.charAt(process.length - 1))) {
-					if (process != "") {
-						alert("연산자를 먼저 입력하세요");
-					} else {
-						process += "(";
-						showProcess.val(process);
-					}
-				} else {
-					process += "(";
-					showProcess.val(process);
-				}
-			});// end of 열린 괄호
-
-			
-			// 닫힌 괄호
-			closeBracket.on("click", function() {
-				var inputNum = $("input[name='inputNum']").val();
-				process = showProcess.val();
-
-				var count1 = 0;
-				var count2 = 0;
-
-				for (var i = 0; i < process.length; i++) {
-					if (process.charAt(i) == "(") {
-						count1 = Number(count1) + 1;
-					} else if (process.charAt(i) == ")") {
-						count2 = Number(count2) + 1;
-					}
-				}
-
-				if (count1 > count2) {
-					if (inputNum != "") {
-						process += (inputNum + ")");
-					} else {
-						process += ")";
-					}
-					showProcess.val(process);
-					$("input[name='inputNum']").val(null);
-				} else {
-					alert("열린 괄호 '" + "(" + "를 먼저 입력해주세요");
-
-				}
-			});// end of 닫힌 괄호
-
-			
-			// 이전
-			back.on("click", function() {
-				process = process.slice(0, -1);
-				showProcess.val(process);
-
-				if (isNaN(process.charAt(process.length - 1))) {
-					$("input[name='inputNum']").removeAttr("readOnly");
-					$("input[name='inputNum']").attr("placeholder", "0");
-				} else {
-					$("input[name='inputNum']").attr("readOnly", "readOnly");
-					$("input[name='inputNum']").attr("placeholder", "연산자를 먼저 선택하세요");
-					status = true;
-				}
-			});// end of 이전
-
-		});// end of Ajax

@@ -12,9 +12,37 @@
 	      seq_memberinfo.nextval,#{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, 
 	      (TO_CHAR(sysdate, 'yyyymmdd')),(TO_CHAR(sysdate, 'yyyymmdd')),#{mobile_Co})
 	</insert>
-
+	
+	<select id="emailCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email}
+	</select>
+	
+	<select id="nick_NameCheck" resultType="String">
+		select count(*) from memberinfo
+		where nick_Name=#{nick_Name}
+	</select>
+	
+	<select id="loginCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="idSearch" resultType="String">
+		select email from memberinfo
+		where name=#{name} and phone_Num=#{phone_Num}
+	</select>
+	
+	<select id="pwSearch" resultType="String">
+		select pw from memberinfo
+		where email=#{email} and phone_Num=#{phone_Num}
+	</select>
+	
   <!-- 회원탈퇴 -->
   <delete id = "delete">
      delete from memberinfo where memner_no=#{member_No}
   </delete>
+
+	
+
 </mapper>

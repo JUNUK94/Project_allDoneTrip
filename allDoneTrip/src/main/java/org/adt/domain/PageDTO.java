@@ -1,7 +1,7 @@
 package org.adt.domain;
 
+
 import lombok.Data;
-import lombok.extern.log4j.Log4j;
 
 @Data
 public class PageDTO {
@@ -13,7 +13,6 @@ public class PageDTO {
 	
 	private int total;
 	private Criteria cri;
-	
 	
 	//페이징 처리
 	public PageDTO(Criteria cri, int total) {
