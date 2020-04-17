@@ -9,6 +9,13 @@
 <html>
 <head>
 <style type="text/css">
+a {
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+}
+</style>
+<style type="text/css">
 
 	div.cheese {
 	text-align: center;
@@ -48,24 +55,33 @@
 			<c:set var="pageNum_Home" value="${pageNum_Home}" />
 			<c:choose>
 				<c:when test="${pageNum_Home eq null}">
-					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
+					<jsp:include page="city.jsp" flush="false" /><!--info_main-->	
 				</c:when>
 				<c:when test="${pageNum_Home eq '1'}">
 					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
 				</c:when>
 				<c:when test="${pageNum_Home eq '2'}">
-					<jsp:include page="city_list.jsp" flush="false" />
+					<jsp:include page="city_list.jsp" flush="false" />	<!-- 기본정보 --> -->	
 				</c:when>
-				<c:when test="${pageNum_Home eq '3'}">
-					<jsp:include page="city_map.jsp" flush="false" />
+				<c:when test="${pageNum_Home eq '3'}">	
+					<jsp:include page="city_map.jsp" flush="false" /><!-- 지도보기 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '4'}">
-					<jsp:include page="city_place.jsp" flush="false" />
+					<jsp:include page="city_place.jsp" flush="false" /><!-- 명소 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '5'}">
-					<jsp:include page="city_plan.jsp" flush="false" />
+					<jsp:include page="city_food.jsp" flush="false" /><!-- 맛집 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '6'}">
+					<jsp:include page="city_theme.jsp" flush="false" /><!-- 테마 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '7'}">
+					<jsp:include page="city_shop.jsp" flush="false" /><!-- 쇼핑 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '8'}">
+					<jsp:include page="city_plan.jsp" flush="false" /><!-- 추천플래너 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '10'}">
 					<jsp:include page="city_detail.jsp" flush="false" />
 				</c:when>
 				<c:when test="${pageNum_Home eq '11'}">

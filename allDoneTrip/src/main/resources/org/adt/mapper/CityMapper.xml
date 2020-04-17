@@ -15,7 +15,7 @@
 		  select a.city_no, a.city_name, a.country_name,  a.conti_name, b.spot_no, b.spot_name, b.t_tel, b.address,b.t_explan, b.t_content
 			from city a, spot b
 			where a.city_no=b.city_no
-			and a.city_no='1'
+			and a.city_no=#{city_No}
             
 		]]>
 	</select>

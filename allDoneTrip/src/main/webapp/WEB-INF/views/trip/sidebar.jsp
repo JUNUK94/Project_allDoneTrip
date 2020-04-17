@@ -26,16 +26,14 @@
 
 	<!--<c:url value='/info_main?pageNum=${pageNum}' var="info_home" />-->
 	<a href="#" class="pageMenu">Home</a><br>
-	
 	<a href="#" class="pageMenu">기본정보</a><br>
-
 	<a href="#" class="pageMenu">지도보기</a><br>
-	
-	<a href="#" class="pageMenu">추천명소</a><br>
-	
-	<a href="#" class="pageMenu">추천플래너</a><br>
-	
-	
+	<a href="#" class="pageMenu">명소</a><br>
+	<a href="#" class="pageMenu">맛집</a><br>	
+	<a href="#" class="pageMenu">테마</a><br>
+	<a href="#" class="pageMenu">쇼핑</a><br>
+	<a href="#" class="pageMenu">추천플래너</a><br>	
+
 	
 	<form id="pageMoveForm" action="" method="get">
 		<input type="hidden" name="Type" value="">
@@ -63,11 +61,20 @@
 					case "지도보기" :
 						$("input[name='Type']").val('3');
 						break;
-					case "추천명소" :
+					case "명소" :
 						$("input[name='Type']").val('4');
 						break;
-					case "추천플래너" :
+					case "맛집" :
 						$("input[name='Type']").val('5');
+						break;
+					case "테마" :
+						$("input[name='Type']").val('6');
+						break;
+					case "쇼핑" :
+						$("input[name='Type']").val('7');
+						break;
+					case "추천플래너" :
+						$("input[name='Type']").val('8');
 						break;
 				}
 						

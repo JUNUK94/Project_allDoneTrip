@@ -131,7 +131,7 @@
 							<div class="card-body text-center">
 								<h5 class="card-title">에펠탑</h5>
 								<p class="card-text">명실상부 파리의 아이콘</p>
-								<a href="paris?Type=6" class="btn btn-success">ㄱㄱㄱㄱ</a>
+								<a href="paris?Type=10" class="btn btn-success">ㄱㄱㄱㄱ</a>
 							</div>
 						</div>
 					</div>

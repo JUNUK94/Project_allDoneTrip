@@ -1,29 +1,15 @@
 package org.adt.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.adt.domain.CityVO;
 import org.adt.service.CityService;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import lombok.extern.log4j.Log4j;
 
@@ -34,12 +20,19 @@ public class TripinfoController {
 
 	@Autowired
 	private CityService cservice;
+/*
+ * 순서는
+1 홈
+2 기본정보
+3 지도보기
+4 명소
+5 맛집
+6 테마
+7 쇼핑
+8 추천플래너
+10 상세페이지
 
-	/*
-	 * @RequestMapping(value = "/main") //+4.7 수정 없어도 될듯 이후 수정예정 public String
-	 * trip_main(Model model) { // System.out.println("11성공!"); //
-	 * model.addAttribute("pageNum_Home", 1); return "trip/trip_main"; }
-	 */
+ */
 //	@GetMapping("/paris")
 //	public ModelAndView main(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response,
 //			@RequestParam("Type") String Type) throws IOException {
@@ -121,11 +114,11 @@ public class TripinfoController {
 		log.info("type = " + Type);
 		
 		if (Type.equals(PARIS_EUFFELTOWER)) {
-			System.out.println("6!상세페이지");
+			System.out.println("10!상세페이지");
 			model.addAttribute("pageNum_Home", 11);
 		}
 		if (Type.equals(PARIS_MONTMARTRE)) {
-			System.out.println("6!상세페이지");
+			System.out.println("10!상세페이지");
 			model.addAttribute("pageNum_Home", 15);
 		}
 ////////////////////
@@ -143,26 +136,31 @@ public class TripinfoController {
 			model.addAttribute("pageNum_Home", 3);
 
 		} else if (Type.equals("4")) {
-			System.out.println("str[1]");
+			System.out.println("str[1] , 명소");
 			model.addAttribute("pageNum_Home", 4);
 
 			model.addAttribute("list", cservice.read(1));
 			System.out.println(cservice.read(1));//전체출력
-			
-			
 
-
-		} else if (Type.equals("5")) {
-			System.out.println("5!추천플래너페이지");
+		}  else if(Type.equals("5")) {
+			System.out.println("5! 맛집");
 			model.addAttribute("pageNum_Home", 5);
-
-
-		} else if (Type.equals("6")) {
-
-			System.out.println("6!상세페이지");
+			//model.addAttribute("list", cservice.read());
+		}	else if(Type.equals("6")) {
+			System.out.println("6! 테마");
 			model.addAttribute("pageNum_Home", 6);
-		}
-		return "trip/trip_main";
-	}
+		}	else if(Type.equals("7")) {
+			System.out.println("7! 쇼핑");
+			model.addAttribute("pageNum_Home", 7);
+		}else if (Type.equals("8")) {
+			System.out.println("8!추천플래너페이지");
+			model.addAttribute("pageNum_Home", 8);
 
-}
+		}else if (Type.equals("10")) {
+
+			System.out.println("10!상세페이지");
+			model.addAttribute("pageNum_Home", 10);
+		
+	}
+		return "trip/trip_main";
+}}
