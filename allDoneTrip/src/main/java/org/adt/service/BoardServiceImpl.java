@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adt.domain.BoardVO;
 import org.adt.domain.Criteria;
+import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerVO;
 import org.adt.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,30 +36,26 @@ public class BoardServiceImpl implements BoardService {
 	//게시판 전체 갯수
 	@Override
 	public int getTotal(Criteria cri) {
-			
 		log.info("get total count");
 		return bMapper.getTotalCount(cri);
 	}
 
 	//게시판글작성
 	@Override
-	public void Insert(BoardVO board) {
+	public int Insert(BoardVO board) {
 		// TODO Auto-generated method stub
-		
+		return bMapper.reviewInsert(board);
 	}
 		
 	//글수정
 	@Override
-	public int update(BoardVO board) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean update(BoardVO board) {
+		return false;
 	}
 		
 	//글삭제
 	@Override
-	public int delete(Long bno) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean delete(Long bno) {
+		return false;
 	}
-
 }
