@@ -30,8 +30,8 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <body>
-city.jsp이에여^~^<br>
-<strong>Weather & Exchange Rate (이쁘게 나눠줄 예정)</strong>
+
+<strong>Weather & Exchange Rate</strong>
 
 <div class = "country"> 국가:PARIS </div>
 <div class = "exchange">1EUR: </div>
@@ -104,13 +104,7 @@ city.jsp이에여^~^<br>
 
     </script>
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ<br>
-인기명소(=추천명소)
-	
-<c:forEach var="str_list" items="${str_list}"> 
-			${str_list}
-</c:forEach>
 
------
 <br><strong >인기여행지</strong>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item"><a class="nav-link active" id="home-tab"
@@ -137,7 +131,7 @@ city.jsp이에여^~^<br>
 							<div class="card-body text-center">
 								<h5 class="card-title">에펠탑</h5>
 								<p class="card-text">명실상부 파리의 아이콘</p>
-								<a href="#" class="btn btn-success">ㄱㄱㄱㄱ</a>
+								<a href="paris?Type=6" class="btn btn-success">ㄱㄱㄱㄱ</a>
 							</div>
 						</div>
 					</div>
@@ -272,7 +266,7 @@ city.jsp이에여^~^<br>
 			
 			</div>
 	</div>
-	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	
 	<div class="container">
 
 		<ul class="nav nav-tabs" id="myTab" role="tablist">

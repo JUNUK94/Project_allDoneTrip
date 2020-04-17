@@ -47,6 +47,9 @@
 
 			<c:set var="pageNum_Home" value="${pageNum_Home}" />
 			<c:choose>
+				<c:when test="${pageNum_Home eq null}">
+					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
+				</c:when>
 				<c:when test="${pageNum_Home eq '1'}">
 					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
 				</c:when>
@@ -62,8 +65,16 @@
 				<c:when test="${pageNum_Home eq '5'}">
 					<jsp:include page="city_plan.jsp" flush="false" />
 				</c:when>
-
-
+				<c:when test="${pageNum_Home eq '6'}">
+					<jsp:include page="city_detail.jsp" flush="false" />
+				</c:when>
+				<c:when test="${pageNum_Home eq '11'}">
+					<jsp:include page="city_detail.jsp" flush="false" />
+				</c:when>
+				<c:when test="${pageNum_Home eq '15'}">
+					<jsp:include page="city_detail.jsp" flush="false" />
+				</c:when>
+				
 			</c:choose>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%@ page session="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +18,7 @@
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -26,200 +27,64 @@
 </head>
 
 <body>
-city_place.jsp<br>
+<strong>명소</strong>
 
 	<div class="container">
 
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item">
-			<a class="nav-link active" id="home-tab"
-					data-toggle="tab" href="#randmark" role="tab" aria-controls="randmark" aria-selected="true">랜드마크</a></li>
+		<form id="pageMoveForm" action="" method="get">
+			<input id="detail" type="hidden" name="Type" value="6">
+		</form>
+
+		<script>
+			function showDetailInfo(cityNo, spotNo){
+				location.href = "/trip/city/paris?Type="+ cityNo + "_"+ spotNo;
+			}
+		
+		</script>
+
+		<div class="tab-content" id="myTabContent" >
+			
+
+			<div class="d-flex flex-wrap justify-content-between tab-pane fade show active"  id="randmark" role="tabpanel" aria-labelledby="randmark-tab">
+				<c:forEach  var="list" items="${list}" varStatus="status">	
+					<c:if test="${!status.last}">
+						<div id="spot_List${status.index}" class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
+										 onclick="showDetailInfo(${list.city_No},${list.spot_No})">
+							<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+							<span>${list.spot_Name}</span>
+						</div>
+					</c:if>
+					<c:if test="${status.last}">
+						<c:if test="${(status.index % 3) == 0}">
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+								<span>${list.spot_Name} ${status.end}</span>
+							</div>
+						</c:if>
 					
-			<li class="nav-item">
-				<a class="nav-link" id="profile-tab" 
-					data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">역사 유적지</a></li>
+						<c:if test="${(status.index % 3) == 1}">
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+								<span>${list.spot_Name} ${status.end}</span>
+							</div>
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+							</div>
+							</div>
+						</c:if>
 					
-			<li class="nav-item">
-				<a class="nav-link" id="charch-tab" 
-					data-toggle="tab" href="#charch" role="tab" aria-controls="charch" aria-selected="false">성당/교회</a></li>
-					
-			<li class="nav-item">
-				<a class="nav-link" id="concert-tab" 
-					data-toggle="tab" href="#concert" role="tab" aria-controls="concert" aria-selected="false">공연장</a></li>
-		</ul>
-		
-		
-		
-		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" id="randmark" role="tabpanel" aria-labelledby="randmark-tab">랜드마큭ㄱㄱ
-			
-			<div class="row">
-			
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>
-
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>
-				
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>		
+						<c:if test="${(status.index % 3) == 2}">
+							<div class="d-flex flex-column bg-warning" style="width:30%; margin-bottom: 20px;">
+								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+								<span>${list.spot_Name} ${status.end}</span>
+							</div>
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+							</div>
+						</c:if>
+					</c:if>
+				</c:forEach>
 			</div>
-    
-			<div class="row">
-			
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>
 
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>
-				
-				<div class="col-md cheese">
-					<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-					<p><code>class="img-responsive"</code></p>
-				</div>		
-			</div>
-			
-			
-			</div>
-				
-			<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">유적ㅈ긱ㄱㄱ
-			
- <div class="container">
-      <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-        <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-      
-    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			</div>
-			
-			<div class="tab-pane fade" id="charch" role="charch" aria-labelledby="charch-tab">아멘...
-			
- <div class="container">
-      <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-        <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-      
-    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			
-			</div>
-			
-			<div class="tab-pane fade" id="concert" role="tabpanel" aria-labelledby="concert-tab">대대댄싱뮤직
-			
-			
- <div class="container">
-      <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-        <div class="row">
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-		<div class="col-md cheese">
-			<p><code>class="img-responsive"</code></p>
-			<p><img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"></p>
-		</div>
-		
-      </div>
-      
-    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			
-			</div>
 		</div>
 	</div>
 
