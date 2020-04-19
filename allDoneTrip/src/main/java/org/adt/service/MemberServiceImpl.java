@@ -68,7 +68,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String pwSearch(String email, int phone_Num) {
 		// TODO Auto-generated method stub
-		String searchPassword = mMapper.idSearch(email, phone_Num);
+		String searchPassword = mMapper.pwSearch(email, phone_Num);
 		
 		return searchPassword;
 	}

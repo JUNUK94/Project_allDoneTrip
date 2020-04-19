@@ -1,10 +1,5 @@
 package org.adt.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +36,7 @@ public class LoginController {
 	@Autowired
 	private MemberMapper mMapper;
 
+	
 	@GetMapping("/loginMain")
 	public void loginMain() {
 
@@ -59,7 +54,7 @@ public class LoginController {
 
 	@GetMapping("/search")
 	public void search() {
-
+		
 	}
 	
 	@PostMapping("/idSearch")
@@ -87,7 +82,7 @@ public class LoginController {
 		member.setPhone_Num(phone_Num);
 		log.info(member.getEmail());
 		
-		String searchResult = mService.idSearch(member.getEmail(), member.getPhone_Num());
+		String searchResult = mService.pwSearch(member.getEmail(), member.getPhone_Num());
 		String msg1 = "비밀번호는 ";
 		String msg2 = "입니다. ";
 		log.info("searchResult = " + searchResult);
