@@ -46,7 +46,9 @@
 		    	<br>
 				<br>
 				<br>
+		<a href="${naver_url}">
 	    		<button type="button" class="btn btn-success" id="naverSignUp">네이버로 회원가입</button>
+	    </a>
 		    	<br>
 				<br>
 				<br>
