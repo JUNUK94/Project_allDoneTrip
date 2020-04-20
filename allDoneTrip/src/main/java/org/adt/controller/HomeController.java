@@ -36,4 +36,39 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/ex/about")
+	public void about() {
+		
+	}
+	
+	@RequestMapping("/ex/blog")
+	public void blog() {
+		
+	}
+	
+	@RequestMapping("/ex/contact")
+	public void contact() {
+		
+	}
+	@RequestMapping("/ex/elements")
+	public void elements() {
+		
+	}
+	@RequestMapping("/ex/packages")
+	public void packages() {
+		
+	}
+	@RequestMapping("/ex/single-blog")
+	public void single_blog() {
+		
+	}
+	@RequestMapping("/ex/top_place")
+	public void top_place() {
+		
+	}
+	@RequestMapping("/ex/tour_details")
+	public void tour_details() {
+		
+	}
+	
 }

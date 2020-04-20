@@ -87,7 +87,7 @@ public class LoginController {
 		member.setPhone_Num(phone_Num);
 		log.info(member.getEmail());
 		
-		String searchResult = mService.idSearch(member.getEmail(), member.getPhone_Num());
+		String searchResult = mService.pwSearch(member.getEmail(), member.getPhone_Num());
 		String msg1 = "비밀번호는 ";
 		String msg2 = "입니다. ";
 		log.info("searchResult = " + searchResult);
