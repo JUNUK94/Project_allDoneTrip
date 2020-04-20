@@ -61,10 +61,10 @@ a {
 					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
 				</c:when>
 				<c:when test="${pageNum_Home eq '2'}">
-					<jsp:include page="city_list.jsp" flush="false" />	<!-- 기본정보 --> -->	
+					<jsp:include page="city_list.jsp" flush="false" />	<!-- 기본정보 -->	
 				</c:when>
 				<c:when test="${pageNum_Home eq '3'}">	
-					<jsp:include page="city_map.jsp" flush="false" /><!-- 지도보기 -->
+					<jsp:include page="write.jsp" flush="false" /><!-- 지도보기 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '4'}">
 					<jsp:include page="city_place.jsp" flush="false" /><!-- 명소 -->
@@ -82,13 +82,22 @@ a {
 					<jsp:include page="city_plan.jsp" flush="false" /><!-- 추천플래너 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '10'}">
-					<jsp:include page="city_detail.jsp" flush="false" />
+					<jsp:include page="city_detail.jsp" flush="false" /><!-- 추천플래너 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '11'}">
-					<jsp:include page="city_detail.jsp" flush="false" />
+					<jsp:include page="city_detailfood.jsp" flush="false" /><!-- 추천플래너 -->
 				</c:when>
-				<c:when test="${pageNum_Home eq '15'}">
-					<jsp:include page="city_detail.jsp" flush="false" />
+				<c:when test="${pageNum_Home eq '22'}">
+					<jsp:include page="city_list_p1.jsp" flush="false" /><!-- 추천플래너 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '23'}">
+					<jsp:include page="city_list_p2.jsp" flush="false" /><!-- 추천플래너 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '24'}">
+					<jsp:include page="city_list_p3.jsp" flush="false" /><!-- 추천플래너 -->
+				</c:when>
+				<c:when test="${pageNum_Home eq '25'}">
+					<jsp:include page="city_list_p4.jsp" flush="false" /><!-- 추천플래너 -->
 				</c:when>
 				
 			</c:choose>

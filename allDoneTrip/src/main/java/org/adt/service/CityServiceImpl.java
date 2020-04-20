@@ -42,8 +42,22 @@ public class CityServiceImpl implements CityService{
 	@Override
 	public List<CityVO> list() {
 		// TODO Auto-generated method stub
-		System.out.println("listlistlist");
+		System.out.println("list get..");
 		return cmapper.read(1);
+	}
+
+	@Override
+	public List<CityVO> foodlist() {
+		// TODO Auto-generated method stub
+		System.out.println("food list get...");
+		return cmapper.foodlist();
+	}
+
+	@Override
+	public List<CityVO> shoplist() {
+		// TODO Auto-generated method stub
+		System.out.println("shop list get..");
+		return cmapper.shoplist();
 	}
 
 	//목록

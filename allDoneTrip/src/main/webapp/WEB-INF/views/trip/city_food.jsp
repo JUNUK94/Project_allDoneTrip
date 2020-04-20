@@ -1,51 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%@ page session="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<script>
+			function showDetailInfo(cityNo, resNO){
+				location.href = "/trip/city/paris?Type="+ cityNo + "F"+ resNO;
+			}
+		
+	</script>
 </head>
 <body>
 <strong>city_food</strong>
 
+
 	<div class="container">
-
-		<form id="pageMoveForm" action="" method="get">
-			<input id="detail" type="hidden" name="Type" value="6">
-		</form>
-
-		<script>
-			function showDetailInfo(cityNo, spotNo){
-				location.href = "/trip/city/paris?Type="+ cityNo + "_"+ spotNo;
-			}
-		
-		</script>
 
 		<div class="tab-content" id="myTabContent" >
 			
 		<!-- 페이지3개씩 뿌림 -->
-			<div class="d-flex flex-wrap justify-content-between tab-pane fade show active"  id="randmark" role="tabpanel" aria-labelledby="randmark-tab">
-				<c:forEach  var="list" items="${list}" varStatus="status">	
+			<div class="d-flex flex-wrap justify-content-between tab-pane fade show active" >
+				<c:forEach  var="res" items="${res}" varStatus="status">	
 					<c:if test="${!status.last}">
 						<div id="spot_List${status.index}" class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
-										 onclick ="showDetailInfo(${list.city_No},${list.spot_No})">
+										 onclick ="showDetailInfo(${res.city_No},${res.res_No})">
 							<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-							<span>${list.spot_Name}</span>
+							<span>${res.res_Name}</span>
 						</div>
 					</c:if>
 					<c:if test="${status.last}">
 						<c:if test="${(status.index % 3) == 0}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${list.spot_Name} ${status.end}</span>
+								<span>${res.res_Name} ${status.end}</span>
 							</div>
 						</c:if>
 					
 						<c:if test="${(status.index % 3) == 1}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${list.spot_Name} ${status.end}</span>
+								<span>${res.res_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
@@ -56,7 +52,7 @@
 						<c:if test="${(status.index % 3) == 2}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${list.spot_Name} ${status.end}</span>
+								<span>${res.res_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							</div>

@@ -20,5 +20,19 @@
 		]]>
 	</select>
 	
+		<select id = "foodlist" resultType = "org.adt.domain.CityVO">
+        <![CDATA[
+		  select *
+		  from restaurant
+            
+		]]>
+	</select>
 
+			<select id = "shoplist" resultType = "org.adt.domain.CityVO">
+        <![CDATA[
+		  select *
+		  from shop
+            
+		]]>
+	</select>
 </mapper>

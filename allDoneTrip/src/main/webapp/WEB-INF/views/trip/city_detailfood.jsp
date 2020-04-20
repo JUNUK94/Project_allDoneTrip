@@ -12,25 +12,24 @@
 <body>
 	<%
 		int TY_CITY_NO = 0;
-		int TY_SPOT_NO = 1;
+		int TY_RES_NO = 1;
 		String Type = (String)request.getParameter("Type");
 		System.out.println("Type : " + Type);
-		String[] SplitType = Type.split("_");
+		String[] SplitType = Type.split("F");
 		
 		int city_no = Integer.parseInt(SplitType[TY_CITY_NO]);
-		int spot_no = Integer.parseInt(SplitType[TY_SPOT_NO]);
+		int res_no = Integer.parseInt(SplitType[TY_RES_NO]);
 		
-		System.out.println("############################## start,,,, city_no : " + city_no + " spot_no : " + spot_no);
+		//System.out.println("############################## start,,,, city_no : " + city_no + " spot_no : " + spot_no);
 		CityMappingData mCityMappingData = CityMappingData.getInstance();
-		CityVO mCityVO = mCityMappingData.getCityData(city_no,spot_no);
+		CityVO mCityVO = mCityMappingData.getFOODData(city_no, res_no);
 		
 		System.out.println("############################## end,,,,");
 		String src1 = "../../resources/images/"+ Type+ ".jpg";
-		
 	%>
-	<h1><%=mCityVO.spot_Name %></h1>
-	<h1><%=mCityVO.t_Content %></h1>
-	<h1>전화번호 : <%=mCityVO.t_tel %></h1>
+	<h1><%=mCityVO.res_Name %></h1>
+	<h1><%=mCityVO.res_Content %></h1>
+	저나번호 : <%=mCityVO.res_Tel %>
 	<img alt="" src="<%=src1 %>">
 	<!--
 	<c:forEach  var="list" items="${list}" varStatus="status">	
