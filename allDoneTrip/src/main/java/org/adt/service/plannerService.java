@@ -36,5 +36,8 @@ public interface plannerService {
 	
 	// 플래너 삭제
 	public void delete(Long plan_No);
+	
+	// 로그인한 유저의 플래너 리스트 가져오기
+	public List<PlannerVO> getUsersPlanner(String email);
 
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.PlannerVO;
+import org.adt.domain.ThumbnailVO;
 import org.adt.service.plannerReplyService;
 import org.adt.service.plannerService;
 
@@ -40,7 +42,30 @@ public class PlannerController {
 	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
-	public void write(Model model) {
+	public void write(PlannerVO pvo, Model model, HttpSession session) {
+		log.info("write");
+		
+		String email = (String)session.getAttribute("email");
+		if(email != null) {
+			model.addAttribute("list", service.getUsersPlanner(email));
+		}
+		if(pvo.getPlan_No() != null) {
+			pvo = service.getPlanner(pvo.getPlan_No()).get(0);
+			log.info(pvo.getTrip_Period());
+			String[] day = pvo.getTrip_Period().split("-");
+		
+			pvo.setStartDay(day[0].replace(".", "-"));
+			pvo.setEndDay(day[1].replace(".", "-"));
+			log.info(pvo);
+			
+			model.addAttribute("data", pvo);
+		}
+	}
+	
+	
+	// 플래너 작성 페이지로 이동
+	@GetMapping("/test")
+	public void test(Model model) {
 		log.info("write");
 		
 		//model.addAttribute("width", "100%");
@@ -91,6 +116,7 @@ public class PlannerController {
 	public ResponseEntity<HashMap<String, PlannerVO>> savePlanner(PlannerVO pvo) {
 															
 		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		ThumbnailVO tvo = new ThumbnailVO();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 		Date date = new Date();
@@ -107,6 +133,22 @@ public class PlannerController {
 		
 		pvo.setUpdateDate(sysdate);
 		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	
+	
+	// 플래너 정보 가져오기
+	@PostMapping("/getPlannerInfo")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, PlannerVO>> getPlannerInfo(PlannerVO pvo) {
+															
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		log.info(pvo);
+		Long plan_No = pvo.getPlan_No();
+		map.put("data", service.getPlanner(plan_No).get(0));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
