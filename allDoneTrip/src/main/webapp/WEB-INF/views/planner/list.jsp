@@ -118,13 +118,20 @@
 							<tr>
 								<td>${pvo.plan_No}</td>
 								<td>${pvo.plan_Like}</td>
+								<td><img src='${pvo.p_Thumbnail}'></td>
 								<td>
 									<a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a>
-									${pvo.city_Name}
+									<br>
+									<hr>
+									<br>
+									${pvo.city_Name}<br>
+									${pvo.trip_Period}
 								</td>
 								<td>${pvo.nick_Name}</td>
 								<td>${pvo.click_Num}</td>
-								<td><button>다운로드</button></td>
+								<td>
+									<button class="btn btn-outline-primary">다운로드</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

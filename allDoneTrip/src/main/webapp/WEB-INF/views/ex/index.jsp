@@ -42,14 +42,7 @@
         <div class="sub_menu">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-12 col-md-6">
-                        <div class="sub_menu_right_content">
-                            <span>Top destinations</span>
-                            <a href="#">Asia</a>
-                            <a href="#">Europe</a>
-                            <a href="#">America</a>
-                        </div>
-                    </div>
+                    <div class="col-lg-6 col-sm-12 col-md-6"></div>
                     <div class="col-lg-6 col-sm-12 col-md-6">
                         <div class="sub_menu_social_icon">
                             <a href="#"><i class="flaticon-facebook"></i></a>
@@ -78,23 +71,20 @@
                                 id="navbarSupportedContent">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="index.html">Home</a>
+                                        <a class="nav-link" href="/ex/index">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="about.html">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="packages.html">packages</a>
+                                        <a class="nav-link" href="/ex/about">About</a>
                                     </li>
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        <a class="nav-link dropdown-toggle" href="/planner/list" id="navbarDropdown"
                                             role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
-                                            Blog
+                                            planner
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="blog.html">Blog</a>
-                                            <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                            <a class="dropdown-item" href="/planner/write">나만의 플래너 작성하기</a>
+                                            <a class="dropdown-item" href="/planner/list">모두의 플래너</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">

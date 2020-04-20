@@ -116,7 +116,6 @@ public class PlannerController {
 	public ResponseEntity<HashMap<String, PlannerVO>> savePlanner(PlannerVO pvo) {
 															
 		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
-		ThumbnailVO tvo = new ThumbnailVO();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 		Date date = new Date();
@@ -131,6 +130,32 @@ public class PlannerController {
 			service.update(pvo);
 		}
 		
+		pvo.setUpdateDate(sysdate);
+		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	
+	
+	// 플래너 저장
+	@PostMapping("/register")
+	public  ResponseEntity<HashMap<String, PlannerVO>> registePlanner(PlannerVO pvo) {
+				
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		Date date = new Date();
+		String sysdate = sdf.format(date);
+		pvo.setStatus(1);
+		log.info(pvo);
+		
+		//플래너 번호가 없으면 DB에 insert
+		if(pvo.getPlan_No() == null) {
+			service.save(pvo);
+		}else {
+			service.update(pvo);
+		}
 		pvo.setUpdateDate(sysdate);
 		map.put("list", pvo);
 		

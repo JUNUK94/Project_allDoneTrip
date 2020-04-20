@@ -19,8 +19,9 @@ public class PlannerVO {
 	  private String trip_Period;
 	  private Long plan_Like;
 	  private Long click_Num;
+	  private int status;
 	  
-	  private String thumbnail;
+	  private String p_Thumbnail;
 	  private String regdate;
 	  private String updateDate;
 	  
