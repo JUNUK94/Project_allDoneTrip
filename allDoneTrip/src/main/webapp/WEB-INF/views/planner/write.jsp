@@ -108,6 +108,25 @@
 <!--====================================================================================-->
 </head>
 <body>
+
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>플래너 작성</h2>
+                            <p>plan your trip</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+
 		<!-- 상단 설정 정보 입력 영역 -->
 		<div id="button_area" class="d-flex flex-row p-3 bg-light justify-content-end align-items-center">
 			<div>

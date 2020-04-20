@@ -94,10 +94,10 @@ public class UploadController {
 			
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-			String serverFolder = "C:\\upload";
-			String webFolder = "C:\\upload";
-//			String serverFolder = "/var/lib/tomcat8/webapps";
-//			String webFolder = "https://alldonetrip.shop/resources";
+//			String serverFolder = "C:\\upload";
+//			String webFolder = "C:\\upload";
+			String serverFolder = "/var/lib/tomcat8/webapps";
+			String webFolder = "https://alldonetrip.shop/resources";
 			String nonUser = "/img/nonUser/drag/";
 			String user = "/img/user/drag/";
 			
@@ -157,10 +157,10 @@ public class UploadController {
 				return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
 			   }
 					
-			String serverFolder = "C:\\upload\\img\\user\\thumbnail\\";
-			String webFolder = "C:\\upload\\img\\user\\thumbnail\\";
-//			String serverFolder = "/var/lib/tomcat8/webapps/img/user/thumbnail/";
-//			String webFolder = "https://alldonetrip.shop/resources/img/user/thumbnail/";
+//			String serverFolder = "C:\\upload\\img\\user\\thumbnail\\";
+//			String webFolder = "C:\\upload\\img\\user\\thumbnail\\";
+			String serverFolder = "/var/lib/tomcat8/webapps/img/user/thumbnail/";
+			String webFolder = "https://alldonetrip.shop/resources/img/user/thumbnail/";
 			
 			for(MultipartFile multipartFile : pData) {	
 				try{
