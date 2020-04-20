@@ -27,11 +27,12 @@
 				
 		    	<div class="col border text-center middle">
 			    	<div class="container-sm mt-4">
-			    		<button type="button" class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
+			    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c830142e73bf6dbb2bac8a21583ca959&redirect_uri=http://localhost:8080/login/kakaoLogin&response_type=code">
+			    		<button type="button" class="btn btn-warning" id="kakaoLogin">카카오 로그인</button></a>
 				   	</div>
 				    	
 			    	<div class="container-sm mt-4">
-			    		<button type="button" class="btn btn-success" id="naverLogin">네이버 로그인</button>
+			    		<a href="<%-- ${naver_url} --%>"><button type="button" class="btn btn-success" id="naverLogin">네이버 로그인</button></a>
 			   		</div>
 		    	</div>
 			</div>
@@ -53,8 +54,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
-	Kakao.init('9d97ada42431e424c4f3d1f9dc6b09af');
-	console.log(Kakao.isInitialized());
+		Kakao.init('c830142e73bf6dbb2bac8a21583ca959');
+		console.log(Kakao.isInitialized());
 	</script>
 	<script src="/resources/js/login/loginMain.js"></script>
 </html>

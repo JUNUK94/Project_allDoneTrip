@@ -23,6 +23,12 @@ public class Criteria {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
+	
+	public Criteria(int pageNum, int amount, int b_Type) {
+		this.pageNum = pageNum;
+		this.amount = amount;
+		this.b_Type = b_Type;
+	}
 
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");

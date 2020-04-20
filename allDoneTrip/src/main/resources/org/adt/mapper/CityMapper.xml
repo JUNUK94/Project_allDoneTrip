@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.CityMapper">
+
+	<select id="getList" resultType="org.adt.domain.CityVO">
+		 <![CDATA[
+		   select * from City where CITY_NO > 0
+		  	]]>
+	</select>
+	
+    <!-- 파리관광지조회 -->
+	<select id = "read" resultType = "org.adt.domain.CityVO">
+        <![CDATA[
+		  select a.city_no, a.city_name, a.country_name,  a.conti_name, b.spot_no, b.spot_name, b.t_tel, b.address,b.t_explan, b.t_content
+			from city a, spot b
+			where a.city_no=b.city_no
+			and a.city_no=#{city_No}
+            
+		]]>
+	</select>
+	
+
+</mapper>
