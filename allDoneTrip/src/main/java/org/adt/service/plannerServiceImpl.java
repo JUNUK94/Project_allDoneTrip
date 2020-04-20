@@ -117,6 +117,12 @@ public class plannerServiceImpl implements plannerService {
 	}
 
 
+	@Override
+	public List<PlannerVO> getUsersPlanner(String email) {
+		return mapper.getUsersPlanner(email);
+	}
+
+
 
 
 

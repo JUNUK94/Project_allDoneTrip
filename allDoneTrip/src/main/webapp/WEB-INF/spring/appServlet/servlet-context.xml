@@ -28,6 +28,9 @@
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="org.adt.controller.NaverLoginBO" />
+
 	<context:component-scan base-package="org.adt.controller" />
 	
 	<security:global-method-security

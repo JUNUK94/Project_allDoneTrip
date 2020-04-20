@@ -136,18 +136,66 @@
 /*===========================================================================================*/
 	//회원가입 버튼 클릭시 회원가입 페이지 이동
 	$("#join").on("click", function(){
-		var form = $("#signUpForm");
-		form.attr("action","/login/insertMember");
-		form.attr("method","post");
-		form.submit();
+		var memeberInfo = $("form[id=signUpForm]").serialize();
+		
+		$.ajax({
+			url: '/login/insertMember',
+			data: memeberInfo,
+			type: 'post',
+			datatype: 'json',
+			success: function(message){
+				if(message != "가입 되었습니다."){
+					alert(message);
+					$(location).attr("href","login/signUp/allDoneSignUp");
+				}else{
+					alert(message);
+					$(location).attr("href","login/loginMain");
+				}
+			}	
+		});
 	});
 	
 	
 /*===========================================================================================*/	
 	
+	//email 보내기 이벤트
+	$("#issued").on("click",function(e){
+		var email = $("#email").val();
+		
+		$.ajax({
+			url: '/login/mailSending',
+			data: {email:email},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				
+				alert("메일이 발송되었습니다.");
+			}	
+		}); // end of ajax
+	});
 	
+/*===========================================================================================*/		
 	
-	
+	//email인증 확인 이벤트
+	$("#mailCheck").on("click",function(e){
+		var certNum = $("#certNum").val();
+		
+		$.ajax({
+			url: '/login/mailCheck',
+			data: {certNum : certNum},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				console.log(message);
+				if(message != "성공"){
+					alert("번호를 다시 확인해주세요");
+				}else{
+					alert("인증이 완료되었습니다.");
+				}
+				
+			}	
+		}); // end of ajax
+	});
 	
 	
 	

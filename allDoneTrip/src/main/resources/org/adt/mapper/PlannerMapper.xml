@@ -112,7 +112,7 @@
 	<!-- 플래너 정보 가져오기 -->	
 	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select 	plan_No, p_Title, nick_Name, city_Name, trip_Period, plan_Like, p_Content, click_Num 
+			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate 
 			from 	planner, city
 			where 	plan_No = #{plan_No} 
 					and planner.city_No=city.city_No 
@@ -175,6 +175,22 @@
 			where plan_No = #{plan_No}
 		]]>
 	</delete>
+	
+	
+	<!-- 해당 유저의 플래너 정보 가져오기 -->	
+	<select id="getUsersPlanner" resultType="org.adt.domain.PlannerVO">
+		<![CDATA[
+			select 	plan_No, p_Title, nick_Name, city_No, trip_Period, plan_Like, p_Content, updateDate
+			from 	planner
+			where 	email = #{email} 
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
 
 
 

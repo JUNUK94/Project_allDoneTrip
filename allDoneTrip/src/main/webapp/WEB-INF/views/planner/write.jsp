@@ -7,8 +7,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>플래너 작성</title>
 	<%	session.setAttribute("email", "silverdue@gmail.com");
 		session.setAttribute("nick_Name", "창창");
@@ -16,7 +16,6 @@
 	%>
 	
 	<style>
-	
 		#document_area {
 			height: 100vh;
 		}
@@ -49,7 +48,8 @@
 			/*padding-top: 100%;*/
 			border: solid 1px gray;
 		}
-
+		
+		
 		div.hotplace_info:hover,
 		div.restaurant_info:hover,
 		div.shopping_info:hover,
@@ -74,51 +74,13 @@
 
 	</style>
 	
-<!--=================================마우스로 지도영역 너비 조절=====================================-->
-	<script type="text/javascript">
-		var startpos = 0;
-		var diffpos = 0;
-		var range = 50;
-		var isEnable = false;
-		
-		function on_mouse_down(e) {
-			startpos = event.clientX + diffpos;
-			isEnable = true;
-			return false;
-		}
-		
-		function on_mouse_up(e) {
-			isEnable = false;
-			return false;
-		}
-		
-		function on_mouse_move(e) {
-			if (isEnable) {
-				pos = event.clientX;
-		  		diffpos = startpos-pos;
-		
-		  		var width = window.innerWidth/2;
-		
-				if (diffpos > -(width-range) && diffpos < (width-range)) {
-		   			document.getElementById("editor_area").style.width = width - diffpos + "%";
-		   			document.getElementById("map_area").style.width = width + diffpos + "%"; 
-		  		}
-			 }
-		}
-		
-		function mouseInit(e){
-			document.getElementById("map_area_resize").onmousedown = on_mouse_down;
-			document.onmouseup = on_mouse_up;
-			document.onmousemove = on_mouse_move;
-		}
-		
-	</script>
-
 <!--=====================================jquery=========================================-->
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" 
+			integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+	
 <!--================================Ajax Cross Origin===================================-->
 
 	<script src="${contextPath}/resources/js/ajaxCrossOrigin/jquery.ajax-cross-origin.min.js"></script>
@@ -127,6 +89,13 @@
 
 	<script src="${contextPath}/resources/CKEditor/ckeditor/ckeditor.js"></script>
 
+
+<!--====================================guillotine========================================-->
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="${contextPath}/resources/crop/cropbox.js"></script>
+	<link rel="stylesheet" href="${contextPath}/resources/crop/style.css">
+	
 <!--===================================bootstrap========================================-->
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -138,7 +107,41 @@
 
 <!--====================================================================================-->
 </head>
-<body onload="mouseInit()">
+<body>
+		<!-- 상단 설정 정보 입력 영역 -->
+		<div id="button_area" class="d-flex flex-row p-3 bg-light justify-content-end align-items-center">
+			<div>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					열기
+				</button>
+				<div class="dropdown-menu">
+					<c:if test="${list != null}">
+						<c:forEach items="${list}" var="pvo">
+							<div class="dropdown-item" onclick="getPlannerInfo(${pvo.plan_No})" style="cursor: pointer">
+								<div class="small font-weight-light font-italic">
+								${pvo.updateDate}
+								</div>
+								${pvo.p_Title}
+							</div>
+							<hr>
+						</c:forEach>
+					</c:if>
+				</div>
+				<button type="button" id="newPlanner" class="btn btn-primary">
+					새글쓰기
+				</button>
+				
+			</div>
+		
+			<button type="button" id="save" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="나만이 확인할 수 있도록 저장합니다. 저장한 플래너는 마이페이지에서 확인하실 수 있습니다.">
+					저장
+			</button>
+			&nbsp;
+			<button type="button" id="register" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="플래너 게시판에 등록하여 모두에게 공유합니다.">
+				게시
+			</button>
+		</div>
+		
 		<!-- 상단 플래너 정보 입력 영역 -->
 		<div id="title_area" class="d-flex flex-row flex-wrap justify-content-start align-items-center">
 			<div class="input-group p-3" style="width:25%">
@@ -147,7 +150,7 @@
 				</div>
 				<input id="plannerTitle" name="plannerTitle" type="text" class="form-control">
 			</div>
-	 		<div class="input-group p-3" style="width:15%">
+	 		<div class="input-group p-3" style="width:20%">
 				<div class="input-group-prepend">
 					<label class="input-group-text">대표 여행지</label>
 				</div>
@@ -177,15 +180,13 @@
 					<label class="input-group-text">여행종료</label>
 				</div>
 			</div>
-			<div class="d-flex justify-content-start ml-auto p-3" style="width:20%">
-				<button id="save" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="나만이 확인할 수 있도록 저장합니다. 저장한 플래너는 마이페이지에서 확인하실 수 있습니다.">
-					저장
-				</button>
-				<button id="register" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="플래너 게시판에 등록하여 모두에게 공유합니다.">
-					등록
+			<div class="input-group p-3" style="width:15%">
+				<button id="openModal" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="modal" data-target="#thumbnailModal">
+					썸네일
 				</button>
 			</div>
 		</div> <!-- end of 상단 플래너 정보 입력바 -->
+	 
 	 
 	 	
 	 	<!-- 문서작성 영역 전체 -->
@@ -357,23 +358,14 @@
 	
 			
 			<!-- 에디터 영역 -->
-	 		<div id="editor_area" class="d-flex flex-column order-2">
+	 		<div id="editor_area" class="d-flex flex-column justify-content-center align-self-start order-2">
 	 			<div class="col_c" style="margin-bottom: 30px">
 					<div class="input-group">
 						<textarea id="p_Content" class="form-control"></textarea>
 					</div>
 				</div>
-				
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroupFileAddon01">썸네일</span>
-					</div>
-					<div class="custom-file">
-						&nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					</div>
-				</div>
 	 		</div> <!-- end of 에디터 영역 -->
-	
+			
 	
 			<!-- 지도 영역 사이즈 조절바 -->
 			<div id="map_area_resize" class="d-flex order-3" style="background-color: #E1E1E1;">
@@ -435,37 +427,231 @@
 	
 	
 	
+	<!-- 썸네일 생성 Modal -->
+	<div id="thumbnailModal" class="modal fade">
+		<div class="modal-dialog modal-lg ">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">썸네일 첨부</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			
+				<!-- Modal body -->
+				<div id="cropArea" class="modal-body d-flex flex-row">
+					<div class="imageBox" style="width: 50%">
+				        <div class="thumbBox"></div>
+				        <div class="spinner" style="display: none">Loading...</div>
+					    <div class="btn-group justify-content-center">
+							<input type="button" id="btnZoomIn" 	class="btn btn-primary"	value="+">
+							<input type="button" id="btnZoomOut" 	class="btn btn-primary"	value="-">
+							<input type="button" id="btnCrop" 		class="btn btn-primary"	value="Crop">
+						</div>
+				    </div>
+				    <div class="action d-flex flex-column justify-content-center" style="width:50%">
+					    <div class="cropped d-flex justify-content-center" style="height: 250px">
+					    	<!-- 크롭된 이미지 보여주는 곳 -->
+					    </div>
+					    <div class="d-flex flex-column p-3 justify-content-center" style="width:100%">
+					        <label class="btn btn-block btn-outline-primary" for="thumbnailFile">파일 선택</label>
+							<input type="file" id="thumbnailFile" class="form-control-file" accept="image/*" style="display: none">
+					        <button type="button" id="submit_Thumbnail" class="btn btn-primary" style="margin-bottom: 8px">등록</button>
+					    	<button type="button" id="cancle_Thumbnail" class="btn btn-secondary">취소</button>
+				        </div>
+				    </div>
+				    <input type="hidden" id="ThumbnailName" name="ThumbnailName" value="">
+				    <input type="hidden" id="pData" 		name="pData" value="">
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- 불러온 정보 셋팅을 위한 input 창 -->
 	<input type="hidden" name="email" id="email" value="${email}"/>
 	<input type="hidden" name="nick_Name" id="nick_Name" value="${nick_Name}"/>
-	<input type="hidden" name="plan_No" id="plan_No" value=""/>
-	
+	<c:if test="${data != null}">
+		<input type="hidden" name="plan_No" id="plan_No" value="${data.plan_No}"/>
+		<input type="hidden" name="title" value="${data.p_Title}"/>
+		<input type="hidden" name="city_Number" value="${data.city_No}"/>
+		<input type="hidden" name="day1" value="${data.startDay}"/>
+		<input type="hidden" name="day2" value="${data.endDay}"/>
+		<input type="hidden" name="content" value="${data.p_Content}"/>
+	</c:if>
+	<c:if test="${data == null}">
+		<input type="hidden" name="plan_No" id="plan_No" value=""/>
+	</c:if>
 </body>
+
 <!--=================================googleMap API======================================-->
 
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
-<script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
-<<<<<<< HEAD
+	<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
+	<script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
 
-=======
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyDvMy2JnsiABcSc-3YCYa8BvRkhuDSnDrw&libraries=places"></script>
->>>>>>> stash
 <!--====================================================================================-->
 
-<script src="${contextPath}/resources/js/planner/plannerWrite.js"></script>
-<script src="${contextPath}/resources/js/planner/plannerCityInfo.js"></script>
-<script src="${contextPath}/resources/js/planner/calculator.js"></script>
-<script src="${contextPath}/resources/js/planner/exchange.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerWrite.js"></script>
+	<script src="${contextPath}/resources/js/planner/plannerCityInfo.js"></script>
+	<script src="${contextPath}/resources/js/planner/calculator.js"></script>
+	<script src="${contextPath}/resources/js/planner/exchange.js"></script>
 
 <!--=================================CKeditor 설정=======================================-->
 
-<script>
-	CKEDITOR.replace( 'p_Content', {
-		height: 1000,
-		width: '100%',
-		filebrowserImageUploadUrl : '/upload/imageInput',	//이미지 업로드 시 저장경로 
-		imageUploadUrl : '/upload/dragImage'		//드래그&드롭 시 이미지저장 경로
-	} );
-</script>
+	<script>
+		CKEDITOR.replace( 'p_Content', {
+			height: 500,
+			width: '100%',
+			filebrowserImageUploadUrl : '/upload/imageInput',	//이미지 업로드 시 저장경로 
+			imageUploadUrl : '/upload/dragImage'				//드래그&드롭 시 이미지저장 경로
+		} );
+	</script>
 
+<!--=================================썸네일 crop / 마우스로 지도영역 너비 조절=====================================-->
+	<script>
+	    $(document).ready(function() {
+	    	
+	    	if($("input[name='plan_No']").val()){
+	    		console.log("here");
+	    		document.getElementById("plan_No").value = $("#plan_No").val();
+	    		document.getElementById("plannerTitle").value = $("input[name='title']").val();
+	    		document.getElementById("mainCity").value = $("input[name='city_Number']").val();
+	    		document.getElementById("startDay").value = $("input[name='day1']").val();
+	    		document.getElementById("endDay").value = $("input[name='day2']").val();
+	    		
+	        	CKEDITOR.instances.p_Content.setData($("input[name='content']").val());
+	    	}
+	    	
+	    	
+	    	//=================================썸네일 crop=====================================
+	    	var angle = 0;        // 현재의 각도를 변수로 저장
+	    	var options = {
+							thumbBox: '.thumbBox',
+							spinner: '.spinner',
+							imgSrc: ''
+							}
+	        var cropper = $('.imageBox').cropbox(options);
+	       
+	    	$('#thumbnailFile').on('change', function(){
+	    		//원래 파일명 찾기
+	    		var ori_Path = ($(this).val()).split('\\');
+	    		var real_Name = ori_Path[ori_Path.length-1];
+	    		
+	    		//로컬이미지 byte로 변환
+	            var reader = new FileReader();
+	            reader.onload = function(e) {
+	                options.imgSrc = e.target.result;
+	                cropper = $('.imageBox').cropbox(options);
+	            }
+	            reader.readAsDataURL(this.files[0]);
+	            
+	            $('#btnZoomIn').on('click', function(){
+		            cropper.zoomIn();
+		        });
+		        
+		        $('#btnZoomOut').on('click', function(){
+		            cropper.zoomOut();
+		        });
+		        
+				$('#btnCrop').on('click', function(){
+		            var img = cropper.getDataURL();
+		            $(".cropped").empty();
+		            $(".cropped").append("<img src='"+img+"' style='border: 1px solid gray'>");
+		            $("#pData").val(img);
+		            $("#ThumbnailName").val(real_Name);
+		        });
+				
+				$('#cancle_Thumbnail').on('click', function(){
+					$(".cropped").empty();
+					$("#ThumbnailName").val("");
+					$("#pData").val("");
+				});
+				
+				$('#submit_Thumbnail').on('click', function(){
+					
+					var obj = new FormData();
+					var imgBlob = cropper.getBlob();
+					
+					console.log(imgBlob);
+
+					var request = new XMLHttpRequest();
+					request.open("POST", "/upload/thumbnail");
+					obj.append("fileName", $("#ThumbnailName").val());
+					obj.append("pData", $("#pData").val());
+					request.send(obj);
+					
+					/*
+					var obj = {
+								"fileName" : $("#ThumbnailName").val(),
+								"pData" : $("#pData").val()
+								"pData" : imgBlob
+								}
+					
+					$.ajax({
+			            url: "/upload/thumbnail",
+			            data: obj,
+			            type: 'post',
+			            dataType: 'JSON',
+			            processData : false, 
+			            contentType : false,
+			            success: function(map){
+			            	console.log("성공!!!!");
+			            },
+			            error: function(xhr){
+			            	console.log("실패", xhr); 
+			            }
+			        });
+					*/
+				});
+	        });
+	        
+	       
+			
+			//=================================마우스로 지도영역 너비 조절=====================================
+			var startpos = 0;
+			var diffpos = 0;
+			var range = 50;
+			var isEnable = false;
+			
+			function on_mouse_down(e) {
+				startpos = event.clientX + diffpos;
+				isEnable = true;
+				return false;
+			}
+			
+			function on_mouse_up(e) {
+				isEnable = false;
+				return false;
+			}
+			
+			function on_mouse_move(e) {
+				if (isEnable) {
+					pos = event.clientX;
+			  		diffpos = startpos-pos;
+			
+			  		var width = window.innerWidth/2;
+			
+					if (diffpos > -(width-range) && diffpos < (width-range)) {
+			   			document.getElementById("editor_area").style.width = width - diffpos + "%";
+			   			document.getElementById("map_area").style.width = width + diffpos + "%"; 
+			  		}
+				 }
+			}
+			
+			function mouseInit(e){
+				document.getElementById("map_area_resize").onmousedown = on_mouse_down;
+				document.onmouseup = on_mouse_up;
+				document.onmousemove = on_mouse_move;
+			}
+			
+			// 함수 실행
+			mouseInit();
+			
+		});
+	</script>
 <!--====================================================================================-->
 </html>
