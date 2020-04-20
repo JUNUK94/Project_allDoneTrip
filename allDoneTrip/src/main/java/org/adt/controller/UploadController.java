@@ -50,7 +50,7 @@ public class UploadController {
 			serverFolder = serverFolder+user;
 			webFolder = webFolder + user;
 		}
-		
+
 		//파일 업로드--------
 		for(MultipartFile multipartFile : uploadFile) {
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -86,13 +86,12 @@ public class UploadController {
 	
 	
 	//에디터에 드래그&드롭 한 이미지 서버에 저장
-		@PostMapping(value = "/dragImage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		@ResponseBody
-		public ResponseEntity<HashMap<String, Object>> dragImage(@RequestParam("upload") MultipartFile[] uploadFile, HttpSession session){
+	@PostMapping(value = "/dragImage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<HashMap<String, Object>> dragImage(@RequestParam("upload") MultipartFile[] uploadFile, HttpSession session){
+		log.info("----------------드래그&드롭 업로드 시작----------------");
 			
-			log.info("----------------드래그&드롭 업로드 시작----------------");
-			
-			HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 
 			String serverFolder = "C:\\upload";
 			String webFolder = "C:\\upload";

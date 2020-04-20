@@ -1,4 +1,31 @@
+/*===========================================================================================*/
+	//email 체크 이벤트
+	$("#email").on("keyup",function(e){
+		var email = $(this).val();
+		console.log(email);
+		
+		$.ajax({
+			url: '/login/inputCheck',
+			data: {email:email},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				console.log(message);
+				
+				var div = $("div.emailCheckStatus");
+				if(message != "사용하실 수 있는 이메일입니다."){
+					div.css("color","red");
+				} else{
+					div.css("color","#00C6ED");
+				}
+				div.html(message);
+			}	
+		}); // end of ajax
+	});
+
 	
+/*===========================================================================================*/
+	//비밀번호 채크
 	$("#pw").on("keyup",function(e){//비밀번호 8자 이상 & 문자 포함
 		
 		var password = $(this).val();
@@ -30,7 +57,9 @@
 	});
 	
 	
-	$("#gender").on("change",function () {//성별 선택하면 띄워주는 함수
+/*===========================================================================================*/
+	//성별 선택하면 띄워주는 함수
+	$("#gender").on("change",function () {
 		var genderSelect = $("div.genderSelect");
 		var obj_id = $("#gender").val();
 		genderSelect.html("<strong>"+obj_id+"</strong>");
@@ -38,12 +67,16 @@
 	});
 	
 	
-	$("#agency").on("change",function () {//통신사 선택시 얼러트
+/*===========================================================================================*/
+	//통신사 선택시 얼러트
+	$("#agency").on("change",function () {
 		var agency = $("#agency").val();
 		alert(agency);
 	 
 	});
 	
+	
+/*===========================================================================================*/
 	// 생년월일 체크 이벤트
 	$("#birth").on("keyup",function(e){
 		
@@ -73,12 +106,95 @@
 		}
 	});
 	
+	
+/*===========================================================================================*/
+	//nickname 체크 이벤트
+	$("#nick_Name").on("keyup",function(e){
+		var nick_Name = $(this).val();
+		console.log(nick_Name);
+		
+		$.ajax({
+			url: '/login/nick_NameCheck',
+			data: {nick_Name:nick_Name},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				console.log(message);
+				
+				var div = $("div.nicknameCheckStatus");
+				if(message != "사용하실 수 있는 닉네임입니다."){
+					div.css("color","red");
+				} else{
+					div.css("color","#00C6ED");
+				}
+				div.html(message);
+			}	
+		}); // end of ajax
+	});
+	
+	
+/*===========================================================================================*/
 	//회원가입 버튼 클릭시 회원가입 페이지 이동
 	$("#join").on("click", function(){
-		var form = $("#signUpForm");
-		form.attr("action","/login/insertMember");
-		form.attr("method","post");
-		form.submit();
+		var memeberInfo = $("form[id=signUpForm]").serialize();
+		
+		$.ajax({
+			url: '/login/insertMember',
+			data: memeberInfo,
+			type: 'post',
+			datatype: 'json',
+			success: function(message){
+				if(message != "가입 되었습니다."){
+					alert(message);
+					$(location).attr("href","login/signUp/allDoneSignUp");
+				}else{
+					alert(message);
+					$(location).attr("href","login/loginMain");
+				}
+			}	
+		});
+	});
+	
+	
+/*===========================================================================================*/	
+	
+	//email 보내기 이벤트
+	$("#issued").on("click",function(e){
+		var email = $("#email").val();
+		
+		$.ajax({
+			url: '/login/mailSending',
+			data: {email:email},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				
+				alert("메일이 발송되었습니다.");
+			}	
+		}); // end of ajax
+	});
+	
+/*===========================================================================================*/		
+	
+	//email인증 확인 이벤트
+	$("#mailCheck").on("click",function(e){
+		var certNum = $("#certNum").val();
+		
+		$.ajax({
+			url: '/login/mailCheck',
+			data: {certNum : certNum},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				console.log(message);
+				if(message != "성공"){
+					alert("번호를 다시 확인해주세요");
+				}else{
+					alert("인증이 완료되었습니다.");
+				}
+				
+			}	
+		}); // end of ajax
 	});
 	
 	
