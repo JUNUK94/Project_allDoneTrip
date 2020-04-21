@@ -39,7 +39,7 @@ public class CityVO {
 	//public int city_No;		//도시번호
 	public int shop_No;		//쇼핑 NUMBER
 	public String shop_Name;	//쇼핑이름
-	public String s_content;	//설명
+	public String s_Content;	//설명
 	public int s_Picture;		//사진 경로
 	public int s_pno;	//사진경로no
 	public String s_address;	//주소

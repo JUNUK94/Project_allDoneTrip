@@ -20,21 +20,41 @@
 		int city_no = Integer.parseInt(SplitType[TY_CITY_NO]);
 		int res_no = Integer.parseInt(SplitType[TY_RES_NO]);
 		
-		//System.out.println("############################## start,,,, city_no : " + city_no + " spot_no : " + spot_no);
+
 		CityMappingData mCityMappingData = CityMappingData.getInstance();
 		CityVO mCityVO = mCityMappingData.getFOODData(city_no, res_no);
 		
 		System.out.println("############################## end,,,,");
 		String src1 = "../../resources/images/"+ Type+ ".jpg";
 	%>
-	<h1><%=mCityVO.res_Name %></h1>
-	<h1><%=mCityVO.res_Content %></h1>
-	저나번호 : <%=mCityVO.res_Tel %>
-	<img alt="" src="<%=src1 %>">
-	<!--
-	<c:forEach  var="list" items="${list}" varStatus="status">	
-					${list.city_No}
-	</c:forEach>
-	-->
+
+	<strong>city_detailfood.jsp</strong>
+	<br>
+
+	<div class="container" role="main">
+	<div class="roww">
+		<div class="row">
+			<div class="col-3">
+				<%=mCityVO.res_Name%>
+			</div>
+		</div>
+		<!-- 사진이 들어감 -->
+		<div class="row">
+			<div class="col-12">
+				<img alt="" src="<%=src1%>">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6"><%=mCityVO.res_Content%></div>
+			<div class="col-6"> 전화번호 : <%=mCityVO.res_Tel%></div>
+		</div>
+		<div class="row">
+			<div class="col-6"><%=mCityVO.res_address %></div>
+			<div class="col-6"><%=mCityVO.res_summary %></div>
+		</div>
+	</div>
+</div>
+	
+	
 </body>
 </html>
