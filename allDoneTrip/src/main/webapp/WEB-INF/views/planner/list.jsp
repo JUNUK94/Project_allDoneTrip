@@ -8,7 +8,20 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 리스트</title>
+	<style>
+		table > thead{
+			text-align: center;
+			color: #0C3272;
+		}
+	
+		table .planList_td{
+			display: table-cell;
+			vertical-align: inherit;
+			text-align: center;
+		}
+	</style>
 </head>
+
 <body>
 	<!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -31,11 +44,11 @@
 		<div 	class="d-flex flex-row align-items-center justify-content-center" 
 				style="height: 80px; background-color: #EAEFFF;">
 				<div class="p-3">
-					<input type="radio" name="sortType" value="regdate">등록일순
+					<input type="radio" id="sortType" name="sortType" value="regdate">등록일순
 					&nbsp;
-					<input type="radio" name="sortType" value="plan_Like">추천순
+					<input type="radio" id="sortType" name="sortType" value="plan_Like">추천순
 					&nbsp;
-					<input type="radio" name="sortType" value="click_Num">조회순
+					<input type="radio" id="sortType" name="sortType" value="click_Num">조회순
 				</div>
 				<div class="p-3">
 					<select id="city_No" name="city_No" class="form-control">
@@ -61,9 +74,13 @@
 								<option value="C" hidden="">도시</option>
 							</select>
 						</div>
-						<input type="text" id="keyword" name="keyword" class="form-control">
+						<input type="text" id="keyword" name="keyword" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+						<div class="input-group-append">
+							<label class="input-group-text" style="background-color: white">
+								<i class="ti-search"></i>
+							</label>
+ 						</div>
 					</div>
-					
 					<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
 					<input type="hidden" name="pageNum" value= "${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value= "${pageMaker.cri.amount}">
@@ -77,6 +94,11 @@
 						<option value="50">50개씩 보기</option>
 					</select>
 				</div>
+				<div class="p-3">
+					<a href="/planner/write">
+						<i class='far fa-edit' style='font-size:20px; margin-left: 30px'></i>
+					</a>
+				</div>
 		</div>
 		<br>
 		<br>
@@ -87,18 +109,17 @@
 					<thead>
 						<tr>
 							<th>글번호</th>
-							<th>추천수</th>
-							<th style="text-align: center">제목</th>
+							<th>제목</th>
 							<th>작성자</th>
 							<th>조회수</th>
+							<th>추천</th>
 							<th>다운로드</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="pvo">
 							<tr>
-								<td>${pvo.plan_No}</td>
-								<td>${pvo.plan_Like}</td>
+								<td class="planList_td">${pvo.plan_No}</td>
 								<td class="d-flex flex-row align-items-center">
 									<div style="width:30%">
 										<c:if test="${pvo.p_Thumbnail != null}">
@@ -120,10 +141,19 @@
 										</div>
 									</div>
 								</td>
-								<td>${pvo.nick_Name}</td>
-								<td>${pvo.click_Num}</td>
-								<td>
-									<button class="btn btn-outline-primary btn-sm">pdf 다운로드</button>
+								<td class="planList_td">${pvo.nick_Name}</td>
+								<td class="planList_td">${pvo.click_Num}</td>
+								<td class="planList_td">
+									<i class='far fa-thumbs-up' style='font-size:20px; color: #0C3272;'></i>
+									&nbsp;
+									${pvo.plan_Like}
+								</td>
+								<td class="planList_td">
+									<button class="btn btn-outline-primary btn-sm">
+										pdf 다운로드
+										&nbsp;
+										<i class='fas fa-download' style='font-size:20px'></i>
+									</button>
 								</td>
 							</tr>
 						</c:forEach>
