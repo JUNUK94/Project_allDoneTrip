@@ -30,11 +30,11 @@
 
 	<div class="container">
 
-	
+
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item"><a class="nav-link active" id="home-tab"
 				data-toggle="tab" href="#home" role="tab" aria-controls="home"
-								aria-selected="true" >여행지 정보</a></li>
+				aria-selected="true">여행지 정보</a></li>
 			<li class="nav-item"><a class="nav-link" id="profile-tab"
 				data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
 				aria-selected="false">날씨</a></li>
@@ -45,101 +45,85 @@
 				data-toggle="tab" href="#bus" role="tab" aria-controls="bus"
 				aria-selected="false">공항 및 교통</a></li>
 		</ul>
-		
-<!-- ----------------------------------------------------------------------------------------------------------구분선 -->					
-		
+
+		<!-- ----------------------------------------------------------------------------------------------------------구분선 -->
+
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
 				<div class="container">
-				      <div class="row"> 
-				        <div class="col-3"> 
-				          	  <div class="card" onClick="location.href='city_list_p1'"> 
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				             		국가정보
-				            </div>
-				          </div>
-				        </div>
-				        
-				        <div class="col-3">
-				          <div class="card" onClick="location.href='city_list_p2'">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				  			            근교여행
-				            </div>
-				          </div>
-				        </div>
-				        
-				        <div class="col-3">
-				          <div class="card" onClick="location.href='city_list_p3'">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				         		     여행최적기 
-				            </div>
-				          </div>
-				        </div>
-				         <div class="col-3"> 
-				          <div class="card" onClick="location.href='city_list_p4'">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				        		     현지어한마디
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-				    </div>
-				</div>
-			<div class="tab-pane fade" id="profile" role="tabpanel"
-				aria-labelledby="profile-tab">배고파
 					
+					<div class="row">
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_p1'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">국가정보</div>
+							</div>
+						</div>
+
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_p2'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">근교여행</div>
+							</div>
+						</div>
+
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_p3'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">여행준비</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_p4'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">현지어한마디</div>
+							</div>
+						</div>
 					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel"
+				aria-labelledby="profile-tab">배고파</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel"
 				aria-labelledby="contact-tab">집갈랭</div>
 			<div class="tab-pane fade" id="bus" role="tabpanel"
 				aria-labelledby="bus">
 				<div class="container">
-				      <div class="row">
-				        <div class="col-3"> 
-				          <div class="card">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				             		공항정보
-				            </div>
-				          </div>
-				        </div>
-				        
-				        <div class="col-3">
-				          <div class="card">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				  			            공항 / 시내
-				            </div>
-				          </div>
-				        </div>
-				        
-				        <div class="col-3">
-				          <div class="card">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				         		     시내교통
-				            </div>
-				          </div>
-				        </div>
-				         <div class="col-3"> 
-				          <div class="card">
-				            <img src="../../resources/images/a1.png" alt="" class="card-img" />
-				            <div class="text-overlay">
-				        		   교통패스
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-				    </div></div>
+					<div class="row">
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_t1'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">공항정보</div>
+							</div>
+						</div>
+
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_t1'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">공항 / 시내</div>
+							</div>
+						</div>
+
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_t2'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">시내교통</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<div class="card" onClick="location.href='city_list_t2'">
+								<img src="../../resources/images/a1.png" alt="" class="card-img" />
+								<div class="text-overlay">교통패스</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div></div>
 		</div>
-	</div>
 	
-	
-	
+
+
+
 </body>
 </html>

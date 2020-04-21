@@ -32,14 +32,16 @@
 					</c:if>
 					<c:if test="${status.last}">
 						<c:if test="${(status.index % 3) == 0}">
-							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
+								onclick ="showDetailInfo(${res.city_No},${res.res_No})">
 								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
 								<span>${res.res_Name} ${status.end}</span>
 							</div>
 						</c:if>
 					
 						<c:if test="${(status.index % 3) == 1}">
-							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
+							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
+								onclick ="showDetailInfo(${res.city_No},${res.res_No})">
 								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
 								<span>${res.res_Name} ${status.end}</span>
 							</div>
@@ -51,7 +53,8 @@
 					
 						<c:if test="${(status.index % 3) == 2}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail"
+									onclick ="showDetailInfo(${res.city_No},${res.res_No})">
 								<span>${res.res_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">

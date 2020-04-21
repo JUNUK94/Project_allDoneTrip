@@ -1,13 +1,52 @@
 <%@page import="org.adt.domain.CityVO"%>
 <%@page import="org.adt.controller.CityMappingData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<style>
+.roww {
+	margin: 10px;
+	padding: inherit
+}
+
+div.main {
+	text-align: center;
+}
+
+.jb-table {
+	display: table;
+	width: 100%;
+}
+
+.jb-table-row {
+	display: table-row;
+}
+
+.jb-table-cell {
+	display: table-cell;
+	padding: 0px 20px;
+	height: 150px;
+}
+
+.jb-top {
+	vertical-align: top;
+}
+
+.jb-middle {
+	vertical-align: middle;
+}
+
+.jb-bottom {
+	vertical-align: bottom;
+}
+</style>
 </head>
 <body>
 	<%
@@ -28,14 +67,37 @@
 		String src1 = "../../resources/images/"+ Type+ ".jpg";
 		
 	%>
-	<h1><%=mCityVO.spot_Name %></h1>
-	<h1><%=mCityVO.t_Content %></h1>
-	<h1>전화번호 : <%=mCityVO.t_tel %></h1>
-	<img alt="" src="<%=src1 %>">
-	<!--
-	<c:forEach  var="list" items="${list}" varStatus="status">	
-					${list.city_No}
-	</c:forEach>
-	-->
+
+
+
+	<strong>city_detail.jsp</strong>
+	<br>
+
+	<div class="container" role="main">
+	<div class="roww">
+		<div class="row">
+			<div class="col-3">
+				<%=mCityVO.spot_Name%>
+			</div>
+		</div>
+		<!-- 사진이 들어감 -->
+		<div class="row">
+			<div class="col-12">
+				<img alt="" src="<%=src1%>">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6"><strong><%=mCityVO.t_Content %></strong></div>
+			<div class="col-6"> 전화번호 : <%=mCityVO.t_tel %></div>
+		</div>
+		<div class="row">
+			<div class="col-6"><%=mCityVO.address %></div>
+			<div class="col-6"><%=mCityVO.t_Explan %></div>
+		</div>
+	</div>
+</div>
+
+	
+
 </body>
 </html>

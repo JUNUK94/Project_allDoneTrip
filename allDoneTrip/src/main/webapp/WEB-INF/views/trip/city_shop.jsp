@@ -4,7 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>쇼핑상세페이지</title>
+	<script>
+			function showDetailInfo(cityNo, shopNo){
+				location.href = "/trip/city/paris?Type="+ cityNo + "E"+ shopNo;
+			}
+		
+	</script>
 </head>
 <body>
 <strong>쇼핑</strong>
