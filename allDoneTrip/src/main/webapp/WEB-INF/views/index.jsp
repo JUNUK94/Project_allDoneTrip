@@ -71,7 +71,7 @@
 	<!-- header end-->
 	
 	<!-- body -->
-	<jsp:include page="mainBody.jsp"/>
+	<jsp:include page="${page}"/>
 	<!-- body end-->
 
 	<!-- footer-->

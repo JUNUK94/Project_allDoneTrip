@@ -13,6 +13,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		log.info("main");
+		model.addAttribute("page", "mainBody.jsp");
 		return "index";
 	}
 	

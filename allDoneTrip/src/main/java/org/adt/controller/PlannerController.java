@@ -42,7 +42,7 @@ public class PlannerController {
 	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
-	public void write(PlannerVO pvo, Model model, HttpSession session) {
+	public String write(PlannerVO pvo, Model model, HttpSession session) {
 		log.info("write");
 		
 		String email = (String)session.getAttribute("email");
@@ -60,6 +60,8 @@ public class PlannerController {
 			
 			model.addAttribute("data", pvo);
 		}
+		model.addAttribute("page", "planner/write.jsp");
+		return "index";
 	}
 	
 	
@@ -74,13 +76,15 @@ public class PlannerController {
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public String list(Criteria cri, Model model) {
 		
 		// 전체 플래너 수 카운트
 		int total = service.totalCount(cri);
 		
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("page", "planner/list.jsp");
+		return "index";
 	}
 
 

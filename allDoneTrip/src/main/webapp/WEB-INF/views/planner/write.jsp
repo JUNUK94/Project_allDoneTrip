@@ -10,7 +10,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>플래너 작성</title>
-	<%	session.setAttribute("email", "silverdue@gmail.com");
+	<%  session.setAttribute("email", "silverdue@gmail.com");
 		session.setAttribute("nick_Name", "창창");
 		//session.invalidate();
 	%>
@@ -109,7 +109,7 @@
 </head>
 <body>
 
-<!-- breadcrumb start-->
+	<!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row">
@@ -117,7 +117,7 @@
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item text-center">
                             <h2>플래너 작성</h2>
-                            <p>plan your trip</p>
+                            <p>Plan your trip</p>
                         </div>
                     </div>
                 </div>
