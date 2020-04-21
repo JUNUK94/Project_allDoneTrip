@@ -27,6 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/upload/*")
 public class UploadController {
+	
 	//에디터 이미지 업로드
 	@PostMapping(value = "/imageInput", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -93,10 +94,10 @@ public class UploadController {
 			
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-			String serverFolder = "C:\\upload";
-			String webFolder = "C:\\upload";
-//			String serverFolder = "/var/lib/tomcat8/webapps";
-//			String webFolder = "https://alldonetrip.shop/resources";
+//			String serverFolder = "C:\\upload";
+//			String webFolder = "C:\\upload";
+			String serverFolder = "/var/lib/tomcat8/webapps";
+			String webFolder = "https://alldonetrip.shop/resources";
 			String nonUser = "/img/nonUser/drag/";
 			String user = "/img/user/drag/";
 			
@@ -143,13 +144,10 @@ public class UploadController {
 		}	
 	
 	
-	
-		
 		//썸네일 이미지 서버에 저장
 		@PostMapping(value = "/thumbnail", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody
-		//public ResponseEntity<HashMap<String, Object>> thumbnail(@RequestParam("fileName") String fileName, @RequestParam("pData") byte[] pData){
-		public ResponseEntity<HashMap<String, Object>> thumbnail(@RequestParam("fileName") String fileName, @RequestParam("pData") File[] pData){	
+		public ResponseEntity<HashMap<String, Object>> thumbnail(@RequestParam("fileName") String fileName, @RequestParam("pData") MultipartFile[] pData){
 			log.info("----------------썸네일 업로드 시작----------------");
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -157,60 +155,34 @@ public class UploadController {
 			//파일 업로드--------
 			if(pData == null){
 				return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
-		    }
+			   }
+					
+//			String serverFolder = "C:\\upload\\img\\user\\thumbnail\\";
+//			String webFolder = "C:\\upload\\img\\user\\thumbnail\\";
+			String serverFolder = "/var/lib/tomcat8/webapps/img/user/thumbnail/";
+			String webFolder = "https://alldonetrip.shop/resources/img/user/thumbnail/";
 			
-			int lByteArraySize = pData.length;
-			log.info(fileName);
-			log.info(pData[0]);
-			
-			String serverFolder = "C:\\upload\\img\\user\\thumbnail\\";
-			String webFolder = "C:\\upload\\img\\user\\thumbnail\\";
-//			String serverFolder = "/var/lib/tomcat8/webapps/img/user/thumbnail/";
-//			String webFolder = "https://alldonetrip.shop/resources/img/user/thumbnail/";
-			
-			
-//			for(MultipartFile multipartFile : pData) {
-//				//랜덤문자열 붙이기
-//				UUID uuid = UUID.randomUUID();
-//				fileName = uuid.toString() + "_" + fileName;
-//			
-//				try {
-//					File saveFile = new File(serverFolder, fileName);
-//					multipartFile.transferTo(saveFile);
-//					
-//					//check image type File
-//					if(checkImageType(saveFile)) {
-//						//Hashmap에 넣어 값 리턴하기
-//						map.put("fileName", fileName);	//파일명
-//						map.put("url", webFolder+pData);	//업로드경로 + 파일명
-//					}
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					map.put("uploaded", 0);
-//					map.put("error", "{'message:'"+e.getMessage()+"'}");
-//				}
-//			}
-			try{
-				//랜덤문자열 붙이기
-				UUID uuid = UUID.randomUUID();
-				fileName = uuid.toString() + "_" + fileName;
+			for(MultipartFile multipartFile : pData) {	
+				try{
+					//랜덤문자열 붙이기
+					UUID uuid = UUID.randomUUID();
+					fileName = uuid.toString() + "_" + fileName;
 				
-				File saveFile = new File(serverFolder+fileName);
-				FileOutputStream lFileOutputStream = new FileOutputStream(saveFile);
-				//lFileOutputStream.write(pData[0]);
-				lFileOutputStream.close();
-				
-				//Hashmap에 반환 경로넣기
-				map.put("url", webFolder+fileName);	//업로드경로 + 파일명
-				log.info("URL = "+map.get("url"));
-				
-			}catch(Throwable e){
-				e.printStackTrace(System.out);
+					//서버에 업로드
+					File saveFile = new File(serverFolder+fileName);
+					multipartFile.transferTo(saveFile);
+					
+					//Hashmap에 반환 경로넣기
+					map.put("thumbnailName", fileName);	//업로드경로 + 파일명
+					map.put("url", webFolder+fileName);	//업로드경로 + 파일명
+					log.info("URL = "+map.get("url"));
+							
+				}catch(Throwable e){
+					e.printStackTrace(System.out);
+				}
 			}
-
 			return new ResponseEntity<>(map, HttpStatus.OK);
 		}
-	
 	
 	
 	

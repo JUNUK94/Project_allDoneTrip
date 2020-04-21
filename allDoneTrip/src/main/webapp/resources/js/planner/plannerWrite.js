@@ -6,10 +6,10 @@
 	var city_Name = document.getElementById("mainCity"); //대표여행지
 	var startDay = document.getElementById("startDay"); //여행 시작일
 	var endDay = document.getElementById("endDay"); //여행 종료일
-	var thumbnail = document.getElementById("thumbnailFile");
-	
+	var p_Thumbnail = document.getElementById("ThumbnailName");//썸네일 주소
+
 	var saveBtn = document.getElementById("save"); // 저장버튼
-	var registerBtn = document.getElementById("register"); // 등록버튼
+	var registerBtn = document.getElementById("register"); // 게시버튼
 	
 	
 //=======================================================jQuery 영역==================================================	
@@ -115,7 +115,8 @@ $(document).ready(function(){
 						"p_Title" : p_Title.value,
 						"city_No" : city_Name.value,
 						"trip_Period" : day1+"-"+day2,
-						"p_Content" : p_Content
+						"p_Content" : p_Content,
+						"p_Thumbnail" : p_Thumbnail.value
 					};
 		
 			$.ajax({
@@ -136,8 +137,62 @@ $(document).ready(function(){
 	        });
 		}
 	});
-
 	
+	
+	//게시버튼 클릭시 이벤트
+	registerBtn.addEventListener("click", function() {
+
+		if(!email.value){
+			alert("로그인하셔야 저장이 가능합니다.");
+			return false;
+		}
+		
+		var registerCheck = confirm("현재 상태를 저장후 게시합니다.<br>정말 게시하시겠습니까?");
+		if(registerCheck){
+			//작성한 문서 값 얻어오기
+			var p_Content = CKEDITOR.instances.p_Content.getData();
+			
+			//여행기간 원하는 형식으로 다시 조정하기
+			var date = "";
+			var day1 = startDay.value.replace(/-/gi, ".");
+			var day2 = endDay.value.replace(/-/gi, ".");
+			
+			var obj ={	"plan_No" : plan_No.value,
+						"email" : email.value,
+						"nick_Name" : nick_Name.value,
+						"p_Title" : p_Title.value,
+						"city_No" : city_Name.value,
+						"trip_Period" : day1+"-"+day2,
+						"p_Content" : p_Content,
+						"p_Thumbnail" : p_Thumbnail.value
+					};
+			
+			$.ajax({
+	            url: "/planner/register",
+	            data: obj,
+	            type: 'post',
+	            dataType: 'JSON',
+	            success: function(map){
+	            	if(map.list.plan_No){
+	            		plan_No.value = map.list.plan_No;
+	            		console.log("플래너 번호 = "+map.list.plan_No);
+	            		alert(map.list.updateDate + "에 저장되었습니다.");
+	            		location.href="/planner/list"
+	            	}
+	            },
+	            error: function(xhr){
+	            	console.log("실패", xhr); 
+	            }
+	        });
+		}
+		
+	});
+	
+	
+	
+	
+	
+	//새글쓰기 클릭 시
 	$("#newPlanner").on("click",function(){
 		var check = confirm("확인 시 저장되지 않은 내용은 모두 사라집니다.");
 		if(check){
@@ -145,15 +200,10 @@ $(document).ready(function(){
 		}
 	});
 	
-	
-	
-	
-	
-
 	// ? 클릭 시 팝오버 
 	$('[data-toggle="popover"]').popover();
 
-	// ToolTip 띄우기
+	// ? 클릭 시 ToolTip 띄우기
 	$('[data-toggle="tooltip"]').tooltip({
 	    html: true
 	});
@@ -161,40 +211,11 @@ $(document).ready(function(){
 }); //end of ajax
 
 
-
-//플래너 정보 셋팅
+//플래너 열기 -> 플래너 선택 시 
 function getPlannerInfo(index){
 	var check = confirm("확인 시 저장되지 않은 내용은 모두 사라집니다.");
 	if(check){
-		$.ajax({
-	        url: "/planner/getPlannerInfo",
-	        data: {"plan_No" : index},
-	        type: 'post',
-	        dataType: 'JSON',
-	        success: function(map){
-	        	document.getElementById("plan_No").value = map.data.plan_No;
-	        	console.log(document.getElementById("plan_No").value);
-	        	p_Title.value = map.data.p_Title;
-	        	
-	        	city_Name.value = map.data.city_No;
-	        	
-	        	var fullDay = map.data.trip_Period.split("-");
-	        	var start = fullDay[0].split(".");
-	        	var end = fullDay[1].split(".");
-	        	var day1 = start[0]+"-"+start[1]+"-"+start[2];
-	        	var day2 = end[0]+"-"+end[1]+"-"+end[2];
-	        	
-	        	startDay.value = day1;
-	        	endDay.value = day2;
-	        	
-	        	CKEDITOR.instances.p_Content.setData(map.data.p_Content);
-	        	
-	        	
-	        },
-	        error: function(xhr){
-	        	console.log("실패", xhr); 
-	        }
-	    });
+		location.href="/planner/write?plan_No="+index;
 	}
 }
 

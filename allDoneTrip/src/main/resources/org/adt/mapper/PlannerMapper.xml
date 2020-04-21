@@ -29,7 +29,7 @@
 			select	* 
 			from 	(select
 					/*+ index_desc(planner pk_planner)*/
-							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num
+							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
 					from 	planner, city
 					where	
 		]]>
@@ -112,7 +112,7 @@
 	<!-- 플래너 정보 가져오기 -->	
 	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate 
+			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
 			from 	planner, city
 			where 	plan_No = #{plan_No} 
 					and planner.city_No=city.city_No 
@@ -122,8 +122,8 @@
 
 	<!-- 플래너 저장 후 플래너 번호 return -->
 	<insert id="save">
-		insert into planner (plan_No, b_Type, nick_Name, email, p_Title, p_Content, trip_Period, city_No, regdate)
-		values (seq_planner.nextval, '1', #{nick_Name}, #{email}, #{p_Title}, #{p_Content}, #{trip_Period}, #{city_No}, to_char(sysdate, 'yyyy.MM.dd'))
+		insert into planner (plan_No, b_Type, nick_Name, email, p_Title, p_Content, trip_Period, city_No, regdate, p_Thumbnail)
+		values (seq_planner.nextval, '1', #{nick_Name}, #{email}, #{p_Title}, #{p_Content}, #{trip_Period}, #{city_No}, to_char(sysdate, 'yyyy.MM.dd'),  #{p_Thumbnail})
 		
 		<selectKey keyProperty="plan_No" resultType="long" order="AFTER">
 			select seq_planner.currval from dual
@@ -139,27 +139,19 @@
 			p_Content = #{p_Content},
 			trip_Period = #{trip_Period},
 			city_No = #{city_No},
-			updateDate = to_char(sysdate, 'yyyy.MM.dd')
-		where plan_No = #{plan_No}
-	</update>
-
-
-	<!-- 플래너 작성 페이지에서 게시판에 등록 => status 1로 변경 -->
-	<update id="register">
-		update planner
-		set nick_Name = #{nick_Name},
-			p_Title = #{p_Title},
-			p_Content = #{p_Content},
-			trip_Period = #{trip_Period},
-			city_No = #{city_No},
 			updateDate = to_char(sysdate, 'yyyy.MM.dd'),
-			status = '1'
+			<choose>
+				<when test="status == '1'.toString()">
+					status = #{status},
+				</when>
+			</choose>
+			p_Thumbnail =  #{p_Thumbnail}
 		where plan_No = #{plan_No}
 	</update>
 	
 	
 	<!-- 그냥 플래너 목록 중에서 게시판 등록버튼 클릭 => status 1로 변경 -->
-	<update id="">
+	<update id="register">
 		update planner
 		set nick_Name = #{nick_Name},
 			updateDate = to_char(sysdate, 'yyyy.MM.dd'),
@@ -180,7 +172,7 @@
 	<!-- 해당 유저의 플래너 정보 가져오기 -->	
 	<select id="getUsersPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select 	plan_No, p_Title, nick_Name, city_No, trip_Period, plan_Like, p_Content, updateDate
+			select 	plan_No, p_Title, nick_Name, city_No, trip_Period, plan_Like, p_Content, updateDate, p_Thumbnail
 			from 	planner
 			where 	email = #{email} 
 		]]>

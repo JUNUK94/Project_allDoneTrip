@@ -10,7 +10,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>플래너 작성</title>
-	<%	session.setAttribute("email", "silverdue@gmail.com");
+	<%  session.setAttribute("email", "silverdue@gmail.com");
 		session.setAttribute("nick_Name", "창창");
 		//session.invalidate();
 	%>
@@ -108,6 +108,25 @@
 <!--====================================================================================-->
 </head>
 <body>
+
+	<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>플래너 작성</h2>
+                            <p>Plan your trip</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+
 		<!-- 상단 설정 정보 입력 영역 -->
 		<div id="button_area" class="d-flex flex-row p-3 bg-light justify-content-end align-items-center">
 			<div>
@@ -181,9 +200,12 @@
 				</div>
 			</div>
 			<div class="input-group p-3" style="width:15%">
-				<button id="openModal" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="modal" data-target="#thumbnailModal">
-					썸네일
-				</button>
+				<div class="input-group-append">
+					<button id="openModal" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="modal" data-target="#thumbnailModal">
+						썸네일
+					</button>
+				</div>
+				<input type="text" id="ThumbnailName" name="ThumbnailName"  class="form-control" readonly="readonly" value="">
 			</div>
 		</div> <!-- end of 상단 플래너 정보 입력바 -->
 	 
@@ -459,8 +481,6 @@
 					    	<button type="button" id="cancle_Thumbnail" class="btn btn-secondary">취소</button>
 				        </div>
 				    </div>
-				    <input type="hidden" id="ThumbnailName" name="ThumbnailName" value="">
-				    <input type="hidden" id="pData" 		name="pData" value="">
 				</div>
 				
 				<!-- Modal footer -->
@@ -473,25 +493,34 @@
 	
 	
 	<!-- 불러온 정보 셋팅을 위한 input 창 -->
-	<input type="hidden" name="email" id="email" value="${email}"/>
-	<input type="hidden" name="nick_Name" id="nick_Name" value="${nick_Name}"/>
-	<c:if test="${data != null}">
-		<input type="hidden" name="plan_No" id="plan_No" value="${data.plan_No}"/>
-		<input type="hidden" name="title" value="${data.p_Title}"/>
-		<input type="hidden" name="city_Number" value="${data.city_No}"/>
-		<input type="hidden" name="day1" value="${data.startDay}"/>
-		<input type="hidden" name="day2" value="${data.endDay}"/>
-		<input type="hidden" name="content" value="${data.p_Content}"/>
-	</c:if>
-	<c:if test="${data == null}">
-		<input type="hidden" name="plan_No" id="plan_No" value=""/>
-	</c:if>
+	<form id="setDataForm" name="setDataForm" action="" method="">	
+		<input type="hidden" name="email" id="email" value="${email}"/>
+		<input type="hidden" name="nick_Name" id="nick_Name" value="${nick_Name}"/>
+		<c:if test="${data != null}">
+			<input type="hidden" name="plan_No" id="plan_No" value="${data.plan_No}"/>
+			<input type="hidden" name="title" value="${data.p_Title}"/>
+			<input type="hidden" name="city_Number" value="${data.city_No}"/>
+			<input type="hidden" name="day1" value="${data.startDay}"/>
+			<input type="hidden" name="day2" value="${data.endDay}"/>
+			<input type="hidden" name="content" value="${data.p_Content}"/>
+			<input type="hidden" name="thumbImg" value="${data.p_Thumbnail}"/>
+		</c:if>
+		<c:if test="${data == null}">
+			<input type="hidden" name="plan_No" id="plan_No" value=""/>
+			<input type="hidden" name="title" value=""/>
+			<input type="hidden" name="city_Number" value=""/>
+			<input type="hidden" name="day1" value=""/>
+			<input type="hidden" name="day2" value=""/>
+			<input type="hidden" name="content" value=""/>
+			<input type="hidden" name="thumbImg" value=""/>
+		</c:if>
+	</form>
 </body>
 
 <!--=================================googleMap API======================================-->
 
 	<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
-	<script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
+	<!-- <script src="${contextPath}/resources/js/planner/plannerMap.js"></script> -->
 
 <!--====================================================================================-->
 
@@ -511,10 +540,10 @@
 		} );
 	</script>
 
-<!--=================================썸네일 crop / 마우스로 지도영역 너비 조절=====================================-->
+<!--===========================================================================================================-->
 	<script>
 	    $(document).ready(function() {
-	    	
+	    	//=================================불러온 플래너 데이터 setting하기=====================================
 	    	if($("input[name='plan_No']").val()){
 	    		console.log("here");
 	    		document.getElementById("plan_No").value = $("#plan_No").val();
@@ -522,13 +551,11 @@
 	    		document.getElementById("mainCity").value = $("input[name='city_Number']").val();
 	    		document.getElementById("startDay").value = $("input[name='day1']").val();
 	    		document.getElementById("endDay").value = $("input[name='day2']").val();
-	    		
 	        	CKEDITOR.instances.p_Content.setData($("input[name='content']").val());
+	        	document.getElementById("ThumbnailName").value = $("input[name='thumbImg']").val();
 	    	}
 	    	
-	    	
 	    	//=================================썸네일 crop=====================================
-	    	var angle = 0;        // 현재의 각도를 변수로 저장
 	    	var options = {
 							thumbBox: '.thumbBox',
 							spinner: '.spinner',
@@ -537,11 +564,13 @@
 	        var cropper = $('.imageBox').cropbox(options);
 	       
 	    	$('#thumbnailFile').on('change', function(){
-	    		//원래 파일명 찾기
-	    		var ori_Path = ($(this).val()).split('\\');
-	    		var real_Name = ori_Path[ori_Path.length-1];
 	    		
-	    		//로컬이미지 byte로 변환
+	    		var ori_Path = ($(this).val()).split('\\'); //원래 파일명 찾기위해 split
+	    		var Name = ori_Path[ori_Path.length-1]; //원래 파일명 찾기
+	    		var real_Name = Name.split(".")[0] + ".png"; //확장자를 png로 변경
+	    		
+	    		console.log("realname = " + real_Name);
+	    		
 	            var reader = new FileReader();
 	            reader.onload = function(e) {
 	                options.imgSrc = e.target.result;
@@ -549,68 +578,63 @@
 	            }
 	            reader.readAsDataURL(this.files[0]);
 	            
+	            //줌인 버튼 클릭
 	            $('#btnZoomIn').on('click', function(){
 		            cropper.zoomIn();
 		        });
-		        
+		        //줌아웃 버튼 클릭
 		        $('#btnZoomOut').on('click', function(){
 		            cropper.zoomOut();
 		        });
-		        
+		        //크롭버튼 클릭 -> 이미지 잘라서 반환
 				$('#btnCrop').on('click', function(){
 		            var img = cropper.getDataURL();
 		            $(".cropped").empty();
 		            $(".cropped").append("<img src='"+img+"' style='border: 1px solid gray'>");
-		            $("#pData").val(img);
 		            $("#ThumbnailName").val(real_Name);
 		        });
-				
+				//취소버튼 클릭
 				$('#cancle_Thumbnail').on('click', function(){
 					$(".cropped").empty();
 					$("#ThumbnailName").val("");
-					$("#pData").val("");
 				});
-				
+				//등록버튼 클릭 -> 서버에 전송
 				$('#submit_Thumbnail').on('click', function(){
 					
-					var obj = new FormData();
+					if(!$("#email").val()){
+						alert("썸네일은 로그인 후 이용 가능합니다.");
+						$("#ThumbnailName").val("");
+						return false;
+					}
+					
+					//크롭한 섬네일 이미지를 blob데이터로 반환받음(png형식)
 					var imgBlob = cropper.getBlob();
-					
-					console.log(imgBlob);
-
-					var request = new XMLHttpRequest();
-					request.open("POST", "/upload/thumbnail");
+					//폼데이터 생성해서 데이터 append 
+					var obj = new FormData();
 					obj.append("fileName", $("#ThumbnailName").val());
-					obj.append("pData", $("#pData").val());
-					request.send(obj);
+					obj.append("pData", imgBlob);
 					
-					/*
-					var obj = {
-								"fileName" : $("#ThumbnailName").val(),
-								"pData" : $("#pData").val()
-								"pData" : imgBlob
-								}
-					
+					//폼데이터를 multipart로 인코딩하여 서버에 업로드하기 위해 통신
 					$.ajax({
 			            url: "/upload/thumbnail",
 			            data: obj,
+			          	enctype : "multipart/form-data", 
+			          	processData: false,
+			          	contentType: false,
 			            type: 'post',
 			            dataType: 'JSON',
-			            processData : false, 
-			            contentType : false,
 			            success: function(map){
-			            	console.log("성공!!!!");
+			            	alert("섬네일 등록 완료");
+			            	$("#ThumbnailName").val(map.url);
 			            },
 			            error: function(xhr){
 			            	console.log("실패", xhr); 
 			            }
 			        });
-					*/
+					
 				});
 	        });
 	        
-	       
-			
 			//=================================마우스로 지도영역 너비 조절=====================================
 			var startpos = 0;
 			var diffpos = 0;
