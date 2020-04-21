@@ -311,25 +311,26 @@ public class LoginController {
 	}// end kakaoLogin()
 	
 
-
+	
 	@PostMapping(value ="/insertMember",produces = "text/plain; charset=UTF-8")
-	public ResponseEntity<String> insertMember(MemberVO member, HttpSession session, @RequestParam("pw") String pw,
-								@RequestParam("gender") String gender,@RequestParam("birth") String birth,@RequestParam("name") String name) {
-		
-		String emailSession = (String)session.getAttribute("ableEmail");
-		String nickSession = (String)session.getAttribute("ableNick");
+	public String insertMember(MemberVO member, HttpSession session) {
+		System.out.println("탓당");
 		String certSession = (String)session.getAttribute("certOK");
 		String message = "";
-		if(emailSession!=null & pw!=null  & name!=null & birth!=null & gender!=null & nickSession!=null & certSession.equals("성공") ) {
-			message="가입 되었습니다.";
-			mService.join(member);
-			log.info(member);
-			return new ResponseEntity<>(message, HttpStatus.OK);
-		}else {
-			message = "필수정보를 모두 입력해주세요.";
-			return new ResponseEntity<>(message, HttpStatus.OK);
-		}
+		
+			if(certSession.equals("성공") ) {
+					
+					message="login/loginMain";
+					mService.join(member);
+					log.info(member);
+					return message;
+				}else {
+					message = "login/signUp/allDoneSignUp";
+					return message;
+			}
 
+		
+		
 	}
 
 	// 이메일 중복채크
@@ -350,6 +351,7 @@ public class LoginController {
 				session.setAttribute("ableEmail", email);
 			} else {
 				message = "올바른 이메일형식이아닙니다.";
+				
 			}
 		} else {
 			message = "이미 사용중인 이메일입니다.";
