@@ -19,15 +19,14 @@
 <body>
 
 <img src="../../resources/images/slide2.png" style='max-width:100%; max-height:auto'>
-	여기는 파리!<br>
-
+	
 
 	
 
 	<!--<c:url value='/info_main?pageNum=${pageNum}' var="info_home" />-->
 	<a href="#" class="pageMenu">Home</a><br>
 	<a href="#" class="pageMenu">기본정보</a><br>
-	<a href="#" class="pageMenu">지도보기</a><br>
+	<a href="#" class="pageMenu">지도보기</a><br>	
 	<a href="#" class="pageMenu">명소</a><br>
 	<a href="#" class="pageMenu">맛집</a><br>	
 	<a href="#" class="pageMenu">테마</a><br>
@@ -59,7 +58,8 @@
 						$("input[name='Type']").val('2');
 						break;
 					case "지도보기" :
-						$("input[name='Type']").val('3');
+						//$("input[name='Type']").val('3');
+						var win = window.open("./write", "_blank", "toolbar=yes,scrollbars=yes,resizable=no,top=500,left=500,width=800,height=800")
 						break;
 					case "명소" :
 						$("input[name='Type']").val('4');

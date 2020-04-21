@@ -112,14 +112,41 @@ public class TripinfoController {
 	@GetMapping("/paris")
 	public String main(@RequestParam("Type") String Type, Model model) throws Exception {
 		log.info("type = " + Type);
-		
-		if (Type.equals(PARIS_EUFFELTOWER)) {
-			System.out.println("10!상세페이지");
-			model.addAttribute("pageNum_Home", 11);
+		try {
+			String[] TypeSpilt = Type.split("_");
+			if(TypeSpilt.length == 2)
+			{
+				CityMappingData mCityMappingData =CityMappingData.getInstance();
+				mCityMappingData.setCityData(cservice.list());
+				System.out.println("10!상세페이지");
+				model.addAttribute("pageNum_Home", 10);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		if (Type.equals(PARIS_MONTMARTRE)) {
-			System.out.println("10!상세페이지");
-			model.addAttribute("pageNum_Home", 15);
+		
+		try {
+			String[] TypeSpilt = Type.split("F");
+			if(TypeSpilt.length == 2) {
+				CityMappingData mCityMappingData =CityMappingData.getInstance();
+				mCityMappingData.setFOODData(cservice.foodlist());
+				System.out.println("11!상세페이지");
+				model.addAttribute("pageNum_Home", 11);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		try {
+			String[] TypeSpilt = Type.split("E");
+			if(TypeSpilt.length == 2) {
+				CityMappingData mCityMappingData =CityMappingData.getInstance();
+				mCityMappingData.setShopData(cservice.shoplist());
+				System.out.println("12!상세페이지");
+				model.addAttribute("pageNum_Home", 12);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 ////////////////////
 		
@@ -130,7 +157,7 @@ public class TripinfoController {
 		} else if (Type.equals("2")) {
 			System.out.println("2성공!");
 			model.addAttribute("pageNum_Home", 2);
-
+			
 		} else if (Type.equals("3")) {
 			System.out.println("3성공!");
 			model.addAttribute("pageNum_Home", 3);
@@ -140,27 +167,80 @@ public class TripinfoController {
 			model.addAttribute("pageNum_Home", 4);
 
 			model.addAttribute("list", cservice.read(1));
-			System.out.println(cservice.read(1));//전체출력
+		//	System.out.println(cservice.read(1));//전체출력
 
 		}  else if(Type.equals("5")) {
 			System.out.println("5! 맛집");
 			model.addAttribute("pageNum_Home", 5);
-			//model.addAttribute("list", cservice.read());
+			
+			model.addAttribute("res", cservice.foodlist());	//맛집 전체출력 'res'로 호출
+		//	System.out.println(cservice.foodlist());
+			
 		}	else if(Type.equals("6")) {
 			System.out.println("6! 테마");
 			model.addAttribute("pageNum_Home", 6);
+			
 		}	else if(Type.equals("7")) {
 			System.out.println("7! 쇼핑");
 			model.addAttribute("pageNum_Home", 7);
+			
+			model.addAttribute("shop", cservice.shoplist());	//쇼핑 전체출력 'shop'으로 호출
+			System.out.println("###shop###");
+			
 		}else if (Type.equals("8")) {
 			System.out.println("8!추천플래너페이지");
 			model.addAttribute("pageNum_Home", 8);
 
 		}else if (Type.equals("10")) {
 
-			System.out.println("10!상세페이지");
+			System.out.println("이게 나오면 안될껄?");
 			model.addAttribute("pageNum_Home", 10);
-		
+			
+
 	}
 		return "trip/trip_main";
-}}
+}
+
+	
+		@GetMapping("/write")
+		public String main() {
+			
+			return "trip/write";
+		}
+		
+		
+		@GetMapping("/city_list_p1")
+		public String list1(Model model) {
+			model.addAttribute("pageNum_Home", 22);
+			return "trip/trip_main";
+		}
+		
+		@GetMapping("/city_list_p2")
+		public String list2(Model model) {
+			model.addAttribute("pageNum_Home", 23);
+			return "trip/trip_main";
+		}
+	
+		@GetMapping("/city_list_p3")
+		public String list3(Model model) {
+			model.addAttribute("pageNum_Home", 24);
+			return "trip/trip_main";
+		}
+		
+		@GetMapping("/city_list_p4")
+		public String list4(Model model) {
+			model.addAttribute("pageNum_Home", 25);
+			return "trip/trip_main";
+		}
+		
+		@GetMapping("/city_list_t1")
+		public String list5(Model model) {
+			model.addAttribute("pageNum_Home", 26);
+			return "trip/trip_main";
+		}
+		@GetMapping("/city_list_t2")
+		public String list6(Model model) {
+			model.addAttribute("pageNum_Home", 27);
+			return "trip/trip_main";
+		}
+	}

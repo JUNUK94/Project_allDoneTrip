@@ -16,7 +16,9 @@ public interface CityService {
 
 	public List<CityVO> list();
 
-	//public List<CityVO> list() throws Exception;	//목록
+	public List<CityVO> foodlist();	//식당 출력
+	
+	public List<CityVO> shoplist();	//쇼핑 출력
 
 	
 }

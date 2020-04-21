@@ -8,106 +8,87 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 리스트</title>
-
-<!--=====================================jquery=========================================-->
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous"></script>
-
-<!--===================================bootstrap========================================-->
-
-	<link rel="stylesheet" 
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-		crossorigin="anonymous">
-		
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
-		crossorigin="anonymous"></script>
-
-<!--====================================================================================-->
 </head>
 <body>
-	<br>
-	<br>
-	<div class="containor">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h3>모두의 플래너</h3>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
-		
-		<br>
-		
-		<div class="row center-block bg-light" style="height: 50px">
-			<div class="col-md-2"></div>
-			<div class="col-md-1">
-				<input type="radio" name="sortType" value="regdate">등록일순
-			</div>
-			<div class="col-md-1">
-				<input type="radio" name="sortType" value="plan_Like">추천순
-			</div>
-			<div class="col-md-1">
-				<input type="radio" name="sortType" value="click_Num">조회순
-			</div>
-			<div class="col-md-1">
-				<select name="city_No" id="city_No">
-					<option value="">도시 선택</option>
-					<option value="1">파리</option>
-					<option value="2">니스</option>
-					<option value="3">리옹</option>
-					<option value="4">상해</option>
-					<option value="5">홍콩</option>
-					<option value="6">방콕</option>
-					<option value="7">다낭</option>
-					<option value="8">하노이</option>
-					<option value="9">치앙마이</option>
-					<option value="10">베이징</option>
-				</select>
-			</div> 
-			<div class="col-md-3">
-				<form id="searchForm" action="/planner/list" method='get'>
-					<select name ='type' id ='type'>
-						<option value="T">제목</option>
-						<option value="W">작성자</option>
-						<option value="C" hidden="">도시</option>
+	<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>모두의 플래너</h2>
+                            <p>Share every plan in the World</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+	<div class="containor-fluid">
+		<div 	class="d-flex flex-row align-items-center justify-content-center" 
+				style="height: 80px; background-color: #EAEFFF;">
+				<div class="p-3">
+					<input type="radio" name="sortType" value="regdate">등록일순
+					&nbsp;
+					<input type="radio" name="sortType" value="plan_Like">추천순
+					&nbsp;
+					<input type="radio" name="sortType" value="click_Num">조회순
+				</div>
+				<div class="p-3">
+					<select id="city_No" name="city_No" class="form-control">
+						<option value="">도시 선택</option>
+						<option value="1">파리</option>
+						<option value="2">니스</option>
+						<option value="3">리옹</option>
+						<option value="4">상해</option>
+						<option value="5">홍콩</option>
+						<option value="6">방콕</option>
+						<option value="7">다낭</option>
+						<option value="8">하노이</option>
+						<option value="9">치앙마이</option>
+						<option value="10">베이징</option>
 					</select>
+				</div>
+				<form id="searchForm" action="/planner/list" method='get'>
+					<div class="input-group p-3">
+						<div class="input-group-prepend">
+							<select id="type" name ="type" class="form-control">
+								<option value="T">제목</option>
+								<option value="W">작성자</option>
+								<option value="C" hidden="">도시</option>
+							</select>
+						</div>
+						<input type="text" id="keyword" name="keyword" class="form-control">
+					</div>
 					
-					<input type="text" name="keyword">
 					<input type="hidden" name="sortType" value = "${pageMaker.cri.sortType}">
 					<input type="hidden" name="pageNum" value= "${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value= "${pageMaker.cri.amount}">
-					<input type="submit" value="검색">
 				</form>
-			</div> 
-			<div class="col-md-1">	
-				<select id="amount">
-					<option value="">보기 수량</option>
-					<option value="10">10개씩 보기</option>
-					<option value="20">20개씩 보기</option>
-					<option value="30">30개씩 보기</option>
-					<option value="40">40개씩 보기</option>
-					<option value="50">50개씩 보기</option>
-				</select>
-			</div> 
-			<div class="col-md-2"></div>
+				<div class="p-3">
+					<select id="amount" class="form-control">
+						<option value="10">10개씩 보기</option>
+						<option value="20">20개씩 보기</option>
+						<option value="30">30개씩 보기</option>
+						<option value="40">40개씩 보기</option>
+						<option value="50">50개씩 보기</option>
+					</select>
+				</div>
 		</div>
-		
 		<br>
 		<br>
-		
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-10 table-responsive-lg">
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>글번호</th>
 							<th>추천수</th>
-							<th>제목</th>
+							<th style="text-align: center">제목</th>
 							<th>작성자</th>
 							<th>조회수</th>
 							<th>다운로드</th>
@@ -118,22 +99,43 @@
 							<tr>
 								<td>${pvo.plan_No}</td>
 								<td>${pvo.plan_Like}</td>
-								<td>
-									<a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a>
-									${pvo.city_Name}
+								<td class="d-flex flex-row align-items-center">
+									<div style="width:30%">
+										<c:if test="${pvo.p_Thumbnail != null}">
+											<img src='${pvo.p_Thumbnail}' width='100px' height='150px'>
+										</c:if>
+										<c:if test="${pvo.p_Thumbnail == null}">
+											<script>
+												var i = parseInt((Math.random()*7));
+												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='100px' height='150px'>");
+											</script>
+										</c:if>
+									</div>
+									<div class="small p-2" style="width:70%">
+										<h5><a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a></h5>
+										<div>
+											<hr>
+											${pvo.city_Name}<br>
+											${pvo.trip_Period}
+										</div>
+									</div>
 								</td>
 								<td>${pvo.nick_Name}</td>
 								<td>${pvo.click_Num}</td>
-								<td><button>다운로드</button></td>
+								<td>
+									<button class="btn btn-outline-primary btn-sm">pdf 다운로드</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 		</div>
 	
-	
+		<br>
+		<br>
+		
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -160,6 +162,9 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+
+	<br><br><br><br>
+		
 
 	<form id="actionForm" action="/planner/list" method="get">
 		<input type="hidden" name="type" value = "${pageMaker.cri.type}">

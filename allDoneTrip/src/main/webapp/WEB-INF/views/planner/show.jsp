@@ -85,19 +85,23 @@
 			</div>
 			<div class="col-md-2 bg-light">
 				<c:forEach items="${content}" var="pvo">
-					<br><br><br>
-					${pvo.p_Title}
-					<hr>
-					${pvo.city_Name}
-					<br>${pvo.trip_Period}
-					<br><button>pdf로 저장</button>
+					<div class="d-flex flex-row">
+						<img src='${pvo.p_Thumbnail}'>
+						<div class="d-flex flex-column">
+							${pvo.p_Title}
+							<hr>
+							${pvo.city_Name}
+							${pvo.trip_Period}
+							<button class="btn btn-outline-primary">pdf로 저장</button>
+						</div>
+					</div>
 				</c:forEach>
 			</div>
 			<div class="col-md-2 bg-light">
-				<img src="/resources/img/planner/scrap.JPG" width="30px">
-				<img src="/resources/img/planner/share.JPG" width="30px">
+				<img src="https://alldonetrip.shop/resources/img/basic/scrap.JPG" width="30px">
+				<img src="https://alldonetrip.shop/resources/img/basic/share.JPG" width="30px">
 				<br><br><br><br><br>
-				<img id="likeBtn" src="/resources/img/planner/Like.png" width="80px">
+				<img id="likeBtn" src="https://alldonetrip.shop/resources/img/basic/Like.png" width="80px">
 				<br>
 				<c:forEach items="${content}" var="pvo">
 					<label name="likeCnt">${pvo.plan_Like}</label>
