@@ -77,7 +77,7 @@ public class PlannerController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		//페이지 include 처리
 		model.addAttribute("page", "planner/list.jsp");
-		
+		model.addAttribute("email", "herbing@naver.com");
 		return "index";
 	}
 
@@ -88,9 +88,11 @@ public class PlannerController {
 	public String show(HttpServletResponse response, HttpServletRequest request,
 					@RequestParam("plan_No") Long plan_No, PlannerReplyVO rvo, Model model) {
 
+		Criteria cri = new Criteria();
+		
 		// 전체 플래너 수 카운트		
 		int totalReply = replyService.totalReplyCount(plan_No);
-		
+				
 		//쿠키여부 체크하여 조회수 추가
 		service.checkCookie(response, request, plan_No);
 		//플래너 내용 가져와서 추가
@@ -101,6 +103,10 @@ public class PlannerController {
 		model.addAttribute("totalReply", totalReply);
 		//대댓글(답글) 목록 가져와서 추가
 		model.addAttribute("reReply", replyService.getReReplyList(plan_No));
+		//등록일 순으로 플래너 리스트 가져와서 추가
+		model.addAttribute("plannerList", service.getList(cri));
+		//추천순으로 플래너 리스트 가져와서 추가
+		model.addAttribute("popular_PlannerList", service.get_Popular_PlannerList());
 		//페이지 include 처리
 		model.addAttribute("page", "planner/show.jsp");
 		

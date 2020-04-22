@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 리스트</title>
 	<style>
 		table > thead{
