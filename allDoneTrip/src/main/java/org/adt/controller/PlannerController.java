@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,22 +42,43 @@ public class PlannerController {
 	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
-	public void write(Model model) {
+	public String write(PlannerVO pvo, Model model, HttpSession session) {
 		log.info("write");
 		
-		//model.addAttribute("width", "100%");
-	}
+		String email = (String)session.getAttribute("email");
+		if(email != null) {
+			model.addAttribute("list", service.getUsersPlanner(email));
+		}
+		if(pvo.getPlan_No() != null) {
+			pvo = service.getPlanner(pvo.getPlan_No()).get(0);
+			log.info(pvo.getTrip_Period());
+			String[] day = pvo.getTrip_Period().split("-");
 		
+			pvo.setStartDay(day[0].replace(".", "-"));
+			pvo.setEndDay(day[1].replace(".", "-"));
+			log.info(pvo);
+			
+			model.addAttribute("data", pvo);
+		}
+		//페이지 include 처리
+		model.addAttribute("page", "planner/write.jsp");
+		return "index";
+	}
+	
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public String list(Criteria cri, Model model) {
 		
 		// 전체 플래너 수 카운트
 		int total = service.totalCount(cri);
 		
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		//페이지 include 처리
+		model.addAttribute("page", "planner/list.jsp");
+		
+		return "index";
 	}
 
 
@@ -79,11 +101,12 @@ public class PlannerController {
 		model.addAttribute("totalReply", totalReply);
 		//대댓글(답글) 목록 가져와서 추가
 		model.addAttribute("reReply", replyService.getReReplyList(plan_No));
+		//페이지 include 처리
+		model.addAttribute("page", "planner/show.jsp");
 		
-		return "planner/show";
+		return "index";
 	}
 	
-
 	
 	
 	// 플래너 저장
@@ -108,6 +131,48 @@ public class PlannerController {
 		
 		pvo.setUpdateDate(sysdate);
 		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	
+	
+	// 플래너 저장
+	@PostMapping("/register")
+	public  ResponseEntity<HashMap<String, PlannerVO>> registePlanner(PlannerVO pvo) {
+				
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		Date date = new Date();
+		String sysdate = sdf.format(date);
+		pvo.setStatus(1);
+		log.info(pvo);
+		
+		//플래너 번호가 없으면 DB에 insert
+		if(pvo.getPlan_No() == null) {
+			service.save(pvo);
+		}else {
+			service.update(pvo);
+		}
+		pvo.setUpdateDate(sysdate);
+		map.put("list", pvo);
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	
+	
+	// 플래너 정보 가져오기
+	@PostMapping("/getPlannerInfo")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, PlannerVO>> getPlannerInfo(PlannerVO pvo) {
+															
+		HashMap<String, PlannerVO> map = new HashMap<String, PlannerVO>();
+		
+		log.info(pvo);
+		Long plan_No = pvo.getPlan_No();
+		map.put("data", service.getPlanner(plan_No).get(0));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
