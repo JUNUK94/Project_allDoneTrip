@@ -383,7 +383,11 @@
 	 		<div id="editor_area" class="d-flex flex-column justify-content-center align-self-start order-2">
 	 			<div class="col_c" style="margin-bottom: 30px">
 					<div class="input-group">
-						<textarea id="p_Content" class="form-control"></textarea>
+						<textarea id="p_Content" class="form-control">
+								<c:if test="${data ne null}">
+									${data.p_Content}
+								</c:if>
+						</textarea>
 					</div>
 				</div>
 	 		</div> <!-- end of 에디터 영역 -->
@@ -502,7 +506,6 @@
 			<input type="hidden" name="city_Number" value="${data.city_No}"/>
 			<input type="hidden" name="day1" value="${data.startDay}"/>
 			<input type="hidden" name="day2" value="${data.endDay}"/>
-			<input type="hidden" name="content" value="${data.p_Content}"/>
 			<input type="hidden" name="thumbImg" value="${data.p_Thumbnail}"/>
 		</c:if>
 		<c:if test="${data == null}">
@@ -511,7 +514,6 @@
 			<input type="hidden" name="city_Number" value=""/>
 			<input type="hidden" name="day1" value=""/>
 			<input type="hidden" name="day2" value=""/>
-			<input type="hidden" name="content" value=""/>
 			<input type="hidden" name="thumbImg" value=""/>
 		</c:if>
 	</form>
@@ -550,7 +552,6 @@
 	    		document.getElementById("mainCity").value = $("input[name='city_Number']").val();
 	    		document.getElementById("startDay").value = $("input[name='day1']").val();
 	    		document.getElementById("endDay").value = $("input[name='day2']").val();
-	        	CKEDITOR.instances.p_Content.setData($("input[name='content']").val());
 	        	document.getElementById("ThumbnailName").value = $("input[name='thumbImg']").val();
 	    	}
 	    	
