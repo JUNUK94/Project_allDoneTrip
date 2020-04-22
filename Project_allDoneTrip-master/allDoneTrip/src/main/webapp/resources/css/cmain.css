@@ -1,0 +1,257 @@
+
+<style>
+* {
+	font-family: "Noto Sans KR","Malgun Gothic","맑은고딕",helvetica,arial,sans-serif,"돋움",Dotum,"굴림",Gulim,HelveticaDotum;
+}
+body, table, input, textarea, button {
+	letter-spacing: 0px;
+}
+body, div, ul, ul li, p, ol, ol li, li, dl, dl dt, dl dd, h1, h2, h3, h4, h5, h6, form, fieldset, button {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+#contentWrap {
+	margin: 40px 0;
+}
+#subWrap {
+	position: relative;
+	width: 1090px;
+	height: 100%;
+	margin: 0 auto;
+	*zoom:1: ;
+}
+#wrap {
+	z-index: 2;
+	position: relative;
+	min-width: 1090px;
+}
+body {
+	min-width: 1090px;
+	height: 100%;
+	color: #232323;
+	margin: 0;
+	padding: 0;
+	overflow-y: scroll;
+}
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: #FFF;
+}
+html, body {
+	font-size: 14px;
+	line-height: 1em;
+	text-align: left;
+}
+#wrap .titleSt02 {
+	position: relative;
+	display: block;
+	height: 22px;
+	line-height: 22px;
+	font-size: 22px;
+	color: #232323;
+	font-weight: 500;
+	margin: 0 0 18px;
+}
+.mapDesc {
+	display: block;
+	font-size: 15px;
+	color: #777;
+	margin: -8px 0 18px 0;
+}
+.mapDesc.oth {
+	margin-top: -13px;
+}
+.tourCityBox {
+	display: table;
+	width: 1088px;
+	margin: 0 0 42px;
+	border: 1px solid #e5e5e5;
+}
+#wrap h2 {
+	display: block;
+	color: #232323;
+	font-weight: 500;
+	font-size: 19px;
+	margin: 0 0 13px;
+}
+#wrap h2.title {
+	font-weight: 400;
+	margin-top: 40px;
+}
+#wrap h2.title {
+	line-height: 1;
+	font-size: 26px;
+	letter-spacing: -1px;
+	font-weight: 400;
+	color: #232323;
+	margin: 0 0 20px;
+}
+.specialTip {
+	margin: 0 0 40px;
+	border: 1px solid #e3e3e3;
+	overflow: hidden;
+}
+.goTourtip {
+	border: 1px solid #e3e3e3;
+	overflow: hidden;
+}
+ul, ul li, ol, ol li {
+	list-style-type: none;
+}
+.goTourtip ul {
+	display: block;
+	width: 1100px;
+}
+.goTourtip li {
+	float: left;
+	display: inline-block;
+	text-align: center;
+	width: 362px;
+	height: 216px;
+	padding: 30px 0 0 0;
+	overflow: hidden;
+	border-left: 1px solid #e3e3e3;
+}
+.goTourtip li:first-child {
+	border: none;
+}
+img, fieldset {
+	border: 0;
+}
+.goTourtip img {
+	margin: 0 0 14px;
+}
+.goTourtip p {
+	display: block;
+	font-size: 16px;
+	color: #232323;
+	line-height: 22px;
+	margin: 0 0 10px;
+}
+a, a:link {
+	text-decoration: none;
+	color: #232323;
+	cursor: pointer;
+}
+.btn.white {
+	display: inline-block;
+	height: 33px;
+	color: #232323;
+	font: normal 15px/33px "Noto Sans KR";
+	padding: 0 25px;
+	margin: 0;
+	background: #FFF;
+	border: 1px solid #c5c5c5;
+}
+.goTourtip .btn.white {
+	width: 129px;
+	height: 32px;
+	font: 500 14px/30px "Noto Sans KR";
+	color: #232323;
+	text-align: center;
+	padding: 0;
+}
+.specialTip ul {
+	display: block;
+	width: 1100px;
+	margin: -1px 0 0 -1px;
+}
+.specialTip li {
+	position: relative;
+	float: left;
+	display: inline-block;
+	width: 362px;
+	height: 230px;
+	text-align: center;
+	font: 0/0 arial;
+	letter-spacing: 0px;
+	border: 1px solid #ececec;
+	border-width: 1px 0 0 1px;
+	overflow: hidden;
+}
+.specialTip img {
+	position: absolute;
+	top: 20px;
+	left: 116px;
+}
+.specialTip .specialTip09 img {
+	left: 96px;
+}
+.specialTip p {
+	position: absolute;
+	top: 163px;
+	display: block;
+	width: 100%;
+	font-size: 16px;
+	line-height: 22px;
+	color: #232323;
+}
+em {
+	font-style: normal;
+}
+.specialTip p em {
+	color: #ff4f02;
+	font-weight: 500;
+}
+.specialTip .specialTip07 img {
+	left: 100px;
+}
+.specialTip .specialTip06 img {
+	left: 79px;
+}
+.specialTip .specialTip05 img {
+	top: 3px;
+}
+.specialTip .specialTip04 img {
+	left: 113px;
+}
+.specialTip .specialTip03 img {
+	top: 17px;
+	left: 115px;
+}
+.specialTip .specialTip02 img {
+	left: 94px;
+}
+.specialTip .specialTip01 img {
+	top: 17px;
+}
+.tourCityBox .cityList {
+	display: table-cell;
+	width: 180px;
+	padding: 0 0 13px;
+	border-left: 1px solid #e5e5e5;
+}
+.tourCityBox :first-child.cityList {
+	border-left: none;
+}
+.tourCityBox h1, .tourCityBox .area {
+	display: block;
+	font: 500 15px/41px "Noto Sans KR";
+	color: #232323;
+	text-align: center;
+	margin: 0 0 7px;
+	background: #f7f7f7;
+}
+.tourCityBox a {
+	display: block;
+	height: 36px;
+	font: normal 14px/37px "Noto Sans KR";
+	color: #232323;
+	vertical-align: middle;
+	padding: 0 0 0 30px;
+}
+a img {
+	border: 0 none;
+}
+.tourCityBox a img {
+	width: 30px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+
+
+</style>

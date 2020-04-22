@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="join">
+	insert into memberinfo(
+	   member_no, email, nick_name, name, pw, birth, gender, phone_num,join_Date,agree_date, mobile_Co
+	             )
+	   values( 
+	      seq_memberinfo.nextval,#{email}, #{nick_Name}, #{name}, #{pw}, #{birth}, #{gender}, #{phone_Num}, 
+	      (TO_CHAR(sysdate, 'yyyymmdd')),(TO_CHAR(sysdate, 'yyyymmdd')),#{mobile_Co})
+	</insert>
+	
+	<select id="emailCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email}
+	</select>
+	
+	<select id="nick_NameCheck" resultType="String">
+		select count(*) from memberinfo
+		where nick_Name=#{nick_Name}
+	</select>
+	
+	<select id="loginCheck" resultType="String">
+		select count(*) from memberinfo
+		where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="idSearch" resultType="String">
+		select email from memberinfo
+		where name=#{name} and phone_Num=#{phone_Num}
+	</select>
+	
+	<select id="pwSearch" resultType="String">
+		select pw from memberinfo
+		where email=#{email} and phone_Num=#{phone_Num}
+	</select>
+	
+  <!-- 회원탈퇴 -->
+  <delete id = "delete">
+     delete from memberinfo where memner_no=#{member_No}
+  </delete>
+
+	
+
+</mapper>
