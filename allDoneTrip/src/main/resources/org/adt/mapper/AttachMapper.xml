@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.AttachMapper">
+
+<!-- 게시글 첨부파일 추가 -->
+<insert id="boardInsert">
+	insert into attach (attach_type, type_name, uuid, upload_path, file_name, file_type, bno)
+	values (#{attach_Type}, #{type_Name}, ${uuid}, #{upload_Path}, #{file_Name}, #{file_Type},#{bno} )
+</insert>
+
+
+<!-- 게시글번호로 첨부파일 찾기 -->
+<select id="findByBno" resultType="org.adt.domain.AttachVO">
+ 	select * from attach where bno = #{bno}
+</select>
+
+<!-- 회원프로필 추가 -->
+<insert id="memberInsert">
+	insert into attach (attach_type, type_name, uuid, upload_path, file_name, file_type, member_no)
+	values (#{attach_Type}, #{type_Name}, ${uuid}, #{upload_Path}, #{file_Name}, #{file_Type},#{member_No} )
+</insert>
+
+
+<!-- 회원프로필 찾기 -->
+<select id="fineByMember_No" resultType="org.adt.domain.AttachVO">
+ 	select * from attach where member_no = #{member_No}
+</select>
+
+<!-- 첨부파일삭제 -->
+<delete id="delete">
+	delete from attach where uuid=#{uuid}
+</delete>
+
+</mapper>

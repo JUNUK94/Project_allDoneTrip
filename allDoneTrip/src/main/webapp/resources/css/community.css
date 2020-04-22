@@ -1,0 +1,53 @@
+@charset "UTF-8";
+body {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.right-align {
+  text-align: right;
+}
+
+/* a:link {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: red;
+} */
+
+.bodyMargin {
+  margin: 10px;
+}
+
+.totalWidth {
+  width: 1200px;
+}
+
+.marginRemove {
+  margin: 0px;
+}
+
+.paddingRemove {
+  padding: 0px;
+}
+.btnMargin {
+  margin-bottom: 1px;
+  padding: 5px;
+}
+.Writee {
+  height: fit-content;
+  width: 40px;
+}
+.inputMargin {
+  margin: 0px;
+}
+
+.cardMargin {
+  margin: 10px;
+}

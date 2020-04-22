@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.BoardMapper">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") and" prefixOverrides="or">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="or">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							nick_Name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							b_Content like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<!-- 게시판전체목록 가져오기 -->
+	<select id="getBoardList" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+		  select * 
+		  from(
+		  SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
+          ROWNUM RN, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE, b_Type
+          FROM BOARD
+				 where
+				 rownum <= #{pageNum} * #{amount}
+		   ]]>
+		<trim prefix="AND">
+			<if test="b_Type != '' and b_Type!=null">
+				b_Type=#{b_Type}
+			</if>
+		</trim>
+		<![CDATA[
+							)
+			where 	rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+
+	<select id="read" resultType="org.adt.domain.BoardVO">
+		select * from board where bno =
+		#{bno}
+	</select>
+	<!-- 새글 등록 -->
+	<insert id="reviewInsert">
+		insert into board (bno, b_type, btype_name, member_no, b_content, title)
+		values            (seq_board.nextval, 2, '후기후기', 2314324, #{b_content}, #{title})
+	</insert>
+
+	<!-- 전체 페이지 가져오기 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board where
+		<include refid="criteria"></include>
+
+		<![CDATA[
+			bno > 0
+		]]>
+		<trim prefix="AND">
+			<if test="b_Type != '' and b_Type!=null">
+				b_Type=#{b_Type}
+			</if>
+		</trim>
+
+
+	</select>
+
+	<!-- 조회수 추가 -->
+	<update id="addBclickNum">
+		<![CDATA[
+			update 	board
+			set		b_clickNum = b_clickNum + 1
+			where 	bno = #{bno}
+		]]>
+	</update>
+
+	<!-- 좋아요 추가 -->
+	<update id="addLike">
+		update board
+		set like_Check = like_Check +1
+		where
+		memner_No=#{member_No) and bno=#{bno}
+	</update>
+
+	<!-- 좋아요 취소 -->
+	<update id="CnxLike">
+		update board
+		set like_Check = 0
+		where
+		memner_No=#{member_No} and bno=#{bno}
+	</update>
+
+	<update id="update">
+		<![CDATA[
+			update board
+			set title = #{title},
+				b_Content = #{b_Content},
+				updatedate = (TO_CHAR(sysdate, 'yyymmdd'))
+			where bno = #{bno}
+		]]>
+	</update>
+
+	<delete id="delete">
+		<![CDATA[
+			delete from board
+			where bno = #{bno}
+		]]>
+	</delete>
+</mapper>

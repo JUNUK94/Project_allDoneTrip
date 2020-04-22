@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.ReplyMapper">
+
+	<!-- 플래너 댓글 입력 -->
+	<insert id="replyWrite">
+		<selectKey keyProperty="rno" order="BEFORE" resultType="long">
+			select seq_reply.nextval from dual
+		</selectKey>
+		insert into Reply (bno, rno, r_content, nick_Name, regdate, email, b_type)
+		values (#{bno}, #{rno}, #{r_Content}, #{nick_Name}, #{regdate}, #{email}, #{b_Type})
+	</insert>
+
+	<!-- 플래너 대댓글(답글) 입력 -->
+	<insert id="reReplyWrite">
+		<selectKey keyProperty="rno" order="BEFORE" resultType="long">
+			select seq_reply.nextval from dual
+		</selectKey>
+		insert into Reply (bno, rno, r_Content, nick_Name, regdate, email, up_rno, b_type)
+		values (#{bno}, #{rno}, #{r_Content}, #{nick_Name}, #{regdate}, #{email}, #{up_Rno}, #{b_Type})
+	</insert>
+
+
+	<!-- 플래너 댓글 가져오기 -->
+	<select id="getReplyList" resultType="org.adt.domain.ReplyVO">
+		<![CDATA[
+			select	/*+ index_desc(reply pk_reply)*/
+					bno, rno, r_Content, nick_Name, email, regdate
+			from	Reply
+			where	bno = #{bno} and up_rno is null
+		]]>
+	</select>
+
+
+	<!-- 플래너 대댓글(답글) 가져오기 -->
+	<select id="getReReplyList" resultType="org.adt.domain.ReplyVO">
+		<![CDATA[
+			select	/*+ index_asc(reply pk_reply)*/
+					bno, rno, r_Content, nick_Name, email, regdate, up_rno
+			from	Reply
+			where	bno = #{bno} and up_rno is not null
+		]]>
+	</select>
+
+
+	<!-- 플래너 댓글 삭제 -->
+	<delete id="replyDelete">
+		delete	Reply
+		where	bno = #{bno} and rno = #{rno}
+	</delete>
+
+
+	<!-- 플래너 댓글 전체 수량 파악 -->
+	<select id="totalReplyCount" resultType="int">
+		select	count(*)
+		from	reply
+		where	bno = #{bno} and up_rno is null
+	</select>
+
+</mapper>
