@@ -356,7 +356,6 @@ $(document).ready(function(){
 		
 		$("#mapContent").toggle("fast");
 		
-<<<<<<< HEAD
 		if(mapStatus){
 			$("#map_area").css("width","5%");
 			$("#editor_area").css("width","80%");
@@ -366,20 +365,6 @@ $(document).ready(function(){
 			$("#editor_area").css("width","65%");
 			mapStatus = true;
 		}
-=======
-		service = new google.maps.places.PlacesService(map);
-
-        service.findPlaceFromQuery(request, function(results, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-            	placeMarker(results[i]);
-            }
-    		var location = new google.maps.LatLng(results[0].lat(), results[0].lng()); 
-            map.setCenter(location);
-          }
-        });
-		
->>>>>>> stash
 		
 	});
 	

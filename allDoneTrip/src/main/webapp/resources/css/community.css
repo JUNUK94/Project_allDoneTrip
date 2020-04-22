@@ -2,6 +2,7 @@
 body {
   margin: 0px;
   padding: 0px;
+  margin-top: 5px;
 }
 
 .right-align {
@@ -21,17 +22,32 @@ a:active {
 } */
 
 .bodyMargin {
-	margin: 10px;
+  margin: 10px;
 }
 
 .totalWidth {
   width: 1200px;
 }
 
+.marginRemove {
+  margin: 0px;
+}
+
+.paddingRemove {
+  padding: 0px;
+}
 .btnMargin {
-	margin: 5px;
-	padding: 5px;
+  margin-bottom: 1px;
+  padding: 5px;
+}
+.Writee {
+  height: fit-content;
+  width: 40px;
 }
 .inputMargin {
-	margin: 0px;
+  margin: 0px;
+}
+
+.cardMargin {
+  margin: 10px;
 }

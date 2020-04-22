@@ -444,11 +444,7 @@
 
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
 <script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
-<<<<<<< HEAD
 
-=======
-<script src="http://maps.google.com/maps/api/js?key=AIzaSyDvMy2JnsiABcSc-3YCYa8BvRkhuDSnDrw&libraries=places"></script>
->>>>>>> stash
 <!--====================================================================================-->
 
 <script src="${contextPath}/resources/js/planner/plannerWrite.js"></script>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+	<% 
+		session.setAttribute("email", "herbing@naver.com");
+		session.setAttribute("nick_Name", "wowgarcon");
+		//session.invalidate();
+	%>
 
 <!DOCTYPE html>
 <html>
@@ -29,16 +33,16 @@
 
 	<div class="row bodyMargin">
 		<nav class="col-2 sidenav">
-			<ul class="nav flex-column">
-				<li class="nav-item"><a class="nav-link" href="#">여행후기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">동행찾기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-			</ul>
-		</nav>
+				<h2 class="mt-3">커뮤니티</h2>
+				<ul class="nav flex-column">
+					<li class="nav-item"><a class="nav-link sideMenu paddingRemove mt-2" data-btype="2">여행후기</a></li>
+					<li class="nav-item"><a class="nav-link sideMenu paddingRemove mt-2" data-btype="3">동행찾기</a></li>
+					<li class="nav-item"><a class="nav-link sideMenu paddingRemove mt-2" data-btype="4">자유게시판</a></li>
+				</ul>
+			</nav>
 		<div class="col-9">
 			<div class="panel panel-default">
 
-				<div class="panel-heading h1">커뮤니티 글이다 이말이다.</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="row col-12 inputMargin">
@@ -54,17 +58,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label>내용</label>
+						<label>내용 </label>
 						<textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${board.b_content}" /></textarea>
 					</div>
 
-
-					<button data-oper='modify' class="btn btn-default">수정</button>
-					<button data-oper='list' class="btn btn-info">목록</button>
-
-					<%-- <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-</form> --%>
+					<form id='operForm' action="/boad/modify" method="get">
+						<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+					</form>
 
 
 					<form id='operForm' action="/community/modify" method="get">
@@ -72,40 +72,30 @@
 
 					</form>
 
-
-<<<<<<< HEAD
-
-=======
 					<div class="row">
 						<div class="col-12 text-right">
-							<button data-oper='modify' class="btn btn-primary">수정</button>
-							<button data-oper='list' class="btn btn-info">목록</button>
+							<button data-oper='modify' class="btn btn-primary boardModify">수정</button>
+							<button data-oper='list' class="btn btn-info boardList">목록</button>
 						</div>
 					</div>
->>>>>>> stash
 				</div>
-				<!--  end panel-body -->
-
 			</div>
-			<!--  end panel-body -->
-<<<<<<< HEAD
-=======
 			<div class="row">
 				<div class="col-md-1">
 					<img src="/resources/img/planner/Non_User_Photo.JPG">
 				</div>
 				<div class="col-md-8">
-					<textarea id="plannerReply" class="col-md-12 bg-light" style="height: 100px;" placeholder="댓글을 입력해주세요"></textarea>
+					<textarea id="boardReply" class="col-md-12 bg-light" style="height: 100px;" placeholder="댓글을 입력해주세요"></textarea>
 				</div>
 				<div class="col-md-2">
-					<button id="sendPlannerReply" class="col-md-12 bg-light" style="height: 100px;">등록</button>
+					<button id="sendBoardReply" class="col-md-12 bg-light" style="height: 100px;">등록</button>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
 
 			<br>
-			<div id="plannerReplyList">
-				<c:forEach items="${reply}" var="prvo" varStatus="vs">
+			<div id="boardReplyList">
+				<c:forEach items="${reply}" var="rvo" varStatus="vs">
 					<div class="row" id="${vs.index}">
 						<div class="col-md-1">
 							<img src="/resources/img/planner/Non_User_Photo.JPG">
@@ -113,20 +103,21 @@
 						<div class="col-md-5">
 							<div class="row">
 								<div class="col-md-2 small text-left">
-									<a href="${prvo.nick_Name}">${prvo.nick_Name}</a>
+									<a href="${rvo.nick_Name}">${rvo.nick_Name}</a>
 								</div>
-								<div class="col-md-10 small text-left">${prvo.regdate}</div>
+								<div class="col-md-10 small text-left">${rvo.regdate}</div>
 							</div>
-							<div>${prvo.pr_Content}</div>
+							<div>${rvo.r_Content}</div>
 						</div>
 						<div class="col-md-1 small text-right">
 							<a href="#" id="count_reReply${vs.index}" onclick="show_reReplyList(${vs.index})">∨</a>
 						</div>
 						<div class="col-md-1 small text-right" id="replyRUD">
-							<c:if test="${prvo.email == email}">
-								<a href="#" onclick="replyDelete(${prvo.p_Rno})">삭제</a> | 
+							<c:if test="${rvo.email == email}">
+								<a href="#" onclick="replyDelete(${rvo.rno})">삭제</a> | 
 						</c:if>
-							<a href="#" onclick="replyWarning(${prvo.p_Rno})">신고</a> | <a href="#" onclick="reReply(${prvo.p_Rno},${vs.index})">답글</a>
+							<a href="#" onclick="replyWarning(${rvo.rno})">신고</a> | 
+							<a href="#" onclick="reReply(${rvo.rno},${vs.index})">답글</a>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -139,7 +130,7 @@
 							<textarea id="reReplyText${vs.index}" class="col-md-12 bg-light" style="height: 100px;" placeholder=">답글"></textarea>
 						</div>
 						<div class="col-md-1">
-							<button class="col-md-12 bg-light" style="height: 100px;" onclick="reReplyInsert(${prvo.p_Rno}, ${vs.index})">등록</button>
+							<button class="col-md-12 bg-light" style="height: 100px;" onclick="reReplyInsert(${rvo.rno}, ${vs.index})">등록</button>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -147,7 +138,7 @@
 					<!-- 답글 띄우기 -->
 					<div class="row" id="reReplyList${vs.index}" style="display: none;">
 						<c:forEach items="${reReply}" var="rrvo">
-							<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
+							<c:if test="${rrvo.up_Rno == rvo.rno}">
 								<div class="col-md-2"></div>
 								<div class="col-md-7">
 									<div class="row">
@@ -159,14 +150,14 @@
 									<div class="row">
 										<div class="col-md-2"></div>
 										<div class="col-md-1"></div>
-										<div class="col-md-9 bg-light">${rrvo.pr_Content}</div>
+										<div class="col-md-9 bg-light">${rrvo.r_Content}</div>
 									</div>
 								</div>
 								<div class="col-md-1 text-right small">
 									<c:if test="${rrvo.email == email}">
-										<a href="#" onclick="replyDelete(${rrvo.p_Rno})">삭제</a> |
+										<a href="#" onclick="replyDelete(${rrvo.rno})">삭제</a> |
 									</c:if>
-									<a href="#" onclick="reReplyWarning(${rrvo.p_Rno})">신고</a>
+									<a href="#" onclick="reReplyWarning(${rrvo.rno})">신고</a>
 								</div>
 								<div class="col-md-2"></div>
 								<br>
@@ -179,477 +170,34 @@
 				</c:forEach>
 			</div>
 			<!-- ./ end row -->
->>>>>>> stash
 		</div>
 		<!-- end panel -->
 	</div>
 	<!-- /.row -->
-
-
-	<div class='row'>
-
-		<div class="col-lg-12">
-
-			<!-- /.panel -->
-			<div class="panel panel-default">
-				<!--       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-      </div> -->
-
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> Reply
-					<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
-						Reply</button>
-				</div>
-
-
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-
-					<ul class="chat">
-
-					</ul>
-					<!-- ./ end ul -->
-				</div>
-				<!-- /.panel .chat-panel -->
-
-				<div class="panel-footer"></div>
-
-
-			</div>
-		</div>
-		<!-- ./ end row -->
-	</div>
-
-
-
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Reply</label> <input class="form-control" name='reply' value='New Reply!!!!'>
-					</div>
-					<div class="form-group">
-						<label>Replyer</label> <input class="form-control" name='replyer' value='replyer'>
-					</div>
-					<div class="form-group">
-						<label>Reply Date</label> <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
-					<button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
-					<button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
-					<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-
-
-
-	<script type="text/javascript" src="/resources/js/reply.js"></script>
-
-	<script>
-		$(document)
-				.ready(
-						function() {
-
-							var bnoValue = '<c:out value="${board.bno}"/>';
-							var replyUL = $(".chat");
-
-							showList(1);
-
-							function showList(page) {
-
-								console.log("show list " + page);
-
-								replyService
-										.getList(
-												{
-													bno : bnoValue,
-													page : page || 1
-												},
-												function(replyCnt, list) {
-
-													console.log("replyCnt: "
-															+ replyCnt);
-													console
-															.log("list: "
-																	+ list);
-													console.log(list);
-
-													if (page == -1) {
-														pageNum = Math
-																.ceil(replyCnt / 10.0);
-														showList(pageNum);
-														return;
-													}
-
-													var str = "";
-
-													if (list == null
-															|| list.length == 0) {
-														return;
-													}
-
-													for (var i = 0, len = list.length || 0; i < len; i++) {
-														str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-														str += "  <div><div class='header'><strong class='primary-font'>["
-																+ list[i].rno
-																+ "] "
-																+ list[i].replyer
-																+ "</strong>";
-														str += "    <small class='pull-right text-muted'>"
-																+ replyService
-																		.displayTime(list[i].replyDate)
-																+ "</small></div>";
-														str += "    <p>"
-																+ list[i].reply
-																+ "</p></div></li>";
-													}
-
-													replyUL.html(str);
-
-													showReplyPage(replyCnt);
-
-												});//end function
-
-							}//end showList
-
-							var pageNum = 1;
-							var replyPageFooter = $(".panel-footer");
-
-							function showReplyPage(replyCnt) {
-
-								var endNum = Math.ceil(pageNum / 10.0) * 10;
-								var startNum = endNum - 9;
-
-								var prev = startNum != 1;
-								var next = false;
-
-								if (endNum * 10 >= replyCnt) {
-									endNum = Math.ceil(replyCnt / 10.0);
-								}
-
-								if (endNum * 10 < replyCnt) {
-									next = true;
-								}
-
-								var str = "<ul class='pagination pull-right'>";
-
-								if (prev) {
-									str += "<li class='page-item'><a class='page-link' href='"
-											+ (startNum - 1)
-											+ "'>Previous</a></li>";
-								}
-
-								for (var i = startNum; i <= endNum; i++) {
-
-									var active = pageNum == i ? "active" : "";
-
-									str += "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"
-											+ i + "</a></li>";
-								}
-
-								if (next) {
-									str += "<li class='page-item'><a class='page-link' href='"
-											+ (endNum + 1) + "'>Next</a></li>";
-								}
-
-								str += "</ul></div>";
-
-								console.log(str);
-
-								replyPageFooter.html(str);
-							}
-
-							replyPageFooter.on("click", "li a", function(e) {
-								e.preventDefault();
-								console.log("page click");
-
-								var targetPageNum = $(this).attr("href");
-
-								console.log("targetPageNum: " + targetPageNum);
-
-								pageNum = targetPageNum;
-
-								showList(pageNum);
-							});
-
-							/*     function showList(page){
-							
-							 replyService.getList({bno:bnoValue,page: page|| 1 }, function(list) {
-							
-							 var str="";
-							 if(list == null || list.length == 0){ 
-							
-							 replyUL.html("");
-							
-							 return;
-							 }
-							 for (var i = 0, len = list.length || 0; i < len; i++) {
-							 str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-							 str +="  <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
-							 str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-							 str +="    <p>"+list[i].reply+"</p></div></li>";
-							 }
-
-
-							 replyUL.html(str);
-
-							 });//end function
-							
-							 }//end showList */
-
-							var modal = $(".modal");
-							var modalInputReply = modal
-									.find("input[name='reply']");
-							var modalInputReplyer = modal
-									.find("input[name='replyer']");
-							var modalInputReplyDate = modal
-									.find("input[name='replyDate']");
-
-							var modalModBtn = $("#modalModBtn");
-							var modalRemoveBtn = $("#modalRemoveBtn");
-							var modalRegisterBtn = $("#modalRegisterBtn");
-
-							$("#modalCloseBtn").on("click", function(e) {
-
-								modal.modal('hide');
-							});
-
-							$("#addReplyBtn").on(
-									"click",
-									function(e) {
-
-										modal.find("input").val("");
-										modalInputReplyDate.closest("div")
-												.hide();
-										modal.find(
-												"button[id !='modalCloseBtn']")
-												.hide();
-
-										modalRegisterBtn.show();
-
-										$(".modal").modal("show");
-
-									});
-
-							modalRegisterBtn.on("click", function(e) {
-
-								var reply = {
-									reply : modalInputReply.val(),
-									replyer : modalInputReplyer.val(),
-									bno : bnoValue
-								};
-								replyService.add(reply, function(result) {
-
-									alert(result);
-
-									modal.find("input").val("");
-									modal.modal("hide");
-
-									//showList(1);
-									showList(-1);
-
-								});
-
-							});
-
-							//댓글 조회 클릭 이벤트 처리 
-							$(".chat")
-									.on(
-											"click",
-											"li",
-											function(e) {
-
-												var rno = $(this).data("rno");
-
-												replyService
-														.get(
-																rno,
-																function(reply) {
-
-																	modalInputReply
-																			.val(reply.reply);
-																	modalInputReplyer
-																			.val(reply.replyer);
-																	modalInputReplyDate
-																			.val(
-																					replyService
-																							.displayTime(reply.replyDate))
-																			.attr(
-																					"readonly",
-																					"readonly");
-																	modal
-																			.data(
-																					"rno",
-																					reply.rno);
-
-																	modal
-																			.find(
-																					"button[id !='modalCloseBtn']")
-																			.hide();
-																	modalModBtn
-																			.show();
-																	modalRemoveBtn
-																			.show();
-
-																	$(".modal")
-																			.modal(
-																					"show");
-
-																});
-											});
-
-							/*     modalModBtn.on("click", function(e){
-							
-							 var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-							
-							 replyService.update(reply, function(result){
-							
-							 alert(result);
-							 modal.modal("hide");
-							 showList(1);
-							
-							 });
-							
-							 });
-
-							 modalRemoveBtn.on("click", function (e){
-							
-							 var rno = modal.data("rno");
-							
-							 replyService.remove(rno, function(result){
-							
-							 alert(result);
-							 modal.modal("hide");
-							 showList(1);
-							
-							 });
-							
-							 }); */
-
-							modalModBtn.on("click", function(e) {
-
-								var reply = {
-									rno : modal.data("rno"),
-									reply : modalInputReply.val()
-								};
-
-								replyService.update(reply, function(result) {
-
-									alert(result);
-									modal.modal("hide");
-									showList(pageNum);
-
-								});
-
-							});
-
-							modalRemoveBtn.on("click", function(e) {
-
-								var rno = modal.data("rno");
-
-								replyService.remove(rno, function(result) {
-
-									alert(result);
-									modal.modal("hide");
-									showList(pageNum);
-
-								});
-
-							});
-
-						});
-	</script>
-
-
-
-	<script>
-		/* console.log("===============");
-		 console.log("JS TEST");
-
-		 var bnoValue = '<c:out value="${board.bno}"/>'; */
-
-		//for replyService add test
-		/* replyService.add(
 		
-		 {reply:"JS Test", replyer:"tester", bno:bnoValue}
-		 ,
-		 function(result){ 
-		 alert("RESULT: " + result);
-		 }
-		 ); */
-
-		//reply List Test
-		/* replyService.getList({bno:bnoValue, page:1}, function(list){
-		
-		 for(var i = 0,  len = list.length||0; i < len; i++ ){
-		 console.log(list[i]);
-		 }
-		 });
-		 */
-
-		/*  //17번 댓글 삭제 테스트 
-		 replyService.remove(17, function(count) {
-
-		 console.log(count);
-
-		 if (count === "success") {
-		 alert("REMOVED");
-		 }
-		 }, function(err) {
-		 alert('ERROR...');
-		 });
-		 */
-
-		//12번 댓글 수정 
-		/* replyService.update({
-		 rno : 12,
-		 bno : bnoValue,
-		 reply : "Modified Reply...."
-		 }, function(result) {
-
-		 alert("수정 완료...");
-
-		 });  
-		 */
-	</script>
-
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			var operForm = $("#operForm");
-
-			$("button[data-oper='modify']").on("click", function(e) {
-
-				operForm.attr("action", "/board/modify").submit();
-
-			});
-
-			$("button[data-oper='list']").on("click", function(e) {
-
-				operForm.find("#bno").remove();
-				operForm.attr("action", "/board/list")
-				operForm.submit();
-
-			});
-		});
-	</script>
-
-
+		<form id="sessionForm" action="/community/plannerReply" method="get">
+			<input type="hidden" name="bno" value="${board.bno}">
+			<input type="hidden" name="nick_Name" value="${nick_Name}">
+			<input type="hidden" name="email" value="${email}">
+			<input type="hidden" name="b_Type" value="${board.b_Type}">
+		</form>
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+	//사이드 메뉴 이동
+	$('.sideMenu').on("click", function(e) {
+		e.preventDefault();
+		
+		let btype = $(this).data("btype");
+
+		$(location).attr('href', 'list?b_Type=' + btype)
+	});
+});
+</script>
+
+<!--====================================================================================-->
+
+	<script src="${contextPath}/resources/js/board/boardReply.js"></script>
+
+<!--====================================================================================-->
 </html>
