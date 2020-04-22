@@ -5,30 +5,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>사이드바</title>
-
+<style type="text/css">
+.bar {
+	width: 100%;
+	padding: 20px 24%;
+	font-size: 18px;
+}
+</style>
 </head>
 <body>
 
-	<img src="../../resources/images/slide2.png" style='max-width:100%; max-height:auto'>
-	
-
+<!--
+	<div class = "row">
+	<img src="../../resources/images/slide2.png">
+	</div>-->
 	<!--<c:url value='/info_main?pageNum=${pageNum}' var="info_home" />-->
-	<a href="#" class="pageMenu">Home</a><br>
-	<a href="#" class="pageMenu">기본정보</a><br>
-	<a href="#" class="pageMenu">지도보기</a><br>	
-	<a href="#" class="pageMenu">명소</a><br>
-	<a href="#" class="pageMenu">맛집</a><br>	
-	<a href="#" class="pageMenu">테마</a><br>
-	<a href="#" class="pageMenu">쇼핑</a><br>
-	<a href="#" class="pageMenu">추천플래너</a><br>	
+	<div class = "bar">
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10">
+			<a href="#" class="pageMenu">Home</a>&nbsp; 
+			<a href="#" class="pageMenu">기본정보</a>&nbsp; 
+			<a href="#" class="pageMenu">지도보기</a>&nbsp;
+			<a href="#" class="pageMenu">명소</a>&nbsp; 
+			<a href="#" class="pageMenu">맛집</a>&nbsp; 
+			<a href="#" class="pageMenu">테마</a>&nbsp;
+			<a href="#" class="pageMenu">쇼핑</a>&nbsp; 
+			<a href="#" class="pageMenu">추천플래너</a>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+</div>
 
-	
+
 	<form id="pageMoveForm" action="" method="get">
-		<input type="hidden" name="Type" value="">
-	</form>
-	
-	
-	<script>
+			<input type="hidden" name="Type" value="">
+		</form>
+
+
+		<script>
 		$(document).ready(function(){
 			
 			var pageMoveForm = $("#pageMoveForm");
@@ -74,6 +89,5 @@
 			
 		});
 	</script>
-	
 </body>
 </html>

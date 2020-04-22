@@ -64,7 +64,7 @@
 										<a class="nav-link" href="/">Home</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="/about">Tour Info</a></li>
+										<a class="nav-link" href="/trip/city/countryList">Tour Info</a></li>
 									<li class="nav-item dropdown">
 										<a 	class="nav-link dropdown-toggle" href="/planner/list"
 											id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -111,22 +111,12 @@
 								</ul>
 							</div>
 							<ul class="navbar-nav">
-								<c:if test="${email == null}">
-									<li class="nav-item">
-										<a class="nav-link text-primary" href="/">Log in</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-primary" href="/">Sign up</a>
-									</li>
-								</c:if>
-								<c:if test="${email != null}">
-									<li class="nav-item">
-										<a class="nav-link text-primary" href="/">유저 프로필, 닉네임 띄워줌</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-primary" href="/">Log out</a>
-									</li>
-								</c:if>
+								<li class="nav-item">
+									<a class="nav-link text-primary" href="/">Log in</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-primary" href="/">Sign up</a>
+								</li>
 							</ul>
 						</nav>
 					</div>
