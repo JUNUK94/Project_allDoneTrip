@@ -1,46 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@ taglib prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"%>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style type="text/css">
-a {
-    color: black;
-    text-decoration: none;
-    background-color: transparent;
-}
-</style>
-<style type="text/css">
-
-	div.cheese {
-	text-align: center;
-
-	}
-	div.sidebar{
-	border: 1px solid gray;
-	text-align: center;
-	}
-	div.main{
-	border: 1px solid gray;
-	text-align: center;
-	}
-
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>파리_도시정보</title>
+	<style>
+		div.cheese {
+			text-align: center;
+		}
+		
+		div.sidebar{
+			border: 1px solid gray;
+			text-align: center;
+		}
+		
+		div.main{
+			border: 1px solid gray;
+			text-align: center;
+		}
+
+		a{
+		    color: black;
+		    text-decoration: none;
+		    background-color: transparent;
+		}
+	</style>
 </head>
 <body>
-	<div class='row'>
-		<div class='col-md-1'></div>
-		<div class='col-md-11 bg-primary'>
-			trip_main.jsp (header추가예정)
-		</div>
-	</div>
+	<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>플래너 작성</h2>
+                            <p>Plan your trip</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
 	<div class='row' >
 		<div class='col-md-2 sidebar'>
 			<!-- 사이드바출력 -->

@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%@ page session="false" %>
-<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <style type="text/css">
-.container {
-	float : left;
-}
 
 .inner {
 	overflow: hidden;
@@ -26,21 +23,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <body>
 
-<strong>Weather & Exchange Rate</strong>
-
-<div class = "country"> 국가:PARIS </div>
-<div class = "exchange">1EUR: </div>
-<div class = "ctemp">현재온도:</div>
-<div class = "clowtemp">최저온도:</div>
-<div class = "chightemp">최고온도:</div>
-<div class = "cicon">아이콘:</div>
-<div class = "time">날짜:</div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="${contextPath}/resources/js/exchange.js"></script>    
+	<strong>Weather & Exchange Rate</strong>
+	
+	<div class = "country"> 국가:PARIS </div>
+	<div class = "exchange">1EUR: </div>
+	<div class = "ctemp">현재온도:</div>
+	<div class = "clowtemp">최저온도:</div>
+	<div class = "chightemp">최고온도:</div>
+	<div class = "cicon">아이콘:</div>
+	<div class = "time">날짜:</div>
+    
     <script>
       $(document).ready(function(){
        
@@ -298,21 +292,5 @@
 			<div class="tab-pane fade" id="concert" role="tabpanel" aria-labelledby="concert-tab">대대댄싱뮤직</div>
 		</div>
 	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
-
 </body>
-
-
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript"
-	src="${contextPath}/resources/js/exchange.js"></script>
 </html>

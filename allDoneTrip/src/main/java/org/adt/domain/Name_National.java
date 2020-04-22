@@ -1,4 +1,4 @@
-package org.adt.controller;
+package org.adt.domain;
 
 import java.util.ArrayList;
 

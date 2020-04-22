@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<title>플래너 작성</title>
 	<%	session.setAttribute("email", "silverdue@gmail.com");
@@ -74,55 +71,32 @@
 
 	</style>
 	
-<!--=====================================jquery=========================================-->
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-<!--================================Ajax Cross Origin===================================-->
-
-	<script src="${contextPath}/resources/js/ajaxCrossOrigin/jquery.ajax-cross-origin.min.js"></script>
-
-<!--===================================bootstrap========================================-->
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
-
-<!--====================================================================================-->
 </head>
 <body>
 		
-			<!-- 지도 영역 -->
-			<div id="map_area" class="d-flex flex-column p-4 bg-light order-4">
-				
-				<div id="mapContent">
-					<div id="mapShow">
-						<!-- 지도 출력 부분 -->
-					</div>
-					<div class="d-flex justify-content-end">
-						<a id="showMyPositon" class="text-primary small" href="#">내 위치로 이동</a>
-					</div>
-					<br>
-					<div class="input-group mb-3">
-						<input type="text" id="input_query" class="form-control SearchBox">
-						<div class="input-group-append">
-							<button id="searchPlaceBtn" class="input-group-text">검색</button>
-						</div>
-					</div>
-					
-					</div>
-				</div>
+	<!-- 지도 영역 -->
+	<div id="map_area" class="d-flex flex-column p-4 bg-light order-4">
 		
+		<div id="mapContent">
+			<div id="mapShow">
+				<!-- 지도 출력 부분 -->
+			</div>
+			<div class="d-flex justify-content-end">
+				<a id="showMyPositon" class="text-primary small" href="#">내 위치로 이동</a>
+			</div>
+			<br>
+			<div class="input-group mb-3">
+				<input type="text" id="input_query" class="form-control SearchBox">
+				<div class="input-group-append">
+					<button id="searchPlaceBtn" class="input-group-text">검색</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </body>
-<!--=================================googleMap API======================================-->
 
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
-<!-- <script src="${contextPath}/resources/js/planner/plannerMap.js"></script> -->
 <script>
 $(document).ready(function(){
 //=================================================선언부==========================================================	

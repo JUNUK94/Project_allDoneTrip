@@ -1,5 +1,5 @@
 <%@page import="org.adt.domain.CityVO"%>
-<%@page import="org.adt.controller.CityMappingData"%>
+<%@page import="org.adt.domain.CityMappingData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

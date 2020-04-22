@@ -7,8 +7,7 @@
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<title>ALLDONE TRIP</title>
 
 <!--=====================================템플릿=========================================-->
@@ -28,9 +27,6 @@
 	<link rel="stylesheet" href="/resources/main/css/flaticon.css">
 	
 	<!-- fontawesome CSS -->	
-	<!-- <link rel="stylesheet"
-		href="/resources/main/fontawesome/css/all.min.css"> -->
-	
 	<link rel="stylesheet" 
 		href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
 		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" 
@@ -48,12 +44,21 @@
 	
 	<!-- style CSS -->
 	<link rel="stylesheet" href="/resources/main/css/style.css">
+	
+	<!-- poper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	
 
 <!--=====================================jquery=========================================-->
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		crossorigin="anonymous"></script>
+
+<!--================================Ajax Cross Origin===================================-->
+
+	<script src="${contextPath}/resources/js/ajaxCrossOrigin/jquery.ajax-cross-origin.min.js"></script>
 
 <!--===================================bootstrap========================================-->
 
@@ -67,7 +72,12 @@
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
 
+<!--==================================google map api====================================-->
+
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
+
 <!--====================================================================================-->
+
 </head>
 
 <body>

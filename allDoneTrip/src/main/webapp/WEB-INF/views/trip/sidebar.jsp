@@ -1,26 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@ taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>사이드바</title>
 
-<!--=====================================jquery=========================================-->
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous"></script>
-
-<!--====================================================================================-->
-
 </head>
 <body>
 
-<img src="../../resources/images/slide2.png" style='max-width:100%; max-height:auto'>
-	
-
+	<img src="../../resources/images/slide2.png" style='max-width:100%; max-height:auto'>
 	
 
 	<!--<c:url value='/info_main?pageNum=${pageNum}' var="info_home" />-->

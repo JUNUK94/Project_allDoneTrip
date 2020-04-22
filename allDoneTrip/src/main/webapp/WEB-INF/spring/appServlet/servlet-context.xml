@@ -29,7 +29,7 @@
 	</beans:bean>
 	
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="org.adt.controller.NaverLoginBO" />
+	<beans:bean id="naverLoginBO" class="org.adt.domain.NaverLoginBO" />
 
 	<context:component-scan base-package="org.adt.controller" />
 	

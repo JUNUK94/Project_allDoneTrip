@@ -1,9 +1,8 @@
-package org.adt.controller;
+package org.adt.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adt.domain.CityVO;
 import org.adt.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.adt.domain.MemberVO;
+import org.adt.domain.NaverLoginBO;
 import org.adt.mapper.MemberMapper;
 import org.adt.service.MemberService;
 import org.json.simple.JSONObject;
