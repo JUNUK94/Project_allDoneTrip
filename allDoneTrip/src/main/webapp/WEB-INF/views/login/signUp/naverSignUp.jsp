@@ -19,10 +19,10 @@
 		<div class="row mt-2 text-center" >
 			<div class="col "><h1>회원가입</h1></div>
 		</div>
-		<form id="signUpForm" name="signUpForm" action="/login/insertMember" method="post" onsubmit="return check()">
+		<form id="signUpForm" >
 		<div class="row mt-3 " >
 			<div class="col-2 "><p class='divText'>Email*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email" value="${email }"></div>
 		</div>
 		<div class="row" >
 			<div class="col-2"></div>
@@ -42,7 +42,7 @@
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Name*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Name" id="name" name="name"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Name" id="name" name="name" value="${name }"></div>
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Birthday*</p></div>
@@ -60,7 +60,7 @@
 			</div>
 			<div class="col-2 text-center">
 				<select class="form-control" id="gender" name="gender">
-					<option >sex</option>
+					<option value="">sex</option>
 					<option value="Male">Male</option>
 					<option value="Female">Female</option>
 				</select>
@@ -71,7 +71,7 @@
 		</div>
 		<div class="row mt-3" >
 			<div class="col-2"><p class='divText'>Nickname*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="nick_Name" id="nick_Name" name="nick_Name"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="nick_Name" id="nick_Name" name="nick_Name" value="${nickName }"></div>
 		</div>
 		<div class="row" >
 			<div class="col-2"></div>
@@ -109,11 +109,11 @@
 		<div class="row mt-5 " >
 		</div>
 		<div class="row mt-3 " >
-			<button type="submit" class="btn btn-primary btn-block" id="join">회원가입</button>
+			<button type="button" class="btn btn-primary btn-block" id="join">회원가입</button>
 		</div>
 		</form>
 		<div class="container-sm mt-3 " ></div>
-	</div>	                                                                                                                                                                                                                                                                                                                                                      
+	</div>	
 </div>
 </body>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
