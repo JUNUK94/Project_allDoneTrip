@@ -2669,7 +2669,7 @@ ul {
 
 /* line 6, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_about.scss */
 .about_us .about_img img {
-  width: 100%;
+  width: 80%;
 }
 
 @media (max-width: 991px) {

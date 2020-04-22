@@ -1,8 +1,14 @@
 $(document).ready(function(){
 	
+	
+	var searchForm = $("#searchForm");
+	
+	
+	checked="checked"
+	
+	
 	// 좋아요 클릭시
 	$("#likeBtn").on("click",function(){
-
 		var email = $("input[name='email']").val();
 		var plan_No = $("input[name='plan_No']").val();
 		var origin_LikeCnt = $("label[name='likeCnt']").html();
@@ -25,9 +31,25 @@ $(document).ready(function(){
 		}else{
 			alert("먼저 로그인이 필요합니다.");
 		}
-		
-		
-		
+	});
+	
+	
+	// 키워드 입력하여 검색
+	$("#keyword").on("keydown", function(key){
+		if(key.keyCode == 13){
+			searchForm.find("input[name='pageNum']").val("1");
+			searchForm.find("input[name='amount']").val("10");
+			searchForm.find("input[name='sortType']").val("regdate");
+			searchForm.submit();
+		}
+	});
+	
+	// 검색버튼 클릭해서 검색
+	$("#search_Submit").on("click", function(key){
+		searchForm.find("input[name='pageNum']").val("1");
+		searchForm.find("input[name='amount']").val("10");
+		searchForm.find("input[name='sortType']").val("regdate");
+		searchForm.submit();
 	});
 	
 });

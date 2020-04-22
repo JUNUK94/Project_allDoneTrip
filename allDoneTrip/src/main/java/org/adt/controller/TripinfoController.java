@@ -1,6 +1,7 @@
 package org.adt.controller;
 
 
+import org.adt.domain.CityMappingData;
 import org.adt.service.CityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,52 +196,57 @@ public class TripinfoController {
 
 			System.out.println("이게 나오면 안될껄?");
 			model.addAttribute("pageNum_Home", 10);
-			
-
 	}
-		return "trip/trip_main";
-}
+
+		model.addAttribute("page","trip/trip_main.jsp");
+		return "index";
+	}
 
 	
 		@GetMapping("/write")
-		public String main() {
-			
-			return "trip/write";
+		public String main(Model model) {
+			return "/trip/write";
 		}
 		
 		
 		@GetMapping("/city_list_p1")
 		public String list1(Model model) {
 			model.addAttribute("pageNum_Home", 22);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 		
 		@GetMapping("/city_list_p2")
 		public String list2(Model model) {
 			model.addAttribute("pageNum_Home", 23);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 	
 		@GetMapping("/city_list_p3")
 		public String list3(Model model) {
 			model.addAttribute("pageNum_Home", 24);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 		
 		@GetMapping("/city_list_p4")
 		public String list4(Model model) {
 			model.addAttribute("pageNum_Home", 25);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 		
 		@GetMapping("/city_list_t1")
 		public String list5(Model model) {
 			model.addAttribute("pageNum_Home", 26);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 		@GetMapping("/city_list_t2")
 		public String list6(Model model) {
 			model.addAttribute("pageNum_Home", 27);
-			return "trip/trip_main";
+			model.addAttribute("page","trip/trip_main.jsp");
+			return "index";
 		}
 	}

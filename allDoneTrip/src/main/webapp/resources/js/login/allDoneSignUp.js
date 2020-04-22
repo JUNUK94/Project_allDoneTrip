@@ -123,6 +123,7 @@
 				
 				var div = $("div.nicknameCheckStatus");
 				if(message != "사용하실 수 있는 닉네임입니다."){
+					
 					div.css("color","red");
 				} else{
 					div.css("color","#00C6ED");
@@ -135,25 +136,7 @@
 	
 /*===========================================================================================*/
 	//회원가입 버튼 클릭시 회원가입 페이지 이동
-	$("#join").on("click", function(){
-		var memeberInfo = $("form[id=signUpForm]").serialize();
-		
-		$.ajax({
-			url: '/login/insertMember',
-			data: memeberInfo,
-			type: 'post',
-			datatype: 'json',
-			success: function(message){
-				if(message != "가입 되었습니다."){
-					alert(message);
-					$(location).attr("href","login/signUp/allDoneSignUp");
-				}else{
-					alert(message);
-					$(location).attr("href","login/loginMain");
-				}
-			}	
-		});
-	});
+
 	
 	
 /*===========================================================================================*/	
@@ -196,6 +179,18 @@
 			}	
 		}); // end of ajax
 	});
+	
+	
+/*===========================================================================================*/	
+	
+	
+	
+	
+
+	
+	
+	
+	
 	
 	
 	

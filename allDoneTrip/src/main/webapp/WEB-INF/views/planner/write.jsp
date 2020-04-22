@@ -519,7 +519,6 @@
 
 <!--=================================googleMap API======================================-->
 
-	<script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
 	<!-- <script src="${contextPath}/resources/js/planner/plannerMap.js"></script> -->
 
 <!--====================================================================================-->

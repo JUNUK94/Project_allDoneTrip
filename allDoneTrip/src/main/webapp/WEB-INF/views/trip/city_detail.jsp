@@ -1,5 +1,5 @@
 <%@page import="org.adt.domain.CityVO"%>
-<%@page import="org.adt.controller.CityMappingData"%>
+<%@page import="org.adt.domain.CityMappingData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,45 +7,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
-.roww {
-	margin: 10px;
-	padding: inherit
-}
-
-div.main {
-	text-align: center;
-}
-
-.jb-table {
-	display: table;
-	width: 100%;
-}
-
-.jb-table-row {
-	display: table-row;
-}
-
-.jb-table-cell {
-	display: table-cell;
-	padding: 0px 20px;
-	height: 150px;
-}
-
-.jb-top {
-	vertical-align: top;
-}
-
-.jb-middle {
-	vertical-align: middle;
-}
-
-.jb-bottom {
-	vertical-align: bottom;
-}
+	.roww {
+		margin: 10px;
+		padding: inherit
+	}
+	
+	div.main {
+		text-align: center;
+	}
+	
+	.jb-table {
+		display: table;
+		width: 100%;
+	}
+	
+	.jb-table-row {
+		display: table-row;
+	}
+	
+	.jb-table-cell {
+		display: table-cell;
+		padding: 0px 20px;
+		height: 150px;
+	}
+	
+	.jb-top {
+		vertical-align: top;
+	}
+	
+	.jb-middle {
+		vertical-align: middle;
+	}
+	
+	.jb-bottom {
+		vertical-align: bottom;
+	}
 </style>
 </head>
 <body>

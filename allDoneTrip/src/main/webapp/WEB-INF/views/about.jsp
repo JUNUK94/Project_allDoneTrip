@@ -144,12 +144,10 @@
     <section class="about_us section_padding">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="about_img">
-                        <img src="../resources/main/img/about_img.png" alt="#">
-                    </div>
+                <div class="col-lg-3">
+					<img src="../resources/main/img/about_img.png" alt="#">
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-9">
                     <div class="about_text">
                         <h5>Who we are</h5>
                         <h2>We love to discover around the world</h2>

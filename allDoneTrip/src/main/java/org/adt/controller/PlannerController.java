@@ -60,19 +60,11 @@ public class PlannerController {
 			
 			model.addAttribute("data", pvo);
 		}
+		//페이지 include 처리
 		model.addAttribute("page", "planner/write.jsp");
 		return "index";
 	}
 	
-	
-	// 플래너 작성 페이지로 이동
-	@GetMapping("/test")
-	public void test(Model model) {
-		log.info("write");
-		
-		//model.addAttribute("width", "100%");
-	}
-		
 	
 	// 플래너 리스트 페이지로 이동
 	@GetMapping("/list")
@@ -83,7 +75,9 @@ public class PlannerController {
 		
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		//페이지 include 처리
 		model.addAttribute("page", "planner/list.jsp");
+		
 		return "index";
 	}
 
@@ -107,11 +101,12 @@ public class PlannerController {
 		model.addAttribute("totalReply", totalReply);
 		//대댓글(답글) 목록 가져와서 추가
 		model.addAttribute("reReply", replyService.getReReplyList(plan_No));
+		//페이지 include 처리
+		model.addAttribute("page", "planner/show.jsp");
 		
-		return "planner/show";
+		return "index";
 	}
 	
-
 	
 	
 	// 플래너 저장

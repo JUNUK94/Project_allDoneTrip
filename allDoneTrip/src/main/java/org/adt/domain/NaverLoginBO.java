@@ -1,8 +1,10 @@
-package org.adt.controller;
+package org.adt.domain;
 
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
+
+import org.adt.controller.naverController;
 import org.springframework.util.StringUtils;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
