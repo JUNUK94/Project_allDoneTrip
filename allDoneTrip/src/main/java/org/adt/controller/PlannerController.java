@@ -22,7 +22,11 @@ import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.PlannerVO;
+<<<<<<< HEAD
 import org.adt.domain.ReplyVO;
+=======
+import org.adt.domain.ThumbnailVO;
+>>>>>>> refs/remotes/origin/master
 import org.adt.service.plannerReplyService;
 import org.adt.service.plannerService;
 

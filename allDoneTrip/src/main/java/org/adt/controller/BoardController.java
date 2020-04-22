@@ -84,15 +84,16 @@ public class BoardController {
 		log.info(bno);
 		service.checkCookie(response, request, bno);
 
+		int totalReply = replyService.totalReplyCnt(bno);
+
+		
 		log.info("/view or modify");
 
 		model.addAttribute("board", service.get(bno));
 
 		model.addAttribute("reply", replyService.getReplyList(bno));
 
-		// 댓글 수량 카운트해서 추가
-		// model.addAttribute("totalReply", totalReply);
-		// 대댓글(답글) 목록 가져와서 추가
+		 model.addAttribute("totalReply", totalReply);
 		model.addAttribute("reReply", replyService.getReReplyList(bno));
 
 		return "/community/view";

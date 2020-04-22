@@ -15,6 +15,8 @@ public class MemberVO {
 	private String  mobile_Co; //통신사
 	private int phone_Num;
 	
+	private String profile;		//프로필사진 경로
+	private String introduce;	//자기소개
 	
 	private String join_Date; //가입일
 	private String signOut_Date; //탈퇴일

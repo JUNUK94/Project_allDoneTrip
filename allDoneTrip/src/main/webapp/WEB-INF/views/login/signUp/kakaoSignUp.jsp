@@ -6,25 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
-	<script src="/resources/js/login/allDoneSignUp.js"></script>
-<!--========================================jquery 링크=============================================-->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous"></script>
-<!--========================================카카오 js 링크=============================================-->
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<!--===============================================================================================-->
+	
 </head>
 
 <body>
-
-
-	<div class="row mt-2 text-center" >
-			<div class="col "><h1>회원가입</h1></div>
+<div class="container-sm mt-5 border" >
+	<div class="container-sm mt-3 " >
+		<div class="row mt-2 text-center" >
+			<div class="col "><h1>카카오 회원가입</h1></div>
 		</div>
 		<form id="signUpForm" >
 		<div class="row mt-3 " >
@@ -99,6 +88,20 @@
 			<input type="text" class="form-control" placeholder="Phone Number(only number)" id="phone_Num" name="phone_Num">
 		</div>
 		</div>
+		<div class="row mt-3" >
+			<div class="col-2 middle">
+				메일 인증
+			</div>
+			<div class="col-6">
+				<input type="text" class="form-control" placeholder="인증번호를 입력해주세요" id="certNum" name="certNum">
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-primary" id="issued">발급</button>
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-light" id="mailCheck">확인</button>
+			</div>
+		</div>
 		<div class="row mt-5 " >
 		</div>
 		<div class="row mt-3 " >
@@ -108,8 +111,18 @@
 		<div class="container-sm mt-3 " ></div>
 	</div>	
 </div>
-</div>
 </body>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+	<script src="/resources/js/login/allDoneSignUp.js"></script>
+<!--========================================jquery 링크=============================================-->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous"></script>
+<!--========================================카카오 js 링크=============================================-->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!--===============================================================================================-->
 
 </html>

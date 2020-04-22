@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +13,7 @@
 		session.setAttribute("nick_Name", "창창");
 		//session.invalidate();
 	%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	
 	<style>
 		#document_area {
@@ -519,8 +519,12 @@
 
 <!--=================================googleMap API======================================-->
 
+<<<<<<< HEAD
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBS2oAuYkl-89AZWRlo4UkUFVgWHLcN2qM&libraries=places"></script>
 <script src="${contextPath}/resources/js/planner/plannerMap.js"></script>
+=======
+	<!-- <script src="${contextPath}/resources/js/planner/plannerMap.js"></script> -->
+>>>>>>> refs/remotes/origin/master
 
 <!--====================================================================================-->
 

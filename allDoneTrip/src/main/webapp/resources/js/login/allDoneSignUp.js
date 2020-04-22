@@ -123,6 +123,7 @@
 				
 				var div = $("div.nicknameCheckStatus");
 				if(message != "사용하실 수 있는 닉네임입니다."){
+					
 					div.css("color","red");
 				} else{
 					div.css("color","#00C6ED");
@@ -135,15 +136,110 @@
 	
 /*===========================================================================================*/
 	//회원가입 버튼 클릭시 회원가입 페이지 이동
-	$("#join").on("click", function(){
-		var form = $("#signUpForm");
-		form.attr("action","/login/insertMember");
-		form.attr("method","post");
-		form.submit();
+
+	
+	
+/*===========================================================================================*/	
+	
+	//email 보내기 이벤트
+	$("#issued").on("click",function(e){
+		var email = $("#email").val();
+		
+		$.ajax({
+			url: '/login/mailSending',
+			data: {email:email},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				
+				alert("메일이 발송되었습니다.");
+			}	
+		}); // end of ajax
+	});
+	
+/*===========================================================================================*/		
+	
+	//email인증 확인 이벤트
+	$("#mailCheck").on("click",function(e){
+		var certNum = $("#certNum").val();
+		
+		$.ajax({
+			url: '/login/mailCheck',
+			data: {certNum : certNum},
+			type: 'get',
+			datatype: 'json',
+			success: function(message){
+				console.log(message);
+				if(message != "성공"){
+					alert("번호를 다시 확인해주세요");
+				}else{
+					alert("인증이 완료되었습니다.");
+				}
+				
+			}	
+		}); // end of ajax
 	});
 	
 	
 /*===========================================================================================*/	
+	
+	
+	function check(){
+		
+		var div = $("div.emailCheckStatus");
+		console.log("asd"+div.text());
+		if(div.text() != "사용하실 수 있는 이메일입니다."){
+		        	alert("형식에 맞지않는 이메일 입니다.");
+		            return false;
+			}
+		var status = false;
+		if(div.text() == "사용하실 수 있는 이메일입니다."){
+			for (var i = 0; i < signUpForm.email.value.length; i++) {
+				if(signUpForm.email.value.charAt(i) == "."){
+					status = true;
+				}
+			}
+			
+			if(!status){
+				alert("형식에 맞지않는 이메일 입니다.");
+	            return false;
+			}
+				
+			
+		}
+		
+		if(signUpForm.email.value.length == 0){
+			alert("이메일을 입력해 주세요.");
+			return false;
+		}
+		if(signUpForm.pw.value.length == 0){
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		if(signUpForm.pw.value.length <8){
+			alert("비밀번호는 8자 이상이여야 합니다.");
+			return false;
+		}
+		if(signUpForm.name.value.length == 0){
+			alert("이름을 입력해 주세요.");
+			return false;
+		}
+		if(signUpForm.birth.value.length == 0){
+			alert("생년월일을 입력해 주세요.");
+			return false;
+		}
+		if(signUpForm.gender.value.length == 0){
+			alert("성별을 선택해 주세요.");
+			return false;
+		}
+		if(signUpForm.nick_Name.value.length == 0){
+			alert("닉네임을 입력해 주세요.");
+			return false;
+		}
+		
+	}
+	
+
 	
 	
 	

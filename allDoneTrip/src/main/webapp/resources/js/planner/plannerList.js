@@ -1,10 +1,7 @@
 $(document).ready(function(){
 	
 	var actionForm = $("#actionForm");
-	
-	$("input[name='keyword']").val();
-	
-	
+	var searchForm = $("#searchForm");
 	
 	//페이지 번호 선택시 
 	$(".page-link").on("click", function(e){
@@ -46,14 +43,13 @@ $(document).ready(function(){
 	});
 	
 	
-	var searchForm = $("#searchForm");
-	
 	// 키워드 입력하여 검색
-	$("#searchForm").find("input[type='submit']").on("click", function(e){
-		e.preventDefault();
-		
-		searchForm.find("input[name='pageNum']").val("1");
-		searchForm.submit();
+	$("#keyword").on("keydown", function(key){
+		if(key.keyCode == 13){
+			searchForm.find("input[name='pageNum']").val("1");
+			searchForm.find("input[name='sortType']").val("regdate");
+			searchForm.submit();
+		}
 	});
 	
 	

@@ -7,14 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%=session.getAttribute("email") %>
  login<br>
- <button id="back">뒤로가기 </button>
+ <button id="back">로그아웃 </button>
  
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$("#back").on("click", function(e){
-			$(location).attr("href","/login/loginMain");
+			$(location).attr("href","/login/loginout");
 		});
 </script>
 </html>

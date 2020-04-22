@@ -30,8 +30,25 @@
 		<div class="col-10 border">
 			
 			내용
+			
+			<div class="sns-go">
+			  <ul>
+			    <li>
+			      <a href="#" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" ><img src="../resources/img/share/sns_naver.png" width="40" alt="네이버 블로그 공유하기"></a>
+			    </li> 
+			    <li>
+			      <a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img src="../resources/img/share/sns_face.png" width="40" alt="페이스북 공유하기"></a>
+			    </li>
+			    <li>
+			      <a href="#" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Twitter" ><img src="../resources/img/share/sns_tw.png" width="40" alt="트위터 공유하기"></a>
+			    </li>
+			    <li>
+			      <a href="#" onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=400,width=600');return false;" target="_blank" alt="Share on kakaostory"><img src="../resources/img/share/sns_kakao.png" width="40" alt="카카오스토리 공유하기"></a>
+			    </li>
+			  </ul>
+			</div>
 		</div>
-	</div>	
+	</div>
 
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

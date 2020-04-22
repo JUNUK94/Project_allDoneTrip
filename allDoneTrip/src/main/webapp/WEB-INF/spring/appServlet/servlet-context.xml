@@ -23,11 +23,14 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="org.adt.domain.NaverLoginBO" />
+
 	<context:component-scan base-package="org.adt.controller" />
 	
 	<security:global-method-security

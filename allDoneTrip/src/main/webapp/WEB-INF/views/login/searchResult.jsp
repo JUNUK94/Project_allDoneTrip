@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${msg1} <br> ${searchResult} ${msg2}
+	${msg1} <br> ${searchResult} ${msg2}<br>
+	<a href="/login/loginMain"><button>로그인 하러가기</button></a>
 </body>
 </html>
