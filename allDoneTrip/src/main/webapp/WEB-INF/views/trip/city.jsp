@@ -18,13 +18,15 @@
 .inner:hover img {
 	transform: scale(1.5);
 }
-
+.card{
+border: aqua;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="container">
 	<strong>Weather & Exchange Rate</strong>
 	
 	<div class = "country"> 국가:PARIS </div>
@@ -116,43 +118,37 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
-							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/paris_1.jpg"
-									alt="Card image cap">
+						<div class="card"  onclick="location.href='paris?Type=1_1';">
+							<div class="inner" >
+								<img class="card-img-top" src="../../resources/images/1_1.jpg" style="width:320px; height: 220px;">
 							</div>
 							<div class="card-body text-center">
 								<h5 class="card-title">에펠탑</h5>
 								<p class="card-text">명실상부 파리의 아이콘</p>
-								<a href="paris?Type=10" class="btn btn-success">ㄱㄱㄱㄱ</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1_21';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/paris_2.jpg"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/paris_2.jpg" style="width:320px; height: 220px;">
 							</div>
 
 							<div class="card-body text-center">
 								<h5 class="card-title">루브르 박물관</h5>
 								<p class="card-text">전 세계 3대 박물관</p>
-								<a href="#" class="btn btn-success">ㄱㄱㄱㄱ.</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1_6';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/paris_3.jpg"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1_6.jpg" style="width:320px; height: 220px;">
 							</div>
 
 							<div class="card-body text-center">
 								<h5 class="card-title">개선문</h5>
 								<p class="card-text">나폴레옹의 승리 상징</p>
-								<a href="#" class="btn btn-success">ㄱㄱㄱ?</a>
 							</div>
 						</div>
 					</div>
@@ -165,43 +161,38 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1F1';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a1.png"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1F1.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
 							<div class="card-body text-center">
 								<h5 class="card-title">레옹 드 브뤼셀</h5>
 								<p class="card-text">벨기에 홍합 요리 전문</p>
-								<a href="#" class="btn btn-success">ㄱㄱ</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1F3';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a2.jpg"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1F3.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
-
 							<div class="card-body text-center">
 								<h5 class="card-title">라스 뒤 팔라펠</h5>
 								<p class="card-text">유대인 스타일의 샌드위치</p>
-								<a href="#" class="btn btn-success">ㄱㄱ</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1F5';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a3.png"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1F5.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
-
 							<div class="card-body text-center">
 								<h5 class="card-title">오 프티 페흐 아 슈발</h5>
 								<p class="card-text">송아지 스테이크를 저렴하게</p>
-								<a href="#" class="btn btn-success">ㄱㄱㄱ</a>
 							</div>
 						</div>
 					</div>
@@ -214,43 +205,38 @@
 					<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1E1';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a4.jpg"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1E1.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
 							<div class="card-body text-center">
 								<h5 class="card-title">디즈니 스토어</h5>
 								<p class="card-text">파리 디즈니랜드의 감동을 다시 한번 </p>
-								<a href="#" class="btn btn-success">ㄱㄱ</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1E4';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a5.png"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1E4.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
-
 							<div class="card-body text-center">
 								<h5 class="card-title">샤넬 깜봉(본점)</h5>
 								<p class="card-text">샤넬 본점</p>
-								<a href="#" class="btn btn-success">ㄱㄱ</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card shadow" style="width: 20rem;">
+						<div class="card" onclick="location.href='paris?Type=1E6';">
 							<div class="inner">
-								<img class="card-img-top" src="../../resources/images/a6.jpg"
-									alt="Card image cap">
+								<img class="card-img-top" src="../../resources/images/1E6.jpg"
+									alt="Card image cap" style="width:320px; height: 220px;">
 							</div>
-
 							<div class="card-body text-center">
 								<h5 class="card-title">갤러리 약국</h5>
 								<p class="card-text">저렴한 약국 화장품</p>
-								<a href="#" class="btn btn-success">ㄱㄱㄱ</a>
 							</div>
 						</div>
 					</div>
@@ -291,6 +277,6 @@
 			
 			<div class="tab-pane fade" id="concert" role="tabpanel" aria-labelledby="concert-tab">대대댄싱뮤직</div>
 		</div>
-	</div>
+	</div></div>
 </body>
 </html>

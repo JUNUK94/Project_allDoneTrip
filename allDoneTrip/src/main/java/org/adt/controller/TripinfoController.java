@@ -202,7 +202,12 @@ public class TripinfoController {
 		return "index";
 	}
 
-	
+		@GetMapping("/countryList")
+		public String countryList(Model model) {
+			model.addAttribute("page","trip/countryList.jsp");
+			return "index";
+		}
+		
 		@GetMapping("/write")
 		public String main(Model model) {
 			return "/trip/write";

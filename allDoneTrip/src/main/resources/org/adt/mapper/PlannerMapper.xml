@@ -179,7 +179,22 @@
 	</select>
 	
 	
-	
+	<!-- 추천순으로 플래너 리스트 가져오기 -->
+	<select id="get_Popular_PlannerList" resultType="org.adt.domain.PlannerVO">
+		<![CDATA[
+			select	* 
+			from 	(select
+					/*+ index_desc(planner pk_planner)*/
+							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
+					from 	planner, city
+					where	
+							planner.city_No=city.city_No 
+							and status = 1
+							order by plan_Like desc
+					)
+			where 	rn > 1
+		]]>
+	</select>
 	
 	
 	

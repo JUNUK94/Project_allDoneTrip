@@ -7,26 +7,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>파리_도시정보</title>
 	<style>
-		div.cheese {
-			text-align: center;
-		}
-		
-		div.sidebar{
-			border: 1px solid gray;
-			text-align: center;
-		}
-		
-		div.main{
-			border: 1px solid gray;
-			text-align: center;
-		}
+div.cheese {
+	text-align: center;
+}
 
-		a{
-		    color: black;
-		    text-decoration: none;
-		    background-color: transparent;
-		}
-	</style>
+div.sidebar {
+	border: 1px solid gray;
+	text-align: center;
+}
+
+div.main {
+	border: 1px solid gray;
+	text-align: center;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+
+</style>
 </head>
 <body>
 	<!-- breadcrumb start-->
@@ -36,23 +38,29 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item text-center">
-                            <h2>플래너 작성</h2>
-                            <p>Plan your trip</p>
+                            <h2>PARIS</h2>
+                            <p>Bonjour!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- breadcrumb start-->
+    <!-- //breadcrumb start-->
 
-	<div class='row' >
-		<div class='col-md-2 sidebar'>
+	<div class="row" >
+		<div class="col-md-1"></div>
+
+		<div class="col-md-10">
 			<!-- 사이드바출력 -->
-			<jsp:include page="sidebar.jsp" flush="false" />
-		</div>
+			<jsp:include page="sidebar.jsp" flush="false" /></div>
+		<div class="col-md-1"></div>
+	</div>
 
-		<div class='col-md-10 main' >
+	
+	<div class='row'>
+		<div class='col-md-12'>
+
 			<!-- info_main. 바뀌는 페이지 -->
 
 			<!-- %@include file="../include/" + {$aaa} + ".jsp" % -->
@@ -60,15 +68,16 @@
 			<c:set var="pageNum_Home" value="${pageNum_Home}" />
 			<c:choose>
 				<c:when test="${pageNum_Home eq null}">
-					<jsp:include page="city.jsp" flush="false" /><!--info_main-->	
+					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
 				</c:when>
 				<c:when test="${pageNum_Home eq '1'}">
 					<jsp:include page="city.jsp" flush="false" /><!--info_main-->
 				</c:when>
 				<c:when test="${pageNum_Home eq '2'}">
-					<jsp:include page="city_list.jsp" flush="false" />	<!-- 기본정보 -->	
+					<jsp:include page="city_list.jsp" flush="false" />
+					<!-- 기본정보 -->
 				</c:when>
-				<c:when test="${pageNum_Home eq '3'}">	
+				<c:when test="${pageNum_Home eq '3'}">
 					<jsp:include page="write.jsp" flush="false" /><!-- 지도보기 -->
 				</c:when>
 				<c:when test="${pageNum_Home eq '4'}">
@@ -94,7 +103,7 @@
 				</c:when>
 				<c:when test="${pageNum_Home eq '12'}">
 					<jsp:include page="city_detailshop.jsp" flush="false" /><!-- 쇼핑상세페이지 -->
-				</c:when>				
+				</c:when>
 				<c:when test="${pageNum_Home eq '22'}">
 					<jsp:include page="list_tour/city_list_p1.jsp" flush="false" /><!-- 기본정보탭-->
 				</c:when>
@@ -112,8 +121,8 @@
 				</c:when>
 				<c:when test="${pageNum_Home eq '27'}">
 					<jsp:include page="list_tour/city_list_t2.jsp" flush="false" /><!-- 기본정보탭-->
-				</c:when>				
-				
+				</c:when>
+
 			</c:choose>
 		</div>
 	</div>

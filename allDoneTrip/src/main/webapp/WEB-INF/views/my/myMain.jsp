@@ -8,6 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>마이 페이지</h2>
+                            <p>MyPage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
 	<div class="row">
 		<div class="col-2 border" >
 			<br>

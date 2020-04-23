@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                                                     	
+=======
+                                                        	
+    
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
     
     
     
@@ -13,7 +18,12 @@
     
     
     <wb-module deploy-name="sample">
+<<<<<<< HEAD
                                                                                                                 
+=======
+                                                                                                                        
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         
@@ -27,7 +37,12 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                                                                         		
+=======
+                                                                                                                		
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         
@@ -41,21 +56,41 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                                         
+=======
+                                                
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                                         
+=======
+                                                
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
                                 
+=======
+                                        
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+<<<<<<< HEAD
                                                                                                         		
+=======
+                                                                                                                		
+        
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
         
         
         
@@ -69,8 +104,15 @@
         
         
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
         <property name="context-root" value="/"/>
                                                                                                         	
+=======
+                
+        <property name="context-root" value="/"/>
+                                                                                                                	
+    
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
     
     
     
@@ -84,7 +126,12 @@
     
     
     </wb-module>
+<<<<<<< HEAD
                                                     
+=======
+                                                        
+
+>>>>>>> branch 'master' of https://github.com/JUNUK94/Project_allDoneTrip
 
 
 

@@ -8,9 +8,26 @@
 <title>올던트립 로그인</title>
 </head>
 <body>
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>올던트립 로그인</h2>
+                            <p>allDone login</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+    
+    <br><br><br>
 	<div class="container-sm mt-5 border" >
 		<div class="row ">
-			<div class="col text-center"><h1>로그인</h1></div>
 		</div>
 		<form action="/login/loginCheck" method="post" name="loginForm" id="loginForm">
 			<div class="row">
@@ -30,9 +47,9 @@
 			    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c830142e73bf6dbb2bac8a21583ca959&redirect_uri=http://localhost:8080/login/kakaoLogin&response_type=code">
 			    		<button type="button" class="btn btn-warning" id="kakaoLogin">카카오 로그인</button></a>
 				   	</div>
-				    	
+				  	
 			    	<div class="container-sm mt-4">
-			    		<a href="<%-- ${naver_url} --%>"><button type="button" class="btn btn-success" id="naverLogin">네이버 로그인</button></a>
+			    		<a href=" ${naver_url}"><button type="button" class="btn btn-success" id="naverLogin">네이버 로그인</button></a>
 			   		</div>
 		    	</div>
 			</div>
@@ -47,6 +64,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="container-sm mt-4">
+	<br><br><br><br>
+	</div>
+
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">

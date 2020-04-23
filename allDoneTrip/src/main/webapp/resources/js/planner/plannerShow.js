@@ -3,10 +3,6 @@ $(document).ready(function(){
 	
 	var searchForm = $("#searchForm");
 	
-	
-	checked="checked"
-	
-	
 	// 좋아요 클릭시
 	$("#likeBtn").on("click",function(){
 		var email = $("input[name='email']").val();

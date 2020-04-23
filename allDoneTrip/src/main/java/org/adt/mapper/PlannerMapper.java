@@ -44,5 +44,8 @@ public interface PlannerMapper {
 	
 	// 로그인한 유저의 플래너 리스트 가져오기
 	public List<PlannerVO> getUsersPlanner(String email);
+	
+	// 추천순으로  플래너 리스트 가져오기
+	public List<PlannerVO> get_Popular_PlannerList();
 
 }

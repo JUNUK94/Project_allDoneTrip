@@ -74,23 +74,6 @@ function replyDelete(p_Rno){
 	});//end of Ajax
 }
 
-
-//답글창 띄우기 이벤트
-function reReply(p_Rno, index){
-	
-	event.preventDefault();
-	
-	var plan_No = document.getElementsByName('plan_No')[0].value;
-	var frame = document.getElementById("reReply"+index);
-	
-	if(frame.style.display == "none"){
-		frame.removeAttribute("style");
-	}else{
-		frame.setAttribute("style","display:none");
-	}
-}
-
-
 //답글 등록 이벤트
 function reReplyInsert(p_Rno, index){
 
@@ -136,14 +119,20 @@ function show_reReplyList(index){
 
 	event.preventDefault();
 	
+	var plan_No = document.getElementsByName('plan_No')[0].value;
+	var reply_writeframe = document.getElementById("reReply"+index);
 	var frame = document.getElementById("reReplyList"+index);
 	var aTag = document.getElementById("count_reReply"+index);
+	
+	if(frame.style.display == "none"){
+		reply_writeframe.removeAttribute("style");
+	}else{
+		reply_writeframe.setAttribute("style","display:none");
+	}
 
 	if(frame.style.display == "none"){
 		frame.style.display = '';
-		aTag.innerHTML = "∧";
 	}else{
 		frame.style.display = 'none';
-		aTag.innerHTML = "∨";
 	}
 }
