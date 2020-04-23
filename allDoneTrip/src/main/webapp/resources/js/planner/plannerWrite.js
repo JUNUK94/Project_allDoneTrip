@@ -106,6 +106,15 @@ $(document).ready(function(){
 		var date = "";
 		var day1 = startDay.value.replace(/-/gi, ".");
 		var day2 = endDay.value.replace(/-/gi, ".");
+		var Thumbnail;
+		
+		if(p_Thumbnail.value){
+			Thumbnail = p_Thumbnail.value;
+		}else{
+			var i = parseInt((Math.random()*7));
+			Thumbnail = "https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png";
+		}
+		
 		
 		//빈양식 없으면 DB에 저장
 		if(inputCheck(p_Content)){
@@ -116,7 +125,7 @@ $(document).ready(function(){
 						"city_No" : city_Name.value,
 						"trip_Period" : day1+"-"+day2,
 						"p_Content" : p_Content,
-						"p_Thumbnail" : p_Thumbnail.value
+						"p_Thumbnail" : Thumbnail
 					};
 		
 			$.ajax({
@@ -156,7 +165,15 @@ $(document).ready(function(){
 			var date = "";
 			var day1 = startDay.value.replace(/-/gi, ".");
 			var day2 = endDay.value.replace(/-/gi, ".");
+			var Thumbnail;
 			
+			if(p_Thumbnail.value){
+				Thumbnail = p_Thumbnail.value;
+			}else{
+				var i = parseInt((Math.random()*7));
+				Thumbnail = "https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png";
+			}
+
 			var obj ={	"plan_No" : plan_No.value,
 						"email" : email.value,
 						"nick_Name" : nick_Name.value,
@@ -164,7 +181,7 @@ $(document).ready(function(){
 						"city_No" : city_Name.value,
 						"trip_Period" : day1+"-"+day2,
 						"p_Content" : p_Content,
-						"p_Thumbnail" : p_Thumbnail.value
+						"p_Thumbnail" : Thumbnail
 					};
 			
 			$.ajax({
@@ -185,11 +202,7 @@ $(document).ready(function(){
 	            }
 	        });
 		}
-		
 	});
-	
-	
-	
 	
 	
 	//새글쓰기 클릭 시
@@ -208,7 +221,7 @@ $(document).ready(function(){
 	    html: true
 	});
 
-}); //end of ajax
+}); //end of jquery
 
 
 //플래너 열기 -> 플래너 선택 시 

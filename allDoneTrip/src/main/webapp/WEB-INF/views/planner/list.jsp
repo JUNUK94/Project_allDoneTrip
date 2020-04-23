@@ -121,15 +121,7 @@
 								<td class="planList_td">${pvo.plan_No}</td>
 								<td class="d-flex flex-row align-items-center">
 									<div style="width:30%">
-										<c:if test="${pvo.p_Thumbnail != null}">
-											<img src='${pvo.p_Thumbnail}' width='100px' height='150px'>
-										</c:if>
-										<c:if test="${pvo.p_Thumbnail == null}">
-											<script>
-												var i = parseInt((Math.random()*7));
-												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='100px' height='150px'>");
-											</script>
-										</c:if>
+										<img src='${pvo.p_Thumbnail}' width='100px' height='150px'>
 									</div>
 									<div class="small p-2" style="width:70%">
 										<h5><a class="show" href="${pvo.plan_No}">${pvo.p_Title}</a></h5>

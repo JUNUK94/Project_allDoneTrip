@@ -16,6 +16,31 @@
 		session.setAttribute("profile", "http://alldonetrip.shop/resources/img/user/profile/a.jpg");
 		//session.invalidate();
 	%>
+	<style>
+		#likeBtn{
+			width:48px; 
+			height: 48px; 
+			padding-top: 10px; 
+			padding-left: 12px;
+			margin-right: 5px;
+			z-index:5; 
+		}
+		
+		#scrapBtn{
+			width:48px; 
+			height: 48px; 
+			padding-top: 12px; 
+			padding-left: 14px;
+			margin-left: 200px;
+			z-index:5; 
+		}
+		
+		#likeBtn:hover,
+		#scrapBtn:hover{
+			cursor: pointer;
+		}
+	</style>
+	
 </head>
 <body>
 	<!-- breadcrumb start-->
@@ -45,19 +70,11 @@
 	                        <div class="col-lg-3">
 								<div class="about_img">
 									<c:forEach items="${content}" var="pvo">
-										<c:if test="${pvo.p_Thumbnail != null}">
-											<img src='${pvo.p_Thumbnail}'>
-										</c:if>
-										<c:if test="${pvo.p_Thumbnail == null}">
-											<script>
-												var i = parseInt((Math.random()*7));
-												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png'");
-											</script>
-										</c:if>
+										<img src='${pvo.p_Thumbnail}'>
 									</c:forEach>
 								</div>
 							</div>
-							<div class="col-lg-6 d-flex flex-column">
+							<div class="col-lg-7 d-flex flex-column hotel_list">
 								<div class="row align-items-center" style="height:80%">
 									<div class="about_text">
 										<c:forEach items="${content}" var="pvo">
@@ -66,6 +83,11 @@
 											</h5>
 											<h2 style="font-weight: bold;">
 												${pvo.p_Title}
+												<c:if test="${pvo.email == email}">
+													<!-- 수정, 삭제 버튼 -->
+													&nbsp;<a id="modify_Planner" href="#"><i class='fas fa-eraser' style='font-size: 18px; color: gray'></i></a>
+													&nbsp;<span data-toggle="modal" data-target="#delete_Planner_Modal"><i class='fas fa-trash-alt' style='font-size: 18px; color: gray'></i></span>
+												</c:if>
 											</h2>
 											<br>
 											<p>${pvo.trip_Period}<br>
@@ -73,21 +95,63 @@
 										</c:forEach>
 									</div>
 								</div>
-								<div class="row align-items-end" style="height:20%">
+								<div class="row single_ihotel_list justify-content-between align-items-end" style="height:30%">
+									<!-- 다운로드 버튼 -->
 									<button type="button" class="btn btn-outline-primary">pdf 다운로드</button>
+									<c:if test="${scrapStatus == true}">
+										<span id="scrapBtn" class="rounded-circle align-items-center" style="background-color: rgb(92, 209, 229);">
+											<i class='far fa-bookmark' style='font-size:25px;color: white'></i>
+										</span>
+									</c:if>
+									<c:if test="${scrapStatus == false}">
+										<span id="scrapBtn" class="rounded-circle align-items-center" style="background-color: #fe5c24;">
+											<i class='far fa-bookmark' style='font-size:25px;color: white'></i>
+										</span>
+									</c:if>
+									<!-- 좋아요 버튼 -->
+									<c:if test="${likeStatus == true}">
+										<span id="likeBtn" class="rounded-circle align-items-center" style="background-color: rgb(92, 209, 229);">
+											<i class='far fa-thumbs-up' style='font-size:25px; color: white;'></i>
+										</span>
+									</c:if>
+									<c:if test="${likeStatus == false}">
+										<span id="likeBtn" class="rounded-circle align-items-center" style="background-color: #fe5c24;">
+											<i class='far fa-thumbs-up' style='font-size:25px; color: white;'></i>
+										</span>
+									</c:if>
+									<!-- 공유 아이콘 -->
+									<div class="hover_text" style="margin-left: 450px; margin-top: 0px;">
+										<div class="hotel_social_icon">
+											<ul>
+												<li>
+													<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook">
+														<i class="ti-facebook"></i>
+													</a>
+												</li>
+												<li>
+													<a href="#" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Twitter">
+														<i class="ti-twitter-alt"></i>
+													</a>
+												</li>
+												<!-- 네이버 블로그로.. -->
+												<li>
+													<a href="#" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver">
+														<i class="ti-linkedin"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="share_icon">
+											<i class="ti-share"></i>
+										</div>
+									</div>
+									<!-- end of 공유아이콘-->
 								</div>
 							</div>
-							<div class="col-lg-2 d-flex flex-column">
-								<div class="row d-flex flex-row justify-content-end">
-									<i class='far fa-envelope text-primary p-1' style='font-size:30px;'></i>
-									<i class='far fa-envelope text-primary p-1' style='font-size:30px;'></i>
-								</div>
-								<div class="row d-flex flex-row justify-content-between">
-								</div>
-							</div>
-							<div class="col-lg-1 d-flex flex-column"></div>
+							<div class="col-lg-2 d-flex flex-column"></div>
 						</div>
                     </div>
+				
                     <!-- 작성자 프로필 부분 -->
 					<div class="blog-author" style="margin-top:30px;">
 						<div class="media align-items-center">
@@ -123,6 +187,7 @@
 							</p>
                         </div>
                     </div>
+                    
                     <!-- 댓글 작성부분 -->
                    	<div class="comment-form">
 						<div class="row form-contact comment_form">
@@ -138,6 +203,7 @@
 							</button>
 						</div>
 					</div>
+					
                     <!-- 댓글 영역 -->
                     <div class="comments-area">
                         <c:forEach items="${reply}" var="prvo" varStatus="vs">
@@ -171,6 +237,7 @@
 	                                                </a>
 	                                            </div>
 	                                        </div>
+	                                        
 	                                        <!-- 답글 입력창 -->
 					                   		<div id="reReply${vs.index}" class="comment-form" style="display:none;">
 												<div class="row form-contact comment_form">
@@ -188,6 +255,8 @@
 	                                </div>
 	                            </div>
 							</div>
+							
+							<!-- 답글 리스트 -->
 							<div id="reReplyList${vs.index}" class="comment-list" style="display:none;">
 								<c:forEach items="${reReply}" var="rrvo">
 									<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
@@ -264,20 +333,10 @@
                             <c:forEach items="${plannerList}" var="List" varStatus="li">
                             	<c:if test="${loop}">
 		                            <div class="media post_item">
-		                            	<c:if test="${List.p_Thumbnail != null}">
-		                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
-		                                </c:if>
-		                                <c:if test="${List.p_Thumbnail == null}">
-		                                	<script>
-												var i = parseInt((Math.random()*7));
-												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='70px' height='70px' style='overflow: hidden;'>");
-											</script>
-		                                </c:if>
+	                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
 		                                <div class="media-body">
-		                                	<a href="single-blog.html">
-		                                        <p style="color: #fe5c24;">${List.city_Name}</p>
-		                                    </a>
-		                                    <a href="single-blog.html">
+											<p style="color: #fe5c24;">${List.city_Name}</p>
+		                                    <a href="/planner/show?plan_No=${List.plan_No}">
 		                                        <h3 style="font-weight: bold;">${List.p_Title}</h3>
 		                                    </a>
 		                                    <p>${List.trip_Period}</p>
@@ -295,20 +354,10 @@
                             <c:forEach items="${popular_PlannerList}" var="List" varStatus="li">
                             	<c:if test="${loop}">
 		                            <div class="media post_item">
-		                            	<c:if test="${List.p_Thumbnail != null}">
-		                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
-		                                </c:if>
-		                                <c:if test="${List.p_Thumbnail == null}">
-		                                	<script>
-												var i = parseInt((Math.random()*7));
-												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='70px' height='70px' style='overflow: hidden;'>");
-											</script>
-		                                </c:if>
+	                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
 		                                <div class="media-body">
-		                                	<a href="single-blog.html">
-		                                        <p style="color: #fe5c24;">${List.city_Name}</p>
-		                                    </a>
-		                                    <a href="single-blog.html">
+											<p style="color: #fe5c24;">${List.city_Name}</p>
+		                                    <a href="/planner/show?plan_No=${List.plan_No}">
 		                                        <h3 style="font-weight: bold;">${List.p_Title}</h3>
 		                                    </a>
 		                                    <p>${List.trip_Period}</p>
@@ -325,15 +374,67 @@
             </div>
         </div>
     </section>
-    <!--================ Blog Area end =================-->							
+    <!--================ end of Blog Area =================-->							
 	
+
+	<!-- 세션의 닉네임,이메일 & 현재 페이지의 플래너번호 가져오기-->
+	<form id="sessionForm" action="/planner/plannerReply" method="get">
+		<input type="hidden" name="plan_No" value="${param.plan_No}">
+		<input type="hidden" name="nick_Name" value="${nick_Name}">
+		<input type="hidden" name="email" value="${email}">
+	</form>
+		
+		
 	
-		<!-- 세션의 닉네임,이메일 & 현재 페이지의 플래너번호 가져오기-->
-		<form id="sessionForm" action="/planner/plannerReply" method="get">
-			<input type="hidden" name="plan_No" value="${param.plan_No}">
-			<input type="hidden" name="nick_Name" value="${nick_Name}">
-			<input type="hidden" name="email" value="${email}">
-		</form>
+<!--==================================== 모달창 ========================================-->		
+	<!-- 플래너 삭제요청 재확인 모달 -->
+  	<div class="modal fade" id="delete_Planner_Modal">
+    	<div class="modal-dialog">
+     		<div class="modal-content">
+      
+        <div class="modal-header">
+          <h5 class="modal-title">플래너 삭제</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body text-center">
+        	<br>
+        	한 번 삭제 후에는 복구가 불가능합니다.<br>
+        	정말 삭제하시겠습니까?
+        	<br><br>
+        	<button id="delete_Planner" type="button" class="btn btn-secondary">삭제</button>
+        	<br>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>	
+
+	<!-- 플래너 삭제 결과 호출 모달 -->
+  	<div class="modal fade" id="delete_Planner_Result_Modal">
+    	<div class="modal-dialog">
+     		<div class="modal-content">
+      
+        <div class="modal-header">
+          <h5 class="modal-title">플래너 삭제</h5>
+          <button type="button" class="close modal-close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div id="delete_Planner_Result" class="modal-body text-center">
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger modal-close" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>	
+		
 		
 		
 

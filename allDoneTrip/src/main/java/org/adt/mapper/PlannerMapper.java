@@ -6,6 +6,7 @@ import java.util.List;
 import org.adt.domain.Criteria;
 
 import org.adt.domain.PlannerVO;
+import org.adt.domain.ScrapVO;
 
 public interface PlannerMapper {
 
@@ -48,4 +49,12 @@ public interface PlannerMapper {
 	// 추천순으로  플래너 리스트 가져오기
 	public List<PlannerVO> get_Popular_PlannerList();
 
+	// 플래너 스크랩 상태 여부 카운트
+	public int checkScrap(ScrapVO scvo);
+	
+	// 플래너 스크랩
+	public void insertScrap(ScrapVO scvo);
+
+	// 플래너 스크랩 삭제
+	public void deleteScrap(ScrapVO scvo);
 }

@@ -161,15 +161,6 @@ $(document).ready(function () {
     
     
 	
-    
-    
-   
-    
-    
-    
-	
-	
-	
 	//선택 도시의 날씨 얻어오기
 	function getWeather(cityName){
 		

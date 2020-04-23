@@ -3006,7 +3006,6 @@ ul {
   position: relative;
   -webkit-transition: 1s;
   transition: 1s;
-  border-bottom: 1px solid #ced8e3;
 }
 
 /* line 6, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_hotel&rasturant.scss */
@@ -3062,8 +3061,6 @@ ul {
 /* line 37, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_hotel&rasturant.scss */
 .hotel_list .single_ihotel_list .hover_text {
   position: absolute;
-  right: 10%;
-  bottom: 49%;
   z-index: 9;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -3085,7 +3082,7 @@ ul {
   display: inline-block;
   font-size: 20px;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgb(92, 209, 229);
   border-radius: 50%;
 }
 

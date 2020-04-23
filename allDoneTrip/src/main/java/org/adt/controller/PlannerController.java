@@ -22,6 +22,7 @@ import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.PlannerVO;
+import org.adt.domain.ScrapVO;
 import org.adt.domain.ThumbnailVO;
 import org.adt.service.plannerReplyService;
 import org.adt.service.plannerService;
@@ -85,14 +86,31 @@ public class PlannerController {
 	
 	// 플래너 조회 페이지로 이동
 	@GetMapping("/show")
-	public String show(HttpServletResponse response, HttpServletRequest request,
+	public String show(HttpServletResponse response, HttpServletRequest request, HttpSession session,
 					@RequestParam("plan_No") Long plan_No, PlannerReplyVO rvo, Model model) {
 
 		Criteria cri = new Criteria();
+		PlannerVO pvo = new PlannerVO();
+		ScrapVO scvo = new ScrapVO();
+
+		String email = (String)session.getAttribute("email");
+		if(email == null) {
+			email = "";
+		}
 		
 		// 전체 플래너 수 카운트		
 		int totalReply = replyService.totalReplyCount(plan_No);
-				
+		
+		pvo.setEmail(email);
+		pvo.setPlan_No(plan_No);
+		
+		scvo.setEmail(email);
+		scvo.setPlan_No(plan_No);
+		
+		//좋아요 상태 추가
+		model.addAttribute("likeStatus", service.check_User(pvo));
+		//스크랩 상태 추가
+		model.addAttribute("scrapStatus", service.checkScrap(scvo));
 		//쿠키여부 체크하여 조회수 추가
 		service.checkCookie(response, request, plan_No);
 		//플래너 내용 가져와서 추가
@@ -143,7 +161,7 @@ public class PlannerController {
 	
 	
 	
-	// 플래너 저장
+	// 플래너 게시
 	@PostMapping("/register")
 	public  ResponseEntity<HashMap<String, PlannerVO>> registePlanner(PlannerVO pvo) {
 				
@@ -167,6 +185,20 @@ public class PlannerController {
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 	
+	
+	// 플래너 삭제
+	@PostMapping("/delete")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, String>> deletePlanner(@RequestParam("plan_No") Long plan_No){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		log.info(plan_No);
+		//플래너 DB에서 삭제
+		service.delete(plan_No);
+		map.put("message", "success");
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
 	
 	
 	// 플래너 정보 가져오기
@@ -248,6 +280,30 @@ public class PlannerController {
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
+	
+	
+	
+	// 스크랩
+	@PostMapping("/scrap")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, String>> addLike(ScrapVO scvo){
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		if(!scvo.isStatus()) {
+			service.insertScrap(scvo);
+			map.put("result", "insert");
+		}else {
+			service.deleteScrap(scvo);
+			map.put("result", "delete");
+		}
+		
+		//좋아요 추가 기능 실행 후, 성공 or 실패 여부 판단
+		
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+		
 	
 	
 	// 좋아요 추가

@@ -112,7 +112,7 @@
 	<!-- 플래너 정보 가져오기 -->	
 	<select id="getPlanner" resultType="org.adt.domain.PlannerVO">
 		<![CDATA[
-			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
+			select 	plan_No, p_Title, nick_Name, email, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
 			from 	planner, city
 			where 	plan_No = #{plan_No} 
 					and planner.city_No=city.city_No 
@@ -197,7 +197,30 @@
 	</select>
 	
 	
+	<!-- 플래너 스크랩 상태 파악 -->
+	<select id="checkScrap" resultType="int">
+		<![CDATA[
+			select	count(*)
+			from	scrap
+			where	plan_No = #{plan_No} and email = #{email}
+		]]>
+	</select>
 	
+	<!-- 플래너 스크랩 삽입 -->
+	<insert id="insertScrap">
+		<![CDATA[
+			insert into scrap (sno, plan_No, email, scrap_date)
+			values (seq_scrap.nextval, #{plan_No}, #{email}, to_char(sysdate, 'yyyy.MM.dd'))
+		]]>
+	</insert>
+	
+	<!-- 플래너 스크랩 삭제 -->
+	<delete id="deleteScrap">
+		<![CDATA[
+			delete from scrap
+			where plan_No = #{plan_No} and email = #{email}
+		]]>
+	</delete>
 
 
 
