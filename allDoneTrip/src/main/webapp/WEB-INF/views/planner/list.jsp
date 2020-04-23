@@ -6,14 +6,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 리스트</title>
 	<style>
 		table > thead{
 			text-align: center;
 			color: #0C3272;
 		}
-		
+	
 		table .planList_td{
 			display: table-cell;
 			vertical-align: inherit;

@@ -19,6 +19,7 @@ public class CityVO {
 	public String t_Latitude;	//위도
 	public String t_Longitude;	//경도
 	public String t_Content;	//도시 자세한설명
+	public String t_Summary;	//도시 자세한설명	
 	public String t_Picture;	//사진경로
 	public int t_tel;	//도시전화번호 + null값도 포함
 	public String address;	//도시주소

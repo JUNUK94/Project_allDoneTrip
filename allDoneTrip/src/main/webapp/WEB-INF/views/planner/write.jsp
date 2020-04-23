@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>플래너 작성</title>
 	<%  session.setAttribute("email", "silverdue@gmail.com");
@@ -383,7 +378,11 @@
 	 		<div id="editor_area" class="d-flex flex-column justify-content-center align-self-start order-2">
 	 			<div class="col_c" style="margin-bottom: 30px">
 					<div class="input-group">
-						<textarea id="p_Content" class="form-control"></textarea>
+						<textarea id="p_Content" class="form-control">
+								<c:if test="${data ne null}">
+									${data.p_Content}
+								</c:if>
+						</textarea>
 					</div>
 				</div>
 	 		</div> <!-- end of 에디터 영역 -->
@@ -502,7 +501,6 @@
 			<input type="hidden" name="city_Number" value="${data.city_No}"/>
 			<input type="hidden" name="day1" value="${data.startDay}"/>
 			<input type="hidden" name="day2" value="${data.endDay}"/>
-			<input type="hidden" name="content" value="${data.p_Content}"/>
 			<input type="hidden" name="thumbImg" value="${data.p_Thumbnail}"/>
 		</c:if>
 		<c:if test="${data == null}">
@@ -511,7 +509,6 @@
 			<input type="hidden" name="city_Number" value=""/>
 			<input type="hidden" name="day1" value=""/>
 			<input type="hidden" name="day2" value=""/>
-			<input type="hidden" name="content" value=""/>
 			<input type="hidden" name="thumbImg" value=""/>
 		</c:if>
 	</form>
@@ -550,7 +547,6 @@
 	    		document.getElementById("mainCity").value = $("input[name='city_Number']").val();
 	    		document.getElementById("startDay").value = $("input[name='day1']").val();
 	    		document.getElementById("endDay").value = $("input[name='day2']").val();
-	        	CKEDITOR.instances.p_Content.setData($("input[name='content']").val());
 	        	document.getElementById("ThumbnailName").value = $("input[name='thumbImg']").val();
 	    	}
 	    	

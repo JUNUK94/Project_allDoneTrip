@@ -3,7 +3,7 @@
 <mapper namespace="org.adt.mapper.BoardMapper">
 	<sql id="criteria">
 		<trim prefix="(" suffix=") and" prefixOverrides="or">
-			<foreach item='type' collection="typeArr">
+			<foreach item="type" collection="typeArr">
 				<trim prefix="or">
 					<choose>
 						<when test="type == 'T'.toString()">
@@ -37,7 +37,7 @@
 				b_Type=#{b_Type}
 			</if>
 		</trim>
-		 <![CDATA[
+		<![CDATA[
 							)
 			where 	rn > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -47,11 +47,15 @@
 		select * from board where bno =
 		#{bno}
 	</select>
+	<!-- 새글 등록 -->
+	<insert id="reviewInsert">
+		insert into board (bno, b_type, btype_name, member_no, b_content, title)
+		values            (seq_board.nextval, 2, '후기후기', 2314324, #{b_content}, #{title})
+	</insert>
 
 	<!-- 전체 페이지 가져오기 -->
 	<select id="getTotalCount" resultType="int">
 		select count(*) from board where
-
 		<include refid="criteria"></include>
 
 		<![CDATA[
@@ -62,15 +66,15 @@
 				b_Type=#{b_Type}
 			</if>
 		</trim>
-      	
-      	
+
+
 	</select>
 
 	<!-- 조회수 추가 -->
 	<update id="addBclickNum">
 		<![CDATA[
 			update 	board
-			set		b_clickNum = (1 + (select b_clickNum from board where bno = #{bno}))
+			set		b_clickNum = b_clickNum + 1
 			where 	bno = #{bno}
 		]]>
 	</update>
@@ -79,14 +83,16 @@
 	<update id="addLike">
 		update board
 		set like_Check = like_Check +1
-		where memner_No=#{member_No) and bno=#{bno}
+		where
+		memner_No=#{member_No) and bno=#{bno}
 	</update>
 
 	<!-- 좋아요 취소 -->
 	<update id="CnxLike">
 		update board
 		set like_Check = 0
-		where memner_No=#{member_No} and bno=#{bno}
+		where
+		memner_No=#{member_No} and bno=#{bno}
 	</update>
 
 	<update id="update">

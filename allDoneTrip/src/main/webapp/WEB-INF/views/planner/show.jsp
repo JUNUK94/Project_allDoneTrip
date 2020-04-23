@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <title>플래너 조회</title>
 	<% 
 		session.setAttribute("email", "silverdue@gmail.com");
@@ -58,7 +57,7 @@
 									</c:forEach>
 								</div>
 							</div>
-							<div class="col-lg-9 d-flex flex-column">
+							<div class="col-lg-6 d-flex flex-column">
 								<div class="row align-items-center" style="height:80%">
 									<div class="about_text">
 										<c:forEach items="${content}" var="pvo">
@@ -78,20 +77,23 @@
 									<button type="button" class="btn btn-outline-primary">pdf 다운로드</button>
 								</div>
 							</div>
+							<div class="col-lg-2 d-flex flex-column">
+								<div class="row d-flex flex-row justify-content-end">
+									<i class='far fa-envelope text-primary p-1' style='font-size:30px;'></i>
+									<i class='far fa-envelope text-primary p-1' style='font-size:30px;'></i>
+								</div>
+								<div class="row d-flex flex-row justify-content-between">
+								</div>
+							</div>
+							<div class="col-lg-1 d-flex flex-column"></div>
 						</div>
-                        <div class="blog_details">
-                            <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <!-- 작성자 프로필 부분 -->
-					<div class="blog-author">
+					<div class="blog-author" style="margin-top:30px;">
 						<div class="media align-items-center">
 							<!-- 작성자의 프로필 사진  -->
-							<img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-							<i class='fas fa-user-circle' style='font-size:48px; color:blue;'></i>
+							<img src="" alt="writer_Profile" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+							<i class='fas fa-user-circle' style='font-size:48px; color:#eaefff;'></i>
 							<div class="media-body">
 								<c:forEach items="${content}" var="pvo">
 									<a href="#">
@@ -104,168 +106,132 @@
 						</div>
 					</div>
 					<div class="navigation-top">
-                        <div class="d-sm-flex justify-content-between text-center">
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4 people like this</p>
-                            <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                            </div>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="../resources/main/img/post/preview.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>Prev Post</p>
-                                        <a href="#">
-                                            <h4>Space The Final Frontier</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials">
-                                        <p>Next Post</p>
-                                        <a href="#">
-                                            <h4>Telescopes 101</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="../resources/main/img/post/next.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="d-sm-flex justify-content-between text-center p-2">
+                            <p class="like-info align-self-center">
+								<c:forEach items="${content}" var="pvo">
+	                            	<span class="align-middle">
+	                            		<i class='far fa-thumbs-up'></i>
+										${pvo.plan_Like}
+									</span>
+								</c:forEach>
+                            </p>
+                            <p class="like-info">
+                            	<span class="align-middle">
+                                	<i class="far fa-comments"></i>
+									${totalReply} Comments
+								</span>
+							</p>
                         </div>
                     </div>
+                    <!-- 댓글 작성부분 -->
+                   	<div class="comment-form">
+						<div class="row form-contact comment_form">
+	          				<div class="col-12">
+	                        	<div class="form-group">
+	                            	<textarea class="form-control w-100" name="plannerReply" id="plannerReply" cols="30" rows="7" placeholder="Write Comment"></textarea>
+	    						</div>
+	       				    </div>
+	                	</div>
+						<div class="form-group">
+							<button id="sendPlannerReply" class="button button-contactForm btn_1">
+								Send Message
+							</button>
+						</div>
+					</div>
+                    <!-- 댓글 영역 -->
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../resources/main/img/comment/comment_1.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../resources/main/img/comment/comment_2.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../resources/main/img/comment/comment_3.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm btn_1">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                        <c:forEach items="${reply}" var="prvo" varStatus="vs">
+	                        <div id="${vs.index}" class="comment-list">
+	                            <div class="single-comment justify-content-between d-flex">
+	                                <div class="user justify-content-between d-flex col-lg-12">
+	                                    <div class="thumb">
+		                                    <!-- 댓글작성자 사진 -->
+	                                        <img src="../resources/main/img/comment/comment_1.png" alt="">
+	                                    </div>
+	                                    <div class="desc flex-grow-1">
+	                                        <p class="comment">${prvo.pr_Content}</p>
+	                                        <div class="d-flex justify-content-between">
+	                                            <div class="d-flex align-items-center">
+	                                                <h5>
+														<a href="${prvo.nick_Name}">${prvo.nick_Name}</a>
+													</h5>
+	                                                <p class="date">${prvo.regdate}</p>
+	                                            </div>
+	                                            <div id="replyRUD" class="reply-btn">
+													<c:if test="${prvo.email == email}" >
+														<a href="#" class="btn-reply text-uppercase" onclick="replyDelete(${prvo.p_Rno})">
+															delete
+														</a>
+													</c:if>
+													<a href="#" class="btn-reply text-uppercase" onclick="replyWarning(${prvo.p_Rno})">
+														warn
+													</a>
+	                                                <a href="#" id="count_reReply${vs.index}" class="btn-reply text-uppercase" onclick="show_reReplyList(${vs.index})">
+	                                                	reply
+	                                                </a>
+	                                            </div>
+	                                        </div>
+	                                        <!-- 답글 입력창 -->
+					                   		<div id="reReply${vs.index}" class="comment-form" style="display:none;">
+												<div class="row form-contact comment_form">
+					                                <div class="col-12">
+					                                    <div class="form-group">
+					                                        <textarea id="reReplyText${vs.index}" class="form-control w-100" cols="30" rows="4" placeholder="Write reply"></textarea>
+					                                    </div>
+													</div>
+												</div>
+												<div class="form-group">
+													<button id="sendPlannerReply" class="button button-contactForm btn_2" onclick="reReplyInsert(${prvo.p_Rno}, ${vs.index})">Send reply</button>
+												</div>
+					                    	</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</div>
+							<div id="reReplyList${vs.index}" class="comment-list" style="display:none;">
+								<c:forEach items="${reReply}" var="rrvo">
+									<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
+			                            <div class="single-comment justify-content-between">
+			                                <div class="user justify-content-between d-flex col-lg-12">
+			                                    <div class="thumb">
+			                                        <img src="../resources/main/img/comment/comment_1.png" style="visibility: hidden;">
+			                                    </div>
+			                                    <div class="thumb">
+				                                    <!-- 댓글작성자 사진 -->
+			                                        <img src="../resources/main/img/comment/comment_1.png" alt="">
+			                                    </div>
+			                                    <div class="desc flex-grow-1">
+			                                        <p class="comment">${rrvo.pr_Content}</p>
+			                                        <div class="d-flex justify-content-between">
+			                                            <div class="d-flex align-items-center">
+			                                                <h5>
+																<a href="${rrvo.nick_Name}">${rrvo.nick_Name}</a>
+															</h5>
+			                                                <p class="date">${rrvo.regdate}</p>
+			                                            </div>
+			                                            <div id="replyRUD" class="reply-btn">
+															<c:if test="${rrvo.email == email}" >
+																<a href="#" class="btn-reply text-uppercase" onclick="replyDelete(${rrvo.p_Rno})">
+																	delete
+																</a>
+															</c:if>
+															<a href="#" class="btn-reply text-uppercase" onclick="reReplyWarning(${rrvo.p_Rno})">
+																warn
+															</a>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <br><br>
+		                            </c:if>
+								</c:forEach>
+							</div>
+						</c:forEach>
+                	</div><!-- end of Comment Area -->
+                </div> <!-- end of posts-list -->
+                
+                <!-- 사이드 바 부분 시작 -->
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
@@ -293,196 +259,75 @@
 							</form>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="../resources/main/img/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../resources/main/img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../resources/main/img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../resources/main/img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            <h3 class="widget_title">Recent Planner</h3>
+                            <c:set var="loop" value="true" />
+                            <c:forEach items="${plannerList}" var="List" varStatus="li">
+                            	<c:if test="${loop}">
+		                            <div class="media post_item">
+		                            	<c:if test="${List.p_Thumbnail != null}">
+		                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
+		                                </c:if>
+		                                <c:if test="${List.p_Thumbnail == null}">
+		                                	<script>
+												var i = parseInt((Math.random()*7));
+												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='70px' height='70px' style='overflow: hidden;'>");
+											</script>
+		                                </c:if>
+		                                <div class="media-body">
+		                                	<a href="single-blog.html">
+		                                        <p style="color: #fe5c24;">${List.city_Name}</p>
+		                                    </a>
+		                                    <a href="single-blog.html">
+		                                        <h3 style="font-weight: bold;">${List.p_Title}</h3>
+		                                    </a>
+		                                    <p>${List.trip_Period}</p>
+		                                </div>
+		                            </div>
+		                            <c:if test="${li.index == 2}">
+		                            	 <c:set var="loop" value="false" />
+		                            </c:if>
+                            	</c:if>
+                            </c:forEach>
                         </aside>
-                        <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
-                                <li>
-                                    <a href="#">project</a>
-                                </li>
-                                <li>
-                                    <a href="#">love</a>
-                                </li>
-                                <li>
-                                    <a href="#">technology</a>
-                                </li>
-                                <li>
-                                    <a href="#">travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">restaurant</a>
-                                </li>
-                                <li>
-                                    <a href="#">life style</a>
-                                </li>
-                                <li>
-                                    <a href="#">design</a>
-                                </li>
-                                <li>
-                                    <a href="#">illustration</a>
-                                </li>
-                            </ul>
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title">Popular Planner</h3>
+                            <c:set var="loop" value="true" />
+                            <c:forEach items="${popular_PlannerList}" var="List" varStatus="li">
+                            	<c:if test="${loop}">
+		                            <div class="media post_item">
+		                            	<c:if test="${List.p_Thumbnail != null}">
+		                                	<img src="${List.p_Thumbnail}" width='70px' height='70px' style="overflow: hidden;">
+		                                </c:if>
+		                                <c:if test="${List.p_Thumbnail == null}">
+		                                	<script>
+												var i = parseInt((Math.random()*7));
+												document.write("<img src='https://alldonetrip.shop/resources/img/basic/thumbnail/BasicThumbnail_"+i+".png' width='70px' height='70px' style='overflow: hidden;'>");
+											</script>
+		                                </c:if>
+		                                <div class="media-body">
+		                                	<a href="single-blog.html">
+		                                        <p style="color: #fe5c24;">${List.city_Name}</p>
+		                                    </a>
+		                                    <a href="single-blog.html">
+		                                        <h3 style="font-weight: bold;">${List.p_Title}</h3>
+		                                    </a>
+		                                    <p>${List.trip_Period}</p>
+		                                </div>
+		                            </div>
+		                            <c:if test="${li.index == 2}">
+		                            	 <c:set var="loop" value="false" />
+		                            </c:if>
+                            	</c:if>
+                            </c:forEach>
                         </aside>
                     </div>
-                </div>
+                </div><!-- end of 사이드 바 -->
             </div>
         </div>
     </section>
     <!--================ Blog Area end =================-->							
 	
 	
-	
-		<div class="row">
-			<div class="col-lg1"></div>
-			<div class="col-lg10 bg-light">
-			</div>
-			<div class="col-lg1"></div>			
-		</div>
-	
-		<div class="row">
-			<div class="col-lg2"></div>
-			<div class="col-lg8" style="height:40px; border-bottom: 1px solid gray; border-top: 1px solid gray">
-				댓글 (${totalReply})
-			</div>
-			<div class="col-lg2"></div>
-		</div>
-		
-		<br>
-		
-		<div class="row">
-			<div class="col-lg2"></div>
-			<div class="col-lg1">
-			<img src="/resources/img/planner/Non_User_Photo.JPG">
-			</div>
-			<div class="col-lg6">
-				<textarea id="plannerReply" class="col-lg12 bg-light" style="height:100px;" placeholder="댓글을 입력해주세요"></textarea>
-			</div>	
-			<div class="col-lg1" >
-				<button id="sendPlannerReply" class="col-lg12 bg-light" style="height:100px;">등록</button>
-			</div>
-			<div class="col-lg2"></div>
-		</div>
-		
-		<br>
-		<div id="plannerReplyList">
-			<c:forEach items="${reply}" var="prvo" varStatus="vs">
-				<div class="row" id="${vs.index}">
-					<div class="col-lg2"></div>
-					<div class="col-lg1">
-						<img src="/resources/img/planner/Non_User_Photo.JPG">
-					</div>
-					<div class="col-lg5">
-						<div class="row">
-							<div class="col-lg2 small text-left">
-								<a href="${prvo.nick_Name}">${prvo.nick_Name}</a>
-							</div> 
-							<div class="col-lg10 small text-left">
-								${prvo.regdate}
-							</div>
-						</div>
-						<div>${prvo.pr_Content}</div>				
-					</div>
-					<div class="col-lg1 small text-right">
-						<a href="#" id="count_reReply${vs.index}" onclick="show_reReplyList(${vs.index})">∨</a>
-					</div>
-					<div class="col-lg1 small text-right" id="replyRUD">	
-						<c:if test="${prvo.email == email}" >
-							<a href="#" onclick="replyDelete(${prvo.p_Rno})">삭제</a> | 
-						</c:if>
-						<a href="#" onclick="replyWarning(${prvo.p_Rno})">신고</a> | 
-						<a href="#" onclick="reReply(${prvo.p_Rno},${vs.index})">답글</a>
-					</div>
-					<div class="col-lg2"></div>
-				</div>
-				
-				<!-- 답글 입력창 -->
-				<div class="row" id="reReply${vs.index}" style="display:none;">
-					<div class="col-lg2"></div>
-					<div class="col-lg1"></div>
-					<div class="col-lg6">
-						<textarea id="reReplyText${vs.index}" class="col-lg12 bg-light" style="height:100px;" placeholder=">답글"></textarea>
-					</div>	
-					<div class="col-lg1" >
-						<button class="col-lg12 bg-light" style="height:100px;" onclick="reReplyInsert(${prvo.p_Rno}, ${vs.index})">등록</button>
-					</div>
-					<div class="col-lg2"></div>
-				</div>
-				
-				<!-- 답글 띄우기 -->
-				<div class="row" id="reReplyList${vs.index}" style="display:none;">
-					<c:forEach items="${reReply}" var="rrvo">
-						<c:if test="${rrvo.up_Prno == prvo.p_Rno}">
-								<div class="col-lg2"></div>
-								<div class="col-lg7">
-									<div class="row">
-										<div class="col-lg2"></div>
-										<div class="col-lg1 text-right">┕</div>
-										<div class="col-lg2 text-left small bg-light">${rrvo.nick_Name}</div>
-										<div class="col-lg7 text-left small bg-light"> ${rrvo.regdate}</div>
-									</div>
-									<div class="row">
-										<div class="col-lg2"></div>
-										<div class="col-lg1"></div>
-										<div class="col-lg9 bg-light">${rrvo.pr_Content}</div>
-									</div>
-								</div>
-								<div class="col-lg1 text-right small">
-									<c:if test="${rrvo.email == email}">
-										<a href="#" onclick="replyDelete(${rrvo.p_Rno})">삭제</a> |
-									</c:if>
-									<a href="#" onclick="reReplyWarning(${rrvo.p_Rno})">신고</a>
-								</div>
-								<div class="col-lg2"></div>
-								<br><br><br>
-						</c:if>
-					</c:forEach>
-				</div>
-				<br>
-			</c:forEach>
-		</div>
-	</div>
-
-				
-
-
-		
 		<!-- 세션의 닉네임,이메일 & 현재 페이지의 플래너번호 가져오기-->
 		<form id="sessionForm" action="/planner/plannerReply" method="get">
 			<input type="hidden" name="plan_No" value="${param.plan_No}">

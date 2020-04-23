@@ -123,6 +123,12 @@ public class plannerServiceImpl implements plannerService {
 	}
 
 
+	@Override
+	public List<PlannerVO> get_Popular_PlannerList() {
+		return mapper.get_Popular_PlannerList();
+	}
+
+
 
 
 

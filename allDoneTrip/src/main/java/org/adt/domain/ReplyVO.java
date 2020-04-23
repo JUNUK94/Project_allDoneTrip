@@ -10,9 +10,9 @@ public class ReplyVO {
 	private Long rno;
 	private String r_Content;
 	private String nick_Name;
-	
+	private String email;
 	private String regdate;
 	private String updatedate;
-	
 	private Long up_Rno;
+
 }

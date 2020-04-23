@@ -55,8 +55,9 @@
 								<ul class="navbar-nav">
 									<li class="nav-item"><a class="nav-link" href="/">Home</a>
 									</li>
-									<li class="nav-item"><a class="nav-link" href="/about">Tour
-											Info</a></li>
+
+									<li class="nav-item"><a class="nav-link"
+										href="/trip/city/countryList">Tour Info</a></li>
 									<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="/planner/list"
 										id="navbarDropdown" role="button" data-toggle="dropdown"
