@@ -7,6 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>아아디/비밀번호 찾기</h2>
+                            <p>allDone search</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+    
 	<div class="container-sm mt-5 border" >
 		<div class="row mt-5"></div>
 		<div class="row">

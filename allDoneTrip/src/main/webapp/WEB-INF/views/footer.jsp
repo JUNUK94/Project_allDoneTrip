@@ -67,7 +67,7 @@
 						<h4>Contact Us</h4>
 						<p>(주)여행가조</p>
 						<p>7F, 69 YMCA, Jongro2 Street, Jongro-gu, Seoul, SOUTH KOREA +81 2-2153-3245</p>
-						<span>alldonetrip@gmail.com</span>
+						<span>alldonetrip.shop@gmail.com</span>
 						<div class="social-icons">
 							<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 								class="ti-twitter-alt"></i></a> <a href="#"><i
