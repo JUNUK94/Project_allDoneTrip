@@ -27,4 +27,9 @@ public class BoardVO {
    
    private Long blike_No;
    private int like_Check;
+   
+   private Long city_No;
+   private String city_Name;
+   
+   private String b_Thumbnail;
 }

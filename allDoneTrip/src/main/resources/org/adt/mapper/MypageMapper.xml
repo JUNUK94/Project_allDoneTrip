@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.adt.mapper.MypageMapper">
+
+	<select id="getMyBoard" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+		  select * 
+		  from(
+		  SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
+                 b_Type, bType_Name, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE
+          FROM BOARD
+				 where
+				 member_No=#{member_No}
+				 and
+				 rownum <= #{pageNum} * #{amount}
+		   ]]>
+		<trim prefix="AND">
+			<if test="b_Type != '' and b_Type!=null">
+				b_Type=#{b_Type}
+			</if>
+		</trim>
+		 <![CDATA[
+							)
+			where 	rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!--내가 쓴 게시글 보기  -->
+	<select id="readMyBoard" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+			select 	bno, title, nick_Name, city_Name, board.city_No, b_Like, b_Content, b_clickNum, updateDate, b_Thumbnail
+			from 	board, city
+			where 	bno = #{bno} 
+					and board.city_No=city.city_No 
+		]]>
+	</select>
+	
+	<!-- 플래너 전체 목록 가져오기 -->	
+	<select id="getMyPlanner" resultType="org.adt.domain.PlannerVO">
+		<![CDATA[
+			select	* 
+			from 	(select
+					/*+ index_desc(planner pk_planner)*/
+							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
+					from 	planner, city, memberinfo
+					where	member_No=#{member_No}	
+							and planner.email=memberinfo.email
+							and planner.city_No=city.city_No 
+							and rownum <= #{pageNum} * #{amount}
+		]]>					
+					
+		<![CDATA[
+							)
+			where 	rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 내가 쓴 플래너 보기 -->
+	<select id="readMyPlanner" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
+			from 	planner, city
+			where 	plan_No = #{plan_No} 
+					and planner.city_No=city.city_No 
+		]]>
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="memberInfoUpdate">
+		<![CDATA[
+			update memberinfo
+			set name=#{name},
+				email=#{email},
+				nick_Name=#{nick_Name},
+				pw=#{pw},
+				birth=#{birth},
+				gender=#{gender},
+				phone_Num=#{phone_Num},
+				join_date=#{join_date},
+				agree_date=#{agree_date},
+				mobile_Co=#{mobile_Co},
+				profile=#{profile},
+				introduce=#{introduce}
+			where member_No=#{member_No}
+		]]>
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		<![CDATA[
+			delete from memberinfo
+			where member_No = #{member_No}
+		]]>
+	</delete>
+	
+	<!-- 내가 스크랩한 플래너 가져오기 -->
+	<select id="getMyScrapPlanner" resultType="org.adt.domain.PlannerVO">
+		<![CDATA[
+			select *
+			from (select
+					/*+ index_desc(planner pk_planner)*/
+							rownum rn, planner.plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
+					from 	planner , city
+					where	planner.city_No=city.city_No 
+							and rownum <= #{pageNum} * #{amount}
+							and status = 1
+    		) a, scrap
+			where scrap.plan_No = a.plan_No 
+				  and member_no=#{member_No}
+				  and rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 내가 스크랩한 플래너 보기 -->
+	<select id="scrapMyPlanner" resultType="org.adt.domain.PlannerVO">
+		<![CDATA[
+			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
+			from 	planner, city
+			where 	plan_No = #{plan_No} 
+					and planner.city_No=city.city_No 
+		]]>
+	</select>
+	
+	<!--내가 스크랩한 게시판 가져오기 -->
+	<select id="getMyScrapBoard" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+		  select * 
+		  from(
+		  		SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
+                 bType_Name, a.BNO, TITLE, NICK_NAME, scrap_date
+          		from board a, scrap b
+				where a.bno=b.bno
+				  and rownum <= #{pageNum} * #{amount}				 
+		   ]]>
+	
+		 <![CDATA[
+							) 
+			where member_No=#{member_No}
+			  and rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!--내가 스크랩한 게시판보기 -->
+	<select id="scrapMyBoard" resultType="org.adt.domain.BoardVO">
+		<![CDATA[
+			select 	bno, title, nick_Name, city_Name, board.city_No, b_Like, b_Content, b_clickNum, updateDate, b_Thumbnail
+			from 	board, city
+			where 	bno = #{bno} 
+					and board.city_No=city.city_No 
+		]]>
+	</select>
+
+</mapper>
