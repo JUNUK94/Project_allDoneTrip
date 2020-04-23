@@ -13,7 +13,7 @@
 			text-align: center;
 			color: #0C3272;
 		}
-	
+		
 		table .planList_td{
 			display: table-cell;
 			vertical-align: inherit;

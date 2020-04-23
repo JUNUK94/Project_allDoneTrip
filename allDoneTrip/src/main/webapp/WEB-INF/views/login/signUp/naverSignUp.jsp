@@ -14,6 +14,22 @@
 	</style>
 </head>
 <body>
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>네이버회원 가입</h2>
+                            <p>naver signUp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
 <div class="container-sm mt-5 border" >
 	<div class="container-sm mt-3 " >
 		<div class="row mt-2 text-center" >

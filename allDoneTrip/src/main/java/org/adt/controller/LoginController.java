@@ -50,20 +50,22 @@ public class LoginController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
 	
 	@GetMapping("/loginMain")
 	public ModelAndView loginMain(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String email = (String)session.getAttribute("emailstatus");
 		if(email != null) {
-			mav.setViewName("/login/login");
+			mav.setViewName("index");
+			mav.addObject("page", "mainBody.jsp");
 			return mav;
 		}else {
 			String kakaoUrl = kakaoController.getAuthorizationUrl(session);
 			String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 			/* 생성한 인증 URL을 View로 전달 */
-			mav.setViewName("login/loginMain");
+			mav.setViewName("index");
+			mav.addObject("page", "login/loginMain.jsp");
 			// 네이버 로그인
 			mav.addObject("naver_url", naverAuthUrl);
 			// 카카오 로그인
@@ -72,12 +74,13 @@ public class LoginController {
 		}
 	}
 	
-	@GetMapping("/loginout")
-	public String loginout(HttpSession session) {
+	@GetMapping("/logout")
+	public String loginout(HttpSession session, Model model) {
 		
 		session.invalidate();
-		
-		return "redirect:/login/loginMain";
+		model.addAttribute("page", "mainBody.jsp");
+
+		return "index"; 
 	}
 	
 	@RequestMapping(value = "/kakaoLogin", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
@@ -109,13 +112,14 @@ public class LoginController {
 //		session.setAttribute("gender", gender); 
 //		session.setAttribute("birthday", birthday); 
 //		session.setAttribute("age", age); 
-		mav.setViewName("login/login");
+		mav.setViewName("index");
+		mav.addObject("page", "mainBody.jsp");
 		mav.addObject("email", email);
 		mav.addObject("nickName", nickName);
 		mav.addObject("profile_image", image);
 		System.out.println("우아아아아아아아아앙"+mav);
 		session.setAttribute("email", email);
-		return mav; 
+		return mav;
 	}// end kakaoLogin()
 
 	/* NaverLoginBO */
@@ -139,7 +143,9 @@ public class LoginController {
 	System.out.println("네이버:" + naverAuthUrl);
 	//네이버
 	model.addAttribute("url", naverAuthUrl);
-	return "login/naverLogin";
+	model.addAttribute("url", naverAuthUrl);
+	model.addAttribute("page", "login/naverLogin");
+	return "index";
 	}
 	
 	
@@ -173,7 +179,8 @@ public class LoginController {
 	session.setAttribute("email",email); //세션 생성
 	session.setAttribute("nickName",nickname);
 	model.addAttribute("result", apiResult);
-	return "login/signUp/naverSignUp";
+	model.addAttribute("page", "login/signUp/naverSignUp.jsp");
+	return "index";
 	}
 
 	
@@ -204,9 +211,10 @@ public class LoginController {
 		model.addAttribute("searchResult", searchResult);
 		model.addAttribute("msg1", msg1);
 		model.addAttribute("msg2", msg2);
-		return "/login/searchResult";
+		model.addAttribute("page", "/login/searchResult.jsp");
+		return "index";
 	}
-
+	
 	@PostMapping("/pwSearch")
 	public String pwSearch(@RequestParam("email") String email, @RequestParam("phone_Num") int phone_Num, Model model) {
 		MemberVO member = new MemberVO();
@@ -222,22 +230,25 @@ public class LoginController {
 		model.addAttribute("searchResult", searchResult);
 		model.addAttribute("msg1", msg1);
 		model.addAttribute("msg2", msg2);
-		return "/login/searchResult";
+		model.addAttribute("page", "/login/searchResult.jsp");
+		return "index";
 	}
 	
 	@GetMapping("/login")
 	public ModelAndView login(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String email = (String)session.getAttribute("emailstatus");
+		String email = (String)session.getAttribute("email");
 		
 		if(email != null) {
-			mav.setViewName("login/login");
+			mav.setViewName("index");
+			mav.addObject("page", "mainBody.jsp");
 			return mav;
 		}else {
 			String kakaoUrl = kakaoController.getAuthorizationUrl(session);
 			String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 			/* 생성한 인증 URL을 View로 전달 */
-			mav.setViewName("login/loginMain");
+			mav.setViewName("index");
+			mav.addObject("page", "login/loginMain.jsp");
 			// 네이버 로그인
 			mav.addObject("naver_url", naverAuthUrl);
 			// 카카오 로그인
@@ -250,7 +261,7 @@ public class LoginController {
 
 	@GetMapping("/signUp/allDoneSignUp")
 	public void allDoneSignUp() {
-
+		
 	}
 	
 	
@@ -262,7 +273,8 @@ public class LoginController {
 	String kakaoUrl = kakaoController.getAuthorizationUrl(session);
 	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 	/* 생성한 인증 URL을 View로 전달 */
-	mav.setViewName("login/signUpList");
+	mav.setViewName("index");
+	mav.addObject("page", "login/signUpList.jsp");
 	// 네이버 로그인
 	mav.addObject("naver_url", naverAuthUrl);
 	// 카카오 로그인
@@ -303,7 +315,8 @@ public class LoginController {
 //		session.setAttribute("gender", gender); 
 //		session.setAttribute("birthday", birthday); 
 //		session.setAttribute("age", age); 
-		mav.setViewName("login/signUp/kakaoSignUp"); 
+		mav.setViewName("index");
+		mav.addObject("page", "login/signUp/kakaoSignUp.jsp");
 		mav.addObject("email", email);
 		mav.addObject("nickName", nickName);
 		mav.addObject("profile_image", image);
@@ -314,20 +327,20 @@ public class LoginController {
 
 	
 	@PostMapping(value ="/insertMember",produces = "text/plain; charset=UTF-8")
-	public String insertMember(MemberVO member, HttpSession session) {
+	public String insertMember(MemberVO member, HttpSession session, Model model) {
 		System.out.println("탓당");
 		String certSession = (String)session.getAttribute("certOK");
-		String message = "";
 		
 			if(certSession.equals("성공") ) {
+					model.addAttribute("page", "login/loginMain.jsp");
 					
-					message="login/loginMain";
 					mService.join(member);
 					log.info(member);
-					return message;
+					return "index";
 				}else {
-					message = "login/signUp/allDoneSignUp";
-					return message;
+					model.addAttribute("page","login/signUp/allDoneSignUp.jsp");
+					
+					return "index";
 			}
 
 		
@@ -390,7 +403,7 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping("/loginCheck")
 	public ResponseEntity<String> loginCheck(@RequestParam("email") String email, @RequestParam("pw") String pw,
-			MemberVO member, HttpSession session) {
+			MemberVO member, HttpSession session, Model model) {
 		
 		HttpHeaders responseHeaders = new HttpHeaders(); // 헤더변경 시 사용
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8"); 
@@ -403,9 +416,11 @@ public class LoginController {
 		String msg = "";
 		if (status) {
 			msg = "성공";
-			session.setAttribute("emailstatus", email);
+			session.setAttribute("email", email);
+			model.addAttribute("page", "mainBody.jsp");
 		} else {
 			msg = "실패";
+			model.addAttribute("page", "/login/loginMain.jsp");
 		}
 		
 		log.info(msg);
@@ -449,7 +464,7 @@ public class LoginController {
 	
 	// mailSending 코드
 	  @RequestMapping(value = "/mailSending")
-	  public ResponseEntity<String> mailSending(HttpServletRequest request, @RequestParam("email") String email,HttpSession session) {
+	  public ResponseEntity<String> mailSending(HttpServletRequest request, @RequestParam("email") String email,HttpSession session, Model model) {
 		System.out.println("시자아아아악");
 		LoginController ex = new LoginController();
 		ex.setCertCharLength(8);
@@ -473,8 +488,8 @@ public class LoginController {
 	    }
 	    
 	    session.setAttribute("certNum", content);
-	    
-	    return new ResponseEntity<>("login/signUp/allDoneSignUp",HttpStatus.OK);
+	    model.addAttribute("page", "login/signUp/allDoneSignUp.jsp");
+	    return new ResponseEntity<>("index",HttpStatus.OK);
 	  }
 	
 	  // mailSending 코드

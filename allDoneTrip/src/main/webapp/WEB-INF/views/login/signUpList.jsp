@@ -17,6 +17,23 @@
   <script src="/resources/js/login/signUpList.js"></script>
 </head>
 <body>
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>회원 가입</h2>
+                            <p>allDone signUp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+    
 	<div class="container-sm mt-5 border" >
 		<div class="row ">
 			<div class="col text-center"><h1>회원가입</h1></div>
