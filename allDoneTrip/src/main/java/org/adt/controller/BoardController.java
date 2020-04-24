@@ -66,7 +66,7 @@ public class BoardController {
 
 		log.info("register: " + board);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 		Date date = new Date();
 		String sysdate = sdf.format(date);
 		
