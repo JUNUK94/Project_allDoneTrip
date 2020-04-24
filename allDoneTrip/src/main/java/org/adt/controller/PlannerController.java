@@ -41,6 +41,15 @@ public class PlannerController {
 	private plannerReplyService replyService;
 	
 	
+	
+	// 플래너 리스트 페이지로 이동
+	@GetMapping("/test")
+	public void test() {
+	}
+	
+	
+	
+	
 	// 플래너 작성 페이지로 이동
 	@GetMapping("/write")
 	public String write(PlannerVO pvo, Model model, HttpSession session) {

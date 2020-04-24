@@ -1,14 +1,14 @@
 package org.adt.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.nio.file.Files;
-import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -185,6 +185,61 @@ public class UploadController {
 		}
 	
 	
+		
+		
+		@PostMapping(value = "/downloadPDF")
+		public void downloadPDF(HttpServletRequest request, HttpServletResponse response) {
+		 
+		    String file_location = "C:\\upload\\img\\";
+		    String filename = "교제-Spring_기초.pdf";
+		    File file = null;
+		    BufferedInputStream fin = null;
+		    BufferedOutputStream outs = null;
+		 
+		    try{
+		       
+		        file = new File(file_location, filename);
+		        response.reset();
+		        response.setHeader("Content-Type","application/pdf");
+		 
+		        if(file != null){
+		            fin = new BufferedInputStream(new FileInputStream(file));
+		            outs = new BufferedOutputStream(response.getOutputStream());
+		 
+		            int read = 0;
+		 
+		            while((read = fin.read()) != -1 ){
+		                outs.write(read);
+		            }
+		        }
+		 
+		    }catch(Exception e){
+		        response.setContentType("text/html;charset=euc-kr");
+		        log.info("<script type='text/javascript'>");
+		        log.info("alert('파일 오픈 중 오류가 발생하였습니다.');");
+		        log.info("</script>");
+		    }finally{
+		 
+		        if(outs != null)
+					try {
+						fin.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        if(fin != null)
+					try {
+						outs.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		 
+		    }
+		}		   
+
+
+		
 	
 	
 	

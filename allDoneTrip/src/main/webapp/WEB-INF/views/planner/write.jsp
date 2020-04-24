@@ -71,8 +71,6 @@
 	
 <!--=====================================jquery=========================================-->
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" 
 			integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 	
@@ -85,7 +83,7 @@
 	<script src="${contextPath}/resources/CKEditor/ckeditor/ckeditor.js"></script>
 
 
-<!--====================================guillotine========================================-->
+<!--====================================cropbox========================================-->
 
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="${contextPath}/resources/crop/cropbox.js"></script>
@@ -101,6 +99,11 @@
 		crossorigin="anonymous"></script>
 
 <!--====================================================================================-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
 </head>
 <body>
 
@@ -146,7 +149,11 @@
 				</button>
 				
 			</div>
-		
+			<a class="btn" href="https://alldonetrip.shop/resources/img/교제-Spring_기초.pdf" >
+			<button type="button" id="savePDF_Btn1" class="btn btn-outline-secondary" style="font-weight: bold">
+				pdf다운로드
+			</button>
+			</a>
 			<button type="button" id="save" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="나만이 확인할 수 있도록 저장합니다. 저장한 플래너는 마이페이지에서 확인하실 수 있습니다.">
 					저장
 			</button>
@@ -377,7 +384,7 @@
 			<!-- 에디터 영역 -->
 	 		<div id="editor_area" class="d-flex flex-column justify-content-center align-self-start order-2">
 	 			<div class="col_c" style="margin-bottom: 30px">
-					<div class="input-group">
+					<div class="input-group pdfDiv">
 						<textarea id="p_Content" class="form-control">
 								<c:if test="${data ne null}">
 									${data.p_Content}
@@ -630,6 +637,26 @@
 				});
 	        });
 	        
+	    	//=================================pdf로 저장=====================================
+	    	$('#savePDF_Btn').on("click", function() {
+				
+	    		html2canvas($("#pdfDiv"), 
+				{	onrendered : function(canvas) {
+						// 한글깨짐현상때문에 jpeg->jspdf 전환
+	    	            var imgData = canvas.toDataURL('image/jpeg');
+	    	            var pageWidth = 210;
+	    	            var pageHeight = pageWidth * 1.414;
+	    	            var imgWidth = pageWidth - 20;
+	    	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
+	    	            
+	    	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+	    	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
+	    	            doc.save('화면.pdf');
+	    	        }
+	    	    });
+	    	});
+	    	
+	    	
 			//=================================마우스로 지도영역 너비 조절=====================================
 			var startpos = 0;
 			var diffpos = 0;
