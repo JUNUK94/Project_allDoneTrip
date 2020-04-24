@@ -22,11 +22,8 @@ import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.PlannerVO;
-<<<<<<< HEAD
-import org.adt.domain.ReplyVO;
-=======
+import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.ThumbnailVO;
->>>>>>> refs/remotes/origin/master
 import org.adt.service.plannerReplyService;
 import org.adt.service.plannerService;
 
@@ -185,9 +182,9 @@ public class PlannerController {
 	// 플래너 댓글 등록
 	@PostMapping("/replyWrite")
 	@ResponseBody
-	public ResponseEntity<HashMap<String, ReplyVO>> replyWrite(ReplyVO rvo) {
+	public ResponseEntity<HashMap<String, PlannerReplyVO>> replyWrite(PlannerReplyVO rvo) {
 															
-		HashMap<String, ReplyVO> map = new HashMap<String, ReplyVO>();
+		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
 		
 		//날짜, 시간 구분해서 원하는 형식으로 조합
 		String date[] = rvo.getRegdate().split("/");
@@ -200,14 +197,14 @@ public class PlannerController {
 		replyService.replyWrite(rvo);
 		map.put("list",rvo);
 		
-		return new ResponseEntity<HashMap<String, ReplyVO>>(map, HttpStatus.OK);
+		return new ResponseEntity<HashMap<String, PlannerReplyVO>>(map, HttpStatus.OK);
 	}
 	
 	
 	// 플래너 대댓글(답글) 등록
 	@PostMapping("/reReplyWrite")
 	@ResponseBody
-	public ResponseEntity<HashMap<String, PlannerReplyVO>> reReplyWrite(ReplyVO prvo) {
+	public ResponseEntity<HashMap<String, PlannerReplyVO>> reReplyWrite(PlannerReplyVO prvo) {
 															
 		HashMap<String, PlannerReplyVO> map = new HashMap<String, PlannerReplyVO>();
 

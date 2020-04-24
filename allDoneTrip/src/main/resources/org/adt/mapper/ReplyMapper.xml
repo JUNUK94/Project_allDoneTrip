@@ -11,7 +11,7 @@
 		values (#{bno}, #{rno}, #{r_Content}, #{nick_Name}, #{regdate}, #{email}, #{b_Type})
 	</insert>
 
-	<!-- 플래너 대댓글(답글) 입력 -->
+	<!-- 게시판 대댓글(답글) 입력 -->
 	<insert id="reReplyWrite">
 		<selectKey keyProperty="rno" order="BEFORE" resultType="long">
 			select seq_reply.nextval from dual
@@ -21,7 +21,7 @@
 	</insert>
 
 
-	<!-- 플래너 댓글 가져오기 -->
+	<!-- 게시판 댓글 가져오기 -->
 	<select id="getReplyList" resultType="org.adt.domain.ReplyVO">
 		<![CDATA[
 			select	/*+ index_desc(reply pk_reply)*/
@@ -32,7 +32,7 @@
 	</select>
 
 
-	<!-- 플래너 대댓글(답글) 가져오기 -->
+	<!-- 게시판 대댓글(답글) 가져오기 -->
 	<select id="getReReplyList" resultType="org.adt.domain.ReplyVO">
 		<![CDATA[
 			select	/*+ index_asc(reply pk_reply)*/
@@ -50,8 +50,8 @@
 	</delete>
 
 
-	<!-- 플래너 댓글 전체 수량 파악 -->
-	<select id="totalReplyCount" resultType="int">
+	<!-- 게시판 댓글 전체 수량 파악 -->
+	<select id="totalReplyCnt" resultType="int">
 		select	count(*)
 		from	reply
 		where	bno = #{bno} and up_rno is null
