@@ -37,8 +37,10 @@ public class UploadController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		String serverFolder = "/Users/aphotosis/upload";
-		String webFolder = "/Users/aphotosis/upload";
+//		String serverFolder = "C:\\upload";
+//		String webFolder = "C:\\upload";
+		String serverFolder = "/var/lib/tomcat8/webapps";
+		String webFolder = "https://alldonetrip.shop/resources";
 		String nonUser = "/img/nonUser/imgUpload/";
 		String user = "/img/user/imgUpload/";
 		
@@ -71,7 +73,6 @@ public class UploadController {
 				//check image type File
 				if(checkImageType(saveFile)) {
 					//Hashmap에 넣어 값 리턴하기
-					log.info("여기까지가");
 					map.put("uploaded", 1);	// 1로 고정(업로드 성공 시 1)
 					map.put("fileName", uploadFileName);	//파일명
 					map.put("url", webFolder+"\\"+uploadFileName);	//업로드경로 + 파일명
