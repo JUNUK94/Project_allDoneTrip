@@ -73,6 +73,13 @@ public class MemberServiceImpl implements MemberService{
 		return searchPassword;
 	}
 
+	@Override
+	public String nick(String email) {
+		// TODO Auto-generated method stub
+		String nick = mMapper.nick(email);
+		return nick;
+	}
+
 	
 	
 	

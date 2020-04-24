@@ -7,23 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
-<style type="text/css">
-.text-overlay {
-	position: absolute;
-	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-.tainer{
-	padding: 10px;
-}
-.tab-content{
-	padding: 10px;
-	margin: 4px;
-}
-
-</style>
+<link href="/resources/css/city.css" rel="stylesheet">
 </head>
 <body>
 
@@ -51,7 +35,6 @@
 					<div class="tab-pane fade show active" id="home" role="tabpanel"
 						aria-labelledby="home-tab">
 						<div class="container">
-
 							<div class="row">
 								<div class="col-3">
 									<div class="card" onClick="location.href='city_list_p1'">

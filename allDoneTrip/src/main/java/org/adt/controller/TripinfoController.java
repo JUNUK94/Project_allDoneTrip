@@ -106,8 +106,8 @@ public class TripinfoController {
 //		return mav;
 //	}
 
-	static final String PARIS_EUFFELTOWER = "1_1";
-	static final String PARIS_MONTMARTRE = "1_5";
+	//static final String PARIS_EUFFELTOWER = "1_1";
+	//static final String PARIS_MONTMARTRE = "1_5";
 	
 
 	@GetMapping("/paris")
@@ -168,14 +168,11 @@ public class TripinfoController {
 			model.addAttribute("pageNum_Home", 4);
 
 			model.addAttribute("list", cservice.read(1));
-		//	System.out.println(cservice.read(1));//전체출력
 
 		}  else if(Type.equals("5")) {
 			System.out.println("5! 맛집");
 			model.addAttribute("pageNum_Home", 5);
-			
 			model.addAttribute("res", cservice.foodlist());	//맛집 전체출력 'res'로 호출
-		//	System.out.println(cservice.foodlist());
 			
 		}	else if(Type.equals("6")) {
 			System.out.println("6! 테마");
@@ -184,9 +181,7 @@ public class TripinfoController {
 		}	else if(Type.equals("7")) {
 			System.out.println("7! 쇼핑");
 			model.addAttribute("pageNum_Home", 7);
-			
 			model.addAttribute("shop", cservice.shoplist());	//쇼핑 전체출력 'shop'으로 호출
-			System.out.println("###shop###");
 			
 		}else if (Type.equals("8")) {
 			System.out.println("8!추천플래너페이지");

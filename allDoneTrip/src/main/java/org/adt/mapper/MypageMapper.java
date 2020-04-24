@@ -40,4 +40,8 @@ public interface MypageMapper {
 	//회원탈퇴
 	public int memberDelete(Long member_No);
 	
+	//회원정보 가지고오기
+	public List<MemberVO> memberInfo(String email);
+	
 }
+

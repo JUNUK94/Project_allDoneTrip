@@ -11,8 +11,12 @@
 </head>
 <body>
 	<div id="HTMLtoPDF">
-		한창현입니다.HTMLtoPDF12
-		<img src="http://alldonetrip.shop/resources/img/basic/logo/logo1.png">
+		한창현입니다.HTMLtoPDF
+		https://i.imgur.com/OLa7yJF.jpeg
+		<img src="
+		http://alldonetrip.shop/resources/img/basic/main/main_Banner6.jpg" width="200px">
+		
+		
 	</div>
 	
 	<a href="#" onclick="pdfPrint()">down</a>
@@ -22,26 +26,24 @@
 	<script src="${contextPath}/resources/main/html2canvas.min.js"></script>
 	
 	<script>
-	
+	/*
 		function pdfPrint(){
 	        // 현재 document.body의 html을 A4 크기에 맞춰 PDF로 변환
 	        html2canvas(document.getElementById('HTMLtoPDF'), {
-	        	letterRendering :  1 , 
-	        	allowTaint :  false , 
-	        	useCORS :  true }). then (( canvas ) => {      
-                						const  imgData  =  canvas . toDataURL ( ' image / png ' );
-											               const pdf = new jsPDF (); 
-											              pdf.addImage (imgData, 'PNG', 10, 10); 
-											                pdf.save ( "foo.pdf");   
+	        	useCORS: true, onrendered: function(canvas) {
+		               canvas.toBlob(function(blob) {
+		                   saveAs(blob, 'download.pdf');
+		               });
+		           }
 	           });
 		}
-
-		/*
+		*/
 		function pdfPrint(){
 	        // 현재 document.body의 html을 A4 크기에 맞춰 PDF로 변환
 	        html2canvas(document.getElementById('HTMLtoPDF'), {
+	        	proxy: "https://alldonetrip.shop",
 	        	letterRendering: 1,
-	        	allowTaint : true,
+	        	allowTaint : false,
 	        	useCORS :  true,
 	            onrendered: function (canvas) {
 					
@@ -77,7 +79,7 @@
 	            }
 	        });
 	    }
-		*/
+		
 	</script>
 </body>
 </html>

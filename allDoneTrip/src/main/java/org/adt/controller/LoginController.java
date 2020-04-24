@@ -55,7 +55,7 @@ public class LoginController {
 	@GetMapping("/loginMain")
 	public ModelAndView loginMain(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String email = (String)session.getAttribute("emailstatus");
+		String email = (String)session.getAttribute("email");
 		if(email != null) {
 			mav.setViewName("index");
 			mav.addObject("page", "mainBody.jsp");
@@ -70,6 +70,7 @@ public class LoginController {
 			mav.addObject("naver_url", naverAuthUrl);
 			// 카카오 로그인
 			mav.addObject("kakao_url", kakaoUrl);
+			log.info("메이이이이인");
 			return mav;
 		}
 	}
@@ -106,21 +107,38 @@ public class LoginController {
 		String gender = kakao_account.path("gender").asText(); 
 		String birthday = kakao_account.path("birthday").asText(); 
 		String age = kakao_account.path("age_range").asText(); 
-//		session.setAttribute("email", email); 
 //		session.setAttribute("name", name); 
 //		session.setAttribute("image", image); 
 //		session.setAttribute("gender", gender); 
 //		session.setAttribute("birthday", birthday); 
 //		session.setAttribute("age", age); 
-		mav.setViewName("index");
-		mav.addObject("page", "mainBody.jsp");
-		mav.addObject("email", email);
-		mav.addObject("nickName", nickName);
-		mav.addObject("profile_image", image);
-		System.out.println("우아아아아아아아아앙"+mav);
-		session.setAttribute("email", email);
-		return mav;
-	}// end kakaoLogin()
+		MemberVO member = new MemberVO();
+		member.setEmail(email);
+		log.info(member.getEmail());
+		boolean status = mService.emailCheck(member.getEmail());
+		System.out.println(status);
+		if(!status) {
+			session.setAttribute("email", email); 
+			
+//			session.setAttribute("name", name); 
+//			session.setAttribute("image", image); 
+//			session.setAttribute("gender", gender); 
+//			session.setAttribute("birthday", birthday); 
+//			session.setAttribute("age", age); 
+			mav.setViewName("index");
+			mav.addObject("page", "mainBody.jsp");
+			return mav; 
+		}
+		else{
+			mav.setViewName("index");
+			mav.addObject("page", "login/signUp/kakaoSignUp.jsp");
+			mav.addObject("Email", email);
+			mav.addObject("nickName", nickName);
+			mav.addObject("profile_image", image);
+			System.out.println("우아아아아아아아아앙"+mav);
+			return mav; 
+		}
+	}
 
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -143,9 +161,7 @@ public class LoginController {
 	System.out.println("네이버:" + naverAuthUrl);
 	//네이버
 	model.addAttribute("url", naverAuthUrl);
-	model.addAttribute("url", naverAuthUrl);
-	model.addAttribute("page", "login/naverLogin");
-	return "index";
+	return "redirect_uri="+naverAuthUrl;
 	}
 	
 	
@@ -153,16 +169,18 @@ public class LoginController {
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/signUp/naverSignUp", method = { RequestMethod.GET, RequestMethod.POST })
 	public String naverSignUp(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-	System.out.println("여기는 callback");
+	log.info("여기는 callback");
 	OAuth2AccessToken oauthToken;
 	oauthToken = naverLoginBO.getAccessToken(session, code, state);
 	//1. 로그인 사용자 정보를 읽어온다.
 	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+	
 	/** apiResult json 구조
 	{"resultcode":"00",
 	"message":"success",
 	"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
 	**/
+	
 	//2. String형식인 apiResult를 json형태로 바꿈
 	JSONParser parser = new JSONParser();
 	Object obj = parser.parse(apiResult);
@@ -175,12 +193,31 @@ public class LoginController {
 	String nickname = (String)response_obj.get("nickname");
 	String name = (String)response_obj.get("name");
 	System.out.println(nickname+"---"+email+"---"+name);
-	//4.파싱 닉네임 세션으로 저장
-	session.setAttribute("email",email); //세션 생성
-	session.setAttribute("nickName",nickname);
-	model.addAttribute("result", apiResult);
-	model.addAttribute("page", "login/signUp/naverSignUp.jsp");
-	return "index";
+	
+	//가입한 이메일이 있는지 확인
+	MemberVO member = new MemberVO();
+	member.setEmail(email);
+	log.info(member.getEmail());
+	boolean status = mService.emailCheck(member.getEmail());
+	
+	System.out.println(status);
+	
+	if(!status) {
+		session.setAttribute("email",email); //세션 생성
+		model.addAttribute("result", apiResult);
+		model.addAttribute("page", "mainBody.jsp");
+		return "index";
+	}else {
+		model.addAttribute("email",email);
+		model.addAttribute("nickName",nickname);
+		model.addAttribute("result", apiResult);
+		model.addAttribute("page", "login/signUp/naverSignUp.jsp");
+		return "index";
+	}
+	
+	
+	
+	
 	}
 
 	
@@ -283,49 +320,13 @@ public class LoginController {
 	}// end memberLoginForm()
 	
 	
-	@RequestMapping(value = "/signUp/kakaoSignUp", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
-	public ModelAndView kakaoSignUp(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception { 
+	@RequestMapping(value = "/signUp/kakaoSignUp", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public void kakaoSignUp(){ 
 		
-		
-		ModelAndView mav = new ModelAndView(); 
-		// 결과값을 node에 담아줌 
-		JsonNode node = kakaoController.getAccessToken(code); 
-		// accessToken에 사용자의 로그인한 모든 정보가 들어있음 
-		JsonNode accessToken = node.get("access_token"); 
-		// 사용자의 정보
-		
-		
-		System.out.println(accessToken);
-		
-		
-		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken); 
-		
-		// 유저정보 카카오에서 가져오기 Get properties 
-		JsonNode properties = userInfo.path("properties"); 
-		JsonNode kakao_account = userInfo.path("kakao_account"); 
-		String email = kakao_account.path("email").asText(); 
-		String nickName = properties.path("nickname").asText(); 
-		String image = properties.path("profile_image").asText(); 
-		String gender = kakao_account.path("gender").asText(); 
-		String birthday = kakao_account.path("birthday").asText(); 
-		String age = kakao_account.path("age_range").asText(); 
-//		session.setAttribute("email", email); 
-//		session.setAttribute("name", name); 
-//		session.setAttribute("image", image); 
-//		session.setAttribute("gender", gender); 
-//		session.setAttribute("birthday", birthday); 
-//		session.setAttribute("age", age); 
-		mav.setViewName("index");
-		mav.addObject("page", "login/signUp/kakaoSignUp.jsp");
-		mav.addObject("email", email);
-		mav.addObject("nickName", nickName);
-		mav.addObject("profile_image", image);
-		System.out.println("우아아아아아아아아앙"+mav);
-		return mav; 
-	}// end kakaoLogin()
-	
+			
+		}
 
-	
+		
 	@PostMapping(value ="/insertMember",produces = "text/plain; charset=UTF-8")
 	public String insertMember(MemberVO member, HttpSession session, Model model) {
 		System.out.println("탓당");
@@ -407,16 +408,18 @@ public class LoginController {
 		
 		HttpHeaders responseHeaders = new HttpHeaders(); // 헤더변경 시 사용
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8"); 
-
+		
 		member.setEmail(email);
 		member.setPw(pw);
-		
+		String nick_Name = mService.nick(email);
 		boolean status = mService.loginCheck(member);
 		log.info(status);
 		String msg = "";
 		if (status) {
 			msg = "성공";
 			session.setAttribute("email", email);
+			session.setAttribute("nick_Name", nick_Name);
+			System.out.println(session.getAttribute("nick_Name"));
 			model.addAttribute("page", "mainBody.jsp");
 		} else {
 			msg = "실패";

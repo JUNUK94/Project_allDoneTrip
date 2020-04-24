@@ -44,7 +44,7 @@
 				
 		    	<div class="col border text-center middle">
 			    	<div class="container-sm mt-4">
-			    		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c830142e73bf6dbb2bac8a21583ca959&redirect_uri=http://localhost:8080/login/kakaoLogin&response_type=code">
+			    		<a href="${kakao_url}">
 			    		<button type="button" class="btn btn-warning" id="kakaoLogin">카카오 로그인</button></a>
 				   	</div>
 				  	

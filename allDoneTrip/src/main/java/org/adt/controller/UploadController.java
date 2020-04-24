@@ -67,6 +67,7 @@ public class UploadController {
 			try {
 				File saveFile = new File(serverFolder, uploadFileName);
 				multipartFile.transferTo(saveFile);
+			
 				
 				//check image type File
 				if(checkImageType(saveFile)) {

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>쇼핑상세페이지</title>
+<link href="/resources/css/city.css" rel="stylesheet">
 	<script>
 		function showDetailInfo(cityNo, shopNo){
 			location.href = "/trip/city/paris?Type="+ cityNo + "E"+ shopNo;
@@ -24,22 +25,22 @@
 					<c:if test="${!status.last}">
 						<div id="spot_List${status.index}" class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
 										 onclick ="showDetailInfo(${shop.city_No},${shop.shop_No})">
-							<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-							<span>${shop.shop_Name}</span>
+							<img src="../../resources/images/a1.png" alt="" class="img-humbnail">
+							<span  class="hello">${shop.shop_Name}</span>
 						</div>
 					</c:if>
 					<c:if test="${status.last}">
 						<c:if test="${(status.index % 3) == 0}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${shop.shop_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
+								<span  class="hello">${shop.shop_Name} ${status.end}</span>
 							</div>
 						</c:if>
 					
 						<c:if test="${(status.index % 3) == 1}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${shop.shop_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
+								<span class="hello">${shop.shop_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
@@ -49,8 +50,8 @@
 					
 						<c:if test="${(status.index % 3) == 2}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${shop.shop_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
+								<span class="hello">${shop.shop_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							</div>

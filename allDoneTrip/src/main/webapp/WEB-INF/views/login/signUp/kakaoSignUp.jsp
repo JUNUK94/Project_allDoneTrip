@@ -33,7 +33,7 @@
 		<form id="signUpForm" >
 		<div class="row mt-3 " >
 			<div class="col-2 "><p class='divText'>Email*</p></div>
-			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email" value="${email }"></div>
+			<div class="col "><input type="text" class="form-control" placeholder="Email" id="email" name="email" value="${Email }"></div>
 		</div>
 		<div class="row" >
 			<div class="col-2"></div>

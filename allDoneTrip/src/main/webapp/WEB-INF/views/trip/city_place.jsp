@@ -6,26 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>city_place</title>
-<style>
-.img {
-	max-width: 100%;
-	height: auto;
-}
-
-#myTab li a {
-	color: black;
-}
-.hello{
-	font-size: 17px;
-	text-align: center;
-}		
-</style>
+<link href="/resources/css/city.css" rel="stylesheet">
 </head>
-
 <body>
 
 
-	<div class="container">
+	<div class="container" >
 	<strong>명소</strong>
 		<form id="pageMoveForm" action="" method="get">
 			<input id="detail" type="hidden" name="Type" value="6">
@@ -46,7 +32,7 @@
 					<c:if test="${!status.last}">
 						<div id="spot_List${status.index}" class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
 										 onclick ="showDetailInfo(${list.city_No},${list.spot_No})">
-							<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
+							<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
 							<span class="hello">${list.spot_Name}</span>
 						</div>
 					</c:if>
@@ -54,16 +40,16 @@
 						<c:if test="${(status.index % 3) == 0}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"  
 								onclick ="showDetailInfo(${list.city_No},${list.spot_No})">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${list.spot_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
+								<span class="hello">${list.spot_Name} ${status.end}</span>
 							</div>
 						</c:if>
 					
 						<c:if test="${(status.index % 3) == 1}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
 								onclick ="showDetailInfo(${list.city_No},${list.spot_No})">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail">
-								<span>${list.spot_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail">
+								<span class="hello">${list.spot_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
@@ -74,8 +60,8 @@
 						<c:if test="${(status.index % 3) == 2}">
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;"
 								onclick ="showDetailInfo(${list.city_No},${list.spot_No})">
-								<img src="../../resources/images/a1.png" alt="" class="img-responsive img-thumbnail" >
-								<span>${list.spot_Name} ${status.end}</span>
+								<img src="../../resources/images/a1.png" alt="" class="imgthumbnail" >
+								<span class="hello">${list.spot_Name} ${status.end}</span>
 							</div>
 							<div class="d-flex flex-column" style="width:30%; margin-bottom: 20px;">
 							</div>

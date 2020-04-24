@@ -74,7 +74,6 @@ public class CityMappingData {
 				return mShopData.get(i);
 			}
 		}
-		System.out.println("&&&shop test finish&&&");
 		return null;
 	}
 	
@@ -82,13 +81,13 @@ public class CityMappingData {
 	public void setCityData(List<CityVO> mCityVo)
 	{
 		mCityData = mCityVo;
-		System.out.println("setCityData setting ON");
+		System.out.println("setCityData setting");
 	}
 	
 	public void setFOODData(List<CityVO> mFOODVo)
 	{
 		mFOODData = mFOODVo;
-		System.out.println("setFOODData setting ON");
+		System.out.println("setFOODData setting");
 	}
 	
 	public void setShopData(List<CityVO> mShopVo) {

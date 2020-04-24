@@ -5,11 +5,6 @@
 <head>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>플래너 작성</title>
-	<%  session.setAttribute("email", "silverdue@gmail.com");
-		session.setAttribute("nick_Name", "창창");
-		//session.invalidate();
-	%>
-	
 	<style>
 		#document_area {
 			height: 100vh;
@@ -149,11 +144,9 @@
 				</button>
 				
 			</div>
-			<a class="btn" href="https://alldonetrip.shop/resources/img/교제-Spring_기초.pdf" >
 			<button type="button" id="savePDF_Btn1" class="btn btn-outline-secondary" style="font-weight: bold">
-				pdf다운로드
+				pdf 다운로드
 			</button>
-			</a>
 			<button type="button" id="save" class="btn btn-outline-secondary" style="font-weight: bold" data-toggle="tooltip" title="나만이 확인할 수 있도록 저장합니다. 저장한 플래너는 마이페이지에서 확인하실 수 있습니다.">
 					저장
 			</button>
@@ -638,22 +631,49 @@
 	        });
 	        
 	    	//=================================pdf로 저장=====================================
-	    	$('#savePDF_Btn').on("click", function() {
+	    	$('#savePDF_Btn1').on("click", function() {
 				
-	    		html2canvas($("#pdfDiv"), 
-				{	onrendered : function(canvas) {
-						// 한글깨짐현상때문에 jpeg->jspdf 전환
-	    	            var imgData = canvas.toDataURL('image/jpeg');
-	    	            var pageWidth = 210;
-	    	            var pageHeight = pageWidth * 1.414;
-	    	            var imgWidth = pageWidth - 20;
-	    	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
-	    	            
-	    	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
-	    	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
-	    	            doc.save('화면.pdf');
-	    	        }
-	    	    });
+	    		function pdfPrint(){
+	    	        // 현재 document.body의 html을 A4 크기에 맞춰 PDF로 변환
+	    	        html2canvas(document.getElementById('p_Content'), {
+	    	        	proxy: "https://alldonetrip.shop",
+	    	        	letterRendering: 1,
+	    	        	allowTaint : false,
+	    	        	useCORS :  true,
+	    	            onrendered: function (canvas) {
+	    					
+	    	                // 캔버스를 이미지로 변환
+	    	                var imgData = canvas.toDataURL('image/png');
+	    	
+	    	                var margin = 10;	
+	    	                var imgWidth = 190; // 210-(margin*10) = 190mm
+	    	                var pageHeight = imgWidth * 1.414;  // 출력 페이지 세로 길이 계산 A4 기준
+	    	                var imgHeight = canvas.height * imgWidth / canvas.width;
+	    	                var heightLeft = imgHeight;
+	    					var position = 0;
+	    					
+	    	                var doc = new jsPDF('p', 'mm');
+	    	
+	    	                // 첫 페이지 출력
+	    	                doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+	    	                heightLeft -= pageHeight;
+	    	
+	    	                // 한 페이지 이상일 경우 루프 돌면서 출력
+	    	                while (heightLeft >= 20) {
+	    	                    position = heightLeft - imgHeight;
+	    	                    doc.addPage();
+	    	                    doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+	    	                    heightLeft -= pageHeight;
+	    	                }
+	    	
+	    	                // 파일 저장
+	    	                doc.save(document.getElementById("plannerTitle").value+'.pdf');
+	    	
+	    	                //이미지로 표현
+	    	                //document.write('<img src="'+imgData+'" />');
+	    	            }
+	    	        });
+	    	    }
 	    	});
 	    	
 	    	

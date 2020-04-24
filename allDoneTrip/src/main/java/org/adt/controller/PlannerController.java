@@ -23,7 +23,6 @@ import org.adt.domain.PageDTO;
 import org.adt.domain.PlannerReplyVO;
 import org.adt.domain.PlannerVO;
 import org.adt.domain.ScrapVO;
-import org.adt.domain.ThumbnailVO;
 import org.adt.service.plannerReplyService;
 import org.adt.service.plannerService;
 

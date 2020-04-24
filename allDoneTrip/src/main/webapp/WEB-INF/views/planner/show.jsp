@@ -10,12 +10,6 @@
 <html>
 <head>
 <title>플래너 조회</title>
-	<% 
-		session.setAttribute("email", "silverdue@gmail.com");
-		session.setAttribute("nick_Name", "창창");
-		session.setAttribute("profile", "http://alldonetrip.shop/resources/img/user/profile/a.jpg");
-		//session.invalidate();
-	%>
 	<style>
 		#likeBtn{
 			width:48px; 

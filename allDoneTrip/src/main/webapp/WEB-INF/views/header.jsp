@@ -72,15 +72,18 @@
 										id="navbarDropdown_1" role="button" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false"> Community </a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-											<a class="dropdown-item" href="tour_details.html">전체</a> <a
-												class="dropdown-item" href="top_place.html">여행 후기</a> <a
-												class="dropdown-item" href="tour_details.html">동행 찾기</a> <a
-												class="dropdown-item" href="elements.html">서로서로 답해요</a>
-										</div></li>
-									<li class="nav-item dropdown"><a
-										class="nav-link dropdown-toggle" href="blog.html"
-										id="navbarDropdown_1" role="button" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false"> MyPage </a>
+											<a class="dropdown-item" href="/community/">전체</a> 
+											<a class="dropdown-item" href="/community/list?b_Type=2">여행 후기</a> 
+											<a class="dropdown-item" href="/community/list?b_Type=3">동행 찾기</a>
+											<a class="dropdown-item" href="/community/list?b_Type=4">서로서로 답해요</a>
+										</div>
+									</li>
+									<li class="nav-item dropdown">
+										<a 	class="nav-link dropdown-toggle" href="blog.html"
+											id="navbarDropdown_1" role="button" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> 
+											MyPage
+										</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
 											<a class="dropdown-item" href="tour_details.html">나의 플래너</a>
 											<a class="dropdown-item" href="top_place.html">나의 게시글</a> <a

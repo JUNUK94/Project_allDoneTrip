@@ -1,8 +1,10 @@
 package org.adt.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.print.attribute.standard.Severity;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.adt.domain.BoardVO;
 import org.adt.domain.Criteria;
 import org.adt.domain.PageDTO;
+import org.adt.domain.PlannerVO;
 import org.adt.domain.ReplyVO;
 import org.adt.service.BoardService;
 import org.adt.service.ReplyService;
+import org.adt.service.plannerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,42 +43,55 @@ public class BoardController {
 
 	private ReplyService replyService;
 
+	private plannerService plannerService;
+
 	@GetMapping({ "/list", "/" })
 	public String list(Criteria cri, Model model) {
 
 		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("boardlist", service.getList(cri));
 
 		int total = service.getTotal(cri);
 
 		log.info("total: " + total);
+		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("page", "community/list.jsp");
 
-		return "/community/list";
+		return "index";
 	}
 
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
+	public void register(HttpServletResponse response, Criteria cri, BoardVO board, RedirectAttributes rttr, Model model) {
 
 		log.info("register: " + board);
-
-		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
-		// Date date = new Date();
-		// String sysdate = sdf.format(date);
-		//
-		// board.setRegdate(sysdate);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+		Date date = new Date();
+		String sysdate = sdf.format(date);
+		
+		board.setRegdate(sysdate);
 
 		service.Insert(board);
-
+		
 		rttr.addFlashAttribute("result", board.getBno());
-
-		return "redirect:/community/list";
+		log.info("test");
+		
+		try {
+			response.sendRedirect("https://alldonetrip.shop/community/list");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@GetMapping("/write")
-	public String write(Criteria cri) {
+	public String write(Criteria cri, Model model) {
 		log.info("Write");
-		return "/community/write";
+		
+		model.addAttribute("page", "community/write.jsp");
+		
+		return "index";
 	}
 
 	@GetMapping({ "/view", "/modify" })
@@ -82,25 +99,28 @@ public class BoardController {
 			@ModelAttribute("cri") Criteria cri, Model model) {
 
 		log.info(bno);
+
 		service.checkCookie(response, request, bno);
 
 		int totalReply = replyService.totalReplyCnt(bno);
-
+		
+		List<PlannerVO> test = plannerService.getPlanner(84l);
+		
+		log.info(test.get(0).getCity_Name());
 		
 		log.info("/view or modify");
-
 		model.addAttribute("board", service.get(bno));
-
+		model.addAttribute("planner", plannerService.getPlanner(84l));
 		model.addAttribute("reply", replyService.getReplyList(bno));
-
-		 model.addAttribute("totalReply", totalReply);
+		model.addAttribute("totalReply", totalReply);
 		model.addAttribute("reReply", replyService.getReReplyList(bno));
+		model.addAttribute("page", "community/view.jsp");
 
-		return "/community/view";
+		return "index";
 	}
 
 	@PostMapping("/modify")
-	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, Model model) {
 		log.info("modify:" + board);
 
 		if (service.update(board)) {
@@ -111,12 +131,14 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-
-		return "redirect:/board/list";
+		
+		model.addAttribute("page", "community/list.jsp");
+		
+		return "index";
 	}
 
 	@PostMapping("/delete")
-	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr, Model model) {
 
 		log.info("remove..." + bno);
 		if (service.delete(bno)) {
@@ -127,6 +149,8 @@ public class BoardController {
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 
+		model.addAttribute("page", "community/list");
+		
 		return "redirect:/board/list";
 	}
 
