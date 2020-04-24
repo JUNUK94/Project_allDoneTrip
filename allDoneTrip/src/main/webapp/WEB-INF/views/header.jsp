@@ -103,8 +103,11 @@
 								</c:if>
 								<c:if test="${email != null}">
 									<li class="nav-item"><a class="nav-link text-primary"
-										href="/">유저 프로필, 닉네임 띄워줌</a></li>
-									<li class="nav-item"><a class="nav-link text-primary"
+										href="/">
+										<img src="${profile}" id="profileImage" class="rounded-circle bg-primary" width=100px height=100px>
+										
+										${nick_Name}</a></li>
+									<li class="nav-item" style="margin-top: 34px"><a class="nav-link text-primary"
 										href="/login/logout">Log out</a></li>
 								</c:if>
 							</ul>

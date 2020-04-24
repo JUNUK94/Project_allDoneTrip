@@ -11,7 +11,7 @@
                  b_Type, bType_Name, BNO, TITLE, B_CONTENT, NICK_NAME, B_CLICKNUM, B_LIKE, REGDATE, UPDATEDATE
           FROM BOARD
 				 where
-				 member_No=#{member_No}
+				 email=#{email}
 				 and
 				 rownum <= #{pageNum} * #{amount}
 		   ]]>
@@ -44,7 +44,7 @@
 					/*+ index_desc(planner pk_planner)*/
 							rownum rn, plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
 					from 	planner, city, memberinfo
-					where	member_No=#{member_No}	
+					where	email=#{email}	
 							and planner.email=memberinfo.email
 							and planner.city_No=city.city_No 
 							and rownum <= #{pageNum} * #{amount}
@@ -67,22 +67,17 @@
 	</select>
 	
 	<!-- 회원 정보 수정 -->
-	<update id="memberInfoUpdate">
+	<update id="memberInfoUpdate" >
 		<![CDATA[
 			update memberinfo
 			set name=#{name},
 				email=#{email},
 				nick_Name=#{nick_Name},
 				pw=#{pw},
-				birth=#{birth},
-				gender=#{gender},
 				phone_Num=#{phone_Num},
-				join_date=#{join_date},
-				agree_date=#{agree_date},
-				mobile_Co=#{mobile_Co},
-				profile=#{profile},
-				introduce=#{introduce}
-			where member_No=#{member_No}
+				introduce=#{introduce},
+				profile=#{profile}
+			where email=#{email}
 		]]>
 	</update>
 	
@@ -90,65 +85,15 @@
 	<delete id="memberDelete">
 		<![CDATA[
 			delete from memberinfo
-			where member_No = #{member_No}
+			where email = #{email}
 		]]>
 	</delete>
 	
-	<!-- 내가 스크랩한 플래너 가져오기 -->
-	<select id="getMyScrapPlanner" resultType="org.adt.domain.PlannerVO">
-		<![CDATA[
-			select *
-			from (select
-					/*+ index_desc(planner pk_planner)*/
-							rownum rn, planner.plan_No, p_Title, city_Name, trip_Period, nick_Name, plan_Like, click_Num, p_Thumbnail
-					from 	planner , city
-					where	planner.city_No=city.city_No 
-							and rownum <= #{pageNum} * #{amount}
-							and status = 1
-    		) a, scrap
-			where scrap.plan_No = a.plan_No 
-				  and member_no=#{member_No}
-				  and rn > (#{pageNum} - 1) * #{amount}
-		]]>
+	<!-- 회원정보 가지고오기 -->
+	<select id="memberInfo" resultType="org.adt.domain.MemberVO">
+		select email, name, nick_Name, pw, phone_Num, profile, introduce from memberinfo
+		where email=#{email}
 	</select>
-	
-	<!-- 내가 스크랩한 플래너 보기 -->
-	<select id="scrapMyPlanner" resultType="org.adt.domain.PlannerVO">
-		<![CDATA[
-			select 	plan_No, p_Title, nick_Name, city_Name, planner.city_No, trip_Period, plan_Like, p_Content, click_Num, updateDate, p_Thumbnail
-			from 	planner, city
-			where 	plan_No = #{plan_No} 
-					and planner.city_No=city.city_No 
-		]]>
-	</select>
-	
-	<!--내가 스크랩한 게시판 가져오기 -->
-	<select id="getMyScrapBoard" resultType="org.adt.domain.BoardVO">
-		<![CDATA[
-		  select * 
-		  from(
-		  		SELECT /*+INDEX_DESC(BOARD PK_BOARD)*/
-                 bType_Name, a.BNO, TITLE, NICK_NAME, scrap_date
-          		from board a, scrap b
-				where a.bno=b.bno
-				  and rownum <= #{pageNum} * #{amount}				 
-		   ]]>
-	
-		 <![CDATA[
-							) 
-			where member_No=#{member_No}
-			  and rn > (#{pageNum} - 1) * #{amount}
-		]]>
-	</select>
-	
-	<!--내가 스크랩한 게시판보기 -->
-	<select id="scrapMyBoard" resultType="org.adt.domain.BoardVO">
-		<![CDATA[
-			select 	bno, title, nick_Name, city_Name, board.city_No, b_Like, b_Content, b_clickNum, updateDate, b_Thumbnail
-			from 	board, city
-			where 	bno = #{bno} 
-					and board.city_No=city.city_No 
-		]]>
-	</select>
+
 
 </mapper>

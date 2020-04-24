@@ -38,10 +38,16 @@
 		where email=#{email} and phone_Num=#{phone_Num}
 	</select>
 	
-  <!-- 회원탈퇴 -->
-  <delete id = "delete">
-     delete from memberinfo where memner_no=#{member_No}
-  </delete>
+	<select id="nick" resultType="String">
+		select nick_Name from memberinfo
+		where email=#{email}
+	</select>
+	
+	<select id="profile" resultType="String">
+		select profile from memberinfo
+		where email=#{email}
+	</select>
+  
 
 	
 

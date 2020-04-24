@@ -12,5 +12,6 @@ public interface MemberService {
 	public boolean nick_NameCheck(String nick_name);
 	public boolean loginCheck(MemberVO member);
 	public String nick(String email);
+	public String profile(String email);
 
 }

@@ -14,6 +14,7 @@ public interface MemberMapper {
 		public String phoneNumberCheck(String phone_num);
 		public String loginCheck(MemberVO member);
 		public String nick(String email);
+		public String profile(String email);
 		//회원탈퇴
 		public int delete(Long member_No);
 		

@@ -80,6 +80,13 @@ public class MemberServiceImpl implements MemberService{
 		return nick;
 	}
 
+	@Override
+	public String profile(String email) {
+		// TODO Auto-generated method stub
+		String profile = mMapper.profile(email);
+		return profile;
+	}
+
 	
 	
 	

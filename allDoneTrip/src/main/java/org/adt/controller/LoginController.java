@@ -412,6 +412,7 @@ public class LoginController {
 		member.setEmail(email);
 		member.setPw(pw);
 		String nick_Name = mService.nick(email);
+		String profile = mService.profile(email);
 		boolean status = mService.loginCheck(member);
 		log.info(status);
 		String msg = "";
@@ -419,6 +420,7 @@ public class LoginController {
 			msg = "성공";
 			session.setAttribute("email", email);
 			session.setAttribute("nick_Name", nick_Name);
+			session.setAttribute("profile", profile);
 			System.out.println(session.getAttribute("nick_Name"));
 			model.addAttribute("page", "mainBody.jsp");
 		} else {
